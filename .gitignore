@@ -3,5 +3,6 @@
 *.pyc
 local_settings.py
 email_settings.py
+db_conf.py
 *~
 uploads
