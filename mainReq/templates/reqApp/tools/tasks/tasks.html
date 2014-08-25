@@ -1,0 +1,83 @@
+{% extends "reqApp/base.html" %}
+{% load reqApp_tags %}
+{% block body %}
+<br/>
+<div>
+    {% if canEditTasks %}
+        Responsable: 
+        <select style="display:inline-block;width:auto;vertical-align:top;" class="blue_button" tooltip="Seleccionar Usuario">
+            <option onclick="location='?';">Seleccionar Usuario</option>
+            {% for i,w in workerUsers %}
+                <option onclick="location='?userIndex={{i}}'"{% ifequal userIndex i %}selected{% endifequal %}>Usuario: {{w}}</option>
+            {% endfor %}
+        </select>
+    {% endif %}
+    
+    Estado: 
+    <select style="display:inline-block;width:auto;vertical-align:top;" class="blue_button" tooltip="Seleccionar Estado">
+        <option onclick="location='?userIndex={{ userIndex }}'">Seleccionar Estado</option>
+        {% for s,n in states %}
+            <option {% ifequal state s %}selected{% endifequal %} onclick="location='?state={{ s }}&userIndex={{ userIndex }}'">{{ n }}</option>
+        {% endfor %}
+    </select>
+    
+    <div style="display:inline-block;position:relative;float:right;">
+        <a title="Ayuda" class="blue_button" href="{% url 'reqApp:help' %}#{{ helpLink }}" target="_blank">?</a>
+    </div>
+</div>
+
+<br/>
+
+<div>
+    <button title="Expandir Elementos" style="display: inline-block;width:auto;" href='#' class="blue_button" onclick='showContents()'>(+)Abrir Todos</button>
+    <button title="Colapsar Elementos" style="display: inline-block;width:auto;" href='#' class="blue_button" onclick='hideContents()'>(--)Cerrar Todos</button>
+    <button title="Buscar Palabra" style="display: inline-block;width:auto;" class="blue_button" onclick='showContents();find();'>Buscar</button>
+    <div style="display: inline-block;width:20%;"></div>
+    {% if canEditTasks %}
+        <a title="Agregar Nueva Tarea" style="display: inline-block;width:auto;" href='#new' class="blue_button" onclick='editNewElement()'>Nueva</a>
+    {% endif %}
+</div>
+
+{% for msg in msgs %}
+    <div class="message">
+        {{ msg }}
+    </div>
+{% endfor %}
+
+<div style="text-align:right;">
+    <div>
+        <i style="color:Gray;">Se encontraron <span style="color:Black;">{{ tasks|length }}<span/> tareas. </i>
+        <i style="color:Gray;">Estado: </i>
+        <b style="color:Black;">por hacer </b>
+        <b class="done">realizada </b>
+        <b class="not_done">no realizada </b>
+        <b class="approved">aprobada </b>
+        <b class="reprobate">reprobada </b>
+        <b class="discarded">descartada </b>
+    </div>
+</div>
+
+{% include ordering_bar with attributes=ordering_attributes actual_order=actual_order getParams=getParams %}
+
+{% ifequal tasks|length 0 %}
+    <p class="centered">--------------- No hay Tareas ---------------</p>
+{% else %}
+    {% for t in tasks %}
+                {% include template with task=t canEditTasks=canEditTasks %}
+    {% endfor %}
+{% endifequal %}
+
+{% if canEditTasks %}
+    {% ifequal workerUsers.count 0 %}
+        <p class="centered">--------------- No existe un integrante a quien asignarle tareas! ---------------</p>
+    {% else %}
+        <div class="new_element">
+            <a name='new'></a>
+            {% include form_template with form=form %}
+        </div>
+    {% endifequal %}
+{% endif %}
+
+<br/><br/><br/><br/><br/><br/>
+
+{% endblock %}

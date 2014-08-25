@@ -1,0 +1,36 @@
+{% load reqApp_tags %}
+
+{% comment %} element canEdit registry actual deleted new extraStyle {% endcomment %}
+
+<div {% if extraStyle %}style="{{ extraStyle }}"{% endif %} class="element_container">
+    <div id="{{ element.identifierText }}">
+        <div>
+            <div class="element_title">
+                    {% if not registry %}
+                        {% with element|alarms as alerts %}
+                            {% if alerts %}
+                                <div name="reqAppModal" title="Posibles conflictos de {{ element.identifierText }}">
+                                    {% for a in alerts %}
+                                        <li>{{a}}</li>
+                                    {% endfor %}
+                                </div>
+                                <span blink="yes" title="Ver Conflictos ..." class="alarm">
+                                    <b>!</b>
+                                </span>
+                            {% endif %}
+                        {% endwith %}
+                    {% endif %}
+                {% block head %}{% endblock %}
+            </div>
+            {% if registry %}
+                {% include "reqApp/tools/registry/registryState.html" with actual=actual deleted=deleted new=new %}
+            {% endif %}
+        </div>
+
+        <div id="{{ element.id }}_content" name="element_content" style="display:none;" ready="no">
+            cargando...
+        </div>
+    </div>
+    <div id="{{ element.id }}_formdiv">
+    </div>
+</div>

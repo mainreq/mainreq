@@ -1,0 +1,29 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reqApp.css' %}" />
+    <title>mainReq</title>
+</head>
+
+<body>
+        <div style="text-align:center;margin:10%;margin-top:10em;" class="element_container">
+            <h1><i>main</i>Req</h1>
+            {% if form %}
+                <form method="POST">
+                    {% csrf_token %}
+                    <div name="pass" style="padding:5px;margin:5px;" {% if form.newPassword.errors %}class="invalid"{% endif %}>
+                        <span style="display:inline-block;width:11em;">*Nueva Contraseña </span>{{ form.newPassword }}</div>
+                    <div name="pass" style="padding:5px;margin:5px;" {% if form.confirmPassword.errors %}class="invalid"{% endif %}>
+                        <span style="display:inline-block;width:11em;">*Confirmar Nueva Contraseña </span>{{ form.confirmPassword }}</div>
+                    <br/>
+                    <a title="Cancelar Edición" class="blue_button" href="{{ next }}">Cancelar</a>
+	                <button title="Guardar Cambios" class="blue_button" type="submit">Cambiar Contraseña</button>
+                </form>
+            {% else %}
+                <div class="message">Hola {{ user }}, tus datos han sido modificados exitosamente.</div>
+                <br/>
+                <div style="text-align:center;margin:6px;"><a class="blue_button" href="{% url 'reqApp:logout' %}">Volver a Ingresar</a></div>
+            {% endif %}
+        </div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{% include "reqApp/pdf/project/css.html" %}
+
+{% for e in CTs.elements %}
+    {% include CTs.template1 with element=e.element %}
+    {% for subElement in e.subElements %}
+        <div class="subElementContainer">{% include CTs.template2 with element=subElement %}</div>
+    {% endfor %}
+    <hr/>
+{% endfor %}

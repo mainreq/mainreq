@@ -1,0 +1,29 @@
+{% extends "reqApp/pdf/base.html" %}
+{% load reqApp_tags %}
+
+{% block content %}
+	{% for section in sections %}
+    	{{ section.title|safe }}
+    	{{ section.obj.content|addSrcHost:host|safe }}
+    	<br/>
+	{% endfor %}
+	
+	<pdf:nextpage/>
+	<h1>3. Requisitos del Sistema</h1>
+	<h2>3.1. Requisitos de Usuario</h2>
+	{% include "reqApp/pdf/project/UR/UR_list.html" with URs=URs %}
+	<br/>
+	<h2>3.2. Requisitos de Software</h2>
+	{% include "reqApp/pdf/project/SR/SR_list.html" with SRs=SRs %}
+	
+	<pdf:nextpage/>
+	<h1>4. Matrices de Trazado</h1>
+	<div style="text-align:right;">
+        <i style="color:Gray;">Estado: </i>
+        <b class="satisfy">cumple </b>
+        <b class="fails">no cumple </b>
+        <b class="ambiguous">ambiguo </b>
+        <b style="color:Black;">+intersección </b>
+    </div>
+	{% include "reqApp/pdf/tools/matrices/MT_list.html" with MTs=MTs %}
+{% endblock %}

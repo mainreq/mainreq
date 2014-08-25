@@ -1,0 +1,8 @@
+{% extends "reqApp/pdf/base.html" %}
+
+{% block pageIndex %}{% endblock %}
+
+{% block content %}
+    <h1>Requisitos de Usuario</h1>
+    {% include "reqApp/pdf/project/UR/UR_list.html" with URs=URs %}
+{% endblock %}

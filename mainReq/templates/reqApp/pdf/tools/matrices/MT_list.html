@@ -1,0 +1,28 @@
+{% load reqApp_tags %}
+
+<style>
+/* WARNING: must match with choices.py */
+.fails{color:Red;}
+.satisfy{color:Green;}
+.ambiguous{color:Purple;}
+
+p.draw{
+font-family:"Courier New", Courier, monospace;
+font-size: 1.0em;
+line-height: auto;
+display:block;
+}
+</style>
+
+{% for mt in MTs %}
+    <h2>{{ mt.name }}</h2>
+    {% for subMT in mt.subMTs %}
+        <p class="draw">
+            {{ subMT|textTableHorizHeaders|safe }}
+            {% for row in subMT %}
+                    <span class="{{ row.0.elRow.state }}">{{ row.0.elRow.identifierText }}</span>|{% for c in row %}{% if c.match %}<b style="color:Black;">+</b>{% else %}<span style="color:#CCCCCC;">·</span>{% endif %}{% endfor %}<br/>
+            {% endfor %}
+        </p>
+        <pdf:nextpage/>
+    {% endfor %}
+{% endfor %}

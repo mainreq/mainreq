@@ -1,0 +1,64 @@
+{% extends "reqApp/base.html" %}
+{% load reqApp_tags %}
+{% block body %}
+<br/>
+
+{% if elementsFilters %}
+    {% with get_params="&order="|concat:actual_order %}
+        {% include "reqApp/project/filter.html" with elementsFilters=elementsFilters getParams=get_params %}
+    {% endwith %}
+    <br/>
+{% endif %}
+
+<div>
+
+    <button title="Expandir Elementos" style="display: inline-block;width:auto;" class="blue_button" onclick='showContents()'>(+)Abrir Todos</button>
+    <button title="Colapsar Elementos" style="display: inline-block;width:auto;" class="blue_button" onclick='hideContents()'>(--)Cerrar Todos</button>
+    <button title="Buscar Palabra" style="display: inline-block;width:auto;" class="blue_button" onclick='showContents();find();'>Buscar</button>
+    <div style="display: inline-block;width:20%;"></div>
+    {% if canEdit %}
+        <a title="Agregar Nuevo" style="display: inline-block;width:auto;" href='#new' class="blue_button" onclick='editNewElement()'>Nuevo</a>
+    {% endif %}
+    <div style="display:inline-block;position:relative;float:right;">
+        <a title="Generar Documento PDF" class="blue_button" href="{% url 'reqApp:pdf' %}?pdfType={{ pdfLink }}" target="_blank">PDF</a>
+        <a title="Ayuda" class="blue_button" style="cursor:help" href="{% url 'reqApp:help' %}#{{ helpLink }}" target="_blank">?</a>
+    </div>
+    
+</div>
+
+{% for msg in msgs %}
+    <div class="message">
+        {{ msg }}
+    </div>
+{% endfor %}
+
+<div style="text-align:right;">
+    <div>
+        <i style="color:Gray;">Se encontraron <span style="color:Black;">{{ elements|listCount }}<span/> elementos. </i>
+        <i style="color:Gray;">Estado: </i>
+        <b class="satisfy">cumple </b>
+        <b class="fails">no cumple </b>
+        <b class="ambiguous">ambiguo </b>
+    </div>
+</div>
+
+{% include ordering_bar with attributes=ordering_attributes actual_order=actual_order getParams=filtersQuery %}
+
+{% ifequal elements|listCount 0 %}
+    <p class="centered">--------------- Lista Vacía ---------------</p>
+{% else %}
+    {% for e in elements %}
+        {% include template with element=e canEdit=canEdit %}
+    {% endfor %}
+{% endifequal %}
+
+{% if canEdit %}
+    <div class="new_element">
+        <a name='new'></a>
+        {% include form_template with form=form %}
+    </div>
+{% endif %}
+
+<br/><br/><br/><br/><br/><br/>
+
+{% endblock %}

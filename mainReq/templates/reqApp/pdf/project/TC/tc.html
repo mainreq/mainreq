@@ -1,0 +1,22 @@
+{% load reqApp_tags %}
+
+<div class="element_container">
+    <b>{{element}}</b><br/>
+    <div>
+    {% if element.requirement.validity %}
+        <i>Requisito asociado: </i>{{ element.requirement }}<br/>
+    {% else %}
+        <i>Requisito asociado: {{ element.requirement }} (eliminado)</i><br/>
+    {% endif %}
+    <i>Descripción: </i>{{ element.description }}<br/>
+    <i>Resultado aceptable: </i>{{ element.acceptableResult }}<br/>
+    <i>Resultado óptimo: </i>{{ element.optimumResult }}<br/>
+    <i>Estado: </i><b class="{{ element.state }}">{{ element|state }}</b><br/>
+    <i>Tipos de Usuarios asociados: </i>
+        {% for ut in element.userTypes|enlistValids %}
+            {{ut}}, 
+        {% endfor %}
+    <br/>
+    <i>Fecha Actualización: </i>{{ element.date|date:"Y-m-d H:i" }}
+    </div>
+</div>

@@ -1,0 +1,27 @@
+{% extends "reqApp/project/project_element.html" %}
+{% load reqApp_tags %}
+
+
+{% block head %}
+    <div style="display: inline-block;width:41%;vertical-align:top;">
+        <a trigger="yes" onclick="showHideContent(this, '{% url 'reqApp:elemContent' %}', 'SR', {{ element.id }}, {% if registry %}1{% else %}0{% endif %}, {% if canEdit %}1{% else %}0{% endif %})" style="cursor:pointer;" name="{{ element.identifierText }}">
+            <b class="{{ element.state }}">{{ element }}</b>
+        </a>
+    </div>
+    <div tooltip="Costo" style="display: inline-block;width:4%;vertical-align:top;">
+        {{ element.cost }}
+    </div>
+    <div tooltip="Prioridad" style="display: inline-block;width:11%;vertical-align:top;">
+        {{ element|priority }}
+    </div>
+    <div tooltip="Tipo" style="display: inline-block;width:17%;vertical-align:top;">
+        {{ element|SRType }}
+    </div>
+    <div tooltip="Hito Asociado" style="display: inline-block;width:20%;vertical-align:top;">
+        {% if element.increment.validity %}
+            <div>{{ element.increment }}</div>
+        {% else %}
+            <div style="color:Gray;">{{ element.increment }} (eliminado)</div>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,17 @@
+<form id='newElementForm' action="#" method="post" class="edition_container">
+	{% csrf_token %}
+	<div><b>Nueva Tarea</b></div>
+	
+	<div><span class="def_width">Responsable: </span>{{ form.user }}</div>
+	
+    <div>
+    <div><span class="def_width">*Nombre: </span>{{ form.name }}</div>
+    <div class="top"><span class="def_width">Descripción:</span></div> <div class="top">{{ form.description }}</div>
+    <div><span class="def_width">*Fecha Revisión: </span>{{ form.deadlineDate }}</div>
+    </div>
+    <br/>
+    <div><span>Enviar Notificación por Email: </span><input id="sendNotifications" type="checkbox" name="sendNotifications" value="yes"> (esta acción puede demorar unos segundos)</div>
+    <br/>
+    <button title="Cancelar Edición&#013;y Recargar Página" class="blue_button" type="button" onclick="cancelNewElement()">Cancelar</button>
+	<button title="Guardar" style="margin-left:100px;" class="blue_button" type="submit" onclick="return validForm(event,this)">Guardar</button>
+</form>

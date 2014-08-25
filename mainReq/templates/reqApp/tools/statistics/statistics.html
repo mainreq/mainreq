@@ -1,0 +1,43 @@
+{% extends "reqApp/base.html" %}
+
+{% block body %}
+<br/>
+<div>
+    <div style="display:inline-block;">
+        Hito: 
+        <select class="blue_button" title="Seleccionar Hito" onchange="location = this.options[this.selectedIndex].value;">
+            {% for key,val in IC_CHOICES %}
+                <option value="?increment={{key}}"{% ifequal increment key %}selected{% endifequal %}>{{val}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div style="display:inline-block;position:relative;float:right;">
+        <a class="blue_button" href="{% url 'reqApp:pdf' %}?pdfType=ST" target="_blank">PDF</a>
+        <a title="Ayuda" class="blue_button" href="{% url 'reqApp:help' %}#{{ helpLink }}" target="_blank">?</a>
+    </div>
+</div>
+<br/>
+
+<h3>Requisitos de Usuario{% if icName %}, {{ icName }}{% endif %}</h3>
+{% include "reqApp/tools/statistics/UR.html" with UR=UR %}
+
+<br/>
+<h3>Requisitos de Software{% if icName %}, {{ icName }}{% endif %}</h3>
+{% include "reqApp/tools/statistics/SR.html" with SR=SR %}
+
+<br/>
+<h3>Casos de Prueba{% if icName %}, {{ icName }}{% endif %}</h3>
+{% include "reqApp/tools/statistics/TC.html" with TC=TC %}
+
+<br/>
+<h3>Módulos</h3>
+{% include "reqApp/tools/statistics/MD.html" with MD=MD %}
+
+<br/>
+<ul>
+<li>Los Módulos no se encuentran asociados a un Hito específico, en esta tabla se cuentan todos los MD asociados al proyecto.</li>
+<li>No se contabilizan RU ni RS sin Hito asociado.</li>
+<li>Se contabilizan sólo los CP asociados a los requisitos contabilizados aquí.</li>
+<li>Elementos sin RU, RS o TU asociados son contabilizados en el total.</li>
+</ul>
+{% endblock %}

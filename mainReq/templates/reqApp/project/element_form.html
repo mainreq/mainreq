@@ -1,0 +1,27 @@
+{% comment %} identifier identifierText deleteWarning {% endcomment %}
+<form {% if identifierText %}id="{{ identifierText }}_form"{% else %}id='newElementForm'{% endif %} action="#" method="post" class="edition_container">
+	{% csrf_token %}
+    {% if identifier %}
+        <input type="hidden" name="identifier" value={{ identifier }}>
+    {% endif %}
+    
+    <div>
+        {% if identifierText %}
+            <b>{{ identifierText }}</b>
+        {% endif %}
+        
+        {% block fields %}{% endblock %}
+        
+    </div>
+    <br/>
+	
+	
+	{% if identifierText %}
+        <button title="Cancelar Edición" class="blue_button" type="button" onclick="cancelElementEdition('{{ identifierText }}')">Cancelar</button>
+        <button title="Guardar Cambios" style="margin-left:100px;" class="blue_button" onclick="validEditionForm(event,this)">Guardar</button>
+        <input type="hidden" name="updateReason" value="">
+	{% else %}
+    	<button title="Cancelar Edición" class="blue_button" type="button" onclick="cancelNewElement()">Cancelar</button>
+    	<button title="Guardar Cambios" style="margin-left:100px;" class="blue_button" type="submit" onclick="return validForm(event,this)">Guardar</button>
+	{% endif %}
+</form>

@@ -1,0 +1,15 @@
+<div>
+    <div style="color:Gray;text-align:right;">
+        {% if actual %}
+        <b class="registry-actual">Elemento actual</b>
+        {% elif deleted %}
+        <b class="registry-deleted">Elemento eliminado</b>
+        {% elif new %}
+        <b class="registry-new">Elemento creado</b>
+        {% else %}
+        <b class="registry-edited">Elemento editado</b>
+        {% endif %}
+        {% ifequal element.reason "" %}{% else %}(<a onclick="alert('{{ element.date|date:"Y-m-d H:i" }}\n[{{ element.user }}]: {{element.reason}}');" href="#">ver motivo...</a>){% endifequal %}
+        {{ element.date|date:"Y-m-d H:i" }} [{{ element.user }}]
+    </div>
+</div>

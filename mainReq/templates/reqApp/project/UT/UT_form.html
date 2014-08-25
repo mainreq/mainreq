@@ -1,0 +1,7 @@
+{% extends "reqApp/project/element_form.html" %}
+{% block fields %}
+    <div><span class="def_width">*Nombre: </span>{{ form.name }}</div>
+    <div class="top"><span class="def_width">*Descripción:</span></div> <div class="top">{{ form.description }}</div>
+    <div><span class="def_width">*Cantidad: </span>{{ form.quantity }}</div>
+    <div class="top"><span class="def_width">Usuarios localizables: </span></div><div class="top">{{ form.userSamples }}</div><span>Usar semicolon (;) para separar.</span>
+{% endblock %}

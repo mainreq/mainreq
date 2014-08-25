@@ -1,0 +1,8 @@
+{% extends "reqApp/pdf/base.html" %}
+
+{% block pageIndex %}{% endblock %}
+
+{% block content %}
+    <h1>{{title}}</h1>
+    {% include "reqApp/pdf/tools/consistency/consistency_list.html" with CTs=CTs %}
+{% endblock %}

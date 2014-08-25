@@ -1,0 +1,11 @@
+{% if not registry %}
+    {% include "reqApp/project/registry_date.html" with element=element %}
+{% endif %}
+
+{% block content %}{% endblock %}
+
+{% if canEdit %}
+    <br/>
+    <button class="blue_button" onclick="editElement('{{ element.identifierText }}', '{% url 'reqApp:elemContent' %}', {{ element.id }}, '{{ elemType }}')">Editar</button>
+    <button title="Eliminar {{ element.identifierText }}" style="margin-left:100px;" class="blue_button" type="button" onclick="deleteElement('{{ element.identifierText }}', {{ element.identifier }}, '{{csrf_token}}','{{deleteWarning}}')">Eliminar</button>
+{% endif %}

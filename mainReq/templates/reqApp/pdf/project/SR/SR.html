@@ -1,0 +1,8 @@
+{% extends "reqApp/pdf/base.html" %}
+
+{% block pageIndex %}{% endblock %}
+
+{% block content %}
+    <h1>Requisitos de Software</h1>
+    {% include "reqApp/pdf/project/SR/SR_list.html" with SRs=SRs %}
+{% endblock %}

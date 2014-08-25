@@ -1,0 +1,54 @@
+{% extends "reqApp/base.html" %}
+{% block body %}
+<br/>
+<div>
+    <span>Bitácora: </span>
+    <select style="display:inline-block;width:auto;vertical-align:top;" class="blue_button" title="Seleccionar Bitácora" id='registrySelect' onchangess="location = this.options[this.selectedIndex].value;">
+        {% for key,val in REGISTRY_CHOICES %}
+            <option value="?registryType={{key}}"{% ifequal registryType key %}selected{% endifequal %} onclick="location='?registryType={{key}}';">{{val}}</option>
+        {% endfor %}
+        <option value="DOCUMENTS" onclick="alert('Para revisar el Historial de cambios de los Documentos debes:\n 1) ir a la pestaña \'Documentos\'\n 2) seleccionar el \'Documento\' y la \'Sección\' que deseas revisar\n 3) presionar \'Editar\' (si tienes permisos de editor)\n 4) usar la opción \'Revisar versiones anteriores\'');$(this).parent().val('?registryType={{registryType}}');">Documentos</option>
+    </select>
+    <select style="display:inline-block;width:auto;vertical-align:top;" class="blue_button" title="Seleccionar Elemento" onchange="location = document.getElementById('registrySelect').options[document.getElementById('registrySelect').selectedIndex].value + this.options[this.selectedIndex].value;">
+        {% for key,val in IDENTIFIER_CHOICES %}
+            <option value="&identifier={{key}}"{% ifequal identifier|stringformat:"s" key|stringformat:"s" %}selected{% endifequal %}>{{val}}</option>
+        {% endfor %}
+    </select>
+    <div style="display:inline-block;position:relative;float:right;">
+        <a title="Ayuda" class="blue_button" href="{% url 'reqApp:help' %}#{{ helpLink }}" target="_blank">?</a>
+    </div>
+</div>
+
+<br/>
+
+<div>
+<button title="Expandir Elementos" style="display: inline-block;width:auto;" class="blue_button" onclick='showContents()'>(+)Abrir Todos</button>
+<button title="Colapsar Elementos" style="display: inline-block;width:auto;" class="blue_button" onclick='hideContents()'>(--)Cerrar Todos</button>
+<button title="Buscar Palabra" style="display: inline-block;width:auto;" class="blue_button" onclick='showContents();find();'>Buscar</button>
+<div style="display: inline-block;width:20%;"></div>
+</div>
+
+<div style="text-align:right;">
+    <div>
+        <i style="color:Gray;">Ordenamiento: </i>
+        <b>fecha </b>
+        <i style="color:Gray;">Estado: </i>
+        <b class="satisfy">cumple </b>
+        <b class="fails">no cumple </b>
+        <b class="ambiguous">ambiguo </b>
+        <b class="registry-actual">actual </b>
+        <b class="registry-new">creado </b>
+        <b class="registry-edited">editado </b>
+        <b class="registry-deleted">eliminado </b>
+    </div>
+</div>
+
+{% ifequal elements|length 0 %}
+    <p class="centered">--------------- Lista Vacía ---------------</p>
+{% else %}
+    {% for e in elements %}
+        {% include template with element=e.element registry=True actual=e.actual deleted=e.deleted new=e.new %}
+    {% endfor %}
+{% endifequal %}
+<br/><br/><br/><br/><br/><br/>
+{% endblock %}

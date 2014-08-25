@@ -1,0 +1,40 @@
+{% load reqApp_tags %}
+<div class="element_container">
+    <div>
+        <div>
+            <div class="element_title">
+                <div style="display: inline-block;width:30%;vertical-align:top;">
+                    <a trigger="yes" onclick="showHideContent(this,'TK',0)" style="cursor:pointer;" name="element.identifierText">
+                        <b class="{{ task|taskState2CssClass }}">Tarea: {{ task }}</b>
+                    </a>
+                </div>
+                <div style="display: inline-block;width:20%;vertical-align:top;">
+                    <span style="color:Gray;">Responsable: </span><span>{{ task.user }}</span>
+                </div>
+                <div style="display: inline-block;width:45%;vertical-align:top;">
+                     <span tooltip="Fecha Revisión">{{ task.deadlineDate|date:"Y-m-d H:i" }}</span> <span style="float:right;" name="countDown" secondsToDeadline={{ task|secondsToDeadline }}></span>
+                </div>
+            </div>
+        </div>
+        <div name="element_content" style="display:none;" ready="yes">    
+            <div><span style="color:Gray;">Estado: </span><span class="{{ task|taskState2CssClass }}">{{ task|taskState }}</span></div>
+            <div><span style="color:Gray;">Email Responsable: </span>{{ task.user.email }}</div>
+            <div><span style="color:Gray;">Fecha inicio: </span>{{ task.initDate|date:"Y-m-d H:i" }}</div>
+            <div><span style="color:Gray;">Plazo: </span>{{ task|daysHoursToDeadline }}</div>
+            <br/>
+            <div><span style="color:Gray;">Descripción: </span>{{ task.description }}</div>
+            <br/>
+            {% if canEditTasks %}
+                {% if task|showTaskButton:'reprobate' %}
+                    <button class="blue_button" onclick="taskButton('Esta acción es irreversible ¿Esta tarea fue realizada de manera satisfactoria?\n\nAprobar: {{ task }}', {{ task.id }}, 'approved', '{{csrf_token}}')">Aprobar</button>
+	                <button style="margin-left:100px;" class="blue_button" onclick="taskButton('Esta acción es irreversible ¿Esta tarea no fue realizada de manera satisfactoria?\n\nReprobar: {{ task }}', {{ task.id }}, 'reprobate', '{{csrf_token}}')">Reprobar</button>
+	            {% endif %}
+	            {% if task|showTaskButton:'discarded' %}
+	                <button style="margin-left:100px;" class="blue_button" onclick="taskButton('Esta acción es irreversible ¿Esta tarea no se encuentra correctamente redactada o su especificación es ambigua?\n\nDescartar: {{ task }}', {{ task.id }}, 'discarded', '{{csrf_token}}')">Descartar</button>
+	            {% endif %}
+	        {% elif task|showTaskButton:'done' %}
+	            <button class="blue_button" onclick="taskButton('Esta acción es irreversible ¿Esta tarea fue realizada y está lista para ser revisada?\n\nTarea Realizada: {{ task }}', {{ task.id }}, 'done', '{{csrf_token}}')">Realizada</button>
+	        {% endif %}
+        </div>
+    </div>
+</div>

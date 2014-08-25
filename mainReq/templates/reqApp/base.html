@@ -1,0 +1,63 @@
+{% load staticfiles %}
+{% load reqApp_tags %}
+
+<!DOCTYPE html>
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reqApp.css' %}" />
+    <script type="text/javascript" src="{% static 'js/reqApp.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.dropdown.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.dropdown.css' %}" />
+    
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.countdown.css' %}"> 
+    <script type="text/javascript" src="{% static 'js/jquery.plugin.js' %}"></script> 
+    <script type="text/javascript" src="{% static 'js/jquery.countdown.js' %}"></script>
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.datetimepicker.css' %}" />
+    <script type="text/javascript" src="{% static 'js/jquery.datetimepicker.js' %}"></script>
+    {% with project=request|userProject %}
+        <title>mainReq :: {{ project.name }}</title>
+    {% endwith %}
+</head>
+
+<body>
+    <div class="userDropDown">
+        <span data-dropdown="#dropdown-1">{{user}}&#x25BC;</span>
+    </div>
+    
+    {% include "reqApp/navbar.html" with project=request|userProject %}
+    
+    {% block body %}{% endblock %}
+    
+    <div id="dropdown-1" class="dropdown dropdown-tip dropdown-anchor-right">
+        <div style="padding:10px;" class="element_container">
+            <div><span style="color:Gray;">Nombre: </span>{{ user.first_name }} {{ user.last_name }}</div>
+            <div><span style="color:Gray;">Email: </span>{{ user.email }}</div>
+            <div><span style="color:Gray;">Rol: </span>
+                {% for role in user.groups.all %}
+                    {{ role }},
+                {% endfor %}
+            </div>
+            {% with project=request|userProject %}
+                <div><span style="color:Gray;">Proyecto: </span>{{ project.name }}</div>
+            {% endwith %}
+            <div style="text-align:center;">
+                <br/>
+                <a class="blue_button" href="{% url 'reqApp:editUser' %}?next={% firstof request.path '/' %}">Cuenta</a>
+                {% ifequal user.userprofile.projects.count 1 %}{% else %}
+                    <a class="blue_button" href="{% url 'reqApp:PR' %}">Proyectos</a>
+                {% endifequal %}
+                {% if user.is_staff %}{% if user.is_superuser %}
+                    <a class="blue_button" href="/admin">Administración</a>
+                {% endif %}{% endif %}
+                <a class="blue_button" href="{% url 'reqApp:logout' %}">Salir</a>
+                <br/>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,109 @@
+{% extends "reqApp/base.html" %}
+{% block body %}
+
+{% if canEdit %}
+<script>
+/* this script is for prevent loosing unsaved changes when leaving this page */
+var unsavedChanges = function(){
+    $('#sectionSelect').val("?section={{section}}");// restore selection in case of not leaving
+    {% if id_version %}
+        $('#selectVersion').val("?section={{ section }}&id={{id_version}}");
+    {% elif actual %}
+        $('#selectVersion').val("?section={{ section }}&id={{actual.id}}");
+    {% endif %}
+    return 'This may have unsaved changes!';
+};
+var edit = function(){
+    $('#edit').hide('slow');
+    $('#version').hide('slow');
+    $('#preview').hide('slow');
+    $('#section').show('slow');
+    $('#versionSelect').show('slow');
+    $('#edition').show('slow');
+    
+    $(window).bind('beforeunload', unsavedChanges);
+};
+var cancel = function(){
+    $(window).unbind('beforeunload', unsavedChanges);
+    location = "?section={{ section }}";
+};
+var save = function(){
+    $(window).unbind('beforeunload', unsavedChanges);
+    $('#id_mce').submit();
+};
+
+
+$(window).bind("load", function() {
+    $('#btn_save').click(save);
+    $('#btn_cancel').click(cancel);
+    $('#btn_edit').click(edit);
+    {% if id_version %}
+    edit();
+    {% endif %}
+});
+</script>
+{% endif %}
+<br/>
+<div>
+    <div style="display:inline-block;width:auto;">Sección:</div>
+    <div style="display:inline-block;width:auto;">
+        <select class="blue_button" id="sectionSelect" title="Seleccionar sección del documento" onchange="location = this.options[this.selectedIndex].value;">
+            {% for pa in sections %}
+                    <option value="?section={{pa.sType}}"{% ifequal section pa.sType %}selected{% endifequal %}{% if not pa.active %}disabled{% endif %}>{{ pa.sName }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    
+    {% if canEdit %}
+        <div style="display:inline-block;width:auto;">
+            <div id="edit" style="display:block">
+                <button id="btn_edit" style="margin-left:50px;" class="blue_button">Editar</button>
+            </div>
+            <div id="edition" style="display:none;">
+                <button title="Cancelar Edición" id="btn_cancel" style="margin-left:50px;" class="blue_button">Cancelar</button>
+                <button title="Guardar Cambios de esta Sección" id="btn_save" style="margin-left:50px;" class="blue_button">Guardar</button>
+            </div>
+        </div>
+    {% endif %}
+    
+    <div style="display:inline-block;width:auto;float:right;">
+        <a class="blue_button" href="{% url 'reqApp:pdf' %}?pdfType={{ pdfLink }}" target="_blank">Documento PDF</a>
+        <a title="Ayuda" class="blue_button" href="{% url 'reqApp:help' %}#{{ helpLink }}" target="_blank">?</a>
+    </div>
+    
+    <div style="text-align:right;">
+        <div id="version" style="display:block;color:Black;">
+            {% if actual %}
+                Versión: {{ actual.date|date:"Y-m-d H:i" }} [{{ actual.user }}]
+            {% endif %}
+        </div>
+        {% if canEdit %}
+            <div id="versionSelect" style="display:none;">
+                {% if versions %}
+                    Revisar versiones anteriores:
+                    <select class="blue_button" id="selectVersion" title="Revisar versiones anteriores" onchange="location = this.options[this.selectedIndex].value;">
+                        {% for version in versions %}
+                            <option value="?section={{ section }}&id={{version.id}}" {% if id_version %}{% ifequal version.id id_version %}selected{% endifequal %}{% endif %}>{{ version.date|date:"Y-m-d H:i" }} [{{version.user}}]{% ifequal version.id actual.id %} (actual){% endifequal %}</option>
+                        {% endfor %}
+                    </select>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+    
+</div>
+<br/>
+<div>
+    {% if canEdit %}
+        <div style='display:none;' id='section'>{% include "reqApp/documents/mce.html" with form_id='id_mce' form=form %}</div>
+    {% endif %}
+    
+    <div style='display:block;' id='preview'><hr/>
+    {% if actual %}
+        <div style="background-color:White;">{{ actual.content|safe }}</div>
+    {% else %}
+        <p style="text-align:center">---------------- Sección No Editada ----------------</p>
+    {% endif %}
+    <hr/></div>
+</div>
+{% endblock %}

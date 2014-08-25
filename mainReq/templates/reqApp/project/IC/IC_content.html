@@ -1,0 +1,17 @@
+{% extends "reqApp/project/element_content.html" %}
+{% load reqApp_tags %}
+
+
+{% block content %}
+<br/>
+<div>
+    <span style="color:Gray;">Descripción: </span>{{ element.description }}
+</div>
+<br/>
+<div>
+    <div style="display: inline-block;width:20%;"><span style="color:Gray;">Fecha inicio: </span></div><div style="display: inline-block;">{{ element.initDate|date:"Y-m-d H:i" }}</div>
+</div>
+<div>
+    <div style="display: inline-block;width:20%;"><span style="color:Gray;">Fecha fin: </span></div><div style="display: inline-block;">{{ element.endDate|date:"Y-m-d H:i" }}</div>
+</div>
+{% endblock %}

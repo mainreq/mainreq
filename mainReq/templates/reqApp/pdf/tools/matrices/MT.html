@@ -1,0 +1,13 @@
+{% extends "reqApp/pdf/base.html" %}
+
+{% block content %}
+    <h1>Matrices de Trazado</h1>
+    <div style="text-align:right;">
+        <i style="color:Gray;">Estado: </i>
+        <b class="satisfy">cumple </b>
+        <b class="fails">no cumple </b>
+        <b class="ambiguous">ambiguo </b>
+        <b style="color:Black;">+intersección </b>
+    </div>
+    {% include "reqApp/pdf/tools/matrices/MT_list.html" with MTs=MTs %}
+{% endblock %}

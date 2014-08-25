@@ -1,0 +1,6 @@
+{% include "reqApp/pdf/project/css.html" %}
+
+{% for md in MDs %}
+    {% include "reqApp/pdf/project/MD/md.html" with element=md %}
+	<hr/>
+{% endfor %}

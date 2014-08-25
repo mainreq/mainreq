@@ -1,0 +1,6 @@
+{% include "reqApp/pdf/project/css.html" %}
+
+{% for ur in URs %}
+    {% include "reqApp/pdf/project/UR/ur.html" with element=ur %}
+	<hr/>
+{% endfor %}

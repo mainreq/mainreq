@@ -1,0 +1,43 @@
+{% extends "reqApp/project/element_content.html" %}
+{% load reqApp_tags %}
+
+
+{% block content %}
+<br/>
+    <div>
+        <span style="color:Gray;">Descripción: </span>{{ element.description }}
+    </div>
+    <br/>
+    <div>
+        <div style="display: inline-block;width:30%;vertical-align:top;"></div>
+        <div style="display: inline-block;width:30%;vertical-align:top;"></div>
+        <div style="display: inline-block;width:30%;vertical-align:top;">
+            <ul class="flat">
+                <span style="color:Gray;">
+                    RS asociados(
+                    {% if registry %}
+                        {{element.softwareRequirements|enlistRegistered|listCount}}
+                    {% else %}
+                        {{element.softwareRequirements|enlistValids|listCount}}
+                    {% endif %}
+                    ):
+                </span>
+                <ul>
+                {% if registry %}
+                    {% for sr in element.softwareRequirements|enlistRegistered %}
+                        {% if sr.validity %}
+                            <li class="{{ sr.state }}">{{sr}}</li>
+                        {% else %}
+                            <li class="{{ sr.state }}" style="color:Gray;">{{sr}} (eliminado)</li>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    {% for sr in element.softwareRequirements|enlistValids %}
+                        <li class="{{ sr.state }}">{{sr}}</li>
+                    {% endfor %}
+                {% endif %}
+                </ul>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

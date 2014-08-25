@@ -1,0 +1,38 @@
+<table class="statistics">
+    <tr>
+        <th colspan=2>RU</th>
+        <th class="statistics">cumple</th>
+        <th class="statistics">no cumple</th>
+        <th class="statistics">ambiguo</th>
+        <th class="statistics">total</th>
+    </tr>
+    {% for attribute in UR.attributes %}
+        {% for tr in attribute %}
+            {% if tr.attribute %}
+            <tr class="statistics">
+                <th rowspan={{ tr.attributes }}>{{ tr.attribute }}</th>
+            {% else %}
+            <tr>
+            {% endif %}
+                <td>{{ tr.name }}</td>
+                <td>{{ tr.satisfy }}</td>
+                <td>{{ tr.fails }}</td>
+                <td>{{ tr.ambiguous }}</td>
+                <td>{{ tr.total }}{% include "reqApp/tools/statistics/percentage.html" with total=UR.total part=tr.total %}</td>
+            </tr>
+        {% endfor %}
+    {% endfor %}
+    <tr class="statistics">
+        <td colspan=2></td>
+        <td>{{ UR.state.satisfy }}{% include "reqApp/tools/statistics/percentage.html" with total=UR.total part=UR.state.satisfy %}</td>
+        <td>{{ UR.state.fails }}{% include "reqApp/tools/statistics/percentage.html" with total=UR.total part=UR.state.fails %}</td>
+        <td>{{ UR.state.ambiguous }}{% include "reqApp/tools/statistics/percentage.html" with total=UR.total part=UR.state.ambiguous %}</td>
+        <td><b>{{ UR.total }}</b>{% include "reqApp/tools/statistics/percentage.html" with total=UR.total part=UR.total %}</td>
+    </tr>
+    {% for e in UR.extras %}
+        <tr>
+            <th>{{ e.name }}</th>
+            <td>{{ e.exCount }}</td>
+        </tr>
+    {% endfor %}
+</table>

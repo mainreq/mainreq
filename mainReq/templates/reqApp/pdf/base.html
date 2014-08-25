@@ -1,0 +1,94 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/><!-- VERY IMPORTANT! -->
+<title>
+{{title}}
+</title>
+<style type="text/css">
+{% block style %}
+    @page {
+        size: {{pagesize}};
+        margin-left: 1.5cm;
+        margin-right: 1.5cm;
+        top: 1.5cm;
+        bottom: 1.5cm;
+        @frame footer {
+            -pdf-frame-content: footerDate;
+            bottom: 1cm;
+            margin-left: 1.5cm;
+            margin-right: 1.5cm;
+            height: 1cm;
+        }
+    }
+    @page pageIndex {
+        size: {{pagesize}};
+        margin: 1.5cm;
+        bottom: 1cm;
+    }
+    @page document {
+        size: {{pagesize}};
+        margin: 1.5cm;
+        bottom: 1cm;
+        @frame footer {
+            -pdf-frame-content: footerContent;
+            bottom: 1cm;
+            margin-left: 1.5cm;
+            margin-right: 1.5cm;
+            height: 1cm;
+        }
+    }
+    pdftoc.pdftoclevel0{margin-left:0.7cm;}
+    pdftoc.pdftoclevel1{margin-left:1.4cm;}
+    pdftoc.pdftoclevel2{margin-left:2.1cm;}
+    pdftoc.pdftoclevel3{margin-left:2.8cm;}
+    pdftoc.pdftoclevel4{margin-left:3.5cm;}
+    pdftoc.pdftoclevel5{margin-left:4.2cm;}
+    img {zoom: 80%;}
+    body{font-size: 1.5em;}
+{%endblock%}	
+</style>
+</head>
+<body>
+
+<div id="footerContent">
+    {%block page_foot%}
+        <div style="text-align:right;">
+		    <pdf:pagenumber/>
+		    de <pdf:pagecount>
+		</div>
+    {%endblock%}
+</div>
+
+<div>
+    <!-- Front page-->
+    <img style="zoom:100%;" src="{{host}}{% static 'img/fcfm.png' %}"><img/>
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    <div>
+        <p style="font-size:2.5em;text-align:center;"><b>{{title}}</b></p>
+    </div>
+    <div>
+        <p style="font-size:2.5em;text-align:center;">{{project.name}}</p>
+    </div>
+    <div id="footerDate">
+        <div style="font-size:1.2em;text-align:right;">
+            <p>Fecha: {{today|date:"Y-m-d"}}</p>
+        </div>
+    </div>
+</div>
+<div>
+{% block pageIndex %}
+    <pdf:nexttemplate name="pageIndex"/>
+    <pdf:nextpage/>
+    <!-- pageIndex -->
+    <p style="font-size:1.8em;">Indice</p>
+    <pdf:toc />
+{% endblock %}
+</div>
+<pdf:nexttemplate name="document"/>
+<pdf:nextpage/>
+
+{%block content%}{%endblock%}
+</body>
+</html>

@@ -1,0 +1,10 @@
+{% extends "reqApp/project/project_element.html" %}
+{% load reqApp_tags %}
+
+{% block head %}
+    <div style="display: inline-block;width:95%;vertical-align:top;">
+        <a trigger="yes" onclick="showHideContent(this, '{% url 'reqApp:elemContent' %}', 'UT', {{ element.id }}, {% if registry %}1{% else %}0{% endif %}, {% if canEdit %}1{% else %}0{% endif %})" style="cursor:pointer;" name="{{ element.identifierText }}">
+            <b>{{ element }}</b>
+        </a>
+    </div>
+{% endblock %}

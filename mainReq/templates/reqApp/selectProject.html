@@ -1,0 +1,33 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reqApp.css' %}" />
+    <title>mainReq</title>
+</head>
+
+<body>
+    <div style="text-align:center;padding:10px;margin:10%;margin-top:10em;" class="element_container">
+        <div style="float:right;"><a class="blue_button" href="{% url 'reqApp:logout' %}">Salir</a></div>
+        {% if user.is_staff %}{% if user.is_superuser %}
+            <div style="width:100%;text-align:left;"><a class="blue_button" href="/admin">Administración</a></div>
+        {% endif %}{% endif %}
+        <h1><i>main</i>Req</h1>
+        <h2>Hola {{user}}</h2>
+        {% if projects %}
+            <form method="POST">{% csrf_token %}
+                <div style="text-align:left">
+                    <p>Selecciona un proyecto:</p>
+                    {% for index,pr in projects %}
+                        <input style="cursor:pointer" id="{{index}}" type="radio" name="index" value="{{index}}" onchange="this.form.submit()">
+                            <label style="cursor:pointer;" onMouseOver="this.style.color='#00F'" onMouseOut="this.style.color='#000'" for="{{index}}"><b>{{pr}}</b></label>
+                        <div style="color:Gray;margin-left:50px;">{{pr.description}}</div>
+                    {% endfor %}
+                </div>
+            </form>
+        {% else %}
+            <p>!No tiene proyectos asociados!</p>
+        {% endif %}
+        <br/>
+    </div>
+</body>
+</html>

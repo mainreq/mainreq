@@ -1,0 +1,8 @@
+{% extends "reqApp/pdf/base.html" %}
+
+{% block pageIndex %}{% endblock %}
+
+{% block content %}
+    <h1>Casos de Prueba</h1>
+    {% include "reqApp/pdf/project/TC/TC_list.html" with TCs=TCs %}
+{% endblock %}

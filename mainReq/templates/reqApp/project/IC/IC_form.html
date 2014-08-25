@@ -1,0 +1,7 @@
+{% extends "reqApp/project/element_form.html" %}
+{% block fields %}
+    <div><span class="def_width">*Nombre: </span>{{ form.name }}</div>
+    <div class="top"><span class="def_width">Descripción:</span></div> <div class="top">{{ form.description }}</div>
+    <div><span class="def_width">*Fecha inicio: </span>{{ form.initDate }}</div>
+    <div><span class="def_width">*Fecha fin: </span>{{ form.endDate }}</div>
+{% endblock %}

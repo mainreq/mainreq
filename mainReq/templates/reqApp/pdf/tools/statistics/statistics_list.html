@@ -1,0 +1,49 @@
+{% load reqApp_tags %}
+
+<style>
+table.statistics{
+    border-collapse:collapse;
+    border-spacing: 0px;
+    border:none;
+    margin:0px;
+    padding:0px;
+}
+.statistics th{
+    border-collapse:collapse;
+    border-spacing: 0px;
+    border: 1px solid LightGray;
+    padding:4px;
+    margin:0px;
+}
+.statistics td{
+    border-collapse:collapse;
+    border-spacing: 0px;
+    border: 1px solid LightGray;
+    padding:3px;
+    margin:0px;
+}
+tr.statistics{
+    border-top: 3px solid LightGray;
+}
+</style>
+
+{% for st in STs %}
+    <h2>{{ st.title }}</h2>
+    <h3><i style="color:Gray;">{{ st.title }}: </i>Requisitos de Usuario</h3>
+    {% include "reqApp/tools/statistics/UR.html" with UR=st.UR %}
+
+    <pdf:nextpage/>
+    <h3><i style="color:Gray;">{{ st.title }}: </i>Requisitos de Software</h3>
+    {% include "reqApp/tools/statistics/SR.html" with SR=st.SR %}
+
+    <pdf:nextpage/>
+    <h3><i style="color:Gray;">{{ st.title }}: </i>Casos de Prueba</h3>
+    {% include "reqApp/tools/statistics/TC.html" with TC=st.TC %}
+
+    {% if st.MD %}
+        <br/>
+        <h3><i style="color:Gray;">{{ st.title }}: </i>Módulos</h3>
+        {% include "reqApp/tools/statistics/MD.html" with MD=st.MD %}
+    {% endif %}
+    <pdf:nextpage/>
+{% endfor %}

@@ -1,0 +1,16 @@
+{% load reqApp_tags %}
+<div class="ordering_bar" title="Ordenar por...">
+{% for attribute in attributes %}
+    <div style="display: inline-block;width:{{ attribute.width }}%;">
+        {% ifequal actual_order attribute.order %}
+            <a class="ordering_bar" href='?order={{ attribute.order|invertOrder }}{{getParams}}'><b>{{ attribute.label }} {{ attribute.up|safe }}</b></a>
+        {% else %}
+            {% ifequal actual_order attribute.order|invertOrder %}
+                <a class="ordering_bar" href='?order={{ attribute.order }}{{getParams}}'><b>{{ attribute.label }} {{ attribute.down|safe }}</b></a>
+            {% else %}
+                <a class="ordering_bar" href='?order={{ attribute.order }}{{getParams}}'>{{ attribute.label }}</a>
+            {% endifequal %}
+        {% endifequal %}
+    </div>
+{% endfor %}
+</div>

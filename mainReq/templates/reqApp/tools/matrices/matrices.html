@@ -1,0 +1,75 @@
+{% extends "reqApp/base.html" %}
+{% load reqApp_tags %}
+{% block body %}
+<br/>
+<div>
+    <div style="display: inline-block;width:auto;vertical-align:top;margin-right:20px;">
+        Matriz: 
+        <select class="blue_button" title="Seleccionar Matriz de Trazado" onchange="location = this.options[this.selectedIndex].value;">
+            {% for key,val in MATRIX_CHOICES %}
+                <option value="?matrixType={{key}}"{% ifequal matrixType key %}selected{% endifequal %}>{{val}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div style="display:inline-block;position:relative;float:right;">
+        <a class="blue_button" href="{% url 'reqApp:pdf' %}?pdfType=MT" target="_blank">PDF</a>
+        <a title="Ayuda" class="blue_button" href="{% url 'reqApp:help' %}#{{ helpLink }}" target="_blank">?</a>
+    </div>
+</div>
+
+<div style="text-align:right;">
+    <div>
+        <i style="color:Gray;">Estado: </i>
+        <b class="satisfy">cumple </b>
+        <b class="fails">no cumple </b>
+        <b class="ambiguous">ambiguo </b>
+        <b style="color:Black;">&#x25FE;intersectan </b>
+        <b style="color:DarkGray;">&#x25FE;sin intersección </b>
+        <b style="color:#1464F6;">&#x25a1;seleccionable </b>
+        <b style="color:#1464F6;">&#x25cf;seleccionado </b>
+    </div>
+</div>
+
+<table id="matr" class="matr-table" matrixType="{{ matrixType }}">
+    <tr>
+        <th></th>
+        {% for e in rows.0 %}
+            <th class="{{ e.elCol.state }}" elColIdentifier = {{ e.elCol.identifier }}>{{ e.elCol.identifierText|verticalLabel|safe }}</th>
+        {% endfor %}
+    </tr>
+    {% for row in rows %}
+        <tr>
+            <th
+                class="{{ row.0.elRow.state }}"
+                elRowIdentifier = {{ row.0.elRow.identifier }}>
+                {{ row.0.elRow.identifierText }}
+            </th>
+        {% for e in row %}
+            <td {% if e.match %}
+                    class="matr_match"
+                {% elif e.never_intersec %}
+                    class="matr_no_intersec"
+                {% elif e.row_no_intersec %}
+                    class="matr_no_intersec_row"
+                {% elif e.col_no_intersec %}
+                    class="matr_no_intersec_col"
+                {% else %}
+                    class="matr_no_match"
+                {% endif %}
+                name = "matrix_element"
+                title = "Haz CLIC para ver detalles..."
+                elRowIdentifier = {{ e.elRow.identifier }}
+                elColIdentifier = {{ e.elCol.identifier }}>
+                    <div class="matr_selec"></div>
+            </td>
+        {% endfor %}
+        </tr>
+    {% endfor %}
+</table>
+<br/>
+<a name="bottom"></a>
+<div id='row'></div>
+<div id='col'></div>
+<br/>
+<br/><br/><br/><br/><br/>
+{% endblock %}

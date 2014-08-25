@@ -1,0 +1,51 @@
+{% extends "reqApp/project/element_content.html" %}
+{% load reqApp_tags %}
+
+
+{% block content %}
+<div><span style="color:Gray;">Estado: </span><span class="{{ element.state }}">{{ element|state }}</span></div>
+    <br/>
+    <div>
+        <span style="color:Gray;">Descripción: </span>{{ element.description }}
+    </div>
+    <br/>
+    <div>
+        <div>
+            <div>
+                <span style="color:Gray;">Resultado aceptable: </span>{{ element.acceptableResult }}
+            </div>
+            <div>
+                 <span style="color:Gray;">Resultado óptimo: </span>{{ element.optimumResult }}
+            </div>
+        </div>
+        <div style="display: inline-block;width:50%;vertical-align:top;"></div>
+        <div style="display: inline-block;width:30%;vertical-align:top;">
+            <ul class="flat">
+                <span style="color:Gray;">
+                    Usuarios asociados(
+                        {% if registry %}
+                            {{element.userTypes|enlistRegistered|listCount}}
+                        {% else %}
+                            {{element.userTypes|enlistValids|listCount}}
+                        {% endif %}
+                    ):
+                </span>
+                <ul>
+                {% if registry %}
+                    {% for ut in element.userTypes|enlistRegistered %}
+                        {% if ut.validity %}
+                            <li>{{ut}}</li>
+                        {% else %}
+                            <li style="color:Gray;" >{{ut}} (eliminado)</li>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    {% for ut in element.userTypes|enlistValids %}
+                        <li>{{ut}}</li>
+                    {% endfor %}
+                {% endif %}
+                </ul>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

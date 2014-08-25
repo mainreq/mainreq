@@ -1,0 +1,44 @@
+{% extends "reqApp/project/element_content.html" %}
+{% load reqApp_tags %}
+
+
+{% block content %}
+<div><span style="color:Gray;">Estado: </span><span class="{{ element.state }}">{{ element|state }}</span></div>
+    <br/>
+    <div>
+        <span style="color:Gray;">Descripción: </span>{{ element.description }}
+    </div>
+    <br/>
+    <div>
+        <div style="display: inline-block;width:40%;vertical-align:top;">
+            <div><span style="color:Gray;">Fuente: </span>{{ element.source }}</div>
+            <div><span style="color:Gray;">Estabilidad: </span>{{ element|stability }}</div>
+        </div>
+        <div style="display: inline-block;width:50%;vertical-align:top;">
+            <ul class="flat">
+                <span style="color:Gray;">
+                    {% if registry %}
+                        Usuarios asociados({{element.userTypes|enlistRegistered|listCount}}):
+                    {% else %}
+                        Usuarios asociados({{element.userTypes|enlistValids|listCount}}):
+                    {% endif %}
+                </span>
+                <ul>
+                    {% if registry %}
+                        {% for ut in element.userTypes|enlistRegistered %}
+                            {% if ut.validity %}
+                                <li>{{ut}}</li>
+                            {% else %}
+                                <li style="color:Gray;" >{{ut}} (eliminado)</li>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        {% for ut in element.userTypes|enlistValids %}
+                            <li>{{ut}}</li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reqApp.css' %}" />
+    <title>mainReq</title>
+</head>
+
+<body>
+    <div style="text-align:center;padding:10px;margin:25%;margin-top:10em;" class="element_container">
+        <h1><i>main</i>Req</h1>
+        <form method="POST">{% csrf_token %}
+            {% if form.non_field_errors %}
+                <p class="invalid">Contraseña o Usuario incorrecto!</p>
+            {% elif form.errors %}
+                <p class="invalid">Contraseña o Usuario incorrecto!</p>
+            {% endif %}
+            <div>
+                <input name="username" type="text" id="user" placeholder="Usuario">
+            </div>
+
+            <div>
+                <input name="password" type="password" id="inputPassword" placeholder="Contraseña">
+            </div>
+            <br/>
+            <button class="blue_button" type="submit">Ingresar</button>
+        </form>
+    </div>
+</body>
+</html>

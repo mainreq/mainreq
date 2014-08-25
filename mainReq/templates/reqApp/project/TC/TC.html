@@ -1,0 +1,17 @@
+{% extends "reqApp/project/project_element.html" %}
+{% load reqApp_tags %}
+
+{% block head %}
+    <div style="display: inline-block;width:43%;vertical-align:top;">
+        <a trigger="yes" onclick="showHideContent(this, '{% url 'reqApp:elemContent' %}', 'TC', {{ element.id }}, {% if registry %}1{% else %}0{% endif %}, {% if canEdit %}1{% else %}0{% endif %})" style="cursor:pointer;" name="{{ element.identifierText }}">
+            <b class="{{ element.state }}">{{ element }}</b>
+        </a>
+    </div>
+    <div style="display: inline-block;width:50%;vertical-align:top;">
+        {% if element.requirement.validity %}
+            <div tooltip="Requisito Asociado" class="{{ element.requirement.state }}">{{ element.requirement }}</div>
+        {% else %}
+            <div tooltip="Requisito Asociado" style="color:Gray;">{{ element.requirement }} (eliminado)</div>
+        {% endif %}
+    </div>
+{% endblock %}

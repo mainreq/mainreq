@@ -1,0 +1,6 @@
+{% extends "reqApp/pdf/base.html" %}
+
+{% block content %}
+    <h1>Estadísticas</h1>
+    {% include "reqApp/pdf/tools/statistics/statistics_list.html" with STs=STs %}
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends "reqApp/pdf/base.html" %}
+
+{% block pageIndex %}{% endblock %}
+
+{% block content %}
+    <h1>Módulos</h1>
+    {% include "reqApp/pdf/project/MD/MD_list.html" with MDs=MDs %}
+{% endblock %}

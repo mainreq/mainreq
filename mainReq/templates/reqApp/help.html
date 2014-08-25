@@ -1,0 +1,405 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reqApp.css' %}" />
+    <title>mainReq::ayuda</title>
+</head>
+
+<body>
+    <h1>MainReq: Definiciones y Preguntas Frecuentes</h1>
+    
+    <br/>
+    
+    <h2><a name="Project">Elementos del Proyecto:</a></h2>
+    <p>En esta sección puedes editar (si el administrador te ha otorgado permisos de edición) y revisar los elementos del proyecto. Éstos son Hitos, Tipos de Usuario, Requisitos de Usuario, Requisitos de Software, Módulos y Casos de Prueba.</p>
+    <p>Puedes ordenarlos por sus atributos principales y expandir el contenido para revisar búsquedas rápidas (usando "ctrl+f" en el navegador).</p>
+    <p>Puedes revisar el historial de cambios de cada elemento en la Bitácora.</p>
+    <p>Las Alarmas (icono azul "( ! )") te muestran posibles conflictos en la especificación de cada elemento.</p>
+    <p>Puedes descargar un documento PDF con el listado y detalle de los Elementos del Proyecto.</p>
+    
+    <br/>
+    
+    <h2><a name="IC">Hitos: HT</a></h2>
+    <ul>
+        <li><a href="#Project">Es un elemento del proyecto...</a></li>
+        <li><b>Definición:</b> El proyecto se puede dividir en incrementos, los que se identifican con un Hito de revisión o entrega de avance. Un Hito Consta de:</li>
+        <ul>
+            <li><b>Identificador:</b> Código único que sirve para identificar y referenciar formalmente este elemento dentro del proyecto. Es asignado automáticamente de manera incremental utilizando el formato "HTXXXX".</li>
+            <li><b>Nombre:</b> Nombre en lenguaje normal del hito.</li>
+            <li><b>Descripción:</b> Descripción del período marcado por este hito.</li>
+            <li><b>Fechas de inicio y fin:</b> Las fechas (con el formato "AAAA-MM-DD hh:mm") de inicio y fin que contemplan la etapa de desarrollo definida por este Hito.</li>
+        </ul>
+        <li><b>Alarmas:</b></li>
+        <ul>
+            <li>"Este Hito no ha sido asignado a ningún Requisito de Usuario"</li>
+            <li>"Este Hito no ha sido asignado a ningún Requisito de Software"</li>
+        </ul>
+    </ul>
+    
+    <h2><a name="UT">Tipos de Usuario: TU</a></h2>
+    <ul>
+        <li><a href="#Project">Es un elemento del proyecto...</a></li>
+        <li><b>Definición:</b> El producto de software a desarrollar puede tener distintos Tipos de Usuario que interactúan con él. Un Tipo de Usuario consta de:</li>
+        <ul>
+            <li><b>Identificador:</b> Código único que sirve para identificar y referenciar formalmente este elemento dentro del proyecto. Es asignado automáticamente de manera incremental utilizando el formato "TUXXXX".</li>
+            <li><b>Nombre:</b> Nombre en lenguaje normal del Tipo de Usuario.</li>
+            <li><b>Descripción:</b> Acá se describen las características de este Tipo de Usuario.</li>
+            <li><b>Cantidad:</b> Número entero positivo correspondiente a una estimación de la cantidad de usuarios del sistema que corresponden a este tipo.</li>
+            <li><b>Usuarios Localizables:</b> Listado de nombre y datos de contacto (ej.: correo electrónico y teléfono) de usuarios conocidos y localizables durante el desarrollo del proyecto. Los datos de cada uno pueden ser separados por un punto y coma ";".</li>
+        </ul>
+        <li><b>Alarmas:</b></li>
+        <ul>
+            <li>"Este Tipo de Usuario no ha sido asociado a ningún Requisito de Usuario"</li>
+            <li>"Este Tipo de Usuario no ha sido asociado a ningún Requisito de Software"</li>
+            <li>"Este Tipo de Usuario no ha sido asociado a ningún Caso de Prueba"</li>
+        </ul>
+    </ul>
+    
+    <h2><a name="UR">Requisitos de Usuario: RU</a></h2>
+    <ul>
+        <li><a href="#Project">Es un elemento del proyecto...</a></li>
+        <li><b>Definición:</b> Corresponden a los requisitos acordados con el cliente, y describen el sistema a desarrollar. Se recomienda que cumplan con las siguientes características:</li>
+        <ul>
+            <li><b>Necesario:</b> Un requisito es necesario si su omisión provoca una deficiencia en el sistema a construir.</li>
+            <li><b>Conciso:</b> Un requisito es conciso si es fácil de leer y entender. Su redacción debe ser simple y clara para aquellos que lo consulten en el futuro.</li>
+            <li><b>Completo:</b> Un requisito está completo si no necesita ampliar detalles en su redacción, es decir, si muestra información suficiente para su comprensión.</li>
+            <li><b>Consistente:</b> Un requisito es consistente si no se contradice con otro requisito.</li>
+            <li><b>No ambiguo:</b> Cuando el lenguaje usado en su definición no causa confusiones al lector y tiene una única interpretación.</li>
+            <li><b>Verificable:</b> Un requisito es verificable cuando puede ser cuantificado de manera que permita hacer uso de algún método de verificación.</li>
+        </ul>
+        <li>Un Requisito de Usuario consta de:</li>
+        <ul>
+            <li><b>Identificador:</b> Código único que sirve para identificar y referenciar formalmente este requisito dentro del proyecto. Es asignado automáticamente de manera incremental utilizando el formato "RUXXXX".</li>
+            <li><b>Nombre:</b> Nombre en lenguaje normal del requisito.</li>
+            <li><b>Descripción:</b> Descripción del requisito (los aspectos que involucra, en qué consiste, etc.).</li>
+            <li><b>Prioridad:</b> Nivel de urgencia asociada al requisito. La prioridad de un requisito puede ser "urgente", "pronto", "normal" o "cuando haya tiempo".</li>
+            <li><b>Estabilidad:</b> Este atributo determina si el requisito puede o no estar sujeto a cambios durante el ciclo de vida del producto de software. La estabilidad puede ser "transable" o "intransable".</li>
+            <li><b>Tipo:</b></li>
+            <ul>
+                <li><b>Funcional:</b> Describe una capacidad que debe ser soportada por el producto de software.</li>
+                <li><b>De Calidad:</b> Representan un atributo de calidad del producto, y se pueden expresar en una escala de medición.</li>
+                <li><b>De Restricción:</b> Indican con qué restricciones se desarrollará y/o funcionará el software, en función de costos, tiempos, personal, ambiente operacional, hardware, redes, etc.</li>
+            </ul>
+            <li><b>Fuente:</b> Documento o persona desde la cual surge el requisito.</li>
+            <li><b>Estado:</b> El estado de cumplimiento actual del requisito dentro del desarrollo, puede ser "Cumple", "No Cumple" o "Ambiguo". El estado predeterminado al momento de la creación es "No Cumple".</li>
+            <li><b>Costo:</b> Número entero positivo que representa el costo asociado al desarrollo de este requisito, útil en caso de utilizar "Puntos de Función" como método de estimación de costos.</li>
+            <li><b>Hito:</b> Asociado a un Hito particular del Proyecto.</li>
+            <li><b>Tipos de Usuario:</b> Usuarios involucrados con este requisito.</li>
+        </ul>
+        <li><b>Alarmas:</b></li>
+        <ul>
+            <li>"El Hito asignado a este Requisito de Usuario ha sido eliminado"</li>
+            <li>"No tiene ningún Requisito de Software asociado"</li>
+            <li>"Tiene más de 5 Requisitos de Software asociados (puede ser muy complejo y quizás deba ser dividido)"</li>
+            <li>"Su prioridad es menor que la prioridad más baja de sus Requisitos de Software asociados"</li>
+            <li>"Su estabilidad es intransable, sin embargo todos sus Requisitos de Software asociados son transables"</li>
+            <li>"Uno de sus Tipos de Usuario no se encuentra asociado a ninguno de sus Requisitos de Software"</li>
+            <li>"Su estado es No Cumple, pero todos sus Requisitos de Software asociados Cumplen"</li>
+            <li>"Su estado es No Cumple, pero todos sus Casos de Prueba asociados Cumplen"</li>
+            <li>"Su estado es Cumple, pero ninguno de sus Requisitos de Software asociados Cumplen"</li>
+            <li>"Su estado es Cumple, pero ninguno de sus Casos de Prueba asociados Cumplen"</li>
+        </ul>
+    </ul>
+    
+    <h2><a name="SR">Requisitos de Software: RS</a></h2>
+    <ul>
+        <li><a href="#Project">Es un elemento del proyecto...</a></li>
+        <li><b>Definición:</b> Son los requisitos que especifica lo que necesita el software a desarrollar para satisfacer los requisitos de usuario. Sus atributos son similares a los de los Requisitos de Usuario, salvo:</li>
+        <ul>
+            <li>El formato del identificador asignado automáticamente es "RSXXXX".</li>
+            <li>Se asocia con los requisitos de usuario correspondientes mediante una lista de selección múltiple.</li>
+            <li>Los tipos de requisitos son más específicos:</li>
+            <ul>
+                <li><b>Funcionales:</b> Indican cuáles deben ser las capacidades del software. Se derivan del modelo lógico.</li>
+                <li><b>Interacción:</b> Especifican el hardware, software o elementos de bases de datos con los que el sistema o sus componentes interactúan o se comunican.</li>
+                <li><b>Operacionales:</b> Especifican la forma en que correrá el sistema y cómo se comunicará con los operadores humanos. Incluyen todas las interfaces de usuario, interacción humano-computador, y requisitos logísticos y organizacionales.</li>
+                <li><b>Recursos (Ambiente Operacional):</b> Especifican los límites superiores de los recursos físicos, tales como capacidad de procesamiento, uso de memoria, espacio en disco, etc.</li>
+                <li><b>Usabilidad:</b> Están relacionados con el esfuerzo de uso y la evaluación del uso realizada por los usuarios.</li>
+                <li><b>Mantenibilidad:</b> Relacionados con el esfuerzo de hacer modificaciones, especificando cuán fácil es la reparación de fallas y adaptación del software a nuevos requisitos.</li>
+                <li><b>Portabilidad:</b> Relacionados con la habilidad del sistema de ser transferido de un ambiente a otro.</li>
+                <li><b>Confiabilidad:</b> Están relacionados con la capacidad de mantener un nivel adecuado de servicio, bajo ciertas condiciones y por cierto tiempo. Especificando los tiempos medios entre fallas aceptables.</li>
+                <li><b>Interoperabilidad:</b> Habilidad de interactuar con determinados sistemas.</li>
+                <li><b>Rendimiento:</b> Establecen valores numéricos para variables medibles relacionadas con el rendimiento del sistema.</li>
+                <li><b>Documentación:</b> Especifican requisitos particulares del proyecto para la documentación.</li>
+                <li><b>Escalabilidad:</b> Especifica la capacidad del sistema para mantener o mejorar su rendimiento medio conforme al aumento del número de usuarios.</li>
+            </ul>
+        </ul>
+        <li><b>Alarmas:</b></li>
+        <ul>
+            <li>"El Hito asignado a este Requisito de Software ha sido eliminado"</li>
+            <li>"Su Hito no corresponde con ningún Hito asociado a sus Requisitos de Usuario"</li>
+            <li>"No tiene ningún Requisito de Usuario asociado"</li>
+            <li>"Tiene más de 3 Requisitos de Usuario asociados (puede ser muy complejo y quizás deba ser dividido)"</li>
+            <li>"Su prioridad es mayor que la prioridad más alta de sus Requisitos de Usuario asociados"</li>
+            <li>"Su estabilidad es intransable, sin embargo todos sus Requisitos de Usuario son transables"</li>
+            <li>"Un Requisito de Usuario asociado ha sido modificado (su fecha de modificación es posterior a la de este Requisito de Software, favor revisar y actualizar)"</li>
+            <li>"Uno de sus Tipos de Usuario no se encuentra asociado a ninguno de sus Requisitos de Usuario"</li>
+            <li>"No tiene ningún Módulo asociado"</li>
+            <li>"Su estado es No Cumple, pero todos sus Casos de Prueba asociados Cumplen"</li>
+            <li>"Su estado es Cumple, pero ninguno de sus Casos de Prueba asociados Cumplen"</li>
+        </ul>
+    </ul>
+
+    <h2><a name="MD">Módulos: MD</a></h2>
+    <ul>
+        <li><a href="#Project">Es un elemento del proyecto...</a></li>
+        <li><b>Definición:</b> Corresponden a componentes de alto nivel que encapsulan los requisitos de software descritos en etapas anteriores. En la práctica éstos se pueden definir como interfaces, páginas web o procedimientos. Un Módulo se compone de:</li>
+        <ul>
+            <li><b>Identificador:</b> Código único que sirve para identificar y referenciar formalmente este módulo dentro del proyecto. Es asignado automáticamente de manera incremental utilizando el formato "MDXXXX".</li>
+            <li><b>Nombre:</b> Nombre simple del módulo.</li>
+            <li><b>Descripción:</b> Se describe la función que encapsula este módulo.</li>
+            <li><b>Prioridad:</b> Nivel de urgencia asociada al módulo. La prioridad de un módulo puede ser "urgente", "pronto", "normal" o "cuando haya tiempo". El formulario ofrece una lista seleccionable.</li>
+            <li><b>Costo:</b> Se ingresa de la misma que el costo asociado a los requisitos, corresponde a un número entero positivo que representa el costo asociado al desarrollo de este módulo.</li>
+            <li><b>Requisitos de Software:</b> sub-componentes que integran el Módulo.</li>
+        </ul>
+        <li><b>Alarmas:</b></li>
+        <ul>
+            <li>"No tiene ningún Requisito de Software asociado"</li>
+            <li>"Ningún Requisito de Software asociado tiene por lo menos la misma prioridad que este módulo"</li>
+            <li>"Un Requisito de Software asociado ha sido modificado (su fecha de modificación es posterior a la de este Módulo, favor revisar y actualizar)"</li>
+        </ul>
+    </ul>
+
+    <h2><a name="TC">Casos de Prueba: CP</a></h2>
+    <ul>
+        <li><a href="#Project">Es un elemento del proyecto...</a></li>
+        <li><b>Definición:</b> son usados para detectar errores en el sistema desarrollado y como medio para validar que el producto de software ha sido concebido e interpretado correctamente según lo especificado en los requisitos. Un Caso de Prueba consta de:</li>
+        <ul>
+            <li><b>Identificador:</b> Código único que sirve para identificar y referenciar formalmente este caso de prueba dentro del proyecto. Es asignado automáticamente de manera incremental utilizando el formato "CPXXXX".</li>
+            <li><b>Nombre:</b> Nombre simple del caso de prueba.</li>
+            <li><b>Descripción:</b> Acá se describe el procedimiento para evaluar el caso de prueba.</li>
+            <li><b>Resultado Aceptable:</b> Se describe el mínimo resultado aceptable que hace exitosa a esta prueba.</li>
+            <li><b>Resultado Óptimo:</b> Se describe el mejor resultado esperable tras realizar la prueba.</li>
+            <li><b>Estado:</b> El estado de cumplimiento actual del caso de prueba, puede ser "Cumple", "No Cumple" o "Ambiguo". El estado predeterminado al momento de la creación es "No Cumple".</li>
+            <li><b>Requisito:</b> Un Caso de Prueba debe estar asociado a un Requisito de Usuario o bien a un Requisito de Software.</li>
+            <li><b>Tipos de Usuario:</b> Se deben especificar los usuarios que tienen participación en las pruebas a realizar.</li>
+        </ul>
+        <li><b>Alarmas:</b></li>
+        <ul>
+            <li>"El Requisito asignado a este Caso de Prueba ha sido eliminado"</li>
+            <li>"El Requisito asociado ha sido modificado (su fecha de modificación es posterior a la de este Caso de Prueba, favor revisar y actualizar)"</li>
+        </ul>
+    </ul>
+
+    <h2><a name="docs">Documentos del Proyecto:</a></h2>
+    <p>La sección de "Documentos" sirve para editar y descargar los siguientes documentos: Documento de Requisitos, Documento de Diseño, Documento de Casos de Prueba y el Documento Histórico del Proyecto.</p>
+    <p>El editor de texto enriquecido incorpora herramientas básicas, permitiendo redactar párrafos y subir imágenes. Además se puede revisar versiones anteriores de cada sección del documento (descuida, sólo se almacena una nueva versión al guardar los cambios).</p>
+    <p>Preguntas Frecuentes:</p>
+    <ul>
+        <li>¿Cómo hacer que una imagen quede bien centrada en el documento PDF?</li>
+        <ul><li>Se debe centrar el texto/cursor (con el botón del editor) y luego insertar la imagen ahí. Si se inserta la imagen y luego se centra no funcionará al generar el documento PDF.</li></ul>
+        <li>¿Por qué no puedo usar "h1" ni "h2" para dar formato de títulos en la edición de documentos?</li>
+        <ul><li>Porque son usados para darle forma al documento final.</li></ul>
+        <li>¿Qué pasa si una imagen es muy grande para una página del documento PDF?</li>
+        <ul><li>Automáticamente se ajusta la imagen al tamaño máximo visible en la hoja.</li></ul>
+        <li>¿Por qué cuando me cambio de documento las secciones no cambian?</li>
+        <ul><li>Porque en realidad a los Documentos de Requisitos, Casos de Prueba y Diseño les corresponden sólo algunas de las secciones compartidas presentes en el Documento Histórico.</li></ul>
+    </ul>
+   
+    <p>Breve descripción de las Secciones de un Documento:</p>
+    <ul>
+        <li><b>Introducción: </b>En esta introducción se describe brevemente el contexto, objetivos y alcance del sistema a desarrollar, así como la documentación relativa al mismo.</li>
+        <li><b>Propósisto: </b>Describir aquí qué hace y qué es el sistema. Para proyectos pequeños, media página debería ser más que suficiente.</li>
+        <li><b>Alcance: </b>Describir hasta dónde llega el proyecto: qué es y qué no es. Para proyectos pequeños, media página debería ser más que suficiente.</li>
+        <li><b>Contexto: </b>Dar información respecto del contexto del desarrollo y el contexto en el que se tiene que insertar el sistema. Tecnologías que estarán involucradas, trabajos previos, vínculos con otros sistemas, etc. Escriba lo que necesite, en general los gráficos son bienvenidos, pues ayudan mucho a la comprensión.</li>
+        <li><b>Definiciones: </b>Indique aquí la definición de las "palabras claves" (o keywords) que se emplearán en el documento, y que el lector no necesariamente conoce. De la misma manera, coloque el significado de todas siglas o abreviaturas que se empleen. Tanto las siglas como las definiciones tienen que expresar lo que el/los autores del documento entienden, y no necesariamente dar definiciones generales. La idea es poder entender en toda su magnitud el documento que se está leyendo, y nada más. La lista DEBE estar en orden alfabético para facilitar la búsqueda de conceptos.</li>
+        <li><b>Referencias: </b>Enumere la documentación y bibliografía utilizada como apoyo para construir este documento. Coloque fechas y versiones de documentos cuando corresponda.</li>
+        <li><b>Equipo Desarrollador y Contraparte: </b>Acá se deben listar el nombre, rol y contacto (email), de los integrantes pertenecientes al equipo de desarrollo y a la contraparte.</li>
+        <li><b>Descripción General: </b>Esta sección describe los requisitos funcionales de los Usuarios/Clientes, sus interfaces externa, las condiciones de excepción y las clases de pruebas que se harán para verificar que los requisitos se cumplen.</li>
+        <li><b>Usuarios: </b>Acá se deben identificar los tipos de usuarios, los atributos generales de cada tipo y la cantidad de personas en cada categoría.</li>
+        <li><b>Producto: </b>Acá debe colocarse la perspectiva que tienen los clientes y los usuarios acerca del producto. Cada tipo de usuario tiene diferentes expectativas, y cada tipo de cliente también. El cliente es el que aporta la visión de la organización. Eso debería estar expresado acá. Basta con colocar una oración por cada tipo de usuario y cliente.</li>
+        <li><b>Ambiente: </b>Acá se describen brevemente los componentes principales del ambiente operacional, donde deberá vivir la solución que está siendo desarrollada. Esto puede describir el escenario actual, o bien el futuro, si es que se realizará una compra de equipamiento. La descripción se realiza a nivel de hardware, servidores, bases de datos, redes, etc.</li>
+        <li><b>Proyectos Relacionados: </b>Acá se debe especificar si este proyecto tiene relación con algún sistema ya implementado, con otro proyecto en ejecución o planificado.</li>
+    </ul>
+
+    <h2><a name="docReq">Documento de Requisitos</a></h2>
+    <a href="#docs">Es un Documento del proyecto...</a>
+    <p>Contenido:</p>
+    <ul>
+        <li>Introducción</li>
+        <ul>
+            <li>Propósito</li>
+            <li>Alcance</li>
+            <li>Contexto</li>
+            <li>Definiciones</li>
+            <li>Referencias</li>
+            <li>Equipo Desarrollador y Contraparte</li>
+        </ul>
+        <li>Descripción General</li>
+        <ul>
+            <li>Usuarios</li>
+            <li>Producto</li>
+            <li>Ambiente</li>
+            <li>Proyectos Relacionados</li>
+        </ul>
+        <li>Requisitos del Sistema</li>
+        <ul>
+            <li>Requisitos de Usuario</li>
+            <li>Requisitos de Software</li>
+        </ul>
+        <li>Matrices de Trazado</li>
+        <ul>
+            <li>RU/RS</li>
+        </ul>
+    </ul>
+    
+    <h2><a name="docDsn">Documento de Diseño</a></h2>
+    <a href="#docs">Es un Documento del proyecto...</a>
+    <p>Contenido:</p>
+    <ul>
+        <li>Introducción</li>
+        <ul>
+            <li>Propósito</li>
+            <li>Alcance</li>
+            <li>Contexto</li>
+            <li>Definiciones</li>
+            <li>Referencias</li>
+            <li>Equipo Desarrollador y Contraparte</li>
+        </ul>
+        <li>Descripción General</li>
+        <li>Diseño</li>
+        <ul>
+            <li>Arquitectura Física</li>
+            <li>Arquitectura Lógica</li>
+            <li>Modelo de Datos</li>
+            <li>Detalle Módulos</li>
+            <li>Navegación</li>
+            <li>Interfaz</li>
+        </ul>
+        <li>Módulos</li>
+        <li>Matrices de Trazado</li>
+        <ul>
+            <li>MD/RS</li>
+        </ul>
+    </ul>
+    
+    <h2><a name="docTC">Documento de Casos de Prueba</a></h2>
+    <a href="#docs">Es un Documento del proyecto...</a>
+    <p>Contenido:</p>
+    <ul>
+        <li>Introducción</li>
+        <ul>
+            <li>Propósito</li>
+            <li>Alcance</li>
+            <li>Contexto</li>
+            <li>Definiciones</li>
+            <li>Referencias</li>
+            <li>Equipo Desarrollador y Contraparte</li>
+        </ul>
+        <li>Descripción General</li>
+        <ul>
+            <li>Usuarios</li>
+            <li>Producto</li>
+            <li>Ambiente</li>
+            <li>Proyectos Relacionados</li>
+        </ul>
+        <li>Requisitos del Sistema</li>
+        <ul>
+            <li>Requisitos de Usuario</li>
+            <li>Requisitos de Software</li>
+        </ul>
+        <li>Casos de Prueba</li>
+        <li>Matrices de Trazado</li>
+        <ul>
+            <li>RU/RS</li>
+            <li>RU/CP</li>
+            <li>RS/CP</li>
+        </ul>
+    </ul>
+    
+    <h2><a name="docHis">Documento Histórico</a></h2>
+    <a href="#docs">Es un Documento del proyecto...</a>
+    <p>Contenido:</p>
+    <ul>
+        <li>Introducción</li>
+        <ul>
+            <li>Propósito</li>
+            <li>Alcance</li>
+            <li>Contexto</li>
+            <li>Definiciones</li>
+            <li>Referencias</li>
+            <li>Equipo Desarrollador y Contraparte</li>
+        </ul>
+        <li>Descripción General</li>
+        <ul>
+            <li>Usuarios</li>
+            <li>Producto</li>
+            <li>Ambiente</li>
+            <li>Proyectos Relacionados</li>
+        </ul>
+        <li>Diseño</li>
+        <ul>
+            <li>Arquitectura Física</li>
+            <li>Arquitectura Lógica</li>
+            <li>Modelo de Datos</li>
+            <li>Detalle Módulos</li>
+            <li>Navegación</li>
+            <li>Interfaz</li>
+        </ul>
+        <li>Requisitos del Sistema</li>
+        <ul>
+            <li>Requisitos de Usuario</li>
+            <li>Requisitos de Software</li>
+        </ul>
+        <li>Módulos</li>
+        <li>Casos de Prueba</li>
+        <li>Matrices de Trazado</li>
+        <ul>
+            <li>RU/RS</li>
+            <li>MD/RS</li>
+            <li>RU/CP</li>
+            <li>RS/CP</li>
+        </ul>
+    </ul>
+    
+    <h2><a name="task">Tareas</a></h2>
+    <div style="text-align:center;">
+        <img style="zoom:100%;" src="{% static 'img/task_life.png' %}"><img/>
+        <p>Figura 33: Ciclo de vida de Tareas.</p>
+    </div>
+    <ul>
+        <li>En esta sección un integrante del equipo de desarrollo puede ver y reportar el estado de las Tareas que se le han encargado. Si el usuario tiene permisos de edición (como un "Jefe de Proyecto"), podrá asignar y revisar Tareas.</li>
+        <li>La Figura 33 muestra los posibles estados de una Tarea.</li>
+        <ul>
+            <li><b>Por Hacer:</b> La Tarea ha sido creada y aún queda tiempo para realizarla.</li>
+            <li><b>Realizada:</b> El integrante responsable reporta la realización de la Tarea dentro del plazo.</li>
+            <li><b>No Realizada:</b> Se acaba el plazo y el integrante no ha reportado su realización.</li>
+            <li><b>Aprobada:</b> El jefe de proyecto considera válida la Tarea reportada por el integrante.</li>
+            <li><b>Reprobada:</b> El jefe de proyecto considera inválida la Tarea reportada por el integrante.</li>
+            <li><b>Descartada:</b> El jefe de proyecto decide que la especificación de la Tarea es inconsistente o ambigua.</li>
+        </ul>
+    </ul>
+    
+    <h2><a name="ST">Estadísticas del Proyecto</a></h2>
+    <p>En esta sección se puede revisar el avance del proyecto en términos de cumplimiento y cantidad de elementos abarcados por Hito.</p>
+    <p>Se ofrece un selector para revisar las estadísticas de elementos asociados a un Hito particular del proyecto. Las tablas pueden ser descargadas en un documento PDF con portada, índice y separadas por hito para su posterior revisión.</p>
+    <ul>
+        <li><b>Requisitos de Usuario:</b> Se despliega la cantidad separada por atributos (prioridad, estabilidad y tipo) y por el nivel de cumplimiento (cumple, no cumple y ambiguo). Contabilizando el costo total y cuántos de ellos no tienen Requisito de Software o Tipo de Usuario asociados.</li>
+        <li><b>Requisitos de Software:</b> Muestra la misma información que la tabla de Requisitos de Usuario, pero considerando los tipos específicos de los Requisitos de Software.</li>
+        <li><b>Casos de Prueba:</b> Se contabiliza la cantidad de Casos de Prueba asociados a Requisitos de Usuario y los asociados a Requisitos de Software, separados por estado de cumplimiento. Además se cuentan cuántos de ellos no tienen Tipos de Usuarios asociados.</li>
+        <li><b>Módulos:</b> Se separan por prioridad, sumando el costo total y contabilizando cuántos de ellos no tienen Requisitos de Software asociados.</li>
+    </ul>
+    
+    <h2><a name="matrix">Matrices de Trazado</a></h2>
+    <p>Las matrices de trazado sirven para revisar las relaciones establecidas entre dos tipos de elementos. Ubicando un tipo de elemento en las filas y el otro tipo en las columnas se puede evaluar la cobertura de requisitos, casos de prueba y módulos. De esta manera se puede realizar un análisis de impacto ante alguna modificación de un elemento en particular.</p>
+    <p>La matriz interactiva permite revisar con un clic el contenido del par de elementos en una intersección. Se destacan con color gris los elementos que no intersecan. Se puede descargar un documento todas las matrices en un archivo PDF, las cuales son particionadas en cuadrantes si sobrepasan el tamaño de la hoja.</p>
+    <ul>
+        <li>Las matrices disponibles son las siguientes:</li>
+        <ul>
+            <li>Requisitos de Usuario vs. Requisitos de Software</li>
+            <li>Módulos vs. Requisitos de Software</li>
+            <li>Requisitos de Usuario vs. Casos de Prueba</li>
+            <li>Requisitos de Software vs. Casos de Prueba</li>
+        </ul>
+    </ul>
+    
+    <h2><a name="cons">Consistencia de Relaciones</a></h2>
+    <p>Esta sección muestra el detalle de los elementos asociados a otro elemento en particular, facilitando la revisión manual de la consistencia en sus descripciones y atributos.</p>
+    <p>Se puede descargar una versión PDF como un documento para su revisión "offline".</p>
+    
+    <h2><a name="reg">Bitácora de Elementos del Proyecto</a></h2>
+    <p>Registra la evolución de cada elemento de proyecto creado, junto con la fecha, el usuario responsable y el motivo de la modificación. Indica si el registro es creado, modificado, eliminado o corresponde al registro actualmente visible.</p>
+    
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+</body>
+</html>

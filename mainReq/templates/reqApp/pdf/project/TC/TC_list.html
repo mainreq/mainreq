@@ -1,0 +1,6 @@
+{% include "reqApp/pdf/project/css.html" %}
+
+{% for tc in TCs %}
+    {% include "reqApp/pdf/project/TC/tc.html" with element=tc %}
+	<hr/>
+{% endfor %}

@@ -1,0 +1,17 @@
+<div>
+    Filtro:
+    {% for filter in elementsFilters %}
+        <span>
+            <select
+                name="filterSelect"
+                class="blue_button"
+                title="{{ filter.title }}"
+                onchange="filterThis('{{ getParams }}')">
+                
+                {% for key,name,selected in filter.list %}
+                    <option value="&{{ filter.key }}={{ key }}"{% if selected %}selected{% endif %}>{{ name }}</option>
+                {% endfor %}
+            </select>
+        </span>
+    {% endfor %}
+</div>

@@ -1,0 +1,17 @@
+<script type="text/javascript" src="{{ STATIC_URL }}tiny_mce/tiny_mce.js"></script>
+<script>
+    // replace tinymce button by our inputfile
+    $(window).bind("load", function() {
+        var id = '#' + $('textarea')[0].id + '_browseimg';
+        var id_tooltip = id + '_voice';
+        var tooltip = $(id_tooltip).html();
+        var _url = "{% url 'reqApp:mce_upload_image' %}";
+        var _csrf = "{{ csrf_token }}";
+        $(id).replaceWith('<div class="tinymceImg" style="background:url({{ STATIC_URL }}tiny_mce/plugins/yenimg/img/img2.gif) no-repeat center;"><input id="'+id+'" title="'+tooltip+'" type="file" accept="image/*" onclick="return imgAlignMessage()" onchange="insertMceImg(this, \''+_url+'\', \''+_csrf+'\')"></div>');
+    });
+</script>
+
+<form id="{{ form_id }}" action="" method="post">
+    {% csrf_token %}
+    {{form.content}}
+</form>

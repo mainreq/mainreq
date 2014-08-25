@@ -1,0 +1,28 @@
+{% extends "reqApp/project/element_content.html" %}
+{% load reqApp_tags %}
+
+
+{% block content %}
+<br/>
+    <div>
+        <span style="color:Gray;">Descripción: </span>{{ element.description }}
+    </div>
+    <br/>
+    <div>
+        <div style="display: inline-block;width:40%;vertical-align:top;">
+            <span style="color:Gray;">Cantidad de usuarios: </span>{{ element.quantity }}
+        </div>
+        <div style="display: inline-block;width:40%;vertical-align:top;">
+            <ul class="flat">
+            {% with samples=element.userSamples|splitBy:';' %}
+            <span style="color:Gray;">Usuarios localizables ({{samples|listLen}}): </span>
+                <ul>
+                    {% for c in samples %}
+                        <li>{{c}}</li>
+                    {% endfor %}
+                </ul>
+            {% endwith %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

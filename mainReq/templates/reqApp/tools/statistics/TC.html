@@ -1,0 +1,33 @@
+<table class="statistics">
+    <tr>
+        <th colspan=2>CP</th>
+        <th class="statistics">cumple</th>
+        <th class="statistics">no cumple</th>
+        <th class="statistics">ambiguo</th>
+        <th class="statistics">total</th>
+    </tr>
+    {% for attribute in TC.attributes %}
+        {% for tr in attribute %}
+            <tr class="statistics">
+                <th colspan=2>{{ tr.name }}</th>
+                <td>{{ tr.satisfy }}</td>
+                <td>{{ tr.fails }}</td>
+                <td>{{ tr.ambiguous }}</td>
+                <td>{{ tr.total }}{% include "reqApp/tools/statistics/percentage.html" with total=TC.total part=tr.total %}</td>
+            </tr>
+        {% endfor %}
+    {% endfor %}
+    <tr class="statistics">
+        <td colspan=2></td>
+        <td>{{ TC.state.satisfy }}{% include "reqApp/tools/statistics/percentage.html" with total=TC.total part=TC.state.satisfy %}</td>
+        <td>{{ TC.state.fails }}{% include "reqApp/tools/statistics/percentage.html" with total=TC.total part=TC.state.fails %}</td>
+        <td>{{ TC.state.ambiguous }}{% include "reqApp/tools/statistics/percentage.html" with total=TC.total part=TC.state.ambiguous %}</td>
+        <td><b>{{ TC.total }}</b>{% include "reqApp/tools/statistics/percentage.html" with total=TC.total part=TC.total %}</td>
+    </tr>
+    {% for e in TC.extras %}
+        <tr>
+            <th>{{ e.name }}</th>
+            <td>{{ e.exCount }}</td>
+        </tr>
+    {% endfor %}
+</table>
