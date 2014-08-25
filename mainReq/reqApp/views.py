@@ -1163,11 +1163,13 @@ def render_to_pdf(template_src, context_dict):
 def pdf(request):
     user = getUserOr404(request)
     project = getProject(request)
+    host = request.build_absolute_uri("/")[:-1]# http://localhost:8000
+    print "host--> ", host
     context = {
         'pagesize':'letter',# https://github.com/chrisglass/xhtml2pdf/blob/master/doc/usage.rst#supported-page-properties-and-values
         'title':'',
         'fileName':'',
-        'host':request.build_absolute_uri("/")[:-1],# http://localhost:8000
+        'host':host,
         'project':project,
         'today':timezone.now(),
     }
