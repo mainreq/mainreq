@@ -4,12 +4,12 @@
 <br/>
 <div>
     Consistencia: 
-    <select style="display:inline-block;width:auto;vertical-align:top;" class="blue_button" title="Seleccionar Relación de Consistencia" id='consistencySelect' onchange="location = this.options[this.selectedIndex].value;">
+    <select progressbar style="display:inline-block;width:auto;vertical-align:top;" class="blue_button" title="Seleccionar Relación de Consistencia" id='consistencySelect' onchange="location = this.options[this.selectedIndex].value;">
         {% for key,val in CONSISTENCY_CHOICES %}
             <option value="?consistency={{key}}"{% ifequal consistency key %}selected{% endifequal %}>{{val}}</option>
         {% endfor %}
     </select>
-    <select style="display:inline-block;width:auto;vertical-align:top;" class="blue_button" title="Seleccionar Elemento" onchange="location = document.getElementById('consistencySelect').options[document.getElementById('consistencySelect').selectedIndex].value + this.options[this.selectedIndex].value;">
+    <select progressbar style="display:inline-block;width:auto;vertical-align:top;" class="blue_button" title="Seleccionar Elemento" onchange="location = document.getElementById('consistencySelect').options[document.getElementById('consistencySelect').selectedIndex].value + this.options[this.selectedIndex].value;">
         {% for key,val in IDENTIFIER_CHOICES %}
             <option value="&identifier={{key}}"{% ifequal identifier|stringformat:"s" key|stringformat:"s" %}selected{% endifequal %}>{{val}}</option>
         {% endfor %}

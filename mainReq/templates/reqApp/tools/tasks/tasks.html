@@ -5,7 +5,7 @@
 <div>
     {% if canEditTasks %}
         Responsable: 
-        <select style="display:inline-block;width:auto;vertical-align:top;" class="blue_button" tooltip="Seleccionar Usuario" onchange="location=$(this).val();">
+        <select progressbar style="display:inline-block;width:auto;vertical-align:top;" class="blue_button" tooltip="Seleccionar Usuario" onchange="location=$(this).val();">
             <option value="?">Seleccionar Usuario</option>
             {% for i,w in workerUsers %}
                 <option value="?userIndex={{i}}"{% ifequal userIndex i %}selected{% endifequal %}>Usuario: {{w}}</option>
@@ -14,7 +14,7 @@
     {% endif %}
     
     Estado: 
-    <select style="display:inline-block;width:auto;vertical-align:top;" class="blue_button" tooltip="Seleccionar Estado" onchange="location=$(this).val();">
+    <select progressbar style="display:inline-block;width:auto;vertical-align:top;" class="blue_button" tooltip="Seleccionar Estado" onchange="location=$(this).val();">
         <option value="?userIndex={{ userIndex }}">Seleccionar Estado</option>
         {% for s,n in states %}
             <option {% ifequal state s %}selected{% endifequal %} value="?state={{ s }}&userIndex={{ userIndex }}">{{ n }}</option>

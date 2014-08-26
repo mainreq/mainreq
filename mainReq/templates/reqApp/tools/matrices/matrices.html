@@ -5,7 +5,7 @@
 <div>
     <div style="display: inline-block;width:auto;vertical-align:top;margin-right:20px;">
         Matriz: 
-        <select class="blue_button" title="Seleccionar Matriz de Trazado" onchange="location = this.options[this.selectedIndex].value;">
+        <select progressbar class="blue_button" title="Seleccionar Matriz de Trazado" onchange="location = this.options[this.selectedIndex].value;">
             {% for key,val in MATRIX_CHOICES %}
                 <option value="?matrixType={{key}}"{% ifequal matrixType key %}selected{% endifequal %}>{{val}}</option>
             {% endfor %}

@@ -47,7 +47,7 @@ $(window).bind("load", function() {
 <div>
     <div style="display:inline-block;width:auto;">Sección:</div>
     <div style="display:inline-block;width:auto;">
-        <select class="blue_button" id="sectionSelect" title="Seleccionar sección del documento" onchange="location = this.options[this.selectedIndex].value;">
+        <select progressbar class="blue_button" id="sectionSelect" title="Seleccionar sección del documento" onchange="location = this.options[this.selectedIndex].value;">
             {% for pa in sections %}
                     <option value="?section={{pa.sType}}"{% ifequal section pa.sType %}selected{% endifequal %}{% if not pa.active %}disabled{% endif %}>{{ pa.sName }}</option>
             {% endfor %}
@@ -60,8 +60,8 @@ $(window).bind("load", function() {
                 <button id="btn_edit" style="margin-left:50px;" class="blue_button">Editar</button>
             </div>
             <div id="edition" style="display:none;">
-                <button title="Cancelar Edición" id="btn_cancel" style="margin-left:50px;" class="blue_button">Cancelar</button>
-                <button title="Guardar Cambios de esta Sección" id="btn_save" style="margin-left:50px;" class="blue_button">Guardar</button>
+                <button progressbar title="Cancelar Edición" id="btn_cancel" style="margin-left:50px;" class="blue_button">Cancelar</button>
+                <button progressbar title="Guardar Cambios de esta Sección" id="btn_save" style="margin-left:50px;" class="blue_button">Guardar</button>
             </div>
         </div>
     {% endif %}
@@ -81,7 +81,7 @@ $(window).bind("load", function() {
             <div id="versionSelect" style="display:none;">
                 {% if versions %}
                     Revisar versiones anteriores:
-                    <select class="blue_button" id="selectVersion" title="Revisar versiones anteriores" onchange="location = this.options[this.selectedIndex].value;">
+                    <select progressbar class="blue_button" id="selectVersion" title="Revisar versiones anteriores" onchange="location = this.options[this.selectedIndex].value;">
                         {% for version in versions %}
                             <option value="?section={{ section }}&id={{version.id}}" {% if id_version %}{% ifequal version.id id_version %}selected{% endifequal %}{% endif %}>{{ version.date|date:"Y-m-d H:i" }} [{{version.user}}]{% ifequal version.id actual.id %} (actual){% endifequal %}</option>
                         {% endfor %}

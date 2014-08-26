@@ -5,7 +5,7 @@
 <div>
     <div style="display:inline-block;">
         Hito: 
-        <select class="blue_button" title="Seleccionar Hito" onchange="location = this.options[this.selectedIndex].value;">
+        <select progressbar class="blue_button" title="Seleccionar Hito" onchange="location = this.options[this.selectedIndex].value;">
             {% for key,val in IC_CHOICES %}
                 <option value="?increment={{key}}"{% ifequal increment key %}selected{% endifequal %}>{{val}}</option>
             {% endfor %}

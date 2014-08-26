@@ -443,3 +443,28 @@ $(window).bind("load", function() {
         //$('th[elColIdentifier='+$(this).attr('elColIdentifier')+']').css({'border-color': 'rgba(0,0,0,0)',});
     });
 });
+
+// Nprogress bar --> https://github.com/rstacruz/nprogress
+function prepareNProgressBar(){
+    NProgress.configure({
+        minimum:0.1,
+        showSpinner:false,
+        trickleRate:0.2,
+        trickleSpeed:800,
+    });
+    $('a[progressbar]').click(function(){
+        NProgress.start();
+    });
+    $('button[progressbar]').click(function(){
+        NProgress.start();
+    });
+    $('select[progressbar]').change(function(){
+        NProgress.start();
+    });
+}
+$(window).bind("load", function(){
+    prepareNProgressBar();
+});
+$(window).unload(function(){
+    NProgress.done();
+});
