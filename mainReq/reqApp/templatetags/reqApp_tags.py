@@ -177,7 +177,7 @@ def textTableHorizHeaders(rows):
 def verticalLabel(label):
     vLabel = ""
     for c in label:
-        vLabel = vLabel + "&#013;" + c
+        vLabel = vLabel + c + "<br/>"# "&#013;"
     return vLabel
 
 @register.filter(name="alarms")

@@ -3,13 +3,15 @@
 <br/>
 <div>
     <span>Bitácora: </span>
-    <select style="display:inline-block;width:auto;vertical-align:top;" class="blue_button" title="Seleccionar Bitácora" id='registrySelect' onchangess="location = this.options[this.selectedIndex].value;">
+    <select style="display:inline-block;width:auto;vertical-align:top;" class="blue_button" title="Seleccionar Bitácora" id='registrySelect' onchange="location = this.options[this.selectedIndex].value;">
         {% for key,val in REGISTRY_CHOICES %}
             <option value="?registryType={{key}}"{% ifequal registryType key %}selected{% endifequal %} onclick="location='?registryType={{key}}';">{{val}}</option>
         {% endfor %}
-        <option value="DOCUMENTS" onclick="alert('Para revisar el Historial de cambios de los Documentos debes:\n 1) ir a la pestaña \'Documentos\'\n 2) seleccionar el \'Documento\' y la \'Sección\' que deseas revisar\n 3) presionar \'Editar\' (si tienes permisos de editor)\n 4) usar la opción \'Revisar versiones anteriores\'');$(this).parent().val('?registryType={{registryType}}');">Documentos</option>
+        {% comment %}
+            <option value="DOCUMENTS" onclick="alert('Para revisar el Historial de cambios de los Documentos debes:\n 1) ir a la pestaña \'Documentos\'\n 2) seleccionar el \'Documento\' y la \'Sección\' que deseas revisar\n 3) presionar \'Editar\' (si tienes permisos de editor)\n 4) usar la opción \'Revisar versiones anteriores\'');$(this).parent().val('?registryType={{registryType}}');">Documentos</option>
+        {% endcomment %}
     </select>
-    <select style="display:inline-block;width:auto;vertical-align:top;" class="blue_button" title="Seleccionar Elemento" onchange="location = document.getElementById('registrySelect').options[document.getElementById('registrySelect').selectedIndex].value + this.options[this.selectedIndex].value;">
+    <select style="display:inline-block;width:auto;vertical-align:top;" class="blue_button" title="Seleccionar Elemento" onchange="location = $('#registrySelect').val() + $(this).val();">
         {% for key,val in IDENTIFIER_CHOICES %}
             <option value="&identifier={{key}}"{% ifequal identifier|stringformat:"s" key|stringformat:"s" %}selected{% endifequal %}>{{val}}</option>
         {% endfor %}

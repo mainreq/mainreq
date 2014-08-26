@@ -5,19 +5,19 @@
 <div>
     {% if canEditTasks %}
         Responsable: 
-        <select style="display:inline-block;width:auto;vertical-align:top;" class="blue_button" tooltip="Seleccionar Usuario">
-            <option onclick="location='?';">Seleccionar Usuario</option>
+        <select style="display:inline-block;width:auto;vertical-align:top;" class="blue_button" tooltip="Seleccionar Usuario" onchange="location=$(this).val();">
+            <option value="?">Seleccionar Usuario</option>
             {% for i,w in workerUsers %}
-                <option onclick="location='?userIndex={{i}}'"{% ifequal userIndex i %}selected{% endifequal %}>Usuario: {{w}}</option>
+                <option value="?userIndex={{i}}"{% ifequal userIndex i %}selected{% endifequal %}>Usuario: {{w}}</option>
             {% endfor %}
         </select>
     {% endif %}
     
     Estado: 
-    <select style="display:inline-block;width:auto;vertical-align:top;" class="blue_button" tooltip="Seleccionar Estado">
-        <option onclick="location='?userIndex={{ userIndex }}'">Seleccionar Estado</option>
+    <select style="display:inline-block;width:auto;vertical-align:top;" class="blue_button" tooltip="Seleccionar Estado" onchange="location=$(this).val();">
+        <option value="?userIndex={{ userIndex }}">Seleccionar Estado</option>
         {% for s,n in states %}
-            <option {% ifequal state s %}selected{% endifequal %} onclick="location='?state={{ s }}&userIndex={{ userIndex }}'">{{ n }}</option>
+            <option {% ifequal state s %}selected{% endifequal %} value="?state={{ s }}&userIndex={{ userIndex }}">{{ n }}</option>
         {% endfor %}
     </select>
     

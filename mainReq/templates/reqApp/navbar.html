@@ -1,9 +1,3 @@
-<script>
-$(document).ready(function() {
-    $('.userDropDown').dropit();
-});
-</script>
-
 <div class="navbar_up">
     <ul>
     <li><a title="Editar/Ver Elementos&#013;del Proyecto" name="navbar" {% ifequal navbar.1 "project" %} class="navbar_up_selected" {% endifequal %} href="{% url 'reqApp:IC' %}">Proyecto</a></li>
