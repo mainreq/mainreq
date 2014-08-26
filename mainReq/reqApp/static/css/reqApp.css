@@ -248,7 +248,7 @@ p.centered{
 table.matr-table{
     border-spacing:0px;
     border:none;
-    margin:0px;
+    margin:10px;
     padding:0px;
     empty-cells:show;
 }
