@@ -1,9 +1,14 @@
 /* font */
+/*
 body{
     font-family:Arial,Helvetica,sans-serif;
     font-size:1em;
     background-color:#F7F6F6;
+}*/
+body{
+    background-color:#F7F6F6;
 }
+
 
 /* top navbar */
 div.navbar_up{

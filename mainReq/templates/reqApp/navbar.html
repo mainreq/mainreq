@@ -1,3 +1,6 @@
+{% load reqApp_tags %}
+
+{% comment %}
 <div class="navbar_up">
     <ul>
     <li><a progressbar title="Editar/Ver Elementos&#013;del Proyecto" name="navbar" {% ifequal navbar.1 "project" %} class="navbar_up_selected" {% endifequal %} href="{% url 'reqApp:IC' %}">Proyecto</a></li>
@@ -5,8 +8,6 @@
     <li><a progressbar title="Tareas,&#013;Estadísticas,&#013;Matrices,&#013;Consistencia,&#013;Bitácora" name="navbar" {% ifequal navbar.1 "tools" %} class="navbar_up_selected" {% endifequal %} href="{% url 'reqApp:tasks' %}">Herramientas</a></li>
     </ul>
 </div>
-
-{% comment %}<div class="project_name">{{ project.name }}</div>{% endcomment %}
 
 <div class="navbar_down">
     <ul>
@@ -35,3 +36,85 @@
         {% endifequal %}
     </ul>
 </div>
+{% endcomment %}
+<!-------------------------------------------------------------------------------------------------------------------------->
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <span class="navbar-brand">MainReq</span>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li {% ifequal navbar.1 "project" %} class="active" {% endifequal %} class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Proyecto <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a progressbar {% ifequal navbar.2 "IC" %} class="active" {% endifequal %} href="{% url 'reqApp:IC' %}">Hitos</a></li>
+            <li><a progressbar {% ifequal navbar.2 "UT" %} class="active" {% endifequal %} href="{% url 'reqApp:UT' %}">Tipos de Usuario</a></li>
+            <li><a progressbar {% ifequal navbar.2 "UR" %} class="active" {% endifequal %} href="{% url 'reqApp:UR' %}">Requisitos de Usuario</a></li>
+            <li><a progressbar {% ifequal navbar.2 "SR" %} class="active" {% endifequal %} href="{% url 'reqApp:SR' %}">Requisitos de Software</a></li>
+            <li><a progressbar {% ifequal navbar.2 "MD" %} class="active" {% endifequal %} href="{% url 'reqApp:MD' %}">Módulos</a></li>
+            <li><a progressbar {% ifequal navbar.2 "TC" %} class="active" {% endifequal %} href="{% url 'reqApp:TC' %}">Casos de Prueba</a></li>
+          </ul>
+        </li>
+        <li {% ifequal navbar.1 "documents" %} class="active" {% endifequal %} class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Documentos <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a progressbar {% ifequal navbar.2 "requirements" %} class="active" {% endifequal %} href="{% url 'reqApp:docReq' %}">Documento de Requisitos</a></li>
+            <li><a progressbar {% ifequal navbar.2 "design" %} class="active" {% endifequal %} href="{% url 'reqApp:docDsn' %}">Documento de Diseño</a></li>
+            <li><a progressbar {% ifequal navbar.2 "tc" %} class="active" {% endifequal %} href="{% url 'reqApp:docTC' %}">Documento de Casos de Prueba</a></li>
+            <li><a progressbar {% ifequal navbar.2 "historic" %} class="active" {% endifequal %} href="{% url 'reqApp:docHis' %}">Documento Histórico</a></li>
+          </ul>
+        </li>
+        <li {% ifequal navbar.1 "tools" %} class="active" {% endifequal %} class="dropdown">
+          <a {% ifequal navbar.1 "project" %} class="active" {% endifequal %} href="#" class="dropdown-toggle" data-toggle="dropdown">Herramientas <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a progressbar {% ifequal navbar.2 "tasks" %} class="active" {% endifequal %} href="{% url 'reqApp:tasks' %}">Tareas</a></li>
+            <li><a progressbar {% ifequal navbar.2 "statistics" %} class="active" {% endifequal %} href="{% url 'reqApp:statistics' %}">Estadísticas</a></li>
+            <li><a progressbar {% ifequal navbar.2 "matrices" %} class="active" {% endifequal %} href="{% url 'reqApp:matrices' %}">Matrices de Trazado</a></li>
+            <li><a progressbar {% ifequal navbar.2 "consistency" %} class="active" {% endifequal %} href="{% url 'reqApp:consistency' %}">Consistencia de Relaciones</a></li>
+            <li><a progressbar {% ifequal navbar.2 "registry" %} class="active" {% endifequal %} href="{% url 'reqApp:registry' %}">Bitácora</a></li>
+          </ul>
+        </li>
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            <a class="dropdown-toggle" href="#" data-toggle="dropdown">Bienvenido, {{ user }} <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+                <li><span style="color:Gray;">Nombre: </span>{{ user.first_name }} {{ user.last_name }}</li>
+                <li><span style="color:Gray;">Email: </span>{{ user.email }}</li>
+                {% with project=request|userProject %}
+                    <li><span style="color:Gray;">Proyecto: </span>{{ project.name }}</li>
+                {% endwith %}
+            </ul>
+            {% comment %}
+            <div class="dropdown-menu" role="menu">
+                <div><span style="color:Gray;">Nombre: </span>{{ user.first_name }} {{ user.last_name }}</div>
+                <div><span style="color:Gray;">Email: </span>{{ user.email }}</div>
+                <div><span style="color:Gray;">Rol: </span>
+                    {% for role in user.groups.all %}
+                        {{ role }},
+                    {% endfor %}
+                </div>
+                {% with project=request|userProject %}
+                    <div><span style="color:Gray;">Proyecto: </span>{{ project.name }}</div>
+                {% endwith %}
+                <div style="text-align:center;">
+                    <br/>
+                    <a href="{% url 'reqApp:editUser' %}?next={% firstof request.path '/' %}">Cuenta</a>
+                    {% ifequal user.userprofile.projects.count 1 %}{% else %}
+                        <a href="{% url 'reqApp:PR' %}">Proyectos</a>
+                    {% endifequal %}
+                    {% if user.is_staff %}{% if user.is_superuser %}
+                        <a href="/admin">Administración</a>
+                    {% endif %}{% endif %}
+                    <a href="{% url 'reqApp:logout' %}">Salir</a>
+                    <br/>
+                </div>
+            </div>
+            {% endcomment %}
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
