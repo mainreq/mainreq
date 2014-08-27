@@ -43,6 +43,33 @@
     
     {% include "reqApp/navbar.html" with project=request|userProject %}
     
+    <ol class="breadcrumb" style="color:Gray">
+        {% ifequal navbar.1 "project" %}<li>Proyecto</li>{% endifequal %}
+        {% ifequal navbar.1 "documents" %}<li>Documentos</li>{% endifequal %}
+        {% ifequal navbar.1 "tools" %}<li>Herramientas</li>{% endifequal %}
+        
+        {% ifequal navbar.2 "IC" %}<li>Hitos</li>{% endifequal %}
+        {% ifequal navbar.2 "UT" %}<li>Tipos de Usuario</li>{% endifequal %}
+        {% ifequal navbar.2 "UR" %}<li>Requisitos de Usuario</li>{% endifequal %}
+        {% ifequal navbar.2 "SR" %}<li>Requisitos de Software</li>{% endifequal %}
+        {% ifequal navbar.2 "MD" %}<li>Módulos</li>{% endifequal %}
+        {% ifequal navbar.2 "TC" %}<li>Casos de Prueba</li>{% endifequal %}
+        
+        {% ifequal navbar.2 "requirements" %}<li>Documento de Requisitos</li>{% endifequal %}
+        {% ifequal navbar.2 "design" %}<li>Documento de Diseño</li>{% endifequal %}
+        {% ifequal navbar.2 "tc" %}<li>Documento de Casos de Prueba</li>{% endifequal %}
+        {% ifequal navbar.2 "historic" %}<li>Documento Histórico</li>{% endifequal %}
+        
+        {% ifequal navbar.2 "tasks" %}<li>Tareas</li>{% endifequal %}
+        {% ifequal navbar.2 "statistics" %}<li>Estadísticas</li>{% endifequal %}
+        {% ifequal navbar.2 "matrices" %}<li>Matrices de Trazado</li>{% endifequal %}
+        {% ifequal navbar.2 "consistency" %}<li>Consistencia de Relaciones</li>{% endifequal %}
+        {% ifequal navbar.2 "registry" %}<li>Bitácora</li>{% endifequal %}
+        
+        {% block extrabreadcrumb %}{% endblock %}
+    </ol>
+    
+    
     {% block body %}{% endblock %}
     
     

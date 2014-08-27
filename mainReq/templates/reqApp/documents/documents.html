@@ -1,4 +1,11 @@
 {% extends "reqApp/base.html" %}
+
+{% block extrabreadcrumb %}
+    {% for pa in sections %}
+        {% ifequal section pa.sType %}<li>{{ pa.sName }}</li>{% endifequal %}
+    {% endfor %}
+{% endblock %}
+
 {% block body %}
 
 {% if canEdit %}

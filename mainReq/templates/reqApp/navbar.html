@@ -1,43 +1,5 @@
 {% load reqApp_tags %}
 
-{% comment %}
-<div class="navbar_up">
-    <ul>
-    <li><a progressbar title="Editar/Ver Elementos&#013;del Proyecto" name="navbar" {% ifequal navbar.1 "project" %} class="navbar_up_selected" {% endifequal %} href="{% url 'reqApp:IC' %}">Proyecto</a></li>
-    <li><a progressbar title="Editar/Descargar Documentos&#013;del Proyecto" name="navbar" {% ifequal navbar.1 "documents" %} class="navbar_up_selected" {% endifequal %} href="{% url 'reqApp:docReq' %}">Documentos</a></li>
-    <li><a progressbar title="Tareas,&#013;Estadísticas,&#013;Matrices,&#013;Consistencia,&#013;Bitácora" name="navbar" {% ifequal navbar.1 "tools" %} class="navbar_up_selected" {% endifequal %} href="{% url 'reqApp:tasks' %}">Herramientas</a></li>
-    </ul>
-</div>
-
-<div class="navbar_down">
-    <ul>
-        {% ifequal navbar.1 "project" %}
-            <li><a progressbar tooltip="HT" name="navbar" {% ifequal navbar.2 "IC" %} class="navbar_down_selected" {% endifequal %} href="{% url 'reqApp:IC' %}">Hitos</a></li>
-            <li><a progressbar tooltip="TU" name="navbar" {% ifequal navbar.2 "UT" %} class="navbar_down_selected" {% endifequal %} href="{% url 'reqApp:UT' %}">Tipos de Usuario</a></li>
-            <li><a progressbar tooltip="RU" name="navbar" {% ifequal navbar.2 "UR" %} class="navbar_down_selected" {% endifequal %} href="{% url 'reqApp:UR' %}">Requisitos de Usuario</a></li>
-            <li><a progressbar tooltip="RS" name="navbar" {% ifequal navbar.2 "SR" %} class="navbar_down_selected" {% endifequal %} href="{% url 'reqApp:SR' %}">Requisitos de Software</a></li>
-            <li><a progressbar tooltip="MD" name="navbar" {% ifequal navbar.2 "MD" %} class="navbar_down_selected" {% endifequal %} href="{% url 'reqApp:MD' %}">Módulos</a></li>
-            <li><a progressbar tooltip="CP" name="navbar" {% ifequal navbar.2 "TC" %} class="navbar_down_selected" {% endifequal %} href="{% url 'reqApp:TC' %}">Casos de Prueba</a></li>
-        {% endifequal %}
-        
-        {% ifequal navbar.1 "documents" %}
-            <li><a progressbar title="Editar/Descargar Documento&#013;de Requisitos" name="navbar" {% ifequal navbar.2 "requirements" %} class="navbar_down_selected" {% endifequal %} href="{% url 'reqApp:docReq' %}">Documento de Requisitos</a></li>
-            <li><a progressbar title="Editar/Descargar Documento&#013;de Diseño" name="navbar" {% ifequal navbar.2 "design" %} class="navbar_down_selected" {% endifequal %} href="{% url 'reqApp:docDsn' %}">Documento de Diseño</a></li>
-            <li><a progressbar title="Editar/Descargar Documento&#013;de Casos de Prueba" name="navbar" {% ifequal navbar.2 "tc" %} class="navbar_down_selected" {% endifequal %} href="{% url 'reqApp:docTC' %}">Documento de Casos de Prueba</a></li>
-            <li><a progressbar title="Editar/Descargar Documento&#013;Histórico" name="navbar" {% ifequal navbar.2 "historic" %} class="navbar_down_selected" {% endifequal %} href="{% url 'reqApp:docHis' %}">Documento Histórico</a></li>
-        {% endifequal %}
-        
-        {% ifequal navbar.1 "tools" %}
-            <li><a progressbar title="Reportar/Asignar&#013;Tareas Individuales" name="navbar" {% ifequal navbar.2 "tasks" %} class="navbar_down_selected" {% endifequal %} href="{% url 'reqApp:tasks' %}">Tareas</a></li>
-            <li><a progressbar title="Indicadores Estadísticos&#013;de Avance del Proyecto&#013;por Hito" name="navbar" {% ifequal navbar.2 "statistics" %} class="navbar_down_selected" {% endifequal %} href="{% url 'reqApp:statistics' %}">Estadísticas</a></li>
-            <li><a progressbar title="Matrices de Trazado" name="navbar" {% ifequal navbar.2 "matrices" %} class="navbar_down_selected" {% endifequal %} href="{% url 'reqApp:matrices' %}">Matrices de Trazado</a></li>
-            <li><a progressbar title="Revisar la Consistencia&#013;de Relaciones entre&#013;Elementos del Proyecto" name="navbar" {% ifequal navbar.2 "consistency" %} class="navbar_down_selected" {% endifequal %} href="{% url 'reqApp:consistency' %}">Consistencia de Relaciones</a></li>
-            <li><a progressbar title="Historial de Cambios&#013;de Elementos del Proyecto" name="navbar" {% ifequal navbar.2 "registry" %} class="navbar_down_selected" {% endifequal %} href="{% url 'reqApp:registry' %}">Bitácora</a></li>
-        {% endifequal %}
-    </ul>
-</div>
-{% endcomment %}
-<!-------------------------------------------------------------------------------------------------------------------------->
 <nav class="navbar navbar-default" role="navigation">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -118,26 +80,3 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-<ol class="breadcrumb" style="color:Gray">
-    {% ifequal navbar.1 "project" %}<li>Proyecto</li>{% endifequal %}
-    {% ifequal navbar.1 "documents" %}<li>Documentos</li>{% endifequal %}
-    {% ifequal navbar.1 "tools" %}<li>Herramientas</li>{% endifequal %}
-    
-    {% ifequal navbar.2 "IC" %}<li>Hitos</li>{% endifequal %}
-    {% ifequal navbar.2 "UT" %}<li>Tipos de Usuario</li>{% endifequal %}
-    {% ifequal navbar.2 "UR" %}<li>Requisitos de Usuario</li>{% endifequal %}
-    {% ifequal navbar.2 "SR" %}<li>Requisitos de Software</li>{% endifequal %}
-    {% ifequal navbar.2 "MD" %}<li>Módulos</li>{% endifequal %}
-    {% ifequal navbar.2 "TC" %}<li>Casos de Prueba</li>{% endifequal %}
-    
-    {% ifequal navbar.2 "requirements" %}<li>Documento de Requisitos</li>{% endifequal %}
-    {% ifequal navbar.2 "design" %}<li>Documento de Diseño</li>{% endifequal %}
-    {% ifequal navbar.2 "tc" %}<li>Documento de Casos de Prueba</li>{% endifequal %}
-    {% ifequal navbar.2 "historic" %}<li>Documento Histórico</li>{% endifequal %}
-    
-    {% ifequal navbar.2 "tasks" %}<li>Tareas</li>{% endifequal %}
-    {% ifequal navbar.2 "statistics" %}<li>Estadísticas</li>{% endifequal %}
-    {% ifequal navbar.2 "matrices" %}<li>Matrices de Trazado</li>{% endifequal %}
-    {% ifequal navbar.2 "consistency" %}<li>Consistencia de Relaciones</li>{% endifequal %}
-    {% ifequal navbar.2 "registry" %}<li>Bitácora</li>{% endifequal %}
-</ol>
