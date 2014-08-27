@@ -8,9 +8,9 @@
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
         <li {% ifequal navbar.1 "project" %} class="active" {% endifequal %} class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Proyecto <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a progressbar {% ifequal navbar.2 "IC" %} class="active" {% endifequal %} href="{% url 'reqApp:IC' %}">Hitos</a></li>
+          <a id="dropdownMenu1" href="#" class="dropdown-toggle" data-toggle="dropdown">Proyecto <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            <li role="presentation"><a role="menuitem" tabindex="-1" progressbar {% ifequal navbar.2 "IC" %} class="active" {% endifequal %} href="{% url 'reqApp:IC' %}">Hitos</a></li>
             <li><a progressbar {% ifequal navbar.2 "UT" %} class="active" {% endifequal %} href="{% url 'reqApp:UT' %}">Tipos de Usuario</a></li>
             <li><a progressbar {% ifequal navbar.2 "UR" %} class="active" {% endifequal %} href="{% url 'reqApp:UR' %}">Requisitos de Usuario</a></li>
             <li><a progressbar {% ifequal navbar.2 "SR" %} class="active" {% endifequal %} href="{% url 'reqApp:SR' %}">Requisitos de Software</a></li>
@@ -43,11 +43,25 @@
         <li class="dropdown">
             <a class="dropdown-toggle" href="#" data-toggle="dropdown">Bienvenido, {{ user }} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-                <li><span style="color:Gray;">Nombre: </span>{{ user.first_name }} {{ user.last_name }}</li>
+                <li><a><span style="color:Gray;">Nombre: </span>{{ user.first_name }} {{ user.last_name }}</a></li>
                 <li><span style="color:Gray;">Email: </span>{{ user.email }}</li>
+                <li style="color:Gray;">Rol: </li>
+                <ul>
+                {% for role in user.groups.all %}
+                    <li>{{ role }}</li>
+                {% endfor %}
+                </ul>
                 {% with project=request|userProject %}
                     <li><span style="color:Gray;">Proyecto: </span>{{ project.name }}</li>
                 {% endwith %}
+                <li><a href="{% url 'reqApp:editUser' %}?next={% firstof request.path '/' %}">Cuenta</a></li>
+                {% ifequal user.userprofile.projects.count 1 %}{% else %}
+                    <li><a href="{% url 'reqApp:PR' %}">Proyectos</a></li>
+                {% endifequal %}
+                {% if user.is_staff %}{% if user.is_superuser %}
+                    <li><a href="/admin">Administración</a></li>
+                {% endif %}{% endif %}
+                <li><a href="{% url 'reqApp:logout' %}">Salir</a></li>
             </ul>
             {% comment %}
             <div class="dropdown-menu" role="menu">
