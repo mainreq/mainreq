@@ -43,21 +43,27 @@
         <li class="dropdown">
             <a class="dropdown-toggle" href="#" data-toggle="dropdown">Bienvenido, {{ user }} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-                <li><a><span style="color:Gray;">Nombre: </span>{{ user.first_name }} {{ user.last_name }}</a></li>
-                <li><span style="color:Gray;">Email: </span>{{ user.email }}</li>
-                <li style="color:Gray;">Rol: </li>
-                <ul>
-                {% for role in user.groups.all %}
-                    <li>{{ role }}</li>
-                {% endfor %}
-                </ul>
+                <li role="presentation" class="dropdown-header">Nombre</li>
+                <li role="presentation"><a>{{ user.first_name }} {{ user.last_name }}</a></li>
+                <li role="presentation" class="dropdown-header">Email</li>
+                <li role="presentation"><a>{{ user.email }}</a></li>
+                <li role="presentation" class="dropdown-header">Rol</li>
+                <li role="presentation">
+                    <a>
+                    {% for role in user.groups.all %}
+                        {{ role }}, 
+                    {% endfor %}
+                    </a>
+                </li>
                 {% with project=request|userProject %}
-                    <li><span style="color:Gray;">Proyecto: </span>{{ project.name }}</li>
+                    <li role="presentation" class="dropdown-header">Proyecto</li>
+                    <li role="presentation"><a>{{ project.name }}</a></li>
                 {% endwith %}
-                <li><a href="{% url 'reqApp:editUser' %}?next={% firstof request.path '/' %}">Cuenta</a></li>
+                <li role="presentation" class="divider"></li>
                 {% ifequal user.userprofile.projects.count 1 %}{% else %}
                     <li><a href="{% url 'reqApp:PR' %}">Proyectos</a></li>
                 {% endifequal %}
+                <li><a href="{% url 'reqApp:editUser' %}?next={% firstof request.path '/' %}">Cuenta</a></li>
                 {% if user.is_staff %}{% if user.is_superuser %}
                     <li><a href="/admin">Administración</a></li>
                 {% endif %}{% endif %}
