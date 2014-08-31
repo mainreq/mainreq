@@ -9,9 +9,9 @@
     </div>
     <div style="display: inline-block;width:50%;vertical-align:top;">
         {% if element.requirement.validity %}
-            <div tooltip="Requisito Asociado" class="{{ element.requirement.state }}">{{ element.requirement }}</div>
+            <div data-toggle="tooltip" data-placement="left" title="Requisito Asociado" class="{{ element.requirement.state }}">{{ element.requirement }}</div>
         {% else %}
-            <div tooltip="Requisito Asociado" style="color:Gray;">{{ element.requirement }} (eliminado)</div>
+            <div data-toggle="tooltip" data-placement="left" title="Requisito Asociado" style="color:Gray;">{{ element.requirement }} (eliminado)</div>
         {% endif %}
     </div>
 {% endblock %}

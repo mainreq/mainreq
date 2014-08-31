@@ -365,18 +365,6 @@ window.addEventListener("keydown",function (e) {
 // toolips
 function prepareTooltips(){
     $('[data-toggle=tooltip]').tooltip();
-    /*
-    $('[tooltip]').each(function(i){
-        var tooltipText = $(this).attr('tooltip');
-        var tooltip = $("<div class='tooltip'>" + tooltipText + "</div>");
-        $(this).append(tooltip);
-        $(this).hover(function() {
-            tooltip.show();
-        }, function() {
-            tooltip.hide();
-        });
-    });
-    */
 }
 $(window).bind("load", function(){
     prepareTooltips();

@@ -18,14 +18,16 @@
                                             </div>
                                             
                                             <div class="modal-body">
+                                                <ul>
                                                 {% for a in alerts %}
                                                     <li>{{a}}</li>
                                                 {% endfor %}
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <span blink="yes" title="Ver Conflictos ..." class="mainReqAlarm">
+                                <span blink="yes" data-toggle="tooltip" data-placement="left" title="Ver Conflictos ..." class="mainReqAlarm">
                                     <b>!</b>
                                 </span>
                             {% endif %}

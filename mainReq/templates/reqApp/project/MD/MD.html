@@ -8,10 +8,10 @@
             <b>{{ element }}</b>
         </a>
     </div>
-    <div data-toggle="tooltip" data-placement="top" title="Costo" style="display: inline-block;width:2%;vertical-align:top;">
+    <div data-toggle="tooltip" data-placement="left" title="Costo" style="display: inline-block;width:2%;vertical-align:top;">
         {{ element.cost }}
     </div>
     <div style="display: inline-block;width:5%;vertical-align:top;"></div>
-    <div tooltip="Prioridad" style="display: inline-block;width:16%;vertical-align:top;">{{ element|priority }}</div>
+    <div data-toggle="tooltip" data-placement="left" title="Prioridad" style="display: inline-block;width:16%;vertical-align:top;">{{ element|priority }}</div>
     <div style="display: inline-block;width:10%;vertical-align:top;"></div>
 {% endblock %}

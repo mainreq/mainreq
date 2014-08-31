@@ -1,7 +1,6 @@
 {% extends "reqApp/base.html" %}
 {% load reqApp_tags %}
 {% block body %}
-<br/>
 
 {% if elementsFilters %}
     {% with get_params="&order="|concat:actual_order %}
