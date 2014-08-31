@@ -364,7 +364,7 @@ window.addEventListener("keydown",function (e) {
 
 // toolips
 function prepareTooltips(){
-    $('[data-toggle=tooltip]').tooltip();
+    $('[data-toggle=tooltip]').tooltip({container:'body'});
 }
 $(window).bind("load", function(){
     prepareTooltips();

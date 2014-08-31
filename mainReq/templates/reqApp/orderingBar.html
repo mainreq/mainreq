@@ -1,16 +1,20 @@
 {% load reqApp_tags %}
-<div class="ordering_bar">
-{% for attribute in attributes %}
-    <div style="display: inline-block;width:{{ attribute.width }}%;">
-        {% ifequal actual_order attribute.order %}
-            <a progressbar class="ordering_bar" data-toggle="tooltip" data-placement="auto" title="Ordenar por..." href='?order={{ attribute.order|invertOrder }}{{getParams}}'><b>{{ attribute.label }} {{ attribute.up|safe }}</b></a>
-        {% else %}
-            {% ifequal actual_order attribute.order|invertOrder %}
-                <a progressbar class="ordering_bar" data-toggle="tooltip" data-placement="auto" title="Ordenar por..." href='?order={{ attribute.order }}{{getParams}}'><b>{{ attribute.label }} {{ attribute.down|safe }}</b></a>
-            {% else %}
-                <a progressbar class="ordering_bar" data-toggle="tooltip" data-placement="auto" title="Ordenar por..." href='?order={{ attribute.order }}{{getParams}}'>{{ attribute.label }}</a>
-            {% endifequal %}
-        {% endifequal %}
+<div class="row">
+    <div class="col-sm-11">
+        <div class="ordering_bar row">
+        {% for attribute in attributes %}
+            <div class="{{ attribute.span }}">
+                {% ifequal actual_order attribute.order %}
+                    <a progressbar class="ordering_bar" data-toggle="tooltip" data-placement="auto" title="Ordenar por..." href='?order={{ attribute.order|invertOrder }}{{getParams}}'><b>{{ attribute.label }} {{ attribute.up|safe }}</b></a>
+                {% else %}
+                    {% ifequal actual_order attribute.order|invertOrder %}
+                        <a progressbar class="ordering_bar" data-toggle="tooltip" data-placement="auto" title="Ordenar por..." href='?order={{ attribute.order }}{{getParams}}'><b>{{ attribute.label }} {{ attribute.down|safe }}</b></a>
+                    {% else %}
+                        <a progressbar class="ordering_bar" data-toggle="tooltip" data-placement="auto" title="Ordenar por..." href='?order={{ attribute.order }}{{getParams}}'>{{ attribute.label }}</a>
+                    {% endifequal %}
+                {% endifequal %}
+            </div>
+        {% endfor %}
+        </div>
     </div>
-{% endfor %}
 </div>

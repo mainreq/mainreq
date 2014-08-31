@@ -281,8 +281,6 @@ ul.flat{
 
 /* alarms */
 .mainReqAlarm{
-    float:right;
-    margin-right:10px;
     width:1em;
     color:White;
     background-color:#0C59CF;

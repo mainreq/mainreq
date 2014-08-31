@@ -5,11 +5,17 @@
 <div {% if extraStyle %}style="{{ extraStyle }}"{% endif %} class="element_container">
     <div id="{{ element.identifierText }}">
         <div>
-            <div class="element_title">
+            <div class="element_title row">
+                <div class="col-sm-11">
+                    <div class="row" trigger="yes" onclick="showHideContent(this,'{% url 'reqApp:elemContent' %}','{% block elemType %}{% endblock %}',{{ element.id }},{% if registry %}1{% else %}0{% endif %},{% if canEdit %}1{% else %}0{% endif %})" style="cursor:pointer;">
+                        {% block head %}{% endblock %}
+                    </div>
+                </div>
+                <div class="col-sm-1" style="text-align:right;">
                     {% if not registry %}
                         {% with element|alarms as alerts %}
                             {% if alerts %}
-                                <div name="reqAppModal" class="modal fade" role="dialog" aria-hidden="true">
+                                <div name="reqAppModal" class="modal fade" role="dialog" aria-hidden="true" style="text-align:left;">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -27,13 +33,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <span blink="yes" data-toggle="tooltip" data-placement="left" title="Ver Conflictos ..." class="mainReqAlarm">
+                                <a blink="yes" data-toggle="tooltip" data-placement="left" title="Ver Conflictos ..." class="blue_button">
                                     <b>!</b>
-                                </span>
+                                </a>
                             {% endif %}
                         {% endwith %}
                     {% endif %}
-                {% block head %}{% endblock %}
+                </div>
             </div>
             {% if registry %}
                 {% include "reqApp/tools/registry/registryState.html" with actual=actual deleted=deleted new=new %}
