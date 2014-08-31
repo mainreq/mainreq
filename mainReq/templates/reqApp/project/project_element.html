@@ -9,12 +9,23 @@
                     {% if not registry %}
                         {% with element|alarms as alerts %}
                             {% if alerts %}
-                                <div name="reqAppModal" title="Posibles conflictos de {{ element.identifierText }}">
-                                    {% for a in alerts %}
-                                        <li>{{a}}</li>
-                                    {% endfor %}
+                                <div name="reqAppModal" class="modal fade" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                                                <h4 class="modal-title">Posibles conflictos de {{ element.identifierText }}</h4>
+                                            </div>
+                                            
+                                            <div class="modal-body">
+                                                {% for a in alerts %}
+                                                    <li>{{a}}</li>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <span blink="yes" title="Ver Conflictos ..." class="alarm">
+                                <span blink="yes" title="Ver Conflictos ..." class="mainReqAlarm">
                                     <b>!</b>
                                 </span>
                             {% endif %}

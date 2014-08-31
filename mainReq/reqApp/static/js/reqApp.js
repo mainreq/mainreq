@@ -258,27 +258,24 @@ function imgAlignMessage(){
 }
 
 // alarms modals
-function setModalsId(){
-    // http://api.jqueryui.com/dialog/
+function prepareModals(){
     $('[name=reqAppModal]').each(function(i){
-        $(this).next().click(function(){$(this).parent().children('[role=dialog]').first().children('[name=reqAppModal]').first().dialog("open");});
-        $(this).dialog({
-            appendTo:$(this).parent(),
-            autoOpen:false,
-            modal:true,
-            width:700,
+        var itsModal = $(this);
+        $(this).next().click(function(){itsModal.modal('show');});
+        $(this).modal({
+            show:false,
         });
     });
 }
 function alarmsBlink(){
-    $('[blink]').each(function(i){
+    $('[blink=yes]').each(function(i){
         var alarm = $(this);
         var container = $(this).parent().parent().parent().parent();
         
         var backgroundColor = alarm.css('background-color');
         var color = alarm.css('color');
         
-        function blink(){
+        function reqBlink(){
             var count = alarm.attr("blinking");
             if(count <= 0){
                 return;
@@ -292,22 +289,22 @@ function alarmsBlink(){
             },300).animate({
                 'background-color':backgroundColor,
                 'color':color,
-            },300, blink);
+            },300, reqBlink);
         }
         
-        container.hover(function() {
+        container.hover(function(){
             alarm.attr("blinking",10);
-            blink();
-        }, function() {
+            reqBlink();
+        },function(){
             alarm.attr("blinking",-1);
         });
     });
 }
 function prepareAlarms(){
-    setModalsId();
+    prepareModals();
     alarmsBlink();
 }
-$(window).bind("load", function(){
+$(window).load(function(){
     prepareAlarms();
 });
 
@@ -367,6 +364,8 @@ window.addEventListener("keydown",function (e) {
 
 // toolips
 function prepareTooltips(){
+    $('[data-toggle=tooltip]').tooltip();
+    /*
     $('[tooltip]').each(function(i){
         var tooltipText = $(this).attr('tooltip');
         var tooltip = $("<div class='tooltip'>" + tooltipText + "</div>");
@@ -377,6 +376,7 @@ function prepareTooltips(){
             tooltip.hide();
         });
     });
+    */
 }
 $(window).bind("load", function(){
     prepareTooltips();
