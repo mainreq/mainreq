@@ -5,6 +5,15 @@ body{
     line-height:1.1;
 }
 
+.navbar{
+    margin-bottom:5px;
+}
+
+.breadcrumb{
+    padding:0px 15px;
+    margin-bottom:10px;
+}
+
 /* project title between navbars */
 .project_name{
     display:block;
@@ -80,7 +89,7 @@ body{
 
 /* ordering bar of elements list */
 div.ordering_bar{
-    background-color:#D6D6D6;
+    background-color:#F5F5F5;
     border-radius:5px;
     padding:2px;
     margin: 0px;
@@ -93,7 +102,7 @@ div.ordering_bar{
 
 a.ordering_bar:link, a.ordering_bar:visited{
     color:Blue;
-    background-color:#D6D6D6;
+    background-color:#F5F5F5;
     text-align:center;
     text-decoration:none;
 }

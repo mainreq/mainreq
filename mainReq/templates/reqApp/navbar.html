@@ -3,9 +3,14 @@
 <nav class="navbar navbar-default" role="navigation">
   <div class="container-fluid">
     <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar_content">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
       <span class="navbar-brand">MainReq </span>
     </div>
-    <div class="collapse navbar-collapse">
+    <div class="collapse navbar-collapse" id="navbar_content">
       <ul class="nav navbar-nav">
         <li {% ifequal navbar.1 "project" %} class="active" {% endifequal %} class="dropdown">
           <a id="dropdownMenu1" href="#" class="dropdown-toggle" data-toggle="dropdown">Proyecto <span class="caret"></span></a>
@@ -61,40 +66,14 @@
                 {% endwith %}
                 <li role="presentation" class="divider"></li>
                 {% ifequal user.userprofile.projects.count 1 %}{% else %}
-                    <li><a href="{% url 'reqApp:PR' %}">Proyectos</a></li>
+                    <li><a href="{% url 'reqApp:PR' %}">Proyectos...</a></li>
                 {% endifequal %}
-                <li><a href="{% url 'reqApp:editUser' %}?next={% firstof request.path '/' %}">Cuenta</a></li>
+                <li><a href="{% url 'reqApp:editUser' %}?next={% firstof request.path '/' %}">Cuenta...</a></li>
                 {% if user.is_staff %}{% if user.is_superuser %}
                     <li><a href="/admin">Administración</a></li>
                 {% endif %}{% endif %}
                 <li><a href="{% url 'reqApp:logout' %}">Salir</a></li>
             </ul>
-            {% comment %}
-            <div class="dropdown-menu" role="menu">
-                <div><span style="color:Gray;">Nombre: </span>{{ user.first_name }} {{ user.last_name }}</div>
-                <div><span style="color:Gray;">Email: </span>{{ user.email }}</div>
-                <div><span style="color:Gray;">Rol: </span>
-                    {% for role in user.groups.all %}
-                        {{ role }},
-                    {% endfor %}
-                </div>
-                {% with project=request|userProject %}
-                    <div><span style="color:Gray;">Proyecto: </span>{{ project.name }}</div>
-                {% endwith %}
-                <div style="text-align:center;">
-                    <br/>
-                    <a href="{% url 'reqApp:editUser' %}?next={% firstof request.path '/' %}">Cuenta</a>
-                    {% ifequal user.userprofile.projects.count 1 %}{% else %}
-                        <a href="{% url 'reqApp:PR' %}">Proyectos</a>
-                    {% endifequal %}
-                    {% if user.is_staff %}{% if user.is_superuser %}
-                        <a href="/admin">Administración</a>
-                    {% endif %}{% endif %}
-                    <a href="{% url 'reqApp:logout' %}">Salir</a>
-                    <br/>
-                </div>
-            </div>
-            {% endcomment %}
         </li>
       </ul>
     </div><!-- /.navbar-collapse -->
