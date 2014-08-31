@@ -91,25 +91,25 @@ body{
 div.ordering_bar{
     background-color:#F5F5F5;
     border-radius:5px;
-    padding:2px;
     margin: 0px;
-}
-
-.ordering_bar div{
-    margin:0px;
-    padding:0px;
 }
 
 a.ordering_bar:link, a.ordering_bar:visited{
     color:Blue;
-    background-color:#F5F5F5;
     text-align:center;
     text-decoration:none;
 }
 
-a.ordering_bar:hover, a.ordering_bar:active{
+a.ordering_bar:hover span.ordering_bar, a.ordering_bar:active{
     color:Blue;
-    text-decoration:underline;
+    display:inline;
+}
+a.ordering_bar:hover span{
+    display:none;
+}
+/*text-decoration:underline;*/
+span.ordering_bar{
+    color:rgba(0,0,0,0);
 }
 
 /* blue buttons for forms and toolbars */

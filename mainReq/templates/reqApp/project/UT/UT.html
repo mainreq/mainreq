@@ -5,7 +5,7 @@
 
 {% block head %}
     <div class="col-sm-12">
-        <a trigger="yes" onclick="showHideContent(this, '{% url 'reqApp:elemContent' %}', 'UT', {{ element.id }}, {% if registry %}1{% else %}0{% endif %}, {% if canEdit %}1{% else %}0{% endif %})" style="cursor:pointer;" name="{{ element.identifierText }}">
+        <a name="{{ element.identifierText }}">
             <b>{{ element }}</b>
         </a>
     </div>

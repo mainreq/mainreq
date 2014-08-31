@@ -46,11 +46,11 @@ def orderingList(model):
         return [
             {'order':'identifier', 'label':'identificador', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-2',},#'width':15
             {'order':'name', 'label':'nombre', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-1',},#'width':9
-            {'order':'state', 'label':'estado', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-2',},#'width':12
+            {'order':'state', 'label':'estado', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-1',},#'width':12
             {'order':'-cost', 'label':'costo', 'up':'&#x25BF;', 'down':'&#x25B5;', 'span':'col-sm-1',},#'width':8
             {'order':'priority', 'label':'prioridad', 'up':'&#x25BF;', 'down':'&#x25B5;', 'span':'col-sm-2',},#'width':13
             {'order':'reqType', 'label':'tipo', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-2',},#'width':18
-            {'order':'increment', 'label':'hito', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-2',},#'width':10
+            {'order':'increment', 'label':'hito', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-3',},#'width':10
         ]
     elif model == SoftwareRequirement:
         return [

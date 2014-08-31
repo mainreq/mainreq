@@ -1,23 +1,24 @@
 {% extends "reqApp/project/project_element.html" %}
 {% load reqApp_tags %}
 
+{% block elemType %}UR{% endblock %}
 
 {% block head %}
-    <div style="display: inline-block;width:41%;vertical-align:top;">
-        <a trigger="yes" onclick="showHideContent(this, '{% url 'reqApp:elemContent' %}', 'UR', {{ element.id }}, {% if registry %}1{% else %}0{% endif %}, {% if canEdit %}1{% else %}0{% endif %})" style="cursor:pointer;" name="{{ element.identifierText }}">
+    <div class="col-sm-4">
+        <a name="{{ element.identifierText }}">
             <b class="{{ element.state }}">{{ element }}</b>
         </a>
     </div>
-    <div data-toggle="tooltip" data-placement="left" title="Costo" style="display: inline-block;width:4%;vertical-align:top;">
+    <div data-toggle="tooltip" data-placement="left" title="Costo" class="col-sm-1">
         {{ element.cost }}
     </div>
-    <div data-toggle="tooltip" data-placement="left" title="Prioridad" style="display: inline-block;width:12%;vertical-align:top;">
+    <div data-toggle="tooltip" data-placement="left" title="Prioridad" class="col-sm-2">
         {{ element|priority }}
     </div>
-    <div data-toggle="tooltip" data-placement="left" title="Tipo" style="display: inline-block;width:16%;vertical-align:top;">
+    <div data-toggle="tooltip" data-placement="left" title="Tipo" class="col-sm-2">
         {{ element|URType }}
     </div>
-    <div data-toggle="tooltip" data-placement="left" title="Hito Asociado" style="display: inline-block;width:20%;vertical-align:top;">
+    <div data-toggle="tooltip" data-placement="left" title="Hito Asociado" class="col-sm-3">
         {% if element.increment.validity %}
             <div>{{ element.increment }}</div>
         {% else %}
