@@ -31,15 +31,16 @@
 {% endfor %}
 
 <div style="text-align:right;">
-    <div>
-        <i style="color:Gray;">Elementos: </i><b style="color:Black;">{{ elements|listCount }}</b>
+    <p>
+        <i style="color:Gray;">Elementos:</i>
+        <b class="reqLabel label-to_do">{{ elements|listCount }}</b>
         {% if colorLabels %}
-            <i style="color:Gray;">Estado: </i>
-            <b class="satisfy">cumple </b>
-            <b class="fails">no cumple </b>
-            <b class="ambiguous">ambiguo </b>
+            <i style="color:Gray;">Estado:</i>
+            <b class="reqLabel label-satisfy">cumple</b>
+            <b class="reqLabel label-fails">no cumple</b>
+            <b class="reqLabel label-ambiguous">ambiguo</b>
         {% endif %}
-    </div>
+    </p>
 </div>
 
 {% include ordering_bar with attributes=ordering_attributes actual_order=actual_order getParams=filtersQuery %}

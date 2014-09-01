@@ -2,17 +2,22 @@
 <div class="element_container">
     <div>
         <div>
-            <div class="element_title">
-                <div style="display: inline-block;width:30%;vertical-align:top;">
-                    <a trigger="yes" onclick="showHideContent(this,'TK',0)" style="cursor:pointer;" name="element.identifierText">
-                        <b class="{{ task|taskState2CssClass }}">Tarea: {{ task }}</b>
-                    </a>
-                </div>
-                <div style="display: inline-block;width:20%;vertical-align:top;">
-                    <span style="color:Gray;">Responsable: </span><span>{{ task.user }}</span>
-                </div>
-                <div style="display: inline-block;width:45%;vertical-align:top;">
-                     <span tooltip="Fecha Revisión">{{ task.deadlineDate|date:"Y-m-d H:i" }}</span> <span style="float:right;" name="countDown" secondsToDeadline={{ task|secondsToDeadline }}></span>
+            <div>
+                <div>
+                    <div class="element_title row" trigger="yes" onclick="showHideContent(this,'TK',0)" style="cursor:pointer;">
+                        <div class="col-sm-4">
+                            <b class="{{ task|taskState2CssClass }} element-identifierText">Tarea: {{ task }}</b>
+                        </div>
+                        <div class="col-sm-2">
+                            <span style="color:Gray;">Responsable: </span><span>{{ task.user }}</span>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-sm-6" data-toggle="tooltip" data-placement="left" title="Fecha Revisión">{{ task.deadlineDate|date:"Y-m-d H:i" }}</div>
+                                <div class="col-sm-6"><span name="countDown" secondsToDeadline={{ task|secondsToDeadline }}></span></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

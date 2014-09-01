@@ -83,8 +83,8 @@ def orderingList(model):
         ]
     elif model == Task:
         return [
-            {'order':'state', 'label':'estado', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':55,},#'width':55
-            {'order':'deadlineDate', 'label':'revisión', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':9,},#'width':9
+            {'order':'state', 'label':'estado', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-2',},#'width':55
+            {'order':'deadlineDate', 'label':'revisión', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-5 col-sm-offset-5',},#'width':9
         ]
     return []
     
