@@ -456,3 +456,8 @@ $(window).bind("load", function(){
 $(window).unload(function(){
     NProgress.done();
 });
+
+// bootstrap-select
+$(document).bind("ready", function(){
+    $('.selectpicker').selectpicker();
+});

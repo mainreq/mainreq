@@ -6,7 +6,7 @@
                 <div>
                     <div class="element_title row" trigger="yes" onclick="showHideContent(this,'TK',0)" style="cursor:pointer;">
                         <div class="col-sm-4">
-                            <b class="{{ task|taskState2CssClass }} element-identifierText">Tarea: {{ task }}</b>
+                            <span class="element-pointer">&#x25BA;</span><b class="{{ task|taskState2CssClass }} element-identifierText">Tarea: {{ task }}</b>
                         </div>
                         <div class="col-sm-2">
                             <span style="color:Gray;">Responsable: </span><span>{{ task.user }}</span>
