@@ -33,10 +33,12 @@
 <div style="text-align:right;">
     <div>
         <i style="color:Gray;">Elementos: </i><b style="color:Black;">{{ elements|listCount }}</b>
-        <i style="color:Gray;">Estado: </i>
-        <b class="satisfy">cumple </b>
-        <b class="fails">no cumple </b>
-        <b class="ambiguous">ambiguo </b>
+        {% if colorLabels %}
+            <i style="color:Gray;">Estado: </i>
+            <b class="satisfy">cumple </b>
+            <b class="fails">no cumple </b>
+            <b class="ambiguous">ambiguo </b>
+        {% endif %}
     </div>
 </div>
 

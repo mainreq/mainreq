@@ -148,7 +148,7 @@ def ajax_form_valid(form, validated):
         response_dict = {'server_response': "FAIL", 'errors':err}
         return HttpResponse(json.dumps(response_dict), content_type='application/json')
 
-def elementView(request, modelFormClass, elementTemplate, formTemplate, modelClass, navbar, pdfLink=None, helpLink=None):
+def elementView(request, modelFormClass, elementTemplate, formTemplate, modelClass, navbar, pdfLink, helpLink, colorLabels):
     user = getUserOr404(request)
     project = getProject(request)
     msgs = []
@@ -218,27 +218,28 @@ def elementView(request, modelFormClass, elementTemplate, formTemplate, modelCla
         'canEdit':isEditor(user, modelClass),
         'elementsFilters':filters,
         'filtersQuery':filtersQuery,
+        'colorLabels':colorLabels,
     }
     
     return render(request, 'reqApp/project/elements_list.html', context)
 
 def viewUT(request):
-    return elementView(request, UTForm, 'reqApp/project/UT/UT.html', 'reqApp/project/UT/UT_form.html', UserType, {'1':'project', '2':'UT'}, 'UT', 'UT')
+    return elementView(request, UTForm, 'reqApp/project/UT/UT.html', 'reqApp/project/UT/UT_form.html', UserType, {'1':'project', '2':'UT'}, 'UT', 'UT', False)
 
 def viewUR(request):
-    return elementView(request, URForm, 'reqApp/project/UR/UR.html', 'reqApp/project/UR/UR_form.html', UserRequirement, {'1':'project', '2':'UR'}, 'UR', 'UR')
+    return elementView(request, URForm, 'reqApp/project/UR/UR.html', 'reqApp/project/UR/UR_form.html', UserRequirement, {'1':'project', '2':'UR'}, 'UR', 'UR', True)
 
 def viewSR(request):
-    return elementView(request, SRForm, 'reqApp/project/SR/SR.html', 'reqApp/project/SR/SR_form.html', SoftwareRequirement, {'1':'project', '2':'SR'}, 'SR', 'SR')
+    return elementView(request, SRForm, 'reqApp/project/SR/SR.html', 'reqApp/project/SR/SR_form.html', SoftwareRequirement, {'1':'project', '2':'SR'}, 'SR', 'SR', True)
 
 def viewMD(request):
-    return elementView(request, MDForm, 'reqApp/project/MD/MD.html', 'reqApp/project/MD/MD_form.html', Module, {'1':'project', '2':'MD'}, 'MD', 'MD')
+    return elementView(request, MDForm, 'reqApp/project/MD/MD.html', 'reqApp/project/MD/MD_form.html', Module, {'1':'project', '2':'MD'}, 'MD', 'MD', True)
 
 def viewTC(request):
-    return elementView(request, TCForm, 'reqApp/project/TC/TC.html', 'reqApp/project/TC/TC_form.html', TestCase, {'1':'project', '2':'TC'}, 'TC', 'TC')
+    return elementView(request, TCForm, 'reqApp/project/TC/TC.html', 'reqApp/project/TC/TC_form.html', TestCase, {'1':'project', '2':'TC'}, 'TC', 'TC', True)
     
 def viewIC(request):
-    return elementView(request, ICForm, 'reqApp/project/IC/IC.html', 'reqApp/project/IC/IC_form.html', Increment, {'1':'project', '2':'IC'}, 'IC', 'IC')
+    return elementView(request, ICForm, 'reqApp/project/IC/IC.html', 'reqApp/project/IC/IC_form.html', Increment, {'1':'project', '2':'IC'}, 'IC', 'IC', False)
     
 ################################# Documents #############################
 def docView(request, navbar, availables, pdfLink, helpLink=None):
