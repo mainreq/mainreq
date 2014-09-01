@@ -52,14 +52,7 @@ body{
 
 
 /* element title */
-.element_title a:link, .element_title  a:visited{
-    color:Black;
-    background-color:White;
-    text-decoration:none;
-}
-
-.element_title a:hover, .element_title a:active{
-    background-color:White;
+.element_title:hover .element-identifierText{
     text-decoration:underline;
 }
 
@@ -91,7 +84,8 @@ body{
 div.ordering_bar{
     background-color:#F5F5F5;
     border-radius:5px;
-    margin: 0px;
+    margin:0px;
+    padding:0px;
 }
 
 a.ordering_bar:link, a.ordering_bar:visited{

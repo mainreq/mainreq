@@ -5,8 +5,7 @@
 
 {% block head %}
     <div class="col-sm-12">
-        <a name="{{ element.identifierText }}">
-            <b>{{ element.identifierText }} {{ element }}</b>
-        </a>
+        <a name="{{ element.identifierText }}"></a>
+        <b class="element-identifierText">{{ element.identifierText }} {{ element }}</b>
     </div>
 {% endblock %}

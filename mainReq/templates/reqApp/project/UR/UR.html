@@ -5,9 +5,8 @@
 
 {% block head %}
     <div class="col-sm-4">
-        <a name="{{ element.identifierText }}">
-            <b class="{{ element.state }}">{{ element }}</b>
-        </a>
+        <a name="{{ element.identifierText }}"></a>
+        <b class="{{ element.state }} element-identifierText">{{ element }}</b>
     </div>
     <div data-toggle="tooltip" data-placement="left" title="Costo" class="col-sm-1">
         {{ element.cost }}

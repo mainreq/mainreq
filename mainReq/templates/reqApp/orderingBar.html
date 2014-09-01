@@ -3,14 +3,14 @@
     <div class="col-sm-11">
         <div class="row">
         {% for attribute in attributes %}
-            <div class="{{ attribute.span }}" style="padding:0px">
+            <div class="{{ attribute.span }}">
                 {% ifequal actual_order attribute.order %}
-                    <a progressbar class="ordering_bar" data-toggle="tooltip" data-placement="auto" title="Ordenar por..." href='?order={{ attribute.order|invertOrder }}{{getParams}}'><b>{{ attribute.label }} </b><span>{{ attribute.up|safe }}</span><span class="ordering_bar">{{ attribute.down|safe }}</span></a>
+                    <a progressbar class="ordering_bar" data-toggle="tooltip" data-placement="auto" title="Ordenar por..." href='?order={{ attribute.order|invertOrder }}{{getParams}}'><b>{{ attribute.label }}</b><span>{{ attribute.up|safe }}</span><span class="ordering_bar">{{ attribute.down|safe }}</span></a>
                 {% else %}
                     {% ifequal actual_order attribute.order|invertOrder %}
-                        <a progressbar class="ordering_bar" data-toggle="tooltip" data-placement="auto" title="Ordenar por..." href='?order={{ attribute.order }}{{getParams}}'><b>{{ attribute.label }} </b><span>{{ attribute.down|safe }}</span><span class="ordering_bar">{{ attribute.up|safe }}</span></a>
+                        <a progressbar class="ordering_bar" data-toggle="tooltip" data-placement="auto" title="Ordenar por..." href='?order={{ attribute.order }}{{getParams}}'><b>{{ attribute.label }}</b><span>{{ attribute.down|safe }}</span><span class="ordering_bar">{{ attribute.up|safe }}</span></a>
                     {% else %}
-                        <a progressbar class="ordering_bar" data-toggle="tooltip" data-placement="auto" title="Ordenar por..." href='?order={{ attribute.order }}{{getParams}}'>{{ attribute.label }} <span class="ordering_bar"> {{ attribute.up|safe }}</span></a>
+                        <a progressbar class="ordering_bar" data-toggle="tooltip" data-placement="auto" title="Ordenar por..." href='?order={{ attribute.order }}{{getParams}}'>{{ attribute.label }}<span class="ordering_bar">{{ attribute.up|safe }}</span></a>
                     {% endifequal %}
                 {% endifequal %}
             </div>
