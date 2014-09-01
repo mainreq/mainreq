@@ -10,8 +10,9 @@ body{
 }
 
 .breadcrumb{
+    background-color:rgba(0,0,0,0);
     padding:0px 15px;
-    margin-bottom:10px;
+    margin-bottom:5px;
 }
 
 /* project title between navbars */
@@ -52,10 +53,17 @@ body{
 
 
 /* element title */
+/*
 .element_title:hover .element-identifierText{
     text-decoration:underline;
 }
-
+*/
+span.element-pointer{
+    color:rgba(0,0,0,0);
+}
+.element_title:hover span.element-pointer{
+    color:rgba(0,0,0,0.6);
+}
 
 /* WARNING: must match with choices.py */
 .fails{color:Red;}
@@ -82,19 +90,19 @@ body{
     margin:0px 2px;
     font-size:0.8em;
 }
-.label-fails{background-color:rgba(255,0,0,0.6);}/* Red */
-.label-satisfy{background-color:rgba(0,128,0,0.6);}/* Green */
-.label-ambiguous{background-color:rgba(128,0,128,0.6);}/* Purple */
-.label-to_do{background-color:rgba(0,0,0,0.6);}/* Black */
-.label-done{background-color:rgba(0,0,255,0.6);}/* Blue */
-.label-not_done{background-color:rgba(255,0,0,0.6);}/* Red */
-.label-approved{background-color:rgba(0,128,0,0.6);}/* Green */
-.label-reprobate{background-color:rgba(255,165,0,0.6);}/* Orange */
-.label-discarded{background-color:rgba(128,0,128,0.6);}/* Purple */
-.label-registry-actual{background-color:rgba(0,128,128,0.6);}/* Teal */
-.label-registry-new{background-color:rgba(128,128,0,0.6);}/* Olive */
-.label-registry-deleted{background-color:rgba(255,140,0,0.6);}/* DarkOrange */
-.label-registry-edited{background-color:rgba(154,205,50,0.6);}/* YellowGreen */
+.label-fails{background-color:rgba(255,0,0,0.7);}/* Red */
+.label-satisfy{background-color:rgba(0,128,0,0.7);}/* Green */
+.label-ambiguous{background-color:rgba(128,0,128,0.7);}/* Purple */
+.label-to_do{background-color:rgba(0,0,0,0.7);}/* Black */
+.label-done{background-color:rgba(0,0,255,0.7);}/* Blue */
+.label-not_done{background-color:rgba(255,0,0,0.7);}/* Red */
+.label-approved{background-color:rgba(0,128,0,0.7);}/* Green */
+.label-reprobate{background-color:rgba(255,165,0,0.7);}/* Orange */
+.label-discarded{background-color:rgba(128,0,128,0.7);}/* Purple */
+.label-registry-actual{background-color:rgba(0,128,128,0.7);}/* Teal */
+.label-registry-new{background-color:rgba(128,128,0,0.7);}/* Olive */
+.label-registry-deleted{background-color:rgba(255,140,0,0.7);}/* DarkOrange */
+.label-registry-edited{background-color:rgba(154,205,50,0.7);}/* YellowGreen */
 
 /* vertical-align:top; */
 .top{

@@ -6,13 +6,13 @@
 {% block head %}
     <div class="col-sm-6">
         <a name="{{ element.identifierText }}"></a>
-        <b class="{{ element.state }} element-identifierText">{{ element }}</b>
+        <span class="element-pointer">&#x25BA;</span><b class="{{ element.state }} element-identifierText">{{ element }}</b>
     </div>
     <div class="col-sm-6">
         {% if element.requirement.validity %}
-            <div data-toggle="tooltip" data-placement="left" title="Requisito Asociado" class="{{ element.requirement.state }}">{{ element.requirement }}</div>
+            <span data-toggle="tooltip" data-placement="left" title="Requisito Asociado" class="{{ element.requirement.state }}">{{ element.requirement }}</span>
         {% else %}
-            <div data-toggle="tooltip" data-placement="left" title="Requisito Asociado" style="color:Gray;">{{ element.requirement }} (eliminado)</div>
+            <span data-toggle="tooltip" data-placement="left" title="Requisito Asociado" style="color:Gray;">{{ element.requirement }} (eliminado)</span>
         {% endif %}
     </div>
 {% endblock %}

@@ -39,52 +39,52 @@ def sendEmail2User(user, subject, message):
 def orderingList(model):
     if model == UserType:
         return [
-            {'order':'identifier', 'label':'identificador', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-2',},#'width':15
-            {'order':'name', 'label':'nombre', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-2 col-sm-offset-2',},#'width':9
+            {'order':'identifier', 'label':'identificador', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-2',},
+            {'order':'name', 'label':'nombre', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-2',},
         ]
     elif model == UserRequirement:
         return [
-            {'order':'identifier', 'label':'identificador', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-2',},#'width':15
-            {'order':'name', 'label':'nombre', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-1',},#'width':9
-            {'order':'state', 'label':'estado', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-1',},#'width':12
-            {'order':'-cost', 'label':'costo', 'up':'&#x25BF;', 'down':'&#x25B5;', 'span':'col-sm-1',},#'width':8
-            {'order':'priority', 'label':'prioridad', 'up':'&#x25BF;', 'down':'&#x25B5;', 'span':'col-sm-2',},#'width':13
-            {'order':'reqType', 'label':'tipo', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-2',},#'width':18
-            {'order':'increment', 'label':'hito', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-3',},#'width':10
+            {'order':'identifier', 'label':'identificador', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-2',},
+            {'order':'name', 'label':'nombre', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-1',},
+            {'order':'state', 'label':'estado', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-1',},
+            {'order':'-cost', 'label':'costo', 'up':'&#x25BF;', 'down':'&#x25B5;', 'span':'col-sm-1',},
+            {'order':'priority', 'label':'prioridad', 'up':'&#x25BF;', 'down':'&#x25B5;', 'span':'col-sm-2',},
+            {'order':'reqType', 'label':'tipo', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-2',},
+            {'order':'increment', 'label':'hito', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-3',},
         ]
     elif model == SoftwareRequirement:
         return [
-            {'order':'identifier', 'label':'identificador', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-2',},#'width':15
-            {'order':'name', 'label':'nombre', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-1',},#'width':9
-            {'order':'state', 'label':'estado', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-1',},#'width':12
-            {'order':'-cost', 'label':'costo', 'up':'&#x25BF;', 'down':'&#x25B5;', 'span':'col-sm-1',},#'width':8
-            {'order':'priority', 'label':'prioridad', 'up':'&#x25BF;', 'down':'&#x25B5;', 'span':'col-sm-2',},#'width':13
-            {'order':'reqType', 'label':'tipo', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-2',},#'width':18
-            {'order':'increment', 'label':'hito', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-3',},#'width':15
+            {'order':'identifier', 'label':'identificador', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-2',},
+            {'order':'name', 'label':'nombre', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-1',},
+            {'order':'state', 'label':'estado', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-1',},
+            {'order':'-cost', 'label':'costo', 'up':'&#x25BF;', 'down':'&#x25B5;', 'span':'col-sm-1',},
+            {'order':'priority', 'label':'prioridad', 'up':'&#x25BF;', 'down':'&#x25B5;', 'span':'col-sm-2',},
+            {'order':'reqType', 'label':'tipo', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-2',},
+            {'order':'increment', 'label':'hito', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-3',},
         ]
     elif model == Module:
         return [
-            {'order':'identifier', 'label':'identificador', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-2',},#'width':15
-            {'order':'name', 'label':'nombre', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-4',},#'width':44
-            {'order':'-cost', 'label':'costo', 'up':'&#x25BF;', 'down':'&#x25B5;', 'span':'col-sm-2',},#'width':8
-            {'order':'priority', 'label':'prioridad', 'up':'&#x25BF;', 'down':'&#x25B5;', 'span':'col-sm-4',},#'width':10
+            {'order':'identifier', 'label':'identificador', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-2',},
+            {'order':'name', 'label':'nombre', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-4',},
+            {'order':'-cost', 'label':'costo', 'up':'&#x25BF;', 'down':'&#x25B5;', 'span':'col-sm-2',},
+            {'order':'priority', 'label':'prioridad', 'up':'&#x25BF;', 'down':'&#x25B5;', 'span':'col-sm-4',},
         ]
     elif model == TestCase:
         return [
-            {'order':'identifier', 'label':'identificador', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-2',},#'width':15
-            {'order':'name', 'label':'nombre', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-1',},#'width':9
-            {'order':'state', 'label':'estado', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-3',},#'width':20
-            {'order':'requirement', 'label':'requisito', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-6',},#'width':10
+            {'order':'identifier', 'label':'identificador', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-2',},
+            {'order':'name', 'label':'nombre', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-1',},
+            {'order':'state', 'label':'estado', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-3',},
+            {'order':'requirement', 'label':'requisito', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-6',},
         ]
     elif model == Increment:
         return [
-            {'order':'identifier', 'label':'identificador', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-2',},#'width':15
-            {'order':'name', 'label':'nombre', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-2 col-sm-offset-2',},#'width':9
+            {'order':'identifier', 'label':'identificador', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-2',},
+            {'order':'name', 'label':'nombre', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-2',},
         ]
     elif model == Task:
         return [
-            {'order':'state', 'label':'estado', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-2',},#'width':55
-            {'order':'deadlineDate', 'label':'revisión', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-5 col-sm-offset-5',},#'width':9
+            {'order':'state', 'label':'estado', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-2',},
+            {'order':'deadlineDate', 'label':'revisión', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-5 col-sm-offset-5',},
         ]
     return []
     

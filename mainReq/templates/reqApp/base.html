@@ -60,35 +60,6 @@
     
     
     {% block body %}{% endblock %}
-    
-    
-    {% comment %}
-    <div id="dropdown-1" class="dropdown dropdown-tip dropdown-anchor-right">
-        <div style="padding:10px;" class="element_container">
-            <div><span style="color:Gray;">Nombre: </span>{{ user.first_name }} {{ user.last_name }}</div>
-            <div><span style="color:Gray;">Email: </span>{{ user.email }}</div>
-            <div><span style="color:Gray;">Rol: </span>
-                {% for role in user.groups.all %}
-                    {{ role }},
-                {% endfor %}
-            </div>
-            {% with project=request|userProject %}
-                <div><span style="color:Gray;">Proyecto: </span>{{ project.name }}</div>
-            {% endwith %}
-            <div style="text-align:center;">
-                <br/>
-                <a class="blue_button" href="{% url 'reqApp:editUser' %}?next={% firstof request.path '/' %}">Cuenta</a>
-                {% ifequal user.userprofile.projects.count 1 %}{% else %}
-                    <a class="blue_button" href="{% url 'reqApp:PR' %}">Proyectos</a>
-                {% endifequal %}
-                {% if user.is_staff %}{% if user.is_superuser %}
-                    <a class="blue_button" href="/admin">Administración</a>
-                {% endif %}{% endif %}
-                <a class="blue_button" href="{% url 'reqApp:logout' %}">Salir</a>
-                <br/>
-            </div>
-        </div>
-    </div>
-    {% endcomment %}
+
 </body>
 </html>

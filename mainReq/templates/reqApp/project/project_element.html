@@ -9,6 +9,9 @@
                 <div class="col-sm-11">
                     <div class="row" trigger="yes" onclick="showHideContent(this,'{% url 'reqApp:elemContent' %}','{% block elemType %}{% endblock %}',{{ element.id }},{% if registry %}1{% else %}0{% endif %},{% if canEdit %}1{% else %}0{% endif %})" style="cursor:pointer;">
                         {% block head %}{% endblock %}
+                        {% if registry %}
+                            {% include "reqApp/tools/registry/registryState.html" with actual=actual deleted=deleted new=new %}
+                        {% endif %}
                     </div>
                 </div>
                 <div class="col-sm-1" style="text-align:right;">
@@ -41,9 +44,6 @@
                     {% endif %}
                 </div>
             </div>
-            {% if registry %}
-                {% include "reqApp/tools/registry/registryState.html" with actual=actual deleted=deleted new=new %}
-            {% endif %}
         </div>
 
         <div id="{{ element.id }}_content" name="element_content" style="display:none;" ready="no">
