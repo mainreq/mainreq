@@ -1,17 +1,15 @@
 {% extends "reqApp/project/project_element.html" %}
 {% load reqApp_tags %}
 
+{% block elemType %}MD{% endblock %}
 
 {% block head %}
-    <div style="display: inline-block;width:60%;vertical-align:top;">
-        <a trigger="yes" onclick="showHideContent(this, '{% url 'reqApp:elemContent' %}', 'MD', {{ element.id }}, {% if registry %}1{% else %}0{% endif %}, {% if canEdit %}1{% else %}0{% endif %})" style="cursor:pointer;" name="{{ element.identifierText }}">
-            <b>{{ element }}</b>
-        </a>
+    <div class="col-sm-6">
+        <a name="{{ element.identifierText }}"></a>
+        <b class="element-identifierText">{{ element }}</b>
     </div>
-    <div data-toggle="tooltip" data-placement="left" title="Costo" style="display: inline-block;width:2%;vertical-align:top;">
+    <div data-toggle="tooltip" data-placement="left" title="Costo" class="col-sm-2">
         {{ element.cost }}
     </div>
-    <div style="display: inline-block;width:5%;vertical-align:top;"></div>
-    <div data-toggle="tooltip" data-placement="left" title="Prioridad" style="display: inline-block;width:16%;vertical-align:top;">{{ element|priority }}</div>
-    <div style="display: inline-block;width:10%;vertical-align:top;"></div>
+    <div data-toggle="tooltip" data-placement="left" title="Prioridad" class="col-sm-4">{{ element|priority }}</div>
 {% endblock %}
