@@ -46,7 +46,7 @@
       
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-            <a class="dropdown-toggle" href="#" data-toggle="dropdown">Bienvenido, {{ user }} <span class="caret"></span></a>
+            <a class="dropdown-toggle" href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> {{ user }} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
                 <li role="presentation" class="dropdown-header">Nombre</li>
                 <li role="presentation"><a>{{ user.first_name }} {{ user.last_name }}</a></li>
@@ -61,7 +61,7 @@
                     </a>
                 </li>
                 {% with project=request|userProject %}
-                    <li role="presentation" class="dropdown-header">Proyecto</li>
+                    <li role="presentation" class="dropdown-header">Proyecto Actual</li>
                     <li role="presentation"><a>{{ project.name }}</a></li>
                 {% endwith %}
                 <li role="presentation" class="divider"></li>

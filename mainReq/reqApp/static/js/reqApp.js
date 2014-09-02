@@ -349,11 +349,13 @@ $(window).bind("load", function(){
 
 
 // elements filter
-function filterThis(getParams){
-    var filterQuery = "";
-    $('[name=filterSelect]').each(function(i){filterQuery = filterQuery + $(this).val();});
+/*
+function filterThis(self, getParams){
+    var filterQuery = $(self).attr('filter');
+    $('[selectedFilter]').each(function(i){filterQuery = filterQuery + $(this).attr('filter');});
     location = "?filter=true" + filterQuery + getParams;
 }
+*/
 
 // capture Ctrl+f and F3 for word search
 window.addEventListener("keydown",function (e) {

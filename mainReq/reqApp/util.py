@@ -169,20 +169,20 @@ def elementsFilters(model, project, actualFilters=None):
                 'reqtype':'',
             }
             
-        incrementList = [('no_filter', 'Selecciona Hito', False)]
+        incrementList = [('no_filter', 'Todos', False)]
         for ic in Increment.objects.valids(project):
             key = str(ic.identifier)
             incrementList.append((key, ic.__unicode__(), (actualFilters['increment'] == key)))
         
-        stateList = [('no_filter', 'Selecciona Estado', False)]
+        stateList = [('no_filter', 'Todos', False)]
         for state, name in STATE_CHOICES:
             stateList.append((state, name, (actualFilters['state'] == state)))
             
-        priorityList = [('no_filter', 'Selecciona Prioridad', False)]
+        priorityList = [('no_filter', 'Todos', False)]
         for priority, name in PRIORITY_CHOICES:
             priorityList.append((priority, name, (actualFilters['priority'] == priority)))
             
-        stabilityList = [('no_filter', 'Selecciona Estabilidad', False)]
+        stabilityList = [('no_filter', 'Todos', False)]
         for stability, name in STABILITY_CHOICES:
             stabilityList.append((stability, name, (actualFilters['stability'] == stability)))
             
@@ -190,7 +190,7 @@ def elementsFilters(model, project, actualFilters=None):
             typeChoices = UR_TYPE_CHOICES
         else:
             typeChoices = SR_TYPE_CHOICES
-        reqTypeList = [('no_filter', 'Selecciona Tipo', False)]
+        reqTypeList = [('no_filter', 'Todos', False)]
         for reqType, name in typeChoices:
             reqTypeList.append((reqType, name, (actualFilters['reqtype'] == reqType)))
             
@@ -209,17 +209,17 @@ def elementsFilters(model, project, actualFilters=None):
                 'requirement':'',
             }
         
-        incrementList = [('no_filter', 'Selecciona Hito', False)]
+        incrementList = [('no_filter', 'Todos', False)]
         for ic in Increment.objects.valids(project):
             key = str(ic.identifier)
             incrementList.append((key, ic.__unicode__(), (actualFilters['increment'] == key)))
         
-        stateList = [('no_filter', 'Selecciona Estado', False)]
+        stateList = [('no_filter', 'Todos', False)]
         for state, name in STATE_CHOICES:
             stateList.append((state, name, (actualFilters['state'] == state)))
             
         requirementList = [
-            ('no_filter', 'Selecciona Requisitos', False),
+            ('no_filter', 'Todos', False),
             ('ur', 'Requisitos de Usuario', (actualFilters['requirement'] == 'ur')),
             ('sr', 'Requisitos de Software', (actualFilters['requirement'] == 'sr')),
         ]
@@ -233,7 +233,7 @@ def elementsFilters(model, project, actualFilters=None):
         if actualFilters is None:
             actualFilters = {'priority':'',}
             
-        priorityList = [('no_filter', 'Selecciona Prioridad', False)]
+        priorityList = [('no_filter', 'Todos', False)]
         for priority, name in PRIORITY_CHOICES:
             priorityList.append((priority, name, (actualFilters['priority'] == priority)))
             

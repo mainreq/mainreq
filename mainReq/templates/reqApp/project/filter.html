@@ -1,3 +1,35 @@
+<div class="btn-group">
+    <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+        <span class="glyphicon glyphicon-filter"></span> Filtrar <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu" style="max-height:400px;overflow-y:scroll;">
+        {% for filter in elementsFilters %}
+            <li class="dropdown-header">{{ filter.title }}</li>
+            {% for key,name,selected in filter.list %}
+                <li><a progressbar href="?filter=true{{ filtersQuery }}&{{ filter.key }}={{ key }}{{ getParams }}" {% if selected %}selectedFilter>{{ name }} <span class='glyphicon glyphicon-ok'></span>{% else %}>{{ name }}{% endif %}</a></li>
+            {% endfor %}
+            <li class="divider"></li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% comment %}
+<select
+    progressbar
+    class="selectpicker"
+    data-style="btn-primary btn-xs"
+    onchange="filterThis(this, '{{ getParams }}')">
+        {% for filter in elementsFilters %}
+            <optgroup label="{{ filter.title }}">
+                {% for key,name,selected in filter.list %}
+                    <option title="Filtro" value="&{{ filter.key }}={{ key }}"{% if selected %}selected data-content="{{ name }} <span class='glyphicon glyphicon-ok'></span>">{% else %}>{{ name }}{% endif %}</option>
+                {% endfor %}
+            </optgroup>
+        {% endfor %}
+</select>
+{% endcomment %}
+
+{% comment %}
 <div>
     Filtro:
     {% for filter in elementsFilters %}
@@ -17,3 +49,4 @@
         </span>
     {% endfor %}
 </div>
+{% endcomment %}
