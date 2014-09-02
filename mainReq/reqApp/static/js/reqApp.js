@@ -272,7 +272,7 @@ function alarmsBlink(){
         var alarm = $(this);
         var container = $(this).parent().parent().parent().parent();
         
-        var backgroundColor = alarm.css('background-color');
+        //var backgroundColor = alarm.css('background-color');
         var color = alarm.css('color');
         
         function reqBlink(){
@@ -284,10 +284,10 @@ function alarmsBlink(){
             alarm.attr("blinking",(count-1));
             
             alarm.animate({
-                'background-color':color,
-                'color':backgroundColor,
+                //'background-color':color,
+                'color':'rgba(0,0,0,0)',//backgroundColor,
             },300).animate({
-                'background-color':backgroundColor,
+                //'background-color':backgroundColor,
                 'color':color,
             },300, reqBlink);
         }

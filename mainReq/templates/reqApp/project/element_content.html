@@ -6,6 +6,6 @@
 
 {% if canEdit %}
     <br/>
-    <button class="blue_button" onclick="editElement('{{ element.identifierText }}', '{% url 'reqApp:elemContent' %}', {{ element.id }}, '{{ elemType }}')">Editar</button>
-    <button title="Eliminar {{ element.identifierText }}" style="margin-left:100px;" class="blue_button" type="button" onclick="deleteElement('{{ element.identifierText }}', {{ element.identifier }}, '{{csrf_token}}','{{deleteWarning}}')">Eliminar</button>
+    <button class="btn btn-primary" onclick="editElement('{{ element.identifierText }}', '{% url 'reqApp:elemContent' %}', {{ element.id }}, '{{ elemType }}')"><span class="glyphicon glyphicon-pencil"></span> Editar</button>
+    <button title="Eliminar {{ element.identifierText }}" style="margin-left:100px;" class="btn btn-primary" type="button" onclick="deleteElement('{{ element.identifierText }}', {{ element.identifier }}, '{{csrf_token}}','{{deleteWarning}}')"><span class="glyphicon glyphicon-trash"></span> Eliminar</button>
 {% endif %}

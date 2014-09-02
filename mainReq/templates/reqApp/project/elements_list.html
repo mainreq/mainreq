@@ -11,15 +11,15 @@
 
 <div>
 
-    <button title="Expandir Elementos" style="display: inline-block;width:auto;" class="blue_button" onclick='showContents()'>(+)Abrir Todos</button>
-    <button title="Colapsar Elementos" style="display: inline-block;width:auto;" class="blue_button" onclick='hideContents()'>(--)Cerrar Todos</button>
+    <button title="Expandir Elementos" style="display: inline-block;width:auto;" class="btn btn-primary btn-xs" onclick='showContents()'><span class="glyphicon glyphicon-zoom-in"></span></button>
+    <button title="Colapsar Elementos" style="display: inline-block;width:auto;" class="btn btn-primary btn-xs" onclick='hideContents()'><span class="glyphicon glyphicon-zoom-out"></span></button>
     <div style="display: inline-block;width:20%;"></div>
     {% if canEdit %}
-        <a title="Agregar Nuevo" style="display: inline-block;width:auto;" href='#new' class="blue_button" onclick='editNewElement()'>Nuevo</a>
+        <a title="Agregar Nuevo" style="display: inline-block;width:auto;" href='#new' class="btn btn-primary btn-xs" onclick='editNewElement()'><span class="glyphicon glyphicon-plus"></span> Nuevo</a>
     {% endif %}
     <div style="display:inline-block;position:relative;float:right;">
-        <a title="Generar Documento PDF" class="blue_button" href="{% url 'reqApp:pdf' %}?pdfType={{ pdfLink }}" target="_blank">PDF</a>
-        <a title="Ayuda" class="blue_button" style="cursor:help" href="{% url 'reqApp:help' %}#{{ helpLink }}" target="_blank">?</a>
+        <a title="Generar Documento PDF" class="btn btn-primary btn-xs" href="{% url 'reqApp:pdf' %}?pdfType={{ pdfLink }}" target="_blank"><span class="glyphicon glyphicon-download"></span> PDF</a>
+        <a title="Ayuda" class="btn btn-primary btn-xs" style="cursor:help" href="{% url 'reqApp:help' %}#{{ helpLink }}" target="_blank"><span class="glyphicon glyphicon-question-sign"></span></a>
     </div>
     
 </div>
