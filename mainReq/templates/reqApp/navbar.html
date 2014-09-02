@@ -13,33 +13,33 @@
     <div class="collapse navbar-collapse" id="navbar_content">
       <ul class="nav navbar-nav">
         <li {% ifequal navbar.1 "project" %} class="active" {% endifequal %} class="dropdown">
-          <a id="dropdownMenu1" href="#" class="dropdown-toggle" data-toggle="dropdown">Proyecto <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-            <li role="presentation"><a role="menuitem" tabindex="-1" progressbar {% ifequal navbar.2 "IC" %} class="active" {% endifequal %} href="{% url 'reqApp:IC' %}">Hitos</a></li>
-            <li><a progressbar {% ifequal navbar.2 "UT" %} class="active" {% endifequal %} href="{% url 'reqApp:UT' %}">Tipos de Usuario</a></li>
-            <li><a progressbar {% ifequal navbar.2 "UR" %} class="active" {% endifequal %} href="{% url 'reqApp:UR' %}">Requisitos de Usuario</a></li>
-            <li><a progressbar {% ifequal navbar.2 "SR" %} class="active" {% endifequal %} href="{% url 'reqApp:SR' %}">Requisitos de Software</a></li>
-            <li><a progressbar {% ifequal navbar.2 "MD" %} class="active" {% endifequal %} href="{% url 'reqApp:MD' %}">Módulos</a></li>
-            <li><a progressbar {% ifequal navbar.2 "TC" %} class="active" {% endifequal %} href="{% url 'reqApp:TC' %}">Casos de Prueba</a></li>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Proyecto <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a progressbar href="{% url 'reqApp:IC' %}">Hitos{% ifequal navbar.2 "IC" %} <span class="glyphicon glyphicon-arrow-left"></span>{% endifequal %}</a></li>
+            <li><a progressbar href="{% url 'reqApp:UT' %}">Tipos de Usuario{% ifequal navbar.2 "UT" %} <span class="glyphicon glyphicon-arrow-left"></span>{% endifequal %}</a></li>
+            <li><a progressbar href="{% url 'reqApp:UR' %}">Requisitos de Usuario{% ifequal navbar.2 "UR" %} <span class="glyphicon glyphicon-arrow-left"></span>{% endifequal %}</a></li>
+            <li><a progressbar href="{% url 'reqApp:SR' %}">Requisitos de Software{% ifequal navbar.2 "SR" %} <span class="glyphicon glyphicon-arrow-left"></span>{% endifequal %}</a></li>
+            <li><a progressbar href="{% url 'reqApp:MD' %}">Módulos{% ifequal navbar.2 "MD" %} <span class="glyphicon glyphicon-arrow-left"></span>{% endifequal %}</a></li>
+            <li><a progressbar href="{% url 'reqApp:TC' %}">Casos de Prueba{% ifequal navbar.2 "TC" %} <span class="glyphicon glyphicon-arrow-left"></span>{% endifequal %}</a></li>
           </ul>
         </li>
         <li {% ifequal navbar.1 "documents" %} class="active" {% endifequal %} class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Documentos <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a progressbar {% ifequal navbar.2 "requirements" %} class="active" {% endifequal %} href="{% url 'reqApp:docReq' %}">Documento de Requisitos</a></li>
-            <li><a progressbar {% ifequal navbar.2 "design" %} class="active" {% endifequal %} href="{% url 'reqApp:docDsn' %}">Documento de Diseño</a></li>
-            <li><a progressbar {% ifequal navbar.2 "tc" %} class="active" {% endifequal %} href="{% url 'reqApp:docTC' %}">Documento de Casos de Prueba</a></li>
-            <li><a progressbar {% ifequal navbar.2 "historic" %} class="active" {% endifequal %} href="{% url 'reqApp:docHis' %}">Documento Histórico</a></li>
+            <li><a progressbar href="{% url 'reqApp:docReq' %}">Documento de Requisitos{% ifequal navbar.2 "requirements" %} <span class="glyphicon glyphicon-arrow-left"></span>{% endifequal %}</a></li>
+            <li><a progressbar href="{% url 'reqApp:docDsn' %}">Documento de Diseño{% ifequal navbar.2 "design" %} <span class="glyphicon glyphicon-arrow-left"></span>{% endifequal %}</a></li>
+            <li><a progressbar href="{% url 'reqApp:docTC' %}">Documento de Casos de Prueba{% ifequal navbar.2 "tc" %} <span class="glyphicon glyphicon-arrow-left"></span>{% endifequal %}</a></li>
+            <li><a progressbar href="{% url 'reqApp:docHis' %}">Documento Histórico{% ifequal navbar.2 "historic" %} <span class="glyphicon glyphicon-arrow-left"></span>{% endifequal %}</a></li>
           </ul>
         </li>
         <li {% ifequal navbar.1 "tools" %} class="active" {% endifequal %} class="dropdown">
-          <a {% ifequal navbar.1 "project" %} class="active" {% endifequal %} href="#" class="dropdown-toggle" data-toggle="dropdown">Herramientas <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Herramientas <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a progressbar {% ifequal navbar.2 "tasks" %} class="active" {% endifequal %} href="{% url 'reqApp:tasks' %}">Tareas</a></li>
-            <li><a progressbar {% ifequal navbar.2 "statistics" %} class="active" {% endifequal %} href="{% url 'reqApp:statistics' %}">Estadísticas</a></li>
-            <li><a progressbar {% ifequal navbar.2 "matrices" %} class="active" {% endifequal %} href="{% url 'reqApp:matrices' %}">Matrices de Trazado</a></li>
-            <li><a progressbar {% ifequal navbar.2 "consistency" %} class="active" {% endifequal %} href="{% url 'reqApp:consistency' %}">Consistencia de Relaciones</a></li>
-            <li><a progressbar {% ifequal navbar.2 "registry" %} class="active" {% endifequal %} href="{% url 'reqApp:registry' %}">Bitácora</a></li>
+            <li><a progressbar href="{% url 'reqApp:tasks' %}">Tareas{% ifequal navbar.2 "tasks" %} <span class="glyphicon glyphicon-arrow-left"></span>{% endifequal %}</a></li>
+            <li><a progressbar href="{% url 'reqApp:statistics' %}">Estadísticas{% ifequal navbar.2 "statistics" %} <span class="glyphicon glyphicon-arrow-left"></span>{% endifequal %}</a></li>
+            <li><a progressbar href="{% url 'reqApp:matrices' %}">Matrices de Trazado{% ifequal navbar.2 "matrices" %} <span class="glyphicon glyphicon-arrow-left"></span>{% endifequal %}</a></li>
+            <li><a progressbar href="{% url 'reqApp:consistency' %}">Consistencia de Relaciones{% ifequal navbar.2 "consistency" %} <span class="glyphicon glyphicon-arrow-left"></span>{% endifequal %}</a></li>
+            <li><a progressbar href="{% url 'reqApp:registry' %}">Bitácora{% ifequal navbar.2 "registry" %} <span class="glyphicon glyphicon-arrow-left"></span>{% endifequal %}</a></li>
           </ul>
         </li>
       </ul>

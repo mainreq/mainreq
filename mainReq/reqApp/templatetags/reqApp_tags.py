@@ -183,3 +183,17 @@ def verticalLabel(label):
 @register.filter(name="alarms")
 def alarms(el):
     return elementAlarms(el)
+    
+@register.filter(name="attr")
+def attr(field, attrs):
+    attrsDic = {}
+    attrsList = []
+    
+    attrs = attrs.strip()
+    attrs = attrs.split(',')
+    
+    for attr in attrs:
+        key,val = attr.split(':')
+        attrsDic.update({key.strip():val.strip()})
+    
+    return field.as_widget(attrs=attrsDic)

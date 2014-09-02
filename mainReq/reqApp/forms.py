@@ -121,9 +121,9 @@ class SRForm(RegistryForm):
         ]
         
         widgets = {
-            'description': forms.Textarea(attrs={'cols': 100, 'rows': 4}),
-            'name': forms.TextInput(attrs={'size': 74}),
-            'userRequirements': forms.SelectMultiple(attrs={'size': 10}),
+            'description': forms.Textarea(),
+            'name': forms.TextInput(),
+            'userRequirements': forms.SelectMultiple(),
         }
         
 class TCForm(RegistryForm):
