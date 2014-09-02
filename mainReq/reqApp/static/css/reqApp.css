@@ -119,13 +119,13 @@ div.ordering_bar{
 }
 
 a.ordering_bar:link, a.ordering_bar:visited{
-    color:Blue;
+    color:#428bca;
     text-align:center;
     text-decoration:none;
 }
 
 a.ordering_bar:hover span.ordering_bar, a.ordering_bar:active{
-    color:Blue;
+    color:#428bca;
     display:inline;
 }
 a.ordering_bar:hover span{
@@ -305,7 +305,7 @@ ul.flat{
 
 /* alarms */
 .mainReqAlarm{
-    color:#0C59CF;
+    color:#428bca;
     cursor:pointer;
 }
 

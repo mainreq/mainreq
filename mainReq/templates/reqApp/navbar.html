@@ -66,13 +66,13 @@
                 {% endwith %}
                 <li role="presentation" class="divider"></li>
                 {% ifequal user.userprofile.projects.count 1 %}{% else %}
-                    <li><a href="{% url 'reqApp:PR' %}">Proyectos...</a></li>
+                    <li><a href="{% url 'reqApp:PR' %}"><span class="glyphicon glyphicon-list"></span> Proyectos</a></li>
                 {% endifequal %}
-                <li><a href="{% url 'reqApp:editUser' %}?next={% firstof request.path '/' %}">Cuenta...</a></li>
+                <li><a href="{% url 'reqApp:editUser' %}?next={% firstof request.path '/' %}"><span class="glyphicon glyphicon-cog"></span> Cuenta</a></li>
                 {% if user.is_staff %}{% if user.is_superuser %}
                     <li><a href="/admin">Administración</a></li>
                 {% endif %}{% endif %}
-                <li><a href="{% url 'reqApp:logout' %}">Salir</a></li>
+                <li><a href="{% url 'reqApp:logout' %}"><span class="glyphicon glyphicon-remove"></span> Salir</a></li>
             </ul>
         </li>
       </ul>
