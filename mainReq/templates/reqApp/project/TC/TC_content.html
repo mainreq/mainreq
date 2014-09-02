@@ -18,34 +18,35 @@
                  <span style="color:Gray;">Resultado óptimo: </span>{{ element.optimumResult }}
             </div>
         </div>
-        <div style="display: inline-block;width:50%;vertical-align:top;"></div>
-        <div style="display: inline-block;width:30%;vertical-align:top;">
-            <ul class="flat">
-                <span style="color:Gray;">
-                    Usuarios asociados(
-                        {% if registry %}
-                            {{element.userTypes|enlistRegistered|listCount}}
-                        {% else %}
-                            {{element.userTypes|enlistValids|listCount}}
-                        {% endif %}
-                    ):
-                </span>
-                <ul>
-                {% if registry %}
-                    {% for ut in element.userTypes|enlistRegistered %}
-                        {% if ut.validity %}
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-6">
+                <ul class="flat">
+                    <span style="color:Gray;">
+                        Usuarios asociados(
+                            {% if registry %}
+                                {{element.userTypes|enlistRegistered|listCount}}
+                            {% else %}
+                                {{element.userTypes|enlistValids|listCount}}
+                            {% endif %}
+                        ):
+                    </span>
+                    <ul>
+                    {% if registry %}
+                        {% for ut in element.userTypes|enlistRegistered %}
+                            {% if ut.validity %}
+                                <li>{{ut}}</li>
+                            {% else %}
+                                <li style="color:Gray;" >{{ut}} (eliminado)</li>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        {% for ut in element.userTypes|enlistValids %}
                             <li>{{ut}}</li>
-                        {% else %}
-                            <li style="color:Gray;" >{{ut}} (eliminado)</li>
-                        {% endif %}
-                    {% endfor %}
-                {% else %}
-                    {% for ut in element.userTypes|enlistValids %}
-                        <li>{{ut}}</li>
-                    {% endfor %}
-                {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    </ul>
                 </ul>
-            </ul>
+            </div>
         </div>
     </div>
 {% endblock %}

@@ -8,10 +8,10 @@
     <span style="color:Gray;">Descripción: </span>{{ element.description }}
 </div>
 <br/>
-<div>
-    <div style="display: inline-block;width:20%;"><span style="color:Gray;">Fecha inicio: </span></div><div style="display: inline-block;">{{ element.initDate|date:"Y-m-d H:i" }}</div>
+<div class="row">
+    <div class="col-sm-2"><span style="color:Gray;">Fecha inicio: </span></div><div class="col-sm-2">{{ element.initDate|date:"Y-m-d H:i" }}</div>
 </div>
-<div>
-    <div style="display: inline-block;width:20%;"><span style="color:Gray;">Fecha fin: </span></div><div style="display: inline-block;">{{ element.endDate|date:"Y-m-d H:i" }}</div>
+<div class="row">
+    <div class="col-sm-2"><span style="color:Gray;">Fecha fin: </span></div><div class="col-sm-2">{{ element.endDate|date:"Y-m-d H:i" }}</div>
 </div>
 {% endblock %}

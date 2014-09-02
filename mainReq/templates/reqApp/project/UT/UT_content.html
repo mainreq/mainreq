@@ -8,11 +8,11 @@
         <span style="color:Gray;">Descripción: </span>{{ element.description }}
     </div>
     <br/>
-    <div>
-        <div style="display: inline-block;width:40%;vertical-align:top;">
+    <div class="row">
+        <div class="col-sm-4">
             <span style="color:Gray;">Cantidad de usuarios: </span>{{ element.quantity }}
         </div>
-        <div style="display: inline-block;width:40%;vertical-align:top;">
+        <div class="col-sm-4">
             <ul class="flat">
             {% with samples=element.userSamples|splitBy:';' %}
             <span style="color:Gray;">Usuarios localizables ({{samples|listLen}}): </span>

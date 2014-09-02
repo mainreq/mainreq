@@ -9,12 +9,12 @@
         <span style="color:Gray;">Descripción: </span>{{ element.description }}
     </div>
     <br/>
-    <div>
-        <div style="display: inline-block;width:40%;vertical-align:top;">
+    <div class="row">
+        <div class="col-sm-4">
             <div><span style="color:Gray;">Fuente: </span>{{ element.source }}</div>
             <div><span style="color:Gray;">Estabilidad: </span>{{ element|stability }}</div>
         </div>
-        <div style="display: inline-block;width:50%;vertical-align:top;">
+        <div class="col-sm-4">
             <ul class="flat">
                 <span style="color:Gray;">
                     {% if registry %}
