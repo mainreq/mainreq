@@ -9,14 +9,14 @@
     <div class="col-sm-1">
         <a title="Colapsar Elementos" href="#" data-toggle="tooltip" data-placement="auto" onclick='hideContents()'><span class="glyphicon glyphicon-zoom-out"></span> Cerrar</a>
     </div>
-    <div class="col-sm-1">
+    <div class="col-sm-1 col-sm-offset-1">
         {% if elementsFilters %}
             {% with get_params="&order="|concat:actual_order %}
                 {% include "reqApp/project/filter.html" with elementsFilters=elementsFilters getParams=get_params filtersQuery=filtersQuery %}
             {% endwith %}
         {% endif %}
     </div>
-    <div class="col-sm-2 col-sm-offset-2">
+    <div class="col-sm-2 col-sm-offset-1">
         {% if canEdit %}
             <a title="Agregar Nuevo" style="display: inline-block;width:auto;" href='#new' class="btn btn-primary btn-xs" onclick='editNewElement()'><span class="glyphicon glyphicon-plus"></span> Nuevo</a>
         {% endif %}

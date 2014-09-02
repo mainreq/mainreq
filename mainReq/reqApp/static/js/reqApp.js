@@ -347,16 +347,6 @@ $(window).bind("load", function(){
     loadDateTimePicker();
 });
 
-
-// elements filter
-/*
-function filterThis(self, getParams){
-    var filterQuery = $(self).attr('filter');
-    $('[selectedFilter]').each(function(i){filterQuery = filterQuery + $(this).attr('filter');});
-    location = "?filter=true" + filterQuery + getParams;
-}
-*/
-
 // capture Ctrl+f and F3 for word search
 window.addEventListener("keydown",function (e) {
     if (e.keyCode === 114 || (e.ctrlKey && e.keyCode === 70)) { 
