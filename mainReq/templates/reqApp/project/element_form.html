@@ -17,11 +17,11 @@
 	
 	
 	{% if identifierText %}
-        <button title="Cancelar Edición" class="btn btn-primary" type="button" onclick="cancelElementEdition('{{ identifierText }}')"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
-        <button title="Guardar Cambios" style="margin-left:100px;" class="btn btn-primary" onclick="validEditionForm(event,this)"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar</button>
+        <button title="Cancelar Edición" class="btn btn-default btn-xs" type="button" onclick="cancelElementEdition('{{ identifierText }}')"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
+        <button title="Guardar Cambios" style="margin-left:100px;" class="btn btn-primary btn-xs" onclick="validEditionForm(event,this)"><span class="glyphicon glyphicon-ok"></span> Guardar</button>
         <input type="hidden" name="updateReason" value="">
 	{% else %}
-    	<button title="Cancelar Edición" class="btn btn-primary" type="button" onclick="cancelNewElement()"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
-    	<button title="Guardar Cambios" style="margin-left:100px;" class="btn btn-primary" type="submit" onclick="return validForm(event,this)"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar</button>
+    	<button title="Cancelar Edición" class="btn btn-default btn-xs" type="button" onclick="cancelNewElement()"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
+    	<button title="Guardar Cambios" style="margin-left:100px;" class="btn btn-primary btn-xs" type="submit" onclick="return validForm(event,this)"><span class="glyphicon glyphicon-ok"></span> Guardar</button>
 	{% endif %}
 </form>
