@@ -41,10 +41,10 @@ body{
 */
 
 .element_content{
-    border-top:2px dashed rgba(0,0,0,0.1);
     padding:5px;
     display:none;
 }
+/* border-top:2px dashed rgba(0,0,0,0.1); */
 
 /* element form container */
 .edition_container{
@@ -67,6 +67,7 @@ body{
 
 span.element-pointer{
     color:rgba(0,0,0,0);
+    white-space:nowrap;
 }
 .element_title:hover span.element-pointer{
     color:rgba(0,0,0,0.6);
