@@ -1,39 +1,39 @@
 {% extends "reqApp/base.html" %}
 {% load reqApp_tags %}
 {% block body %}
-<div>
-    {% if canEditTasks %}
-        Responsable: 
-        <select progressbar style="display:inline-block;width:auto;vertical-align:top;" class="selectpicker" data-style="btn-primary" tooltip="Seleccionar Usuario" onchange="location=$(this).val();">
-            <option value="?">Seleccionar Usuario</option>
-            {% for i,w in workerUsers %}
-                <option value="?userIndex={{i}}"{% ifequal userIndex i %}selected{% endifequal %}>Usuario: {{w}}</option>
+<div class="row">
+    <div class="col-sm-1">
+        <a title="Expandir Elementos" href="#" data-toggle="tooltip" data-placement="auto" onclick='showContents()'><span class="glyphicon glyphicon-zoom-in"></span> Abrir</a>
+    </div>
+    <div class="col-sm-1">
+        <a title="Colapsar Elementos" href="#" data-toggle="tooltip" data-placement="auto" onclick='hideContents()'><span class="glyphicon glyphicon-zoom-out"></span> Cerrar</a>
+    </div>
+    <div class="col-sm-2">
+        {% if canEditTasks %} 
+            <select progressbar class="selectpicker" data-width="auto" data-style="btn-primary btn-xs" onchange="location=$(this).val();">
+                <option value="?">Responsable</option>
+                {% for i,w in workerUsers %}
+                    <option data-icon="glyphicon-user" value="?userIndex={{i}}"{% ifequal userIndex i %}selected{% endifequal %}>{{w}}</option>
+                {% endfor %}
+            </select>
+        {% endif %}
+    </div>
+    <div class="col-sm-2">
+        <select progressbar  class="selectpicker" data-width="auto" data-style="btn-primary btn-xs" onchange="location=$(this).val();">
+            <option value="?userIndex={{ userIndex }}">Estado</option>
+            {% for s,n in states %}
+                <option data-icon="glyphicon-filter" {% ifequal state s %}selected{% endifequal %} value="?state={{ s }}&userIndex={{ userIndex }}">{{ n }}</option>
             {% endfor %}
         </select>
-    {% endif %}
-    
-    Estado: 
-    <select progressbar style="display:inline-block;width:auto;vertical-align:top;" class="blue_button" tooltip="Seleccionar Estado" onchange="location=$(this).val();">
-        <option value="?userIndex={{ userIndex }}">Seleccionar Estado</option>
-        {% for s,n in states %}
-            <option {% ifequal state s %}selected{% endifequal %} value="?state={{ s }}&userIndex={{ userIndex }}">{{ n }}</option>
-        {% endfor %}
-    </select>
-    
-    <div style="display:inline-block;position:relative;float:right;">
-        <a title="Ayuda" class="blue_button" href="{% url 'reqApp:help' %}#{{ helpLink }}" target="_blank">?</a>
     </div>
-</div>
-
-<br/>
-
-<div>
-    <button title="Expandir Elementos" style="display: inline-block;width:auto;" href='#' class="blue_button" onclick='showContents()'>(+)Abrir Todos</button>
-    <button title="Colapsar Elementos" style="display: inline-block;width:auto;" href='#' class="blue_button" onclick='hideContents()'>(--)Cerrar Todos</button>
-    <div style="display: inline-block;width:20%;"></div>
-    {% if canEditTasks %}
-        <a title="Agregar Nueva Tarea" style="display: inline-block;width:auto;" href='#new' class="blue_button" onclick='editNewElement()'>Nueva</a>
-    {% endif %}
+    <div class="col-sm-2">
+        {% if canEditTasks %}
+            <a title="Agregar Nueva Tarea" href='#new' class="btn btn-primary btn-xs" onclick='editNewElement()'><span class="glyphicon glyphicon-plus"></span> Nueva</a>
+        {% endif %}
+    </div>
+    <div class="col-sm-1 col-sm-offset-3">
+        <a style="cursor:help" href="{% url 'reqApp:help' %}#{{ helpLink }}" target="_blank"><span class="glyphicon glyphicon-question-sign"></span> Ayuda</a>
+    </div>
 </div>
 
 {% for msg in msgs %}

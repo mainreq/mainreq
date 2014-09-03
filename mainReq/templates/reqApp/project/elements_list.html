@@ -9,19 +9,19 @@
     <div class="col-sm-1">
         <a title="Colapsar Elementos" href="#" data-toggle="tooltip" data-placement="auto" onclick='hideContents()'><span class="glyphicon glyphicon-zoom-out"></span> Cerrar</a>
     </div>
-    <div class="col-sm-1 col-sm-offset-1">
+    <div class="col-sm-2 col-sm-offset-2">
         {% if elementsFilters %}
             {% with get_params="&order="|concat:actual_order %}
                 {% include "reqApp/project/filter.html" with elementsFilters=elementsFilters getParams=get_params filtersQuery=filtersQuery %}
             {% endwith %}
         {% endif %}
     </div>
-    <div class="col-sm-2 col-sm-offset-1">
+    <div class="col-sm-2">
         {% if canEdit %}
             <a title="Agregar Nuevo" href='#new' class="btn btn-primary btn-xs" onclick='editNewElement()'><span class="glyphicon glyphicon-plus"></span> Nuevo</a>
         {% endif %}
     </div>
-    <div class="col-sm-1 col-sm-offset-3">
+    <div class="col-sm-1 col-sm-offset-2">
         <a title="Generar Documento PDF" data-toggle="tooltip" data-placement="auto" href="{% url 'reqApp:pdf' %}?pdfType={{ pdfLink }}" target="_blank"><span class="glyphicon glyphicon-download"></span> PDF</a>
     </div>
     <div class="col-sm-1">
