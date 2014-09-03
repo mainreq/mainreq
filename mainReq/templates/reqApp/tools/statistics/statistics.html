@@ -1,21 +1,21 @@
 {% extends "reqApp/base.html" %}
 
 {% block body %}
-<div>
-    <div style="display:inline-block;">
-        Hito: 
-        <select progressbar class="blue_button" title="Seleccionar Hito" onchange="location = this.options[this.selectedIndex].value;">
+<div class="row">
+    <div class="col-sm-3">
+        <select progressbar class="selectpicker" data-width="auto" data-style="btn-primary btn-xs" onchange="location = this.options[this.selectedIndex].value;">
             {% for key,val in IC_CHOICES %}
-                <option value="?increment={{key}}"{% ifequal increment key %}selected{% endifequal %}>{{val}}</option>
+                <option title="Filtrar por Hito" data-icon="glyphicon-filter" value="?increment={{key}}"{% ifequal increment key %}selected{% endifequal %}>{{val}}</option>
             {% endfor %}
         </select>
     </div>
-    <div style="display:inline-block;position:relative;float:right;">
-        <a class="blue_button" href="{% url 'reqApp:pdf' %}?pdfType=ST" target="_blank">PDF</a>
-        <a title="Ayuda" class="blue_button" href="{% url 'reqApp:help' %}#{{ helpLink }}" target="_blank">?</a>
+    <div class="col-sm-1 col-sm-offset-7">
+        <a title="Generar Documento PDF" data-toggle="tooltip" data-placement="auto" href="{% url 'reqApp:pdf' %}?pdfType=ST" target="_blank"><span class="glyphicon glyphicon-download"></span> PDF</a>
+    </div>
+    <div class="col-sm-1">
+        <a style="cursor:help" href="{% url 'reqApp:help' %}#{{ helpLink }}" target="_blank"><span class="glyphicon glyphicon-question-sign"></span> Ayuda</a>
     </div>
 </div>
-<br/>
 
 <h3>Requisitos de Usuario{% if icName %}, {{ icName }}{% endif %}</h3>
 {% include "reqApp/tools/statistics/UR.html" with UR=UR %}

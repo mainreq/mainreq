@@ -715,7 +715,7 @@ def statisticsUR_SR_TC_MD(project, ic=None):
     
 def statistics(request):
     IC_CHOICES = [
-        (0, "Seleccione Hito"),
+        (0, "Todos"),
     ]
 
     user = getUserOr404(request)
