@@ -13,18 +13,15 @@
 <body>
     <div style="text-align:center;padding:10px;margin:25%;margin-top:10em;" class="element_container">
         <h1><i>main</i>Req</h1>
-        <form method="POST">{% csrf_token %}
-            {% if form.non_field_errors %}
-                <p class="invalid">Contraseña o Usuario incorrecto!</p>
-            {% elif form.errors %}
-                <p class="invalid">Contraseña o Usuario incorrecto!</p>
+        <form class="form-horizontal" role="form" method="POST">{% csrf_token %}
+            {% if form.non_field_errors or form.errors %}
+                <div class="form-group has-error">
+                    <p class="help-block">Contraseña o Usuario incorrecto!</p>
+            {% else %}
+                <div class="form-group">
             {% endif %}
-            <div>
-                <input name="username" type="text" id="user" placeholder="Usuario">
-            </div>
-
-            <div>
-                <input name="password" type="password" id="inputPassword" placeholder="Contraseña">
+                <div class="col-sm-6 col-sm-offset-3"><input class="form-control" name="username" type="text" id="user" placeholder="Usuario"></div>
+                <div class="col-sm-6 col-sm-offset-3"><input class="form-control col-sm-2" name="password" type="password" id="inputPassword" placeholder="Contraseña"></div>
             </div>
             <br/>
             <button class="btn btn-primary" type="submit">Ingresar</button>
