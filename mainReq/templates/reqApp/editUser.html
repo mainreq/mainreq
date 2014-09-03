@@ -45,13 +45,13 @@
 
                     <div><a href="{% url 'reqApp:pass' %}?next={% firstof request.path '/' %}">Cambiar Contraseña</a></div>
                     <br/>
-                    <a title="Cancelar Edición" class="btn btn-default" href="{{ next }}"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
-	                <button title="Guardar Cambios" class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-ok"></span> Guardar</button>
+                    <a class="btn btn-default" href="{{ next }}"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
+	                <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-ok"></span> Guardar</button>
                 </form>
             {% else %}
                 <div class="message">Hola {{ user }}, tus datos han sido modificados exitosamente.</div>
                 <br/>
-                <div style="text-align:center;margin:6px;"><a class="btn btn-primary" href="{% url 'reqApp:logout' %}">Volver a Ingresar</a></div>
+                <div style="text-align:center;margin:6px;"><a href="{% url 'reqApp:logout' %}">Volver a Ingresar</a></div>
             {% endif %}
         </div>
 </body>
