@@ -8,8 +8,28 @@
         <b class="registry-new">Elemento creado</b>
         {% else %}
         <b class="registry-edited">Elemento editado</b>
-        {% endif %}
-        {% ifequal element.reason "" %}{% else %}(<a onclick="alert('{{ element.date|date:"Y-m-d H:i" }}\n[{{ element.user }}]: {{element.reason}}');" href="#">ver motivo...</a>){% endifequal %}
-        {{ element.date|date:"Y-m-d H:i" }} [{{ element.user }}]
+        {% endif %}        
+        <span class="glyphicon glyphicon-time"></span>{{ element.date|date:"Y-m-d H:i" }} <span class="glyphicon glyphicon-user"></span>{{ element.user }}
+        {% ifequal element.reason "" %}{% else %}
+            <span style="cursor:auto;color:Black;" onclick="stopClickPropagation(event)">
+                <div name="reqAppModal" class="modal fade" role="dialog" aria-hidden="true" style="text-align:left;">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                                <h4 class="modal-title">Registro de {{ element.identifierText }}</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p><span class="glyphicon glyphicon-time"></span> {{ element.date|date:"Y-m-d H:i" }}</p>
+                                <p><span class="glyphicon glyphicon-user"></span> {{ element.user }}</p>
+                                <h4>Motivo de modificación:</h4>
+                                <p>{{element.reason}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a data-toggle="tooltip" data-placement="auto" title="ver motivo..." href="#"><span class="glyphicon glyphicon-comment"></span></a>
+            </span>
+        {% endifequal %}
     </div>
 </div>

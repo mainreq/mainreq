@@ -4,7 +4,6 @@
 function showHideContent(self, url, _elemType, _identifier, _registry, _canEdit){// _registry = 0      _canEdit= 0
     var content = $(self).parent().parent().parent().next('div[name=element_content]');
     if(content.css('display') == 'block'){
-        //$(self).find(".element-pointer").html(" &#x25BE;");
         content.hide('slow');
     }else{
         if(content.attr("ready") == 'no'){
@@ -13,7 +12,6 @@ function showHideContent(self, url, _elemType, _identifier, _registry, _canEdit)
                 content.html(data);
             });
         }
-        //$(self).find(".element-pointer").html(" &#x25B4;");
         content.show('slow');
     }
 }
@@ -265,7 +263,9 @@ function imgAlignMessage(){
 function prepareModals(){
     $('[name=reqAppModal]').each(function(i){
         var itsModal = $(this);
-        $(this).next().click(function(){itsModal.modal('show');});
+        $(this).next().click(function(){
+            itsModal.modal('show');
+        });
         $(this).modal({
             show:false,
         });
@@ -303,6 +303,9 @@ function alarmsBlink(){
             alarm.attr("blinking",-1);
         });
     });
+}
+function stopClickPropagation(event){
+    event.stopPropagation();
 }
 function prepareAlarms(){
     prepareModals();
