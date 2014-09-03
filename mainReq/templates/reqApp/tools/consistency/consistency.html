@@ -1,28 +1,34 @@
 {% extends "reqApp/base.html" %}
 {% load reqApp_tags %}
 {% block body %}
-<div>
-    Consistencia: 
-    <select progressbar style="display:inline-block;width:auto;vertical-align:top;" class="blue_button" title="Seleccionar Relación de Consistencia" id='consistencySelect' onchange="location = this.options[this.selectedIndex].value;">
-        {% for key,val in CONSISTENCY_CHOICES %}
-            <option value="?consistency={{key}}"{% ifequal consistency key %}selected{% endifequal %}>{{val}}</option>
-        {% endfor %}
-    </select>
-    <select progressbar style="display:inline-block;width:auto;vertical-align:top;" class="blue_button" title="Seleccionar Elemento" onchange="location = document.getElementById('consistencySelect').options[document.getElementById('consistencySelect').selectedIndex].value + this.options[this.selectedIndex].value;">
-        {% for key,val in IDENTIFIER_CHOICES %}
-            <option value="&identifier={{key}}"{% ifequal identifier|stringformat:"s" key|stringformat:"s" %}selected{% endifequal %}>{{val}}</option>
-        {% endfor %}
-    </select>
-    <div style="display:inline-block;position:relative;float:right;">
-        <a class="blue_button" href="{% url 'reqApp:pdf' %}?pdfType=CT&consistency={{consistency}}" target="_blank">PDF</a>
-        <a title="Ayuda" class="blue_button" href="{% url 'reqApp:help' %}#{{ helpLink }}" target="_blank">?</a>
+
+<div class="row">
+    <div class="col-sm-1">
+        <a title="Expandir Elementos" href="#" data-toggle="tooltip" data-placement="auto" onclick='showContents()'><span class="glyphicon glyphicon-zoom-in"></span> Abrir</a>
     </div>
-</div>
-<br/>
-<div>
-<button title="Expandir Elementos" style="display: inline-block;width:auto;" href='#' class="blue_button" onclick='showContents()'>(+)Abrir Todos</button>
-<button title="Colapsar Elementos" style="display: inline-block;width:auto;" href='#' class="blue_button" onclick='hideContents()'>(--)Cerrar Todos</button>
-<div style="display: inline-block;width:20%;"></div>
+    <div class="col-sm-1">
+        <a title="Colapsar Elementos" href="#" data-toggle="tooltip" data-placement="auto" onclick='hideContents()'><span class="glyphicon glyphicon-zoom-out"></span> Cerrar</a>
+    </div>
+    <div class="col-sm-3">
+        <select progressbar class="selectpicker" data-width="auto" data-style="btn-primary btn-xs" id='consistencySelect' onchange="location = this.options[this.selectedIndex].value;">
+            {% for key,val in CONSISTENCY_CHOICES %}
+                <option data-icon="glyphicon-eye-open" value="?consistency={{key}}"{% ifequal consistency key %}selected{% endifequal %}>{{val}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-sm-4">
+        <select progressbar class="selectpicker" data-width="auto" data-style="btn-primary btn-xs" onchange="location = document.getElementById('consistencySelect').options[document.getElementById('consistencySelect').selectedIndex].value + this.options[this.selectedIndex].value;">
+            {% for key,val in IDENTIFIER_CHOICES %}
+                <option value="&identifier={{key}}"{% ifequal identifier|stringformat:"s" key|stringformat:"s" %}selected{% endifequal %}>{{val}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-sm-1 col-sm-offset-1">
+        <a title="Generar Documento PDF" data-toggle="tooltip" data-placement="auto" href="{% url 'reqApp:pdf' %}?pdfType=CT&consistency={{consistency}}" target="_blank"><span class="glyphicon glyphicon-download"></span> PDF</a>
+    </div>
+    <div class="col-sm-1">
+        <a style="cursor:help" href="{% url 'reqApp:help' %}#{{ helpLink }}" target="_blank"><span class="glyphicon glyphicon-question-sign"></span> Ayuda</a>
+    </div>
 </div>
 
 <div style="text-align:right;">

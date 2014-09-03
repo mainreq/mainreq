@@ -923,17 +923,17 @@ def relationsTree(modelQSet, subModelQSet, prop, identifier):
 
 def consistency(request):
     CONSISTENCY_CHOICES = [
-        ("ursr", "RU/RS"),
-        ("urtc", "RU/CP"),
-        ("srur", "RS/RU"),
-        ("srtc", "RS/CP"),
-        ("srmd", "RS/MD"),
-        ("mdsr", "MD/RS"),
-        ("tcur", "CP/RU"),
-        ("tcsr", "CP/RS"),
+        ("ursr", "Consistencia RU/RS"),
+        ("urtc", "Consistencia RU/CP"),
+        ("srur", "Consistencia RS/RU"),
+        ("srtc", "Consistencia RS/CP"),
+        ("srmd", "Consistencia RS/MD"),
+        ("mdsr", "Consistencia MD/RS"),
+        ("tcur", "Consistencia CP/RU"),
+        ("tcsr", "Consistencia CP/RS"),
     ]
     IDENTIFIER_CHOICES = [
-        (0, "Seleccione Elemento Específico"),
+        (0, "Todos"),
     ]
     templates = {
         "ursr":{'element':'reqApp/project/UR/UR.html','subElement':'reqApp/project/SR/SR.html'},
