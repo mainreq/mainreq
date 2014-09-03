@@ -1,36 +1,34 @@
 {% extends "reqApp/base.html" %}
 {% block body %}
-<div>
-    <span>Bitácora: </span>
-    <select progressbar style="display:inline-block;width:auto;vertical-align:top;" class="blue_button" title="Seleccionar Bitácora" id='registrySelect' onchange="location = this.options[this.selectedIndex].value;">
-        {% for key,val in REGISTRY_CHOICES %}
-            <option value="?registryType={{key}}"{% ifequal registryType key %}selected{% endifequal %} onclick="location='?registryType={{key}}';">{{val}}</option>
-        {% endfor %}
-        {% comment %}
-            <option value="DOCUMENTS" onclick="alert('Para revisar el Historial de cambios de los Documentos debes:\n 1) ir a la pestaña \'Documentos\'\n 2) seleccionar el \'Documento\' y la \'Sección\' que deseas revisar\n 3) presionar \'Editar\' (si tienes permisos de editor)\n 4) usar la opción \'Revisar versiones anteriores\'');$(this).parent().val('?registryType={{registryType}}');">Documentos</option>
-        {% endcomment %}
-    </select>
-    <select progressbar style="display:inline-block;width:auto;vertical-align:top;" class="blue_button" title="Seleccionar Elemento" onchange="location = $('#registrySelect').val() + $(this).val();">
-        {% for key,val in IDENTIFIER_CHOICES %}
-            <option value="&identifier={{key}}"{% ifequal identifier|stringformat:"s" key|stringformat:"s" %}selected{% endifequal %}>{{val}}</option>
-        {% endfor %}
-    </select>
-    <div style="display:inline-block;position:relative;float:right;">
-        <a title="Ayuda" class="blue_button" href="{% url 'reqApp:help' %}#{{ helpLink }}" target="_blank">?</a>
+<div class="row">
+    <div class="col-sm-1">
+        <a title="Expandir Elementos" href="#" data-toggle="tooltip" data-placement="auto" onclick='showContents()'><span class="glyphicon glyphicon-zoom-in"></span> Abrir</a>
     </div>
-</div>
-
-<br/>
-
-<div>
-<button title="Expandir Elementos" style="display: inline-block;width:auto;" class="blue_button" onclick='showContents()'>(+)Abrir Todos</button>
-<button title="Colapsar Elementos" style="display: inline-block;width:auto;" class="blue_button" onclick='hideContents()'>(--)Cerrar Todos</button>
-<div style="display: inline-block;width:20%;"></div>
+    <div class="col-sm-1">
+        <a title="Colapsar Elementos" href="#" data-toggle="tooltip" data-placement="auto" onclick='hideContents()'><span class="glyphicon glyphicon-zoom-out"></span> Cerrar</a>
+    </div>
+    <div class="col-sm-3">
+        <select progressbar class="selectpicker" data-width="auto" data-style="btn-primary btn-xs" id='registrySelect' onchange="location = this.options[this.selectedIndex].value;">
+            {% for key,val in REGISTRY_CHOICES %}
+                <option data-icon="glyphicon-list" value="?registryType={{key}}"{% ifequal registryType key %}selected{% endifequal %} onclick="location='?registryType={{key}}';">{{val}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-sm-3">
+        <select progressbar class="selectpicker" data-width="auto" data-style="btn-primary btn-xs" onchange="location = $('#registrySelect').val() + $(this).val();">
+            {% for key,val in IDENTIFIER_CHOICES %}
+                <option value="&identifier={{key}}"{% ifequal identifier|stringformat:"s" key|stringformat:"s" %}selected{% endifequal %}>{{val}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-sm-1 col-sm-offset-3">
+        <a style="cursor:help" href="{% url 'reqApp:help' %}#{{ helpLink }}" target="_blank"><span class="glyphicon glyphicon-question-sign"></span> Ayuda</a>
+    </div>
 </div>
 
 <div style="text-align:right;">
     <p>
-        <i style="color:Gray;">Ordenamiento:</i>
+        <i style="color:Gray;">Orden:</i>
         <b class="reqLabel label-to_do">fecha &#x25BF;</b>
         <i style="color:Gray;">Estado:</i>
         <b class="reqLabel label-satisfy">cumple</b>

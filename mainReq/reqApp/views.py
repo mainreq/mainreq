@@ -1047,7 +1047,7 @@ def registry(request):
         ("tc", "Casos de Prueba"),
     ]
     IDENTIFIER_CHOICES = [
-        (0, "Seleccione Elemento Específico"),
+        (0, "Todos"),
     ]
     models = {
         "ic": Increment,

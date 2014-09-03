@@ -22,7 +22,7 @@
         <select progressbar  class="selectpicker" data-width="auto" data-style="btn-primary btn-xs" onchange="location=$(this).val();">
             <option title="Filtrar por Estado" value="?userIndex={{ userIndex }}">Sin Filtro</option>
             {% for s,n in states %}
-                <option data-icon="glyphicon-filter" {% ifequal state s %}selected{% endifequal %} value="?state={{ s }}&userIndex={{ userIndex }}">{{ n }}</option>
+                <option data-icon="glyphicon-ok-sign" {% ifequal state s %}selected{% endifequal %} value="?state={{ s }}&userIndex={{ userIndex }}">{{ n }}</option>
             {% endfor %}
         </select>
     </div>
