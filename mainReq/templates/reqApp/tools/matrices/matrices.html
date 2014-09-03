@@ -1,18 +1,19 @@
 {% extends "reqApp/base.html" %}
 {% load reqApp_tags %}
 {% block body %}
-<div>
-    <div style="display: inline-block;width:auto;vertical-align:top;margin-right:20px;">
-        Matriz: 
-        <select progressbar class="blue_button" title="Seleccionar Matriz de Trazado" onchange="location = this.options[this.selectedIndex].value;">
+<div class="row">
+    <div class="col-sm-3">
+        <select progressbar class="selectpicker" data-width="auto" data-style="btn-primary btn-xs" onchange="location = this.options[this.selectedIndex].value;">
             {% for key,val in MATRIX_CHOICES %}
-                <option value="?matrixType={{key}}"{% ifequal matrixType key %}selected{% endifequal %}>{{val}}</option>
+                <option data-icon="glyphicon-th" value="?matrixType={{key}}"{% ifequal matrixType key %}selected{% endifequal %}>{{val}}</option>
             {% endfor %}
         </select>
     </div>
-    <div style="display:inline-block;position:relative;float:right;">
-        <a class="blue_button" href="{% url 'reqApp:pdf' %}?pdfType=MT" target="_blank">PDF</a>
-        <a title="Ayuda" class="blue_button" href="{% url 'reqApp:help' %}#{{ helpLink }}" target="_blank">?</a>
+    <div class="col-sm-1 col-sm-offset-7">
+        <a title="Generar Documento PDF" data-toggle="tooltip" data-placement="auto" href="{% url 'reqApp:pdf' %}?pdfType=MT" target="_blank"><span class="glyphicon glyphicon-download"></span> PDF</a>
+    </div>
+    <div class="col-sm-1">
+        <a style="cursor:help" href="{% url 'reqApp:help' %}#{{ helpLink }}" target="_blank"><span class="glyphicon glyphicon-question-sign"></span> Ayuda</a>
     </div>
 </div>
 
