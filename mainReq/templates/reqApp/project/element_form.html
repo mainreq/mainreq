@@ -1,5 +1,5 @@
 {% comment %} identifier identifierText deleteWarning {% endcomment %}
-<form {% if identifierText %}id="{{ identifierText }}_form"{% else %}id='newElementForm'{% endif %} action="#" method="post" class="edition_container">
+<form {% if identifierText %}id="{{ identifierText }}_form"{% else %}id='newElementForm'{% endif %} action="#" method="post" class="edition_container form-horizontal" role="form">
 	{% csrf_token %}
     {% if identifier %}
         <input type="hidden" name="identifier" value={{ identifier }}>
@@ -13,26 +13,25 @@
         {% block fields %}{% endblock %}
         
     </div>
-    <br/>
 	
 	
 	{% if identifierText %}
-	    <input type="hidden" name="updateReason" value="">
 	    <div class="row">
 	        <div class="col-sm-2">
-                <button title="Cancelar Edición" class="btn btn-default btn-xs" onclick="cancelElementEdition('{{ identifierText }}')"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
+                <button title="Cancelar Edición" class="btn btn-default btn-xs" type="button" onclick="cancelElementEdition('{{ identifierText }}')"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
             </div>
             <div class="col-sm-2">
                 <button title="Guardar Cambios" class="btn btn-primary btn-xs" onclick="validEditionForm(event,this)"><span class="glyphicon glyphicon-ok"></span> Guardar</button>
+                <input type="hidden" name="updateReason" value="">
             </div>
         </div>
 	{% else %}
 	    <div class="row">
 	        <div class="col-sm-2">
-    	        <button title="Cancelar Edición" class="btn btn-default btn-xs" onclick="cancelNewElement()"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
+    	        <button title="Cancelar Edición" class="btn btn-default btn-xs" type="button" onclick="cancelNewElement()"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
     	    </div>
     	    <div class="col-sm-2">
-            	<button title="Guardar Cambios" style="margin-left:100px;" class="btn btn-primary btn-xs" onclick="return validForm(event,this)"><span class="glyphicon glyphicon-ok"></span> Guardar</button>
+            	<button title="Guardar Cambios" class="btn btn-primary btn-xs" onclick="return validForm(event,this)"><span class="glyphicon glyphicon-ok"></span> Guardar</button>
             </div>
 	{% endif %}
 </form>

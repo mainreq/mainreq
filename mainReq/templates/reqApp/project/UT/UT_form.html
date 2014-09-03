@@ -1,7 +1,21 @@
 {% extends "reqApp/project/element_form.html" %}
+{% load reqApp_tags %}
+
 {% block fields %}
-    <div><span class="def_width">*Nombre: </span>{{ form.name }}</div>
-    <div class="top"><span class="def_width">*Descripción:</span></div> <div class="top">{{ form.description }}</div>
-    <div><span class="def_width">*Cantidad: </span>{{ form.quantity }}</div>
-    <div class="top"><span class="def_width">Usuarios localizables: </span></div><div class="top">{{ form.userSamples }}</div><span>Usar semicolon (;) para separar.</span>
+    <div class="form-group form-group-sm">
+        <label class="col-sm-2 control-label">*Nombre</label>
+        <div class="col-sm-10">{{ form.name|attr:"class:form-control input-sm" }}</div>
+    </div>
+    <div class="form-group form-group-sm">
+        <label class="col-sm-2 control-label">*Descripción</label>
+        <div class="col-sm-10">{{ form.description|attr:"class:form-control input-sm,rows:2" }}</div>
+    </div>
+    <div class="form-group form-group-sm">
+        <label class="col-sm-2 control-label">*Cantidad</label>
+        <div class="col-sm-2">{{ form.quantity|attr:"class:form-control input-sm, touchSpin:on" }}</div>
+    </div>
+    <div class="form-group form-group-sm">
+        <label class="col-sm-2 control-label">Usuarios localizables</label>
+        <div class="col-sm-10">{{ form.userSamples|attr:"class:form-control input-sm,rows:2" }}<span class="help-block">Usar punto y coma (;) para separar datos de usuarios.</span></div>
+    </div>
 {% endblock %}

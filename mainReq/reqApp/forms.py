@@ -60,10 +60,10 @@ class UTForm(RegistryForm):
             'userSamples',
         ]
         widgets = {
-            'description': forms.Textarea(attrs={'cols': 100, 'rows': 4}),
-            'name': forms.TextInput(attrs={'size': 74}),
-            'quantity': forms.TextInput(attrs={'size': 5}),
-            'userSamples': forms.Textarea(attrs={'cols': 50, 'rows': 4}),
+            'description': forms.Textarea(),
+            'name': forms.TextInput(),
+            'quantity': forms.TextInput(),
+            'userSamples': forms.Textarea(),
         }
 
 class URForm(RegistryForm):
@@ -91,8 +91,8 @@ class URForm(RegistryForm):
         ]
         
         widgets = {
-            'description': forms.Textarea(attrs={'cols': 100, 'rows': 4}),
-            'name': forms.TextInput(attrs={'size': 74}),
+            'description': forms.Textarea(),
+            'name': forms.TextInput(),
         }
 
 class SRForm(RegistryForm):
@@ -156,10 +156,10 @@ class TCForm(RegistryForm):
             'state',
         ]
         widgets = {
-            'description': forms.Textarea(attrs={'cols': 100, 'rows': 4}),
-            'name': forms.TextInput(attrs={'size': 74}),
-            'acceptableResult': forms.Textarea(attrs={'cols': 70, 'rows': 2}),
-            'optimumResult': forms.Textarea(attrs={'cols': 70, 'rows': 2}),
+            'description': forms.Textarea(),
+            'name': forms.TextInput(),
+            'acceptableResult': forms.Textarea(),
+            'optimumResult': forms.Textarea(),
         }
         
 class MDForm(RegistryForm):
@@ -180,9 +180,9 @@ class MDForm(RegistryForm):
             
         ]
         widgets = {
-            'description': forms.Textarea(attrs={'cols': 100, 'rows': 4}),
-            'name': forms.TextInput(attrs={'size': 74}),
-            'softwareRequirements': forms.SelectMultiple(attrs={'size': 10}),
+            'description': forms.Textarea(),
+            'name': forms.TextInput(),
+            'softwareRequirements': forms.SelectMultiple(),
         }
         
 class ICForm(RegistryForm):
@@ -196,10 +196,10 @@ class ICForm(RegistryForm):
             'endDate',
         ]
         widgets = {
-            'description': forms.Textarea(attrs={'cols': 100, 'rows': 4}),
-            'name': forms.TextInput(attrs={'size': 74}),
-            'initDate': forms.DateTimeInput(format='%Y-%m-%d %H:%M',attrs={'datetimepicker':'yes','placeholder': 'YYYY-MM-DD hh:mm'}),
-            'endDate': forms.DateTimeInput(format='%Y-%m-%d %H:%M',attrs={'datetimepicker':'yes','placeholder': 'YYYY-MM-DD hh:mm'}),
+            'description': forms.Textarea(),
+            'name': forms.TextInput(),
+            'initDate': forms.DateTimeInput(format='%Y-%m-%d %H:%M'),
+            'endDate': forms.DateTimeInput(format='%Y-%m-%d %H:%M'),
         }
         
     def clean_endDate(self):

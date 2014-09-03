@@ -39,8 +39,10 @@ function cancelElementEdition(identifierText){
 function editElement(identifierText, url, _identifier, _elemType){
     $.get(url,{getForm:"yes", identifier:_identifier, elemType:_elemType},function(data){
         $('#'+_identifier+'_formdiv').html(data);
-        $('#'+identifierText+'_form').show('slow');
+        prepareSelectpicker();
         loadDateTimePicker();
+        prepareTouchSpin();
+        $('#'+identifierText+'_form').show('slow');
     });
     $('#'+identifierText).hide('slow');
 }
@@ -82,12 +84,11 @@ function deleteElement(idText, identifier, csrf, deleteWarning){
 function validEditionForm(event,button){
     event = event || window.event; // cross browser
     event.preventDefault(); // avoid reload
-    
     var updateReason = prompt("Explique en pocas palabras el motivo de esta modificación:", "Este elemento es modificado porque...");
     if(updateReason == null){
         return false;
     }
-    $(button).next('[name=updateReason]').val(updateReason);
+    button.form.elements['updateReason'].value = updateReason;
     return validForm(event,button);
 }
 
@@ -124,7 +125,7 @@ function validForm(event,button){
                 button.disabled = false;
                 
                 // clean previous errors
-                $('.invalid').removeClass('invalid').prev().hide();
+                $('.has-error').removeClass('has-error').prev().hide();
                 
                 // show form errors
                 for(var e = 0; e < data.errors.length; e++){
@@ -132,9 +133,10 @@ function validForm(event,button){
                     input_error = data.errors[e][1];
                     var field = form.elements[input_name];
                     if(field!=undefined){
-                        field.className += " invalid";
-                        var newInput = $("<div style='color:Red'>"+input_error+"</div>");
-                        $(field).before(newInput);
+                        //field.className += " has-error";
+                        var newInput = $("<span class='help-block'>"+input_error+"</span>");
+                        $(field).after(newInput);
+                        $(field).closest('.form-group').addClass('has-error');
                     }
                 }
             }
@@ -450,6 +452,17 @@ $(window).unload(function(){
 });
 
 // bootstrap-select
-$(document).bind("ready", function(){
+function prepareSelectpicker(){
     $('.selectpicker').selectpicker();
+}
+$(document).bind("ready", function(){
+    prepareSelectpicker();
+});
+
+// http://www.virtuosoft.eu/code/bootstrap-touchspin/
+function prepareTouchSpin(){
+    $('[touchSpin]').TouchSpin();
+}
+$(document).bind("ready", function(){
+    prepareTouchSpin();
 });

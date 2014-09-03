@@ -34,8 +34,16 @@ body{
     padding:2px;
 }
 
+/*
 .element_container:hover{
     border:1px solid Gray;
+}
+*/
+
+.element_content{
+    border-top:2px dashed rgba(0,0,0,0.1);
+    padding:5px;
+    display:none;
 }
 
 /* element form container */
@@ -53,17 +61,17 @@ body{
 
 
 /* element title */
-/*
 .element_title:hover .element-identifierText{
     text-decoration:underline;
 }
-*/
+
 span.element-pointer{
     color:rgba(0,0,0,0);
 }
 .element_title:hover span.element-pointer{
     color:rgba(0,0,0,0.6);
 }
+
 
 /* WARNING: must match with choices.py */
 .fails{color:Red;}

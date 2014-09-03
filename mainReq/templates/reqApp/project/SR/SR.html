@@ -5,8 +5,9 @@
 
 {% block head %}
     <div class="col-sm-4">
+        {#<span class="element-pointer caret"></span>#}
         <a name="{{ element.identifierText }}"></a>
-        <span class="element-pointer">&#x25BA;</span><b class="{{ element.state }} element-identifierText">{{ element }}</b>
+        <b class="{{ element.state }} element-identifierText">{{ element }}</b>
     </div>
     <div class="col-sm-1">
         <span data-toggle="tooltip" data-placement="left" title="Costo">{{ element.cost }}</span>
