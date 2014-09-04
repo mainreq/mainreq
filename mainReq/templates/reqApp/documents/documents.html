@@ -50,55 +50,58 @@ $(window).bind("load", function() {
 });
 </script>
 {% endif %}
-<div>
-    <div style="display:inline-block;width:auto;">Sección:</div>
-    <div style="display:inline-block;width:auto;">
-        <select progressbar class="blue_button" id="sectionSelect" title="Seleccionar sección del documento" onchange="location = this.options[this.selectedIndex].value;">
+<div class="row">
+    <div class="col-sm-4">
+        <select progressbar class="selectpicker" data-width="auto" data-style="btn-default btn-xs" id="sectionSelect" onchange="location = this.options[this.selectedIndex].value;">
             {% for pa in sections %}
-                    <option value="?section={{pa.sType}}"{% ifequal section pa.sType %}selected{% endifequal %}{% if not pa.active %}disabled{% endif %}>{{ pa.sName }}</option>
+                    <option data-content="<span style='font-size:0.9em;color:Gray;'>Sección: </span>{{ pa.sName }}" value="?section={{pa.sType}}"{% ifequal section pa.sType %}selected{% endifequal %}{% if not pa.active %}disabled{% endif %}></option>
             {% endfor %}
         </select>
     </div>
-    
-    {% if canEdit %}
-        <div style="display:inline-block;width:auto;">
-            <div id="edit" style="display:block">
-                <button id="btn_edit" style="margin-left:50px;" class="blue_button">Editar</button>
+    <div class="col-sm-2">
+        {% if canEdit %}
+            <div class="row">
+                <div id="edit" class="col-sm-12">
+                    <button id="btn_edit" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span> Editar Sección</button>
+                </div>
+                <div id="edition" class="col-sm-12" style="display:none;">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <button progressbar id="btn_cancel" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
+                        </div>
+                        <div class="col-sm-6">
+                            <button progressbar id="btn_save" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-ok"></span> Guardar</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div id="edition" style="display:none;">
-                <button progressbar title="Cancelar Edición" id="btn_cancel" style="margin-left:50px;" class="blue_button">Cancelar</button>
-                <button progressbar title="Guardar Cambios de esta Sección" id="btn_save" style="margin-left:50px;" class="blue_button">Guardar</button>
-            </div>
-        </div>
-    {% endif %}
-    
-    <div style="display:inline-block;width:auto;float:right;">
-        <a class="blue_button" href="{% url 'reqApp:pdf' %}?pdfType={{ pdfLink }}" target="_blank">Documento PDF</a>
-        <a title="Ayuda" class="blue_button" href="{% url 'reqApp:help' %}#{{ helpLink }}" target="_blank">?</a>
+        {% endif %}
     </div>
-    
-    <div style="text-align:right;">
-        <div id="version" style="display:block;color:Black;">
+    <div class="col-sm-4">
+        <div id="version">
             {% if actual %}
-                Versión: {{ actual.date|date:"Y-m-d H:i" }} [{{ actual.user }}]
+                <span class="glyphicon glyphicon-time"></span> {{ actual.date|date:"Y-m-d H:i" }} <span class="glyphicon glyphicon-user"></span> {{ actual.user }}
             {% endif %}
         </div>
         {% if canEdit %}
             <div id="versionSelect" style="display:none;">
                 {% if versions %}
-                    Revisar versiones anteriores:
-                    <select progressbar class="blue_button" id="selectVersion" title="Revisar versiones anteriores" onchange="location = this.options[this.selectedIndex].value;">
+                    <select progressbar class="selectpicker" data-width="auto" data-style="btn-default btn-xs" id="selectVersion" onchange="location = this.options[this.selectedIndex].value;">
                         {% for version in versions %}
-                            <option value="?section={{ section }}&id={{version.id}}" {% if id_version %}{% ifequal version.id id_version %}selected{% endifequal %}{% endif %}>{{ version.date|date:"Y-m-d H:i" }} [{{version.user}}]{% ifequal version.id actual.id %} (actual){% endifequal %}</option>
+                            <option data-content="<span class='glyphicon glyphicon-time'></span> {{ version.date|date:'Y-m-d H:i' }} <span class='glyphicon glyphicon-user'></span>  {{version.user}}{% ifequal version.id actual.id %} (actual){% endifequal %}" value="?section={{ section }}&id={{version.id}}" {% if id_version %}{% ifequal version.id id_version %}selected{% endifequal %}{% endif %}></option>
                         {% endfor %}
                     </select>
                 {% endif %}
             </div>
         {% endif %}
     </div>
-    
+    <div class="col-sm-1">
+        <a title="Generar Documento PDF" data-toggle="tooltip" data-placement="auto" href="{% url 'reqApp:pdf' %}?pdfType={{ pdfLink }}" target="_blank"><span class="glyphicon glyphicon-download"></span> PDF</a>
+    </div>
+    <div class="col-sm-1">
+        <a style="cursor:help" href="{% url 'reqApp:help' %}#{{ helpLink }}" target="_blank"><span class="glyphicon glyphicon-question-sign"></span> Ayuda</a>
+    </div>
 </div>
-<br/>
 <div>
     {% if canEdit %}
         <div style='display:none;' id='section'>{% include "reqApp/documents/mce.html" with form_id='id_mce' form=form %}</div>

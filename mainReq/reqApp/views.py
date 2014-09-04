@@ -242,11 +242,11 @@ def viewIC(request):
     return elementView(request, ICForm, 'reqApp/project/IC/IC.html', 'reqApp/project/IC/IC_form.html', Increment, {'1':'project', '2':'IC'}, 'IC', 'IC', False)
     
 ################################# Documents #############################
-def docView(request, navbar, availables, pdfLink, helpLink=None):
+def docView(request, navbar, availables, shownSection, pdfLink, helpLink=None):
     user = getUserOr404(request)
     project = getProject(request)
 
-    section =  request.GET.get('section', availables[0])
+    section =  request.GET.get('section', shownSection)
     if section not in availables:
         section = availables[0]
         
@@ -320,7 +320,7 @@ def docReq(request):
         'environment',
         'related_projects',
     ]
-    return docView(request, navbar, sections, 'docReq', 'docReq')
+    return docView(request, navbar, sections, 'introduction', 'docReq', 'docReq')
     
 def docDsn(request):
     navbar = {'1':'documents', '2':'design'}
@@ -342,7 +342,7 @@ def docDsn(request):
         'navigation',
         'interface',
     ]
-    return docView(request, navbar, sections, 'docDsn', 'docDsn')
+    return docView(request, navbar, sections, 'design', 'docDsn', 'docDsn')
     
 def docTC(request):
     navbar = {'1':'documents', '2':'tc'}
@@ -361,7 +361,7 @@ def docTC(request):
         'environment',
         'related_projects',
     ]
-    return docView(request, navbar, sections, 'docTC', 'docTC')
+    return docView(request, navbar, sections, 'general_description', 'docTC', 'docTC')
 
 def docHis(request):
     navbar = {'1':'documents', '2':'historic'}
@@ -388,7 +388,7 @@ def docHis(request):
         'navigation',
         'interface',
     ]
-    return docView(request, navbar, sections, 'docHis', 'docHis')
+    return docView(request, navbar, sections, 'product', 'docHis', 'docHis')
 
 ############################### Tools ##########################
 
