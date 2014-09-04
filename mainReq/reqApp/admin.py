@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 from django.contrib import admin
 from reqApp.models import *
 from django.contrib.auth.models import User
@@ -27,7 +28,7 @@ class UserAdmin(AuthUserAdmin):
         c = 0
         for u in queryset:
             npass = (randrange(9)+1)*1000+(randrange(9)+1)*100+(randrange(9)+1)*10+(randrange(9)+1)
-            if sendEmail2User(u, 'Bienvenido a MainReq!', 'Username:%s    Password:%s'%(u.username,npass)):
+            if sendEmail2User(u, 'MainReq - Bienvenido!', u'Bienvenido,\n\nHas sido registrado en <a href="http://mainreq.dcc.uchile.cl">MainReq</a> con la siguiente información:\n\nUsuario: %s\n\nContraseña: %s\n\nmainreq.dcc.uchile.cl'%(u.username,npass)):
                 messages.success(request, "password changed & sent by email (user: %s)" % u.username)
                 u.set_password(npass)
                 u.save()
