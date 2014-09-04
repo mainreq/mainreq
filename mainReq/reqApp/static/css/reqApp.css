@@ -9,10 +9,10 @@ body{
 }
 
 .navbar li{
-    border-left:6px solid rgba(0,0,0,0);
+    border-right:6px solid rgba(0,0,0,0);
 }
 li .navbar-li-selected{
-    border-left:6px solid Black;
+    border-right:6px solid Black;
 }
 
 .breadcrumb{

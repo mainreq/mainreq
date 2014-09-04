@@ -10,7 +10,7 @@
     </div>
     <div class="col-sm-2">
         {% if canEditTasks %} 
-            <select progressbar class="selectpicker" data-width="auto" data-style="btn-primary btn-xs" onchange="location=$(this).val();">
+            <select progressbar class="selectpicker" data-width="auto" data-style="btn-default btn-xs" onchange="location=$(this).val();">
                 <option title="Responsable" value="?">No Seleccionado</option>
                 {% for i,w in workerUsers %}
                     <option data-icon="glyphicon-user" value="?userIndex={{i}}"{% ifequal userIndex i %}selected{% endifequal %}>{{w}}</option>
@@ -19,7 +19,7 @@
         {% endif %}
     </div>
     <div class="col-sm-2">
-        <select progressbar  class="selectpicker" data-width="auto" data-style="btn-primary btn-xs" onchange="location=$(this).val();">
+        <select progressbar  class="selectpicker" data-width="auto" data-style="btn-default btn-xs" onchange="location=$(this).val();">
             <option title="Filtrar por Estado" value="?userIndex={{ userIndex }}">Sin Filtro</option>
             {% for s,n in states %}
                 <option data-icon="glyphicon-ok-sign" {% ifequal state s %}selected{% endifequal %} value="?state={{ s }}&userIndex={{ userIndex }}">{{ n }}</option>

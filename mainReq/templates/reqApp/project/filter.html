@@ -1,8 +1,8 @@
 <div class="btn-group">
-    <button title="Filtrar por Atributo" type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
-        <span class="glyphicon glyphicon-filter"></span> Filtrar <span class="caret"></span>
+    <button title="Filtrar por Atributo" type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+        <span class="glyphicon glyphicon-filter"></span> Filtros <span class="caret"></span>
     </button>
-    <ul class="dropdown-menu" role="menu" style="max-height:400px;overflow-y:scroll;">
+    <ul class="dropdown-menu" role="menu" style="max-height:400px;overflow-y:auto;">
         {% for filter in elementsFilters %}
             <li class="dropdown-header">{{ filter.title }}</li>
             {% for key,name,selected in filter.list %}

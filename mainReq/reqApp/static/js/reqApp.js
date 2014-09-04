@@ -77,6 +77,8 @@ function deleteElement(idText, identifier, csrf, deleteWarning){
     params["delete"] = "delete";
     params["deletionReason"] = deletionReason;
     
+    NProgress.start();
+    
     post_to_url("", params, "post");
 }
 
@@ -117,6 +119,8 @@ function validForm(event,button){
                 // remove ajax mark
                 form.removeChild(input);
                 
+                NProgress.start();
+                
                 // send form
                 form.submit();
             }else{
@@ -125,7 +129,7 @@ function validForm(event,button){
                 button.disabled = false;
                 
                 // clean previous errors
-                $('.has-error').removeClass('has-error').prev().hide();
+                $('.has-error').removeClass('has-error');
                 
                 // show form errors
                 for(var e = 0; e < data.errors.length; e++){
@@ -133,9 +137,13 @@ function validForm(event,button){
                     input_error = data.errors[e][1];
                     var field = form.elements[input_name];
                     if(field!=undefined){
-                        //field.className += " has-error";
                         var newInput = $("<span class='help-block'>"+input_error+"</span>");
-                        $(field).after(newInput);
+                        var prevHelpBlock = $(field).next('.help-block');
+                        if(prevHelpBlock.length == 0){
+                            $(field).after(newInput);
+                        }else{
+                            prevHelpBlock.html(input_error);
+                        }
                         $(field).closest('.form-group').addClass('has-error');
                     }
                 }
@@ -325,6 +333,8 @@ function taskButton(confirmText, id, nextTaskState, csrf){
     params["csrfmiddlewaretoken"] = csrf;// '{{csrf_token}}'
     params["id"] = id;
     params["nextTaskState"] = nextTaskState;
+    
+    NProgress.start();
     
     post_to_url("", params, "post");
 }
