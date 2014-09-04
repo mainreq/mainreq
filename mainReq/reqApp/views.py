@@ -25,7 +25,6 @@ def editUser(request):
             user.first_name = data['first_name']
             user.last_name = data['last_name']
             user.email = data['email']
-            #user.set_password(data['newPassword'])
             user.save()
         else:
             context.update({'form':form})
@@ -64,7 +63,7 @@ def selectProject(request):
         if 'index' in request.POST:
             index = int(request.POST['index'])
             request.session['project'] = index
-    return HttpResponseRedirect(reverse('reqApp:tasks'))
+    return HttpResponseRedirect(reverse('reqApp:IC'))
 
 ################ Project Elements ################
 

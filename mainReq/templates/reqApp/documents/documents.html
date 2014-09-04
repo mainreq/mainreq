@@ -12,12 +12,13 @@
 <script>
 /* this script is for prevent loosing unsaved changes when leaving this page */
 var unsavedChanges = function(){
-    $('#sectionSelect').val("?section={{section}}");// restore selection in case of not leaving
+    $('#sectionSelect').val("?section={{section}}").selectpicker('render');;// restore selection in case of not leaving
     {% if id_version %}
-        $('#selectVersion').val("?section={{ section }}&id={{id_version}}");
+        $('#selectVersion').val("?section={{ section }}&id={{id_version}}").selectpicker('render');;
     {% elif actual %}
-        $('#selectVersion').val("?section={{ section }}&id={{actual.id}}");
+        $('#selectVersion').val("?section={{ section }}&id={{actual.id}}").selectpicker('render');;
     {% endif %}
+    NProgress.done();
     return 'This may have unsaved changes!';
 };
 var edit = function(){
