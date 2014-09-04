@@ -163,10 +163,12 @@ def elementView(request, modelFormClass, elementTemplate, formTemplate, modelCla
                 msgs.append(instance.identifierText()+u' eliminado y registrado en la bitácora')
             else:# edit element
                 form = modelFormClass(instance=instance, data=request.POST)
+                form.assignIdentifier(instance.identifier)
+                form.assignProject(project)
                 if form.is_valid():
                     if request.POST.has_key("validate"):
                         return ajax_form_valid(form, True)
-                    form.assignProject(project)
+                    #form.assignProject(project)
                     updateReason = request.POST['updateReason']
                     form.updateRegistryElement(user, identifier, updateReason)
                     msgs.append(instance.identifierText()+u' modificado y registrado en la bitácora')
@@ -178,10 +180,11 @@ def elementView(request, modelFormClass, elementTemplate, formTemplate, modelCla
                     msgs.append(m)
         else:# create element
             form = modelFormClass(request.POST)
+            form.assignProject(project)
             if form.is_valid():
                 if request.POST.has_key("validate"):
                     return ajax_form_valid(form, True)
-                form.assignProject(project)
+                #form.assignProject(project)
                 instance = form.createRegistryElement(user)
                 msgs.append(instance.identifierText()+u' creado y registrado en la bitácora')
             else:

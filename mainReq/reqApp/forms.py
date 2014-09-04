@@ -8,6 +8,11 @@ from tinymce.widgets import TinyMCE
 
 class RegistryForm(forms.ModelForm):
     validsProjectFields = []
+    formIdentifier = -1
+    
+    def assignIdentifier(self, identifier):
+        self.formIdentifier = identifier
+    
     def assignProject(self, project):
         self.project = project
         
@@ -208,7 +213,13 @@ class ICForm(RegistryForm):
             return end
         ini = self.cleaned_data['initDate']
         if end < ini:
-            raise forms.ValidationError("Fecha Fin es menor que Fecha Inicio!")
+            raise forms.ValidationError("Fecha Fin es menor que Fecha Inicio")
+            
+        for increment in Increment.objects.valids(self.project):
+            if (self.formIdentifier != increment.identifier):
+                if not ((ini <= increment.initDate and ini <= increment.endDate and end <= increment.initDate and end <= increment.endDate) or (ini >= increment.initDate and ini >= increment.endDate and end >= increment.initDate and end >= increment.endDate)):
+                    raise forms.ValidationError(u"Conflicto de Fecha Inicio y Fecha Fin con "+increment.identifierText())
+            
         return end
         
 

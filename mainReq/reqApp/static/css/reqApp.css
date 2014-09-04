@@ -21,6 +21,14 @@ li .navbar-li-selected{
     margin-bottom:10px;
 }
 
+.alert-info{
+    padding:2px;
+}
+.alert-dismissible{
+    padding-right:34px;
+    padding-top:2px;
+}
+
 /* project title between navbars */
 .project_name{
     display:block;
