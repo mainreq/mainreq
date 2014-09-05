@@ -29,7 +29,16 @@ class UserAdmin(AuthUserAdmin):
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser','groups')}),
     )
     
+    list_display = ('username','email','first_name','last_name','is_staff','semester')
+    list_filter = ('is_staff', 'userprofile__projects__semester')
+    
     actions = ['reassignUserPass','deactivateNonStaffUser']
+    
+    def semester(self, instance):
+        projects = instance.userprofile.projects.all().order_by('-startDate')
+        if projects.count() > 0:
+            return projects[0].semester
+        return '----'
     
     def reassignUserPass(self, request, queryset):
         c = 0
@@ -43,7 +52,7 @@ class UserAdmin(AuthUserAdmin):
             else:
                 messages.error(request, "Error: can't send email! (user: %s)" % u.username)
         messages.info(request, "%s passwords changed & sent by email." % c)#warning, debug, info, success, error        
-    reassignUserPass.short_description = "Re-assign password & notify by email"
+    reassignUserPass.short_description = "New password & email Notification"
     
     def deactivateNonStaffUser(self, request, queryset):
         c = 0

@@ -47,6 +47,8 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
     projects = models.ManyToManyField(Project, null=True, blank=True)
     
+    
+    
 def profile(sender, **kwargs):
     if kwargs.get('created', False):
         UserProfile.objects.create(
