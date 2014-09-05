@@ -476,7 +476,7 @@ def tasks(request):
             else:
                 tasks = Task.objects.getTasks(project, workerUsers[userIndex], actualOrder)
         else:
-            tasks = []
+            tasks = Task.objects.getTasks(project, order=actualOrder)
     else: # show his tasks
         if request.method == 'POST':
             if request.POST.has_key("nextTaskState"):# change task state

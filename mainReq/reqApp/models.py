@@ -24,6 +24,29 @@ class Project(models.Model):
     
     def __unicode__(self):
         return u'[%s] %s' % (self.creationDate(), self.name)
+    """
+    name = models.CharField(max_length=64)
+    description = models.CharField(max_length=140)
+    projectYear = models.DateTimeField(default=timezone.now,blank=True)
+    
+    projectSemester = models.CharField(choices=SEMESTER_CHOICES)
+    closingDate = models.DateTimeField()
+    
+    class Meta:
+        ordering = ['-id']
+    
+    def year(self):
+        df = DateFormat(self.projectYear)
+        return df.format('Y')
+        
+    def semester(self):
+        for s,n in SEMESTER_CHOICES:
+            if s == self.projectSemester:
+                return n
+    
+    def __unicode__(self):
+        return u'[%s %s] %s' % (self.year(), self.semester(), self.name)
+    """
 
 class UserProfile(models.Model):
     """

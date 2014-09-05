@@ -70,3 +70,8 @@ TASK_CHOICES = [
     ("t5_reprobate", "reprobada"),
     ("t6_discarded", "descartada"),
 ]
+
+SEMESTER_CHOICES = [
+    ("semester_1", "Primer Semestre"),
+    ("semester_2", "Segundo Semestre"),
+]

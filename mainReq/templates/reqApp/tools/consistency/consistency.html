@@ -26,7 +26,7 @@
     <div style="white-space:nowrap;" class="col-sm-1 col-sm-offset-1">
         <a title="Generar Documento PDF" data-toggle="tooltip" data-placement="auto" href="{% url 'reqApp:pdf' %}?pdfType=CT&consistency={{consistency}}" target="_blank"><span class="glyphicon glyphicon-download"></span> PDF</a>
     </div>
-    <div class="col-sm-1">
+    <div style="text-align:right;" class="col-sm-1">
         <a title="Ayuda" data-toggle="tooltip" data-placement="auto" style="cursor:help" href="{% url 'reqApp:help' %}#{{ helpLink }}" target="_blank"><span class="glyphicon glyphicon-question-sign"></span></a>
     </div>
 </div>
