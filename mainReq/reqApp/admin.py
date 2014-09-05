@@ -13,6 +13,7 @@ from django.contrib.auth.models import Permission
 from django.contrib.auth.models import Group
 
 from django.contrib.admin import widgets
+from django.utils.dateformat import DateFormat
 
 class UserProfileInline(admin.StackedInline):
     model = UserProfile
@@ -77,18 +78,35 @@ class MyProjectForm(forms.ModelForm):
             'startDate',
             'projectSemester',
             'closingDate',
+            'semester',
         ]
         widgets = {
             'description': widgets.AdminTextareaWidget(),
             'name': widgets.AdminTextInputWidget(),
             'startDate': widgets.AdminSplitDateTime(),#forms.DateInput(format='%Y'),
             'closingDate': widgets.AdminSplitDateTime(),
+            'semester': forms.HiddenInput(),
         }
+        labels = {
+            'semester':'',
+        }
+
+    def clean_semester(self):
+        startDate = self.cleaned_data['startDate']
+        projectSemester = self.cleaned_data['projectSemester']
+        
+        for s,n in SEMESTER_CHOICES:
+            if s == projectSemester:
+                projectSemester = n
+                break
+        
+        return u'%s %s' % (DateFormat(startDate).format('Y'), projectSemester)
 
 class ProjectAdmin(admin.ModelAdmin):
     form = MyProjectForm
-    list_display = ('name', 'year', 'semester')
+    list_display = ('name', 'semester')
     #list_filter = TODO
+    search_fields = ['name', 'semester']
 admin.site.register(Project, ProjectAdmin)
 
 

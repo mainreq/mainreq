@@ -31,21 +31,22 @@ class Project(models.Model):
     startDate = models.DateTimeField(default=timezone.now)
     projectSemester = models.CharField(max_length=140, choices=SEMESTER_CHOICES)
     closingDate = models.DateTimeField()
+    semester = models.CharField(max_length=140, blank=True)
     
     class Meta:
-        ordering = ['-id']
-    
+        ordering = ['-semester','-id']
+    """
     def year(self):
         df = DateFormat(self.startDate)
         return df.format('Y')
         
-    def semester(self):
+    def getSemester(self):
         for s,n in SEMESTER_CHOICES:
             if s == self.projectSemester:
                 return n
-    
+    """
     def __unicode__(self):
-        return u'[%s %s] %s' % (self.year(), self.semester(), self.name)
+        return u'[%s] %s' % (self.semester, self.name)
 
 class UserProfile(models.Model):
     """
