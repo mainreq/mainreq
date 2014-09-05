@@ -35,18 +35,9 @@ class Project(models.Model):
     
     class Meta:
         ordering = ['-semester','-id']
-    """
-    def year(self):
-        df = DateFormat(self.startDate)
-        return df.format('Y')
         
-    def getSemester(self):
-        for s,n in SEMESTER_CHOICES:
-            if s == self.projectSemester:
-                return n
-    """
     def __unicode__(self):
-        return u'[%s] %s' % (self.semester, self.name)
+        return u'%s: %s' % (self.semester, self.name)
 
 class UserProfile(models.Model):
     """

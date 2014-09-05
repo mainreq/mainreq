@@ -70,7 +70,7 @@
                 {% endifequal %}
                 <li><a href="{% url 'reqApp:editUser' %}?next={% firstof request.path '/' %}"><span class="glyphicon glyphicon-cog"></span> Cuenta</a></li>
                 {% if user.is_staff %}{% if user.is_superuser %}
-                    <li><a href="/admin">Administración</a></li>
+                    <li><a href="/admin"><span class="glyphicon glyphicon-wrench"></span> Administración</a></li>
                 {% endif %}{% endif %}
                 <li><a href="{% url 'reqApp:logout' %}"><span class="glyphicon glyphicon-remove"></span> Salir</a></li>
             </ul>

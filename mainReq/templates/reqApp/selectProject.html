@@ -5,23 +5,37 @@
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
     <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-select.min.css' %}"/>
+    <script type="text/javascript" src="{% static 'js/bootstrap-select.min.js' %}"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/nprogress.css' %}"/>
+    <script type="text/javascript" src="{% static 'js/nprogress.js' %}"></script>
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/reqApp.css' %}" />
+    <script type="text/javascript" src="{% static 'js/reqApp.js' %}"></script>
+    
     <title>mainReq</title>
 </head>
 
 <body>
     <div style="text-align:center;padding:10px;margin:10%;margin-top:10em;" class="element_container">
-        <div style="float:right;"><a class="btn btn-primary" href="{% url 'reqApp:logout' %}">Salir</a></div>
+        <div style="float:right;"><a class="btn btn-link" href="{% url 'reqApp:logout' %}">Salir</a></div>
         {% if user.is_staff %}{% if user.is_superuser %}
-            <div style="width:100%;text-align:left;"><a class="btn btn-primary" href="/admin">Administración</a></div>
+            <div style="width:100%;text-align:left;"><a class="btn btn-link" href="/admin">Administración</a></div>
         {% endif %}{% endif %}
         <h1><i>main</i>Req</h1>
-        <h2>Hola {{user}}</h2>
+        <h4>Hola {{user}}</h4>
         {% if projects %}
             <form method="POST">{% csrf_token %}
                 <div style="text-align:left">
-                    <p>Selecciona un proyecto:</p>
+                    <select title="Selecciona un proyecto" class="selectpicker" data-width="auto" data-live-search="true" data-style="btn-primary btn-xs" multiple name="index" onchange="this.form.submit()">
+                        {% for index,pr in projects %}
+                            <option data-subtext="{{ pr.semester }}" value="{{index}}">{{ pr.name }}</option>
+                        {% endfor %}
+                    </select>
+                    
+                    {% comment %}
                     <div class="radio">
                         {% for index,pr in projects %}
                             <label>
@@ -31,6 +45,7 @@
                             </label>
                         {% endfor %}
                     </div>
+                    {% endcomment %}
                 </div>
             </form>
         {% else %}
