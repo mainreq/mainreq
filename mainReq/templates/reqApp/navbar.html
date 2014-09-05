@@ -15,12 +15,12 @@
         <li {% ifequal navbar.1 "project" %} class="active" {% endifequal %} class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Proyecto <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li {% ifequal navbar.2 "IC" %}class="navbar-li-selected"{% endifequal %}><a progressbar href="{% url 'reqApp:IC' %}"><b class="reqLabel label-to_do">HT</b> Hitos</a></li>
-            <li {% ifequal navbar.2 "UT" %}class="navbar-li-selected"{% endifequal %}><a progressbar href="{% url 'reqApp:UT' %}"><b class="reqLabel label-to_do">TU</b> Tipos de Usuario</a></li>
-            <li {% ifequal navbar.2 "UR" %}class="navbar-li-selected"{% endifequal %}><a progressbar href="{% url 'reqApp:UR' %}"><b class="reqLabel label-to_do">RU</b> Requisitos de Usuario</a></li>
-            <li {% ifequal navbar.2 "SR" %}class="navbar-li-selected"{% endifequal %}><a progressbar href="{% url 'reqApp:SR' %}"><b class="reqLabel label-to_do">RS</b> Requisitos de Software</a></li>
-            <li {% ifequal navbar.2 "MD" %}class="navbar-li-selected"{% endifequal %}><a progressbar href="{% url 'reqApp:MD' %}"><b class="reqLabel label-to_do">MD</b> Módulos</a></li>
-            <li {% ifequal navbar.2 "TC" %}class="navbar-li-selected"{% endifequal %}><a progressbar href="{% url 'reqApp:TC' %}"><b class="reqLabel label-to_do">CP</b> Casos de Prueba</a></li>
+            <li {% ifequal navbar.2 "IC" %}class="navbar-li-selected"{% endifequal %}><a progressbar href="{% url 'reqApp:IC' %}"><span class="badge">HT</span> Hitos</a></li>
+            <li {% ifequal navbar.2 "UT" %}class="navbar-li-selected"{% endifequal %}><a progressbar href="{% url 'reqApp:UT' %}"><span class="badge">TU</span> Tipos de Usuario</a></li>
+            <li {% ifequal navbar.2 "UR" %}class="navbar-li-selected"{% endifequal %}><a progressbar href="{% url 'reqApp:UR' %}"><span class="badge">RU</span> Requisitos de Usuario</a></li>
+            <li {% ifequal navbar.2 "SR" %}class="navbar-li-selected"{% endifequal %}><a progressbar href="{% url 'reqApp:SR' %}"><span class="badge">RS</span> Requisitos de Software</a></li>
+            <li {% ifequal navbar.2 "MD" %}class="navbar-li-selected"{% endifequal %}><a progressbar href="{% url 'reqApp:MD' %}"><span class="badge">MD</span> Módulos</a></li>
+            <li {% ifequal navbar.2 "TC" %}class="navbar-li-selected"{% endifequal %}><a progressbar href="{% url 'reqApp:TC' %}"><span class="badge">CP</span> Casos de Prueba</a></li>
           </ul>
         </li>
         <li {% ifequal navbar.1 "documents" %} class="active" {% endifequal %} class="dropdown">

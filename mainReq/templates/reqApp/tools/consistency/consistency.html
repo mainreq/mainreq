@@ -3,10 +3,10 @@
 {% block body %}
 
 <div class="row">
-    <div class="col-sm-1">
+    <div style="white-space:nowrap;" class="col-sm-1">
         <a title="Expandir Elementos" href="#" data-toggle="tooltip" data-placement="auto" onclick='showContents()'><span class="glyphicon glyphicon-zoom-in"></span> Abrir</a>
     </div>
-    <div class="col-sm-1">
+    <div style="white-space:nowrap;" class="col-sm-1">
         <a title="Colapsar Elementos" href="#" data-toggle="tooltip" data-placement="auto" onclick='hideContents()'><span class="glyphicon glyphicon-zoom-out"></span> Cerrar</a>
     </div>
     <div class="col-sm-3">
@@ -23,11 +23,11 @@
             {% endfor %}
         </select>
     </div>
-    <div class="col-sm-1 col-sm-offset-1">
+    <div style="white-space:nowrap;" class="col-sm-1 col-sm-offset-1">
         <a title="Generar Documento PDF" data-toggle="tooltip" data-placement="auto" href="{% url 'reqApp:pdf' %}?pdfType=CT&consistency={{consistency}}" target="_blank"><span class="glyphicon glyphicon-download"></span> PDF</a>
     </div>
     <div class="col-sm-1">
-        <a style="cursor:help" href="{% url 'reqApp:help' %}#{{ helpLink }}" target="_blank"><span class="glyphicon glyphicon-question-sign"></span> Ayuda</a>
+        <a title="Ayuda" data-toggle="tooltip" data-placement="auto" style="cursor:help" href="{% url 'reqApp:help' %}#{{ helpLink }}" target="_blank"><span class="glyphicon glyphicon-question-sign"></span></a>
     </div>
 </div>
 

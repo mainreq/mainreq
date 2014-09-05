@@ -2,13 +2,13 @@
 {% load reqApp_tags %}
 {% block body %}
 <div class="row">
-    <div class="col-sm-1">
+    <div style="white-space:nowrap;" class="col-sm-1">
         <a title="Expandir Elementos" href="#" data-toggle="tooltip" data-placement="auto" onclick='showContents()'><span class="glyphicon glyphicon-zoom-in"></span> Abrir</a>
     </div>
-    <div class="col-sm-1">
+    <div style="white-space:nowrap;" class="col-sm-1">
         <a title="Colapsar Elementos" href="#" data-toggle="tooltip" data-placement="auto" onclick='hideContents()'><span class="glyphicon glyphicon-zoom-out"></span> Cerrar</a>
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm-3">
         {% if canEditTasks %} 
             <select progressbar class="selectpicker" data-width="auto" data-style="btn-default btn-xs" onchange="location=$(this).val();">
                 <option title="Responsable" value="?">No Seleccionado</option>
@@ -18,7 +18,7 @@
             </select>
         {% endif %}
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm-3">
         <select progressbar  class="selectpicker" data-width="auto" data-style="btn-default btn-xs" onchange="location=$(this).val();">
             <option title="Filtrar por Estado" value="?userIndex={{ userIndex }}">Sin Filtro</option>
             {% for s,n in states %}
@@ -26,13 +26,13 @@
             {% endfor %}
         </select>
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm-3">
         {% if canEditTasks %}
             <a title="Agregar Nueva Tarea" href='#new' class="btn btn-primary btn-xs" onclick='editNewElement()'><span class="glyphicon glyphicon-plus"></span> Nueva</a>
         {% endif %}
     </div>
-    <div class="col-sm-1 col-sm-offset-3">
-        <a style="cursor:help" href="{% url 'reqApp:help' %}#{{ helpLink }}" target="_blank"><span class="glyphicon glyphicon-question-sign"></span> Ayuda</a>
+    <div class="col-sm-1">
+        <a title="Ayuda" data-toggle="tooltip" data-placement="auto" style="cursor:help" href="{% url 'reqApp:help' %}#{{ helpLink }}" target="_blank"><span class="glyphicon glyphicon-question-sign"></span></a>
     </div>
 </div>
 

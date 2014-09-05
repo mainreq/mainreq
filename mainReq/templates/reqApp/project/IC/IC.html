@@ -4,8 +4,12 @@
 {% block elemType %}IC{% endblock %}
 
 {% block head %}
-    <div class="col-sm-12">
+    <div class="col-sm-4">
         <a name="{{ element.identifierText }}"></a>
         <b class="element-identifierText">{{ element.identifierText }} {{ element }}</b><span class="element-pointer"> &#x25C4;</span>
     </div>
+    <div class="col-sm-3"><span data-toggle="tooltip" data-placement="left" title="Fecha Inicio">{{ element.initDate|date:"Y-m-d H:i" }}</span></div>
+    <div class="col-sm-3"><span data-toggle="tooltip" data-placement="left" title="Fecha Fin">{{ element.endDate|date:"Y-m-d H:i" }}</span></div>
+    <div class="col-sm-1"><span data-toggle="tooltip" data-placement="left" title="Requisitos de Usuario" class="badge">{{ element|incrementRUCount }}</span></div>
+    <div class="col-sm-1"><span data-toggle="tooltip" data-placement="left" title="Requisitos de Software" class="badge">{{ element|incrementRSCount }}</span></div>
 {% endblock %}

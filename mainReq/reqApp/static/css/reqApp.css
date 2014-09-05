@@ -28,6 +28,9 @@ li .navbar-li-selected{
     padding-right:34px;
     padding-top:2px;
 }
+.alert-dismissible .close{
+    top:-6px;
+}
 
 /* project title between navbars */
 .project_name{

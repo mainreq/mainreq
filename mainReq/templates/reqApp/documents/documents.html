@@ -55,7 +55,7 @@ $(window).bind("load", function() {
     <div class="col-sm-4">
         <select progressbar class="selectpicker" data-width="auto" data-style="btn-default btn-xs" id="sectionSelect" onchange="location = this.options[this.selectedIndex].value;">
             {% for pa in sections %}
-                    <option data-content="<span style='font-size:0.9em;color:Gray;'>Sección: </span>{{ pa.sName }}" value="?section={{pa.sType}}"{% ifequal section pa.sType %}selected{% endifequal %}{% if not pa.active %}disabled{% endif %}></option>
+                    <option data-content="<span style='font-size:0.9em;color:Gray;'>Sección: </span><span style='font-size:0.9em;'>{{ pa.sName }}</span>" value="?section={{pa.sType}}"{% ifequal section pa.sType %}selected{% endifequal %}{% if not pa.active %}disabled{% endif %}></option>
             {% endfor %}
         </select>
     </div>
@@ -96,11 +96,11 @@ $(window).bind("load", function() {
             </div>
         {% endif %}
     </div>
-    <div class="col-sm-1">
+    <div style="white-space:nowrap;" class="col-sm-1">
         <a title="Generar Documento PDF" data-toggle="tooltip" data-placement="auto" href="{% url 'reqApp:pdf' %}?pdfType={{ pdfLink }}" target="_blank"><span class="glyphicon glyphicon-download"></span> PDF</a>
     </div>
     <div class="col-sm-1">
-        <a style="cursor:help" href="{% url 'reqApp:help' %}#{{ helpLink }}" target="_blank"><span class="glyphicon glyphicon-question-sign"></span> Ayuda</a>
+        <a style="cursor:help" href="{% url 'reqApp:help' %}#{{ helpLink }}" target="_blank"><span class="glyphicon glyphicon-question-sign"></span></a>
     </div>
 </div>
 <div>

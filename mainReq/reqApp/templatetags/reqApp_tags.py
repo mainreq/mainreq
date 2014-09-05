@@ -197,3 +197,11 @@ def attr(field, attrs):
         attrsDic.update({key.strip():val.strip()})
     
     return field.as_widget(attrs=attrsDic)
+    
+@register.filter(name="incrementRUCount")
+def incrementRUCount(el):
+    return UserRequirement.objects.valids(el.project).filter(increment=el).count()
+    
+@register.filter(name="incrementRSCount")
+def incrementRSCount(el):
+    return SoftwareRequirement.objects.valids(el.project).filter(increment=el).count()
