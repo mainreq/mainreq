@@ -89,6 +89,9 @@ class MyProjectForm(forms.ModelForm):
         }
         labels = {
             'semester':'',
+            'startDate':'Start Date:',
+            'closingDate':'Closing Date:',
+            'projectSemester':'Semester:',
         }
 
     def clean_semester(self):
@@ -109,7 +112,7 @@ class ProjectAdmin(admin.ModelAdmin):
     search_fields = ['name', 'semester']
 admin.site.register(Project, ProjectAdmin)
 
-
+admin.site.disable_action('delete_selected')
 
 # custom auth permissions
 class MyGroupAdminForm(forms.ModelForm):
