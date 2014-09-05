@@ -8,6 +8,12 @@ from random import randrange
 from django.contrib import messages
 from reqApp.util import *
 
+from django import forms
+from django.contrib.auth.models import Permission
+from django.contrib.auth.models import Group
+
+from django.contrib.admin import widgets
+
 class UserProfileInline(admin.StackedInline):
     model = UserProfile
     max_num = 1
@@ -62,18 +68,32 @@ admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 
 
+class MyProjectForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = [
+            'name',
+            'description',
+            'startDate',
+            'projectSemester',
+            'closingDate',
+        ]
+        widgets = {
+            'description': widgets.AdminTextareaWidget(),
+            'name': widgets.AdminTextInputWidget(),
+            'startDate': widgets.AdminSplitDateTime(),#forms.DateInput(format='%Y'),
+            'closingDate': widgets.AdminSplitDateTime(),
+        }
+
 class ProjectAdmin(admin.ModelAdmin):
-    fields = ('name','description',)
-    list_display = ('name', 'creationDate',)
+    form = MyProjectForm
+    list_display = ('name', 'year', 'semester')
+    #list_filter = TODO
 admin.site.register(Project, ProjectAdmin)
 
 
 
 # custom auth permissions
-from django import forms
-from django.contrib.auth.models import Permission
-from django.contrib.auth.models import Group
-
 class MyGroupAdminForm(forms.ModelForm):
     class Meta:
         model = Group

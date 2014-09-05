@@ -11,6 +11,7 @@ from django.utils.dateformat import DateFormat
 PERM_PRE = u"EDITOR_"
 
 class Project(models.Model):
+    """
     name = models.CharField(max_length=64)
     description = models.CharField(max_length=140)
     date = models.DateTimeField(default=timezone.now,blank=True)
@@ -27,16 +28,15 @@ class Project(models.Model):
     """
     name = models.CharField(max_length=64)
     description = models.CharField(max_length=140)
-    projectYear = models.DateTimeField(default=timezone.now,blank=True)
-    
-    projectSemester = models.CharField(choices=SEMESTER_CHOICES)
+    startDate = models.DateTimeField(default=timezone.now)
+    projectSemester = models.CharField(max_length=140, choices=SEMESTER_CHOICES)
     closingDate = models.DateTimeField()
     
     class Meta:
         ordering = ['-id']
     
     def year(self):
-        df = DateFormat(self.projectYear)
+        df = DateFormat(self.startDate)
         return df.format('Y')
         
     def semester(self):
@@ -46,7 +46,6 @@ class Project(models.Model):
     
     def __unicode__(self):
         return u'[%s %s] %s' % (self.year(), self.semester(), self.name)
-    """
 
 class UserProfile(models.Model):
     """
