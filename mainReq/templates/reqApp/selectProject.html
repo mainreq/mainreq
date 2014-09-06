@@ -20,9 +20,9 @@
 
 <body>
     <div style="text-align:center;padding:10px;margin:10%;margin-top:10em;" class="element_container">
-        <div style="float:right;"><a class="btn btn-link" href="{% url 'reqApp:logout' %}">Salir</a></div>
+        <div style="float:right;"><a class="btn btn-link" href="{% url 'reqApp:logout' %}"><span class="glyphicon glyphicon-remove"></span> Salir</a></div>
         {% if user.is_staff %}{% if user.is_superuser %}
-            <div style="width:100%;text-align:left;"><a class="btn btn-link" href="/admin">Administración</a></div>
+            <div style="width:100%;text-align:left;"><a class="btn btn-link" href="/admin"><span class="glyphicon glyphicon-wrench"></span> Administración</a></div>
         {% endif %}{% endif %}
         <h1><i>main</i>Req</h1>
         <h4>Hola {{user}}</h4>

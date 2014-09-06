@@ -155,7 +155,11 @@ def deleteWarning(el):
 def getPermissionCodename(model):
     return model._meta.permissions[0][0]
     
-def isEditor(user, model):
+def isEditor(request, model):
+    user = getUserOr404(request)
+    project = getProject(request)
+    if not project.is_active() and not user.is_staff:
+        return False
     return user.has_perm('reqApp.'+getPermissionCodename(model))
     
 def elementsFilters(model, project, actualFilters=None):
@@ -305,8 +309,12 @@ def dict2GetQuery(dic):
     return query
     
 def hasDangerousChars(s):
+    # avoid posible problems inserting strings into js/html variables
     if s.find("\"") >= 0:return True
     if s.find("\'") >= 0:return True
     if s.find("\\") >= 0:return True
     if s.find("/") >= 0:return True
     return False
+    
+def getHost(request):
+    return unicode(request.build_absolute_uri("/")[:-1])# http://localhost:8000

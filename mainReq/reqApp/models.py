@@ -36,6 +36,16 @@ class Project(models.Model):
     class Meta:
         ordering = ['-semester','-id']
         
+    def is_active(self):
+        if timezone.now() >= self.closingDate:
+            return False
+        return True
+    
+    def status(self):
+        if self.is_active():
+            return 'Open'
+        return 'Closed'
+        
     def __unicode__(self):
         return u'%s: %s' % (self.semester, self.name)
 

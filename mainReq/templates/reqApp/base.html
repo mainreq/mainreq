@@ -64,6 +64,14 @@
         {% block extrabreadcrumb %}{% endblock %}
     </ol>
     
+    {% with project=request|userProject %}
+        {% if not project.is_active %}
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
+                ¡Este Proyecto se encuentra cerrado! Fecha de cierre: {{ project.closingDate|date:"Y-m-d H:i" }}
+            </div>
+        {% endif %}
+    {% endwith %}
     
     {% block body %}{% endblock %}
 

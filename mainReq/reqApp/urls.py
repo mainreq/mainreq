@@ -7,6 +7,8 @@ urlpatterns = patterns('',
         {'template_name':'reqApp/index.html'}, name='login'),
     url(r'^logout/$' , 'django.contrib.auth.views.logout_then_login',
         name='logout'),
+    url(r'^admin/logout/$' , 'django.contrib.auth.views.logout_then_login',
+        name='logout'),
 
     url(r'^usuario/$', views.editUser, name='editUser'),
     url(r'^pass/$', views.editPass, name='pass'),

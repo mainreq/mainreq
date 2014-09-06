@@ -217,7 +217,7 @@ def elementView(request, modelFormClass, elementTemplate, formTemplate, modelCla
         'navbar':navbar,
         'pdfLink':pdfLink,
         'helpLink':helpLink,
-        'canEdit':isEditor(user, modelClass),
+        'canEdit':isEditor(request, modelClass),
         'elementsFilters':filters,
         'filtersQuery':filtersQuery,
         'colorLabels':colorLabels,
@@ -259,7 +259,7 @@ def docView(request, navbar, availables, shownSection, pdfLink, helpLink=None):
             active = True
         sections.append({'sType':pa[0], 'sName':pa[1], 'active':active})
     
-    canEdit = isEditor(user, DocumentSection)
+    canEdit = isEditor(request, DocumentSection)
     
     context = {
         'navbar':navbar,
@@ -409,7 +409,7 @@ def tasks(request):
     getParams = ""
     
     context = {}
-    if isEditor(user, Task):
+    if isEditor(request, Task):
         userIndex = -1
         if 'userIndex' in request.GET:
             userIndex = int(request.GET.get('userIndex',-1))
@@ -457,7 +457,7 @@ def tasks(request):
                     msgs.append(u'Tarea creada: "'+task.__unicode__()+u'" Responsable: '+workerUser.__unicode__())
                     # send email notifications
                     if request.POST.has_key("sendNotifications"):
-                        notif = u"Hola '"+workerUser.__unicode__()+u"' tienes una nueva tarea. \nTarea: "+task.__unicode__()+u"\nFecha de Revisión: "+str(task.deadlineDate)[:-6]+u"\nDescripción: "+task.description+u"\n\n* IMPORTANTE: luego de que realices la tarea debes reportar su estado en la sección de Tareas de MainReq."
+                        notif = u"Hola '"+workerUser.__unicode__()+u"' tienes una nueva tarea. \nTarea: "+task.__unicode__()+u"\nFecha de Revisión: "+str(task.deadlineDate)[:-6]+u"\nDescripción: "+task.description+u"\n\n* IMPORTANTE: debes reportar su estado en la sección de Tareas de MainReq ("+getHost(request)+")."
                         if sendEmail2User(workerUser, "MainReq: Nueva Tarea", notif):
                             msgs.append(u"Nueva tarea notificada a Usuario: " + workerUser.__unicode__() + u" Email: " + workerUser.email)
                             if sendEmail2User(user, "MainReq: Nueva Tarea", u"(Copia de notificación enviada)\n\n"+notif):
@@ -1166,8 +1166,7 @@ def render_to_pdf(template_src, context_dict):
 def pdf(request):
     user = getUserOr404(request)
     project = getProject(request)
-    host = request.build_absolute_uri("/")[:-1]# http://localhost:8000
-    print "host--> ", host
+    host = getHost(request)#request.build_absolute_uri("/")[:-1]# http://localhost:8000
     context = {
         'pagesize':'letter',# https://github.com/chrisglass/xhtml2pdf/blob/master/doc/usage.rst#supported-page-properties-and-values
         'title':'',

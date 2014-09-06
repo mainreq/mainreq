@@ -44,7 +44,7 @@ class UserAdmin(AuthUserAdmin):
         c = 0
         for u in queryset:
             npass = (randrange(9)+1)*1000+(randrange(9)+1)*100+(randrange(9)+1)*10+(randrange(9)+1)
-            if sendEmail2User(u, 'MainReq - Bienvenido!', u'Bienvenido,\n\nHas sido registrado en <a href="http://mainreq.dcc.uchile.cl">MainReq</a> con la siguiente información:\n\nUsuario: %s\n\nContraseña: %s\n\nmainreq.dcc.uchile.cl'%(u.username,npass)):
+            if sendEmail2User(u, 'MainReq - Bienvenido!', u'Bienvenido,\n\nHas sido registrado en MainReq (%s) con la siguiente información:\n\nUsuario: %s\n\nContraseña: %s'%(getHost(request), u.username, npass)):
                 messages.success(request, "password changed & sent by email (user: %s)" % u.username)
                 u.set_password(npass)
                 u.save()
@@ -116,8 +116,8 @@ class MyProjectForm(forms.ModelForm):
 
 class ProjectAdmin(admin.ModelAdmin):
     form = MyProjectForm
-    list_display = ('name', 'semester')
-    #list_filter = TODO
+    list_display = ('name', 'semester', 'closingDate', 'status')
+    list_filter = ('semester',)
     search_fields = ['name', 'semester']
 admin.site.register(Project, ProjectAdmin)
 
