@@ -347,7 +347,7 @@ $(window).bind("load", function(){
             $(this).countdown({
                 until: new Date(+new Date() + (secondsToDeadline * 1000)),
                 compact: true, 
-                layout: 'Tiempo restante: {dn}d {hnn}{sep}{mnn}{sep}{snn}',
+                layout: '{dn}d {hnn}{sep}{mnn}{sep}{snn}',
             });
         }
     });
