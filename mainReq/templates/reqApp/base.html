@@ -29,6 +29,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/reqApp.css' %}"/>
     <script type="text/javascript" src="{% static 'js/reqApp.js' %}"></script>
     
+    <meta name="google" value="notranslate" />
+    
     {% with project=request|userProject %}
         <title>mainReq :: {{ project.name }}</title>
     {% endwith %}

@@ -25,6 +25,8 @@ var edit = function(){
     $('#edit').hide('slow');
     $('#version').hide('slow');
     $('#preview').hide('slow');
+    $('#pdf').hide('slow');
+    $('#sectionSelectDiv').hide('slow');
     $('#section').show('slow');
     $('#versionSelect').show('slow');
     $('#edition').show('slow');
@@ -52,51 +54,49 @@ $(window).bind("load", function() {
 </script>
 {% endif %}
 <div class="row">
-    <div class="col-sm-4">
+    <div id="sectionSelectDiv" class="col-sm-5">
         <select progressbar class="selectpicker" data-width="auto" data-style="btn-default btn-xs" id="sectionSelect" onchange="location = this.options[this.selectedIndex].value;">
             {% for pa in sections %}
                     <option data-content="<span style='font-size:0.9em;color:Gray;'>Sección: </span><span style='font-size:0.9em;'>{{ pa.sName }}</span>" value="?section={{pa.sType}}"{% ifequal section pa.sType %}selected{% endifequal %}{% if not pa.active %}disabled{% endif %}></option>
             {% endfor %}
         </select>
     </div>
-    <div class="col-sm-2">
-        {% if canEdit %}
+    {% if canEdit %}
+        <div id="edit" class="col-sm-1">
+            <button id="btn_edit" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span> Editar</button>
+        </div>
+                
+        <div id="edition" class="col-sm-4 col-sm-offset-2" style="display:none;">
             <div class="row">
-                <div id="edit" class="col-sm-12">
-                    <button id="btn_edit" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span> Editar</button>
+                <div class="col-sm-6">
+                    <button progressbar id="btn_cancel" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
                 </div>
-                <div id="edition" class="col-sm-12" style="display:none;">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <button progressbar id="btn_cancel" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
-                        </div>
-                        <div class="col-sm-6">
-                            <button progressbar id="btn_save" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-ok"></span> Guardar</button>
-                        </div>
-                    </div>
+                <div class="col-sm-6">
+                    <button progressbar id="btn_save" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-ok"></span> Guardar</button>
                 </div>
             </div>
-        {% endif %}
-    </div>
-    <div class="col-sm-4">
-        <div id="version">
-            {% if actual %}
-                <span class="glyphicon glyphicon-time"></span> {{ actual.date|date:"Y-m-d H:i" }} <span class="glyphicon glyphicon-user"></span> {{ actual.user }}
-            {% endif %}
         </div>
-        {% if canEdit %}
-            <div id="versionSelect" style="display:none;">
-                {% if versions %}
-                    <select progressbar class="selectpicker" data-width="auto" data-style="btn-default btn-xs" id="selectVersion" onchange="location = this.options[this.selectedIndex].value;">
-                        {% for version in versions %}
-                            <option data-content="<span class='glyphicon glyphicon-time'></span> {{ version.date|date:'Y-m-d H:i' }} <span class='glyphicon glyphicon-user'></span>  {{version.user}}{% ifequal version.id actual.id %} (actual){% endifequal %}" value="?section={{ section }}&id={{version.id}}" {% if id_version %}{% ifequal version.id id_version %}selected{% endifequal %}{% endif %}></option>
-                        {% endfor %}
-                    </select>
+    {% else %}
+        <div class="col-sm-1"></div>
+    {% endif %}
+            <div class="col-sm-3 col-sm-offset-1" id="version">
+                {% if actual %}
+                        <span style="white-space:nowrap;"><span class="glyphicon glyphicon-time"></span> {{ actual.date|date:"Y-m-d H:i" }}</span>
+                        <span style="white-space:nowrap;"><span class="glyphicon glyphicon-user"></span> {{ actual.user }}</span>
                 {% endif %}
             </div>
-        {% endif %}
-    </div>
-    <div style="white-space:nowrap;" class="col-sm-1">
+            {% if canEdit %}
+                <div id="versionSelect" class="col-sm-5" style="display:none;">
+                    {% if versions %}
+                        <select progressbar class="selectpicker" data-width="auto" data-style="btn-default btn-xs" id="selectVersion" onchange="location = this.options[this.selectedIndex].value;">
+                            {% for version in versions %}
+                                <option data-content="<span class='glyphicon glyphicon-time'></span> {{ version.date|date:'Y-m-d H:i' }} <span class='glyphicon glyphicon-user'></span>  {{version.user}}{% ifequal version.id actual.id %} (actual){% endifequal %}" value="?section={{ section }}&id={{version.id}}" {% if id_version %}{% ifequal version.id id_version %}selected{% endifequal %}{% endif %}></option>
+                            {% endfor %}
+                        </select>
+                    {% endif %}
+                </div>
+            {% endif %}
+    <div id="pdf" style="white-space:nowrap;" class="col-sm-1">
         <a title="Generar Documento PDF" data-toggle="tooltip" data-placement="auto" href="{% url 'reqApp:pdf' %}?pdfType={{ pdfLink }}" target="_blank"><span class="glyphicon glyphicon-download"></span> PDF</a>
     </div>
     <div style="text-align:right;" class="col-sm-1">
@@ -105,7 +105,7 @@ $(window).bind("load", function() {
 </div>
 <div>
     {% if canEdit %}
-        <div style='display:none;' id='section'>{% include "reqApp/documents/mce.html" with form_id='id_mce' form=form %}</div>
+        <div style='display:none;' id='section'><br/>{% include "reqApp/documents/mce.html" with form_id='id_mce' form=form %}</div>
     {% endif %}
     
     <div style='display:block;' id='preview'><hr/>
