@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 from django.db import models
 from django.db.models import Max
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User,Group
 from django.db.models.signals import post_save
 from reqApp.choices import *
 from django.utils import timezone
@@ -9,6 +9,11 @@ from django.utils.dateformat import DateFormat
 
 # admin permission prefix
 PERM_PRE = u"EDITOR_"
+
+
+class Role(Group):
+    def __unicode__(self):
+        return u'%s' % (self.name)
 
 class Project(models.Model):
     """

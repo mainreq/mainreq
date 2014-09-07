@@ -26,11 +26,12 @@ class UserAdmin(AuthUserAdmin):
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         ('Personal info', {'fields': ('first_name', 'last_name', 'email')}),
-        ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser','groups')}),
+        ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser')}),
+        ('Roles', {'fields': ('groups',)}),
     )
     
     list_display = ('username','email','first_name','last_name','is_staff','semester')
-    list_filter = ('is_staff', 'userprofile__projects__semester')
+    list_filter = ('is_staff', 'userprofile__projects__semester','groups')
     
     actions = ['reassignUserPass','deactivateNonStaffUser']
     
@@ -52,7 +53,7 @@ class UserAdmin(AuthUserAdmin):
             else:
                 messages.error(request, "Error: can't send email! (user: %s)" % u.username)
         messages.info(request, "%s passwords changed & sent by email." % c)#warning, debug, info, success, error        
-    reassignUserPass.short_description = "New password & email Notification"
+    reassignUserPass.short_description = "Send Email Notification (User & Password)"
     
     def deactivateNonStaffUser(self, request, queryset):
         c = 0
@@ -92,7 +93,7 @@ class MyProjectForm(forms.ModelForm):
         widgets = {
             'description': widgets.AdminTextareaWidget(),
             'name': widgets.AdminTextInputWidget(),
-            'startDate': widgets.AdminSplitDateTime(),#forms.DateInput(format='%Y'),
+            'startDate': widgets.AdminSplitDateTime(),
             'closingDate': widgets.AdminSplitDateTime(),
             'semester': forms.HiddenInput(),
         }
@@ -126,11 +127,12 @@ admin.site.disable_action('delete_selected')
 # custom auth permissions
 class MyGroupAdminForm(forms.ModelForm):
     class Meta:
-        model = Group
+        model = Role#Group
 
     permissions = forms.ModelMultipleChoiceField(
         Permission.objects.filter(codename__startswith = PERM_PRE),
-        widget=admin.widgets.FilteredSelectMultiple('permissions', False))
+        widget=admin.widgets.FilteredSelectMultiple('permissions', False),
+        required=False)
 
 
 class MyGroupAdmin(admin.ModelAdmin):
@@ -138,4 +140,4 @@ class MyGroupAdmin(admin.ModelAdmin):
     search_fields = ('name',)
 
 admin.site.unregister(Group)
-admin.site.register(Group, MyGroupAdmin)
+admin.site.register(Role, MyGroupAdmin)
