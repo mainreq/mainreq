@@ -1140,8 +1140,9 @@ def imgUpload(request):
         file_ = form.cleaned_data['file']
         path = os.path.join(upload_path, file_.name)
         real_path = default_storage.save(path, file_)
+        media_path = real_path[real_path.find('uploads/'):]
         return HttpResponse(
-            os.path.join(settings.MEDIA_URL, real_path)
+            os.path.join(settings.MEDIA_URL, media_path)
         )
     return HttpResponse('')
     

@@ -97,7 +97,7 @@ LOGOUT_URL = 'reqApp:login'
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')#'/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
@@ -117,7 +117,7 @@ TINYMCE_JS_URL = os.path.join(STATIC_URL, "js/tiny_mce/tiny_mce.js")
 TINYMCE_JS_ROOT = os.path.join(STATIC_URL, "tiny_mce/")
 
 # doc. img. upload folder
-IMAGES_UPLOAD = 'uploads/'
+IMAGES_UPLOAD = MEDIA_ROOT + '/uploads/'
 
 # email
 from reqApp.email_settings import *
