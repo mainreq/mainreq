@@ -26,7 +26,7 @@ ADMINS = (('John', 'lasagna.bolognesa.campesina@gmail.com'),)
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
