@@ -22,8 +22,6 @@ SECRET_KEY = '@&c9(e+0kk=0b%@3&-ri@ei^1v4xgq#011bjs4k!x)f041*70v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ADMINS = (('Homero', 'mainreq.2014.errors@gmail.com'),)
-
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = ['*']
@@ -134,5 +132,5 @@ Create /reqApp/email_settings.py (with following custom lines)
 
 EMAIL_HOST_USER = '_______@gmail.com' # your gmail
 EMAIL_HOST_PASSWORD = '________' # your gmail password
-
+ADMINS = (('Homero', '______@gmail.com'),) # (optional) send errors stacktrace by email
 """
