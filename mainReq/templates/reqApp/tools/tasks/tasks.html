@@ -43,18 +43,16 @@
     </div>
 {% endfor %}
 
-<div style="text-align:right;">
-    <p>
-        <i style="color:Gray;">Tareas:</i>
-        <b class="reqLabel label-to_do">{{ tasks|length }}</b>
-        <i style="color:Gray;">Estado:</i>
-        <b class="reqLabel label-to_do">por hacer</b>
-        <b class="reqLabel label-done">realizada</b>
-        <b class="reqLabel label-not_done">no realizada</b>
-        <b class="reqLabel label-approved">aprobada</b>
-        <b class="reqLabel label-reprobate">reprobada</b>
-        <b class="reqLabel label-discarded">descartada</b>
-    </p>
+<div class="reqLabelDiv">
+    <i style="color:Gray;">Tareas:</i>
+    <b class="reqLabel label-to_do">{{ tasks|length }}</b>
+    <i style="color:Gray;">Estado:</i>
+    <b class="reqLabel label-to_do">por hacer</b>
+    <b class="reqLabel label-done">realizada</b>
+    <b class="reqLabel label-not_done">no realizada</b>
+    <b class="reqLabel label-approved">aprobada</b>
+    <b class="reqLabel label-reprobate">reprobada</b>
+    <b class="reqLabel label-discarded">descartada</b>
 </div>
 
 {% include ordering_bar with attributes=ordering_attributes actual_order=actual_order getParams=getParams %}

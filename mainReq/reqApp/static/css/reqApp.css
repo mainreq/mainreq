@@ -1,5 +1,4 @@
 body{
-    margin:5px;
     line-height:1.1;
 }
 
@@ -112,6 +111,10 @@ span.element-pointer{
 .registry-edited{color:YellowGreen;}
 
 /* color labels */
+div .reqLabelDiv{
+    padding:3px 2px;
+    text-align:right;
+}
 .reqLabel{
     color:White;
     border-radius:8px;
