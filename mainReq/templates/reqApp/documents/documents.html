@@ -104,16 +104,17 @@ $(window).bind("load", function() {
     </div>
 </div>
 <div>
+    <br/>
     {% if canEdit %}
-        <div style='display:none;' id='section'><br/>{% include "reqApp/documents/mce.html" with form_id='id_mce' form=form %}</div>
+        <div style='display:none;' class="documentPreview" id='section'>{% include "reqApp/documents/mce.html" with form_id='id_mce' form=form %}</div>
     {% endif %}
     
-    <div style='display:block;' id='preview'><hr/>
+    <div id='preview'>
     {% if actual %}
         <div class="documentPreview">{{ actual.content|safe }}</div>
     {% else %}
-        <p style="text-align:center">---------------- Sección No Editada ----------------</p>
+        <hr/><p style="text-align:center">---------------- Sección No Editada ----------------</p><hr/>
     {% endif %}
-    <hr/></div>
+    </div>
 </div>
 {% endblock %}
