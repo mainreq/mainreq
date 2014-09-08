@@ -110,7 +110,7 @@ $(window).bind("load", function() {
     
     <div style='display:block;' id='preview'><hr/>
     {% if actual %}
-        <div style="background-color:White;">{{ actual.content|safe }}</div>
+        <div class="documentPreview">{{ actual.content|safe }}</div>
     {% else %}
         <p style="text-align:center">---------------- Sección No Editada ----------------</p>
     {% endif %}

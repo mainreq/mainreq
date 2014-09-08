@@ -78,6 +78,12 @@ li .navbar-li-selected{
     padding:10px;
 }
 
+/* document preview */
+div .documentPreview{
+    -webkit-box-shadow: 2px 0px 12px 1px rgba(50, 50, 50, 0.7);
+    -moz-box-shadow:    2px 0px 12px 1px rgba(50, 50, 50, 0.7);
+    box-shadow:         2px 0px 12px 1px rgba(50, 50, 50, 0.7);
+}
 
 /* element title */
 .element_title:hover .element-identifierText{
