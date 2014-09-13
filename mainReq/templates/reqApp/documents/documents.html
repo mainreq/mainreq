@@ -111,7 +111,7 @@ $(window).bind("load", function() {
     
     <div id='preview'>
     {% if actual %}
-        <div class="documentPreview">{{ actual.content|safe }}</div>
+        <div class="documentPreview" style="padding:10px;">{{ actual.content|safe }}</div>
     {% else %}
         <hr/><p style="text-align:center">---------------- Sección No Editada ----------------</p><hr/>
     {% endif %}

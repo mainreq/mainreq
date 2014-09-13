@@ -35,6 +35,11 @@ class UserAdmin(AuthUserAdmin):
     
     actions = ['reassignUserPass','deactivateNonStaffUser']
     
+    def has_delete_permission(self, request, obj=None):
+        # disable delete button in user form
+        # chain deletion is dangerous!
+        return False
+    
     def semester(self, instance):
         projects = instance.userprofile.projects.all().order_by('-startDate')
         if projects.count() > 0:
@@ -120,6 +125,11 @@ class ProjectAdmin(admin.ModelAdmin):
     list_display = ('name', 'semester', 'closingDate', 'status')
     list_filter = ('semester',)
     search_fields = ['name', 'semester']
+    
+    def has_delete_permission(self, request, obj=None):
+        # disable delete button in project form
+        return False
+    
 admin.site.register(Project, ProjectAdmin)
 
 admin.site.disable_action('delete_selected')

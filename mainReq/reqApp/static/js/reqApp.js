@@ -150,7 +150,7 @@ function validForm(event,button){
             }
        },
        error: function(jqXHR, textStatus, errorThrown){
-           alert("ERROR: Este elemento ha sido eliminado previamente. Por favor recarga la página.");
+           bootbox.alert("ERROR: Este elemento ha sido eliminado previamente. Por favor recarga la página.");
        }
     });
     
@@ -246,7 +246,7 @@ function insertMceImg(input,url,csrf,host){
             if(data != ""){
                 addMCEImg(data, host);//host --> "http://localhost:8000"
             }else{
-                alert('ERROR: archivo de imagen inválido!');
+                bootbox.alert('ERROR: archivo de imagen inválido!');
             }
        }
     });
