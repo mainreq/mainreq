@@ -1,0 +1,32 @@
+{% load reqApp_tags %}
+
+<a  href="#narf"
+    tabindex="0"
+    data-toggle="popover"
+    data-trigger="focus"
+    data-html="true"
+    title="Línea de Tiempo de Estados de {{ element.identifierText }}"
+    data-content="
+            <div style='width:500px;height:2.5em;position:relative;overflow:hidden'>
+                <span style='position:absolute;width:100%;'>
+                    <span style='padding:0px;padding-top:1.2em;border:1px solid Gray;color:Gray;white-space:nowrap;overflow:hidden;width:50%;text-overflow:ellipsis;position:absolute'>Primera iteración</span>
+                    <span style='padding:0px;padding-top:1.2em;border:1px solid Gray;color:Gray;white-space:nowrap;overflow:hidden;left:50%;width:50%;text-overflow:ellipsis;position:absolute'>Segunda iteración</span>
+                </span>
+                <span style='background-color:Red;color:White;white-space:nowrap;overflow:hidden;left:4%;width:25%;text-overflow:ellipsis;position:absolute'>no cumple</span>
+                <span style='background-color:Purple;color:White;white-space:nowrap;overflow:hidden;left:30%;width:55%;text-overflow:ellipsis;position:absolute'>ambiguo</span>
+                <span style='background-color:Green;color:White;white-space:nowrap;overflow:hidden;left:90%;width:5%;text-overflow:ellipsis;position:absolute'>cumple</span>
+            </div>
+            {#<b statevolution title='Ayuda' data-toggle='tooltip' data-placement='top' style='cursor:help'>here</b>'s some amazing content. It's very engaging. Right?#}
+        <script>
+            var self = $('[data-toggle=tooltip][statevolution]');
+            self.tooltip({container:self.parent()});
+        </script>
+    ">
+    (ver evolución...)
+</a>
+<script>
+    $('[data-toggle=popover]').popover({
+        container:'body',
+        template:'<div class="popover" role="tooltip" style="max-width:none;"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+    });
+</script>
