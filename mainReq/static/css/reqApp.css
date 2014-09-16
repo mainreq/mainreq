@@ -118,10 +118,12 @@ span.element-pointer{
 
 /* color labels */
 div .reqLabelDiv{
+    cursor:default;
     padding:3px 2px;
     text-align:right;
 }
 .reqLabel{
+    cursor:default;
     color:White;
     border-radius:8px;
     padding:0px 2px;
