@@ -42,7 +42,7 @@
     <div class="container">
     {% include "reqApp/navbar.html" with project=request|userProject %}
     
-    <ol class="breadcrumb" style="color:Gray">
+    <ol class="breadcrumb" style="color:Gray;cursor:default">
         {% ifequal navbar.1 "project" %}<li>Proyecto</li>{% endifequal %}
         {% ifequal navbar.1 "documents" %}<li>Documentos</li>{% endifequal %}
         {% ifequal navbar.1 "tools" %}<li>Herramientas</li>{% endifequal %}

@@ -215,6 +215,10 @@ class ICForm(RegistryForm):
         if end < ini:
             raise forms.ValidationError("Fecha Fin es menor que Fecha Inicio")
             
+        closingDate = timezone.localtime(self.project.closingDate)
+        if end > closingDate:
+            raise forms.ValidationError("Fecha Fin debe ser menor a la Fecha de Cierre del proyecto (" + str(closingDate)[:-6] + ")")
+            
         for increment in Increment.objects.valids(self.project):
             if (self.formIdentifier != increment.identifier):
                 if not ((ini <= increment.initDate and ini <= increment.endDate and end <= increment.initDate and end <= increment.endDate) or (ini >= increment.initDate and ini >= increment.endDate and end >= increment.initDate and end >= increment.endDate)):

@@ -177,7 +177,7 @@ def textTableHorizHeaders(rows):
 def verticalLabel(label):
     vLabel = ""
     for c in label:
-        vLabel = vLabel + c + "<br/>"# "&#013;"
+        vLabel = vLabel + c + "<br/>"
     return vLabel
 
 @register.filter(name="alarms")
@@ -205,3 +205,24 @@ def incrementRUCount(el):
 @register.filter(name="incrementRSCount")
 def incrementRSCount(el):
     return SoftwareRequirement.objects.valids(el.project).filter(increment=el).count()
+    
+@register.filter(name="stateTimeline")
+def stateTimeline(el):
+    increments = []
+    incs = Increment.objects.valids(el.project, 'initDate')
+    incsCount = incs.count()
+    if incsCount == 0:
+        return None
+    initDate = incs[0].initDate
+    endDate = incs[incsCount-1].endDate
+    totalSeconds = (endDate - initDate).total_seconds()
+    for inc in incs:
+        left = (inc.initDate - initDate).total_seconds() * 100.0 / totalSeconds
+        right = (inc.endDate - initDate).total_seconds() * 100.0 / totalSeconds
+        increments.append({
+            'increment':inc,
+            'left':left,
+            'width':right-left,
+        })
+    states = []
+    return {'increments':increments,'states':states}
