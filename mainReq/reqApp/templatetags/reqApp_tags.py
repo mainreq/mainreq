@@ -52,6 +52,13 @@ def state(element):
         if key == element.state:
             return val
     return '?'
+
+@register.filter(name="string2State")
+def string2State(s):
+    for key,val in STATE_CHOICES:
+        if key == s:
+            return val
+    return '?'
     
 @register.filter(name="taskState")
 def taskState(task):
@@ -224,5 +231,33 @@ def stateTimeline(el):
             'left':left,
             'width':right-left,
         })
+    
     states = []
+    elements = el.__class__.objects.registered(el.project, el.identifier).order_by('date')
+    left = 0
+    leftDate = initDate
+    state = ''
+    for element in elements:
+        if element.date <= endDate and element.state != state:
+            if state != '':
+                right = (element.date - initDate).total_seconds() * 100.0 / totalSeconds
+                if right > left:
+                    width = right-left
+                    if width < 1:
+                        width = 1
+                    states.append({'state':state, 'leftDate':leftDate, 'rightDate':element.date,'left':left,'width':width,})
+                    left = right
+            if element.date > leftDate:
+                leftDate = element.date
+                left = (leftDate - initDate).total_seconds() * 100.0 / totalSeconds
+            state = element.state
+    if state != '':
+        now = timezone.now()
+        if now > endDate:
+            now = endDate
+        right = (now - initDate).total_seconds() * 100.0 / totalSeconds
+        width = right-left
+        if width < 1:
+            width = 1
+        states.append({'state':state, 'leftDate':leftDate, 'rightDate':now,'left':left,'width':width,})
     return {'increments':increments,'states':states}
