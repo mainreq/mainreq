@@ -29,8 +29,7 @@ SR_TYPE_CHOICES = [
 PRIORITY_CHOICES = [
     ("p1_urgent","urgente"),
     ("p2_normal","normal"),
-    ("p3_soon","pronto"),
-    ("p4_later","cuando haya tiempo"),
+    ("p3_later","si se puede"),
 ]
 
 # please be extra careful when modifying STATE_CHOICES

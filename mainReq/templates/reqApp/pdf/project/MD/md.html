@@ -4,7 +4,7 @@
     <b>{{element}}</b><br/>
     <div>
     <i>Descripción: </i>{{ element.description }}<br/>
-    <i>Prioridad: </i>{{ element|priority }}<br/>
+    <i>Urgencia: </i>{{ element|priority }}<br/>
     <i>Costo: </i>{{ element.cost }}<br/>
     <i>Requisitos de Software asociados: </i>
         {% for sr in element.softwareRequirements|enlistValids %}

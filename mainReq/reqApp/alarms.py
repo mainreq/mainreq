@@ -42,7 +42,7 @@ def elementAlarms(el):
                 if sr.priority > minPriority:
                     minPriority = sr.priority
             if minPriority != dummyPriority and el.priority > minPriority:
-                resp.append("Su prioridad es menor que la prioridad más baja de sus Requisitos de Software asociados")
+                resp.append("Su urgencia es menor que la urgencia más baja de sus Requisitos de Software asociados")
         #--------------------------------------------------------------------------------------------
             if el.stability == 'non_negotiable':
                 q = SoftwareRequirement.objects.valids(el.project).filter(userRequirements=el)
@@ -108,7 +108,7 @@ def elementAlarms(el):
                 if ur.priority < maxPriority:
                     maxPriority = ur.priority
             if maxPriority != dummyPriority and el.priority < maxPriority:
-                resp.append("Su prioridad es mayor que la prioridad más alta de sus Requisitos de Usuario asociados")
+                resp.append("Su urgencia es mayor que la urgencia más alta de sus Requisitos de Usuario asociados")
         #--------------------------------------------------------------------------------------------
             if el.stability == 'non_negotiable':
                 if urCount > 0 and urCount == el.userRequirements.filter(validity=True).filter(stability='negotiable').count():
@@ -164,7 +164,7 @@ def elementAlarms(el):
                 if sr.priority < maxSrPriority:
                     maxSrPriority = sr.priority
             if el.priority < maxSrPriority:
-                resp.append("Ningún Requisito de Software asociado tiene por lo menos la misma prioridad que este módulo")
+                resp.append("Ningún Requisito de Software asociado tiene por lo menos la misma urgencia que este módulo")
         #--------------------------------------------------------------------------------------------
             srs = el.softwareRequirements.filter(validity=True).filter(date__gte=el.date)
             c = 0

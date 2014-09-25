@@ -10,20 +10,20 @@
         <a title="Colapsar Elementos" href="#" data-toggle="tooltip" data-placement="auto" onclick='hideContents()'><span class="glyphicon glyphicon-zoom-out"></span> Cerrar</a>
     </div>
     <div class="col-sm-3">
-        <select progressbar class="selectpicker" data-width="auto" data-style="btn-primary btn-xs" id='consistencySelect' onchange="location = this.options[this.selectedIndex].value;">
+        <select progressbar class="selectpicker" data-width="100%" data-style="btn-primary btn-xs" id='consistencySelect' onchange="location = this.options[this.selectedIndex].value;">
             {% for key,val in CONSISTENCY_CHOICES %}
                 <option data-icon="glyphicon-eye-open" value="?consistency={{key}}"{% ifequal consistency key %}selected{% endifequal %}>{{val}}</option>
             {% endfor %}
         </select>
     </div>
-    <div class="col-sm-4">
-        <select progressbar class="selectpicker" data-width="auto" data-style="btn-default btn-xs" onchange="location = document.getElementById('consistencySelect').options[document.getElementById('consistencySelect').selectedIndex].value + this.options[this.selectedIndex].value;">
+    <div class="col-sm-5">
+        <select progressbar class="selectpicker" data-width="100%" data-style="btn-default btn-xs" onchange="location = document.getElementById('consistencySelect').options[document.getElementById('consistencySelect').selectedIndex].value + this.options[this.selectedIndex].value;">
             {% for key,val in IDENTIFIER_CHOICES %}
                 <option value="&identifier={{key}}"{% ifequal identifier|stringformat:"s" key|stringformat:"s" %}selected{% endifequal %}>{{val}}</option>
             {% endfor %}
         </select>
     </div>
-    <div style="white-space:nowrap;" class="col-sm-1 col-sm-offset-1">
+    <div style="white-space:nowrap;" class="col-sm-1">
         <a title="Generar Documento PDF" data-toggle="tooltip" data-placement="auto" href="{% url 'reqApp:pdf' %}?pdfType=CT&consistency={{consistency}}" target="_blank"><span class="glyphicon glyphicon-download"></span> PDF</a>
     </div>
     <div style="text-align:right;" class="col-sm-1">

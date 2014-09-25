@@ -77,7 +77,7 @@
             <li><b>Identificador:</b> Código único que sirve para identificar y referenciar formalmente este requisito dentro del proyecto. Es asignado automáticamente de manera incremental utilizando el formato "RUXXXX".</li>
             <li><b>Nombre:</b> Nombre en lenguaje normal del requisito.</li>
             <li><b>Descripción:</b> Descripción del requisito (los aspectos que involucra, en qué consiste, etc.).</li>
-            <li><b>Prioridad:</b> Nivel de urgencia asociada al requisito. La prioridad de un requisito puede ser "urgente", "pronto", "normal" o "cuando haya tiempo".</li>
+            <li><b>Urgencia:</b> Nivel de urgencia asociada al requisito. La urgencia de un requisito puede ser "urgente", "normal" o "si se puede".</li>
             <li><b>Estabilidad:</b> Este atributo determina si el requisito puede o no estar sujeto a cambios durante el ciclo de vida del producto de software. La estabilidad puede ser "transable" o "intransable".</li>
             <li><b>Tipo:</b></li>
             <ul>
@@ -96,7 +96,7 @@
             <li>"El Hito asignado a este Requisito de Usuario ha sido eliminado"</li>
             <li>"No tiene ningún Requisito de Software asociado"</li>
             <li>"Tiene más de 5 Requisitos de Software asociados (puede ser muy complejo y quizás deba ser dividido)"</li>
-            <li>"Su prioridad es menor que la prioridad más baja de sus Requisitos de Software asociados"</li>
+            <li>"Su urgencia es menor que la urgencia más baja de sus Requisitos de Software asociados"</li>
             <li>"Su estabilidad es intransable, sin embargo todos sus Requisitos de Software asociados son transables"</li>
             <li>"Uno de sus Tipos de Usuario no se encuentra asociado a ninguno de sus Requisitos de Software"</li>
             <li>"Su estado es No Cumple, pero todos sus Requisitos de Software asociados Cumplen"</li>
@@ -135,7 +135,7 @@
             <li>"Su Hito no corresponde con ningún Hito asociado a sus Requisitos de Usuario"</li>
             <li>"No tiene ningún Requisito de Usuario asociado"</li>
             <li>"Tiene más de 3 Requisitos de Usuario asociados (puede ser muy complejo y quizás deba ser dividido)"</li>
-            <li>"Su prioridad es mayor que la prioridad más alta de sus Requisitos de Usuario asociados"</li>
+            <li>"Su urgencia es mayor que la urgencia más alta de sus Requisitos de Usuario asociados"</li>
             <li>"Su estabilidad es intransable, sin embargo todos sus Requisitos de Usuario son transables"</li>
             <li>"Un Requisito de Usuario asociado ha sido modificado (su fecha de modificación es posterior a la de este Requisito de Software, favor revisar y actualizar)"</li>
             <li>"Uno de sus Tipos de Usuario no se encuentra asociado a ninguno de sus Requisitos de Usuario"</li>
@@ -153,14 +153,14 @@
             <li><b>Identificador:</b> Código único que sirve para identificar y referenciar formalmente este módulo dentro del proyecto. Es asignado automáticamente de manera incremental utilizando el formato "MDXXXX".</li>
             <li><b>Nombre:</b> Nombre simple del módulo.</li>
             <li><b>Descripción:</b> Se describe la función que encapsula este módulo.</li>
-            <li><b>Prioridad:</b> Nivel de urgencia asociada al módulo. La prioridad de un módulo puede ser "urgente", "pronto", "normal" o "cuando haya tiempo". El formulario ofrece una lista seleccionable.</li>
+            <li><b>Urgencia:</b> Nivel de urgencia asociada al módulo. La urgencia de un módulo puede ser "urgente", "normal" o "si se puede". El formulario ofrece una lista seleccionable.</li>
             <li><b>Costo:</b> Se ingresa de la misma que el costo asociado a los requisitos, corresponde a un número entero positivo que representa el costo asociado al desarrollo de este módulo.</li>
             <li><b>Requisitos de Software:</b> sub-componentes que integran el Módulo.</li>
         </ul>
         <li><b>Alarmas:</b></li>
         <ul>
             <li>"No tiene ningún Requisito de Software asociado"</li>
-            <li>"Ningún Requisito de Software asociado tiene por lo menos la misma prioridad que este módulo"</li>
+            <li>"Ningún Requisito de Software asociado tiene por lo menos la misma urgencia que este módulo"</li>
             <li>"Un Requisito de Software asociado ha sido modificado (su fecha de modificación es posterior a la de este Módulo, favor revisar y actualizar)"</li>
         </ul>
     </ul>
@@ -379,10 +379,10 @@
     <p>En esta sección se puede revisar el avance del proyecto en términos de cumplimiento y cantidad de elementos abarcados por Hito.</p>
     <p>Se ofrece un selector para revisar las estadísticas de elementos asociados a un Hito particular del proyecto. Las tablas pueden ser descargadas en un documento PDF con portada, índice y separadas por hito para su posterior revisión.</p>
     <ul>
-        <li><b>Requisitos de Usuario:</b> Se despliega la cantidad separada por atributos (prioridad, estabilidad y tipo) y por el nivel de cumplimiento (cumple, no cumple y ambiguo). Contabilizando el costo total y cuántos de ellos no tienen Requisito de Software o Tipo de Usuario asociados.</li>
+        <li><b>Requisitos de Usuario:</b> Se despliega la cantidad separada por atributos (urgencia, estabilidad y tipo) y por el nivel de cumplimiento (cumple, no cumple y ambiguo). Contabilizando el costo total y cuántos de ellos no tienen Requisito de Software o Tipo de Usuario asociados.</li>
         <li><b>Requisitos de Software:</b> Muestra la misma información que la tabla de Requisitos de Usuario, pero considerando los tipos específicos de los Requisitos de Software.</li>
         <li><b>Casos de Prueba:</b> Se contabiliza la cantidad de Casos de Prueba asociados a Requisitos de Usuario y los asociados a Requisitos de Software, separados por estado de cumplimiento. Además se cuentan cuántos de ellos no tienen Tipos de Usuarios asociados.</li>
-        <li><b>Módulos:</b> Se separan por prioridad, sumando el costo total y contabilizando cuántos de ellos no tienen Requisitos de Software asociados.</li>
+        <li><b>Módulos:</b> Se separan por urgencia, sumando el costo total y contabilizando cuántos de ellos no tienen Requisitos de Software asociados.</li>
     </ul>
     
     <h2><a name="matrix">Matrices de Trazado</a></h2>

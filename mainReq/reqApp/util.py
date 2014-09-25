@@ -48,7 +48,7 @@ def orderingList(model):
             {'order':'name', 'label':'nombre', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-1',},
             {'order':'state', 'label':'estado', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-1',},
             {'order':'-cost', 'label':'costo', 'up':'&#x25BF;', 'down':'&#x25B5;', 'span':'col-sm-1',},
-            {'order':'priority', 'label':'prioridad', 'up':'&#x25BF;', 'down':'&#x25B5;', 'span':'col-sm-2',},
+            {'order':'priority', 'label':'urgencia', 'up':'&#x25BF;', 'down':'&#x25B5;', 'span':'col-sm-2',},
             {'order':'reqType', 'label':'tipo', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-2',},
             {'order':'increment', 'label':'hito', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-3',},
         ]
@@ -58,7 +58,7 @@ def orderingList(model):
             {'order':'name', 'label':'nombre', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-1',},
             {'order':'state', 'label':'estado', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-1',},
             {'order':'-cost', 'label':'costo', 'up':'&#x25BF;', 'down':'&#x25B5;', 'span':'col-sm-1',},
-            {'order':'priority', 'label':'prioridad', 'up':'&#x25BF;', 'down':'&#x25B5;', 'span':'col-sm-2',},
+            {'order':'priority', 'label':'urgencia', 'up':'&#x25BF;', 'down':'&#x25B5;', 'span':'col-sm-2',},
             {'order':'reqType', 'label':'tipo', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-2',},
             {'order':'increment', 'label':'hito', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-3',},
         ]
@@ -67,7 +67,7 @@ def orderingList(model):
             {'order':'identifier', 'label':'identificador', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-2',},
             {'order':'name', 'label':'nombre', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-4',},
             {'order':'-cost', 'label':'costo', 'up':'&#x25BF;', 'down':'&#x25B5;', 'span':'col-sm-2',},
-            {'order':'priority', 'label':'prioridad', 'up':'&#x25BF;', 'down':'&#x25B5;', 'span':'col-sm-4',},
+            {'order':'priority', 'label':'urgencia', 'up':'&#x25BF;', 'down':'&#x25B5;', 'span':'col-sm-4',},
         ]
     elif model == TestCase:
         return [
@@ -201,7 +201,7 @@ def elementsFilters(model, project, actualFilters=None):
         return [
             {'title':'Selecciona Hito','key':'increment','list':incrementList},
             {'title':'Selecciona Estado','key':'state','list':stateList},
-            {'title':'Selecciona Prioridad','key':'priority','list':priorityList},
+            {'title':'Selecciona Urgencia','key':'priority','list':priorityList},
             {'title':'Selecciona Estabilidad','key':'stability','list':stabilityList},
             {'title':'Selecciona Tipo','key':'reqtype','list':reqTypeList},
         ]
@@ -241,7 +241,7 @@ def elementsFilters(model, project, actualFilters=None):
         for priority, name in PRIORITY_CHOICES:
             priorityList.append((priority, name, (actualFilters['priority'] == priority)))
             
-        return [{'title':'Selecciona Prioridad','key':'priority','list':priorityList}]
+        return [{'title':'Selecciona Urgencia','key':'priority','list':priorityList}]
     return False
     
 def filterElements(model, project, elements, request):

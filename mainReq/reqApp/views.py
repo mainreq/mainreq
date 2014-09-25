@@ -527,7 +527,7 @@ def statisticsUR_SR_TC_MD(project, ic=None):
     extras = []
     
     table = [
-        ('Prioridad', 'priority', PRIORITY_CHOICES, priority),
+        ('Urgencia', 'priority', PRIORITY_CHOICES, priority),
         ('Estabilidad', 'stability', STABILITY_CHOICES, stability),
         ('Tipo', 'reqType', UR_TYPE_CHOICES, tyype),
     ]
@@ -584,7 +584,7 @@ def statisticsUR_SR_TC_MD(project, ic=None):
     extras = []
     
     table = [
-        ('Prioridad', 'priority', PRIORITY_CHOICES, priority),
+        ('Urgencia', 'priority', PRIORITY_CHOICES, priority),
         ('Estabilidad', 'stability', STABILITY_CHOICES, stability),
         ('Tipo', 'reqType', SR_TYPE_CHOICES, tyype),
     ]
@@ -678,7 +678,7 @@ def statisticsUR_SR_TC_MD(project, ic=None):
     extras = []
     
     table = [
-        ('Prioridad', 'priority', PRIORITY_CHOICES, priority),
+        ('Urgencia', 'priority', PRIORITY_CHOICES, priority),
     ]
     
     for attribute, s, choices, arr in table:
