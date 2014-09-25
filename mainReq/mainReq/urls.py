@@ -5,6 +5,7 @@ from django.conf import settings
 from django.contrib import admin
 admin.autodiscover()
 
+handler404 = 'reqApp.views.handler404'
 
 urlpatterns = patterns('',
     url(r'^', include('reqApp.urls', namespace="reqApp")),

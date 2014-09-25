@@ -12,6 +12,9 @@ from django.http import Http404
 
 from django.db.models import Sum
 
+def handler404(request):
+    return render(request, 'reqApp/404.html', {})
+
 ################ edit user profile ################
 def editUser(request):
     user = getUserOr404(request)
