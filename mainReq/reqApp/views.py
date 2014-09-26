@@ -633,40 +633,42 @@ def statisticsUR_SR_TC_MD(project, ic=None):
     sr.update({'total':total})
     
     # test case statistics
-    q = TestCase.objects.valids(project).filter(requirement__validity=True)
-    q_ur = q.filter(requirement__userrequirement__increment__validity=True)
-    q_sr = q.filter(requirement__softwarerequirement__increment__validity=True)
+    #q = TestCase.objects.valids(project).filter(requirement__validity=True)
+    q = TestCase.objects.valids(project).filter(softwareRequirement__validity=True)
+    #q_ur = q.filter(requirement__userrequirement__increment__validity=True)
+    q_sr = q.filter(softwareRequirement__increment__validity=True)
     
     if ic is not None:
-        q_ur = q_ur.filter(requirement__userrequirement__increment=ic)
-        q_sr = q_sr.filter(requirement__softwarerequirement__increment=ic)
+        #q_ur = q_ur.filter(requirement__userrequirement__increment=ic)
+        q_sr = q_sr.filter(softwareRequirement__increment=ic)
     tc = {}
     tyype = []
     state = {}
     extras = []
              
-    dic_asoc_UR = {'name':'Asociados a RU','total':0}
+    #dic_asoc_UR = {'name':'Asociados a RU','total':0}
     dic_asoc_SR = {'name':'Asociados a RS','total':0}
     for e, wanda in STATE_CHOICES:
-        tcases_ur = q_ur.filter(state=e).count()
+        #tcases_ur = q_ur.filter(state=e).count()
         tcases_sr = q_sr.filter(state=e).count()
         
-        dic_asoc_UR.update({e:tcases_ur})
-        dic_asoc_UR.update({'total':dic_asoc_UR['total']+tcases_ur})
+        #dic_asoc_UR.update({e:tcases_ur})
+        #dic_asoc_UR.update({'total':dic_asoc_UR['total']+tcases_ur})
         
         dic_asoc_SR.update({e:tcases_sr})
         dic_asoc_SR.update({'total':dic_asoc_SR['total']+tcases_sr})
         
-        state.update({e:tcases_ur + tcases_sr})
+        #state.update({e:tcases_ur + tcases_sr})
+        state.update({e:tcases_sr})
         
-    tyype.append(dic_asoc_UR)
+    #tyype.append(dic_asoc_UR)
     tyype.append(dic_asoc_SR)
     
-    total = q_ur.count()+q_sr.count()
+    total = q_sr.count()#+q_ur.count()
     
     extras.append({
         'name':'Sin TU asoc.',
-        'exCount':total - q_ur.filter(userTypes__validity=True).distinct().count() - q_sr.filter(userTypes__validity=True).distinct().count()
+        'exCount':total - q_sr.filter(userTypes__validity=True).distinct().count()# - q_ur.filter(userTypes__validity=True).distinct().count()
     })
     
     tc.update({'attributes':[tyype]})
@@ -820,59 +822,62 @@ def matrix(matrixType, project):
         m2s = SoftwareRequirement.objects.valids(project)
         
         m2idsmatchs = []
-        for row in range(0,len(m1s)):
+        for row in range(0,m1s.count()):#len(m1s)
             m2idsmatchs.append([])
             for sr in m2s.filter(userRequirements=m1s[row]):
                 m2idsmatchs[row].append(sr.id)
                 
         colNoIntersec = []
         for sr in m2s:
-            colNoIntersec.append(len(m1s.filter(softwarerequirement=sr))==0)
+            colNoIntersec.append(m1s.filter(softwarerequirement=sr).count()==0)#len(m1s.filter(softwarerequirement=sr))
     elif matrixType == 'mdsr':
         m1s = Module.objects.valids(project)
         m2s = SoftwareRequirement.objects.valids(project)
         
         m2idsmatchs = []
-        for row in range(0,len(m1s)):
+        for row in range(0,m1s.count()):#len(m1s)
             m2idsmatchs.append([])
             for sr in m2s.filter(module=m1s[row]):
                 m2idsmatchs[row].append(sr.id)
                 
         colNoIntersec = []
         for sr in m2s:
-            colNoIntersec.append(len(m1s.filter(softwareRequirements=sr))==0)
+            colNoIntersec.append(m1s.filter(softwareRequirements=sr).count()==0)#len(m1s.filter(softwareRequirements=sr))
     elif matrixType == 'urtc':
         m1s = UserRequirement.objects.valids(project)
-        m2s = TestCase.objects.valids(project).filter(requirement__is_UR=True)
+        m2s = TestCase.objects.valids(project)#.filter(requirement__is_UR=True)
         
         m2idsmatchs = []
-        for row in range(0,len(m1s)):
+        for row in range(0,m1s.count()):#len(m1s)
             m2idsmatchs.append([])
-            for tc in m2s.filter(requirement=m1s[row]):
+            #for tc in m2s.filter(requirement=m1s[row]):
+            for tc in m2s.filter(softwareRequirement__userRequirements=m1s[row]):
                 m2idsmatchs[row].append(tc.id)
                 
         colNoIntersec = []
         for tc in m2s:
-            colNoIntersec.append(len(m1s.filter(testcase=tc))==0)
+            #colNoIntersec.append(len(m1s.filter(testcase=tc))==0)
+            colNoIntersec.append(m1s.filter(softwarerequirement__testcase=tc).count()==0)#len(m1s.filter(softwarerequirement__testcase=tc))
     elif matrixType == 'srtc':
         m1s = SoftwareRequirement.objects.valids(project)
-        m2s = TestCase.objects.valids(project).filter(requirement__is_UR=False)
+        m2s = TestCase.objects.valids(project)#.filter(requirement__is_UR=False)
         
         m2idsmatchs = []
-        for row in range(0,len(m1s)):
+        for row in range(0,m1s.count()):#len(m1s)
             m2idsmatchs.append([])
-            for tc in m2s.filter(requirement=m1s[row]):
+            #for tc in m2s.filter(requirement=m1s[row]):
+            for tc in m2s.filter(softwareRequirement=m1s[row]):
                 m2idsmatchs[row].append(tc.id)
                 
         colNoIntersec = []
         for tc in m2s:
-            colNoIntersec.append(len(m1s.filter(testcase=tc))==0)
+            colNoIntersec.append(m1s.filter(testcase=tc).count()==0)#len(m1s.filter(testcase=tc))
         
     rows = []
-    for row in range(0,len(m1s)):
+    for row in range(0,m1s.count()):#len(m1s)
         rows.append([])
         
-        for col in range(0,len(m2s)):
+        for col in range(0,m2s.count()):#len(m2s)
             match = m2s[col].id in m2idsmatchs[row]
             row_no_intersec = (len(m2idsmatchs[row])==0)
             rows[row].append({
@@ -884,7 +889,7 @@ def matrix(matrixType, project):
                 'never_intersec':(row_no_intersec and colNoIntersec[col]),
                 'row_no_intersec':row_no_intersec,
                 'col_no_intersec':colNoIntersec[col],
-                })
+            })
     return rows
 
 def matrices(request):
@@ -973,7 +978,8 @@ def consistency(request):
             model = UserRequirement
             modeloQ = UserRequirement.objects.valids(project)
             subModeloQ = TestCase.objects.valids(project)
-            prop = 'requirement'
+            #prop = 'requirement'
+            prop = 'softwareRequirement__userRequirements'
         elif consistencyType == 'srur':
             model = SoftwareRequirement
             modeloQ = SoftwareRequirement.objects.valids(project)
@@ -983,7 +989,8 @@ def consistency(request):
             model = SoftwareRequirement
             modeloQ = SoftwareRequirement.objects.valids(project)
             subModeloQ = TestCase.objects.valids(project)
-            prop = 'requirement'
+            #prop = 'requirement'
+            prop = 'softwareRequirement'
         elif consistencyType == 'srmd':
             model = SoftwareRequirement
             modeloQ = SoftwareRequirement.objects.valids(project)
@@ -996,12 +1003,13 @@ def consistency(request):
             prop = 'module'
         elif consistencyType == 'tcur':
             model = TestCase
-            modeloQ = TestCase.objects.valids(project).filter(requirement__is_UR=True)
+            modeloQ = TestCase.objects.valids(project)#.filter(requirement__is_UR=True)
             subModeloQ = UserRequirement.objects.valids(project)
-            prop = 'testcase'
+            #prop = 'testcase'
+            prop = 'softwarerequirement__testcase'
         elif consistencyType == 'tcsr':
             model = TestCase
-            modeloQ = TestCase.objects.valids(project).filter(requirement__is_UR=False)
+            modeloQ = TestCase.objects.valids(project)#.filter(requirement__is_UR=False)
             subModeloQ = SoftwareRequirement.objects.valids(project)
             prop = 'testcase'
         else:
@@ -1432,7 +1440,8 @@ def pdf(request):
                 'template2':'reqApp/pdf/project/TC/tc.html',
                 'elements':relationsTree(UserRequirement.objects.valids(project)
                                             , TestCase.objects.valids(project)
-                                            , 'requirement', 0)
+                                            #, 'requirement', 0)
+                                            , 'softwareRequirement__userRequirements', 0)
                 },
                 'srur':{
                 'title':'RS/RU',
@@ -1450,7 +1459,8 @@ def pdf(request):
                 'template2':'reqApp/pdf/project/TC/tc.html',
                 'elements':relationsTree(SoftwareRequirement.objects.valids(project)
                                             , TestCase.objects.valids(project)
-                                            , 'requirement', 0)
+                                            #, 'requirement', 0)
+                                            , 'softwareRequirement', 0)
                 },
                 'srmd':{
                 'title':'RS/MD',
@@ -1475,16 +1485,17 @@ def pdf(request):
                 'fileName':'Documento_de_Consistencia_CP-RU',
                 'template1':'reqApp/pdf/project/TC/tc.html',
                 'template2':'reqApp/pdf/project/UR/ur.html',
-                'elements':relationsTree(TestCase.objects.valids(project).filter(requirement__is_UR=True)
+                'elements':relationsTree(TestCase.objects.valids(project)#.filter(requirement__is_UR=True)
                                             , UserRequirement.objects.valids(project)
-                                            , 'testcase', 0)
+                                            #, 'testcase', 0)
+                                            , 'softwarerequirement__testcase', 0)
                 },
                 'tcsr':{
                 'title':'CP/RS',
                 'fileName':'Documento_de_Consistencia_CP-RS',
                 'template1':'reqApp/pdf/project/TC/tc.html',
                 'template2':'reqApp/pdf/project/SR/sr.html',
-                'elements':relationsTree(TestCase.objects.valids(project).filter(requirement__is_UR=False)
+                'elements':relationsTree(TestCase.objects.valids(project)#.filter(requirement__is_UR=False)
                                             , SoftwareRequirement.objects.valids(project)
                                             , 'testcase', 0)
                 },

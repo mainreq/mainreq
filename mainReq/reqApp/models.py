@@ -342,7 +342,8 @@ class TestCase(Registry):
     state = models.CharField(max_length=30, choices=STATE_CHOICES)
     
     userTypes = models.ManyToManyField(UserType, null=True, blank=True)
-    requirement = models.ForeignKey(Requirement, null=False, blank=False)
+    softwareRequirement = models.ForeignKey(SoftwareRequirement, null=False, blank=False)
+    #requirement = models.ForeignKey(Requirement, null=False, blank=False)
     
     objects = RegistryManager()
     
@@ -455,6 +456,7 @@ class Task(models.Model):
     project = models.ForeignKey(Project, null=False)
     initDate = models.DateTimeField(default=timezone.now)
     deadlineDate = models.DateTimeField(default=timezone.now)
+    doneDate = models.DateTimeField(default=timezone.now)
     user = models.ForeignKey(User)
     description = models.CharField(max_length=5000, blank=True)
     state = models.CharField(max_length=30, choices=TASK_CHOICES)

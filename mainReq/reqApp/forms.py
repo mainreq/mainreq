@@ -136,8 +136,10 @@ class TCForm(RegistryForm):
         super (TCForm,self).__init__(*args,**kwargs)
         self.validsProjectFields = [
             'userTypes',
+            'softwareRequirement',
         ]
     
+    """
     def assignProject(self, project):
         self.project = project
         
@@ -148,12 +150,14 @@ class TCForm(RegistryForm):
         self.fields['requirement'].queryset = self.fields['requirement'].queryset.filter(validity=True).filter(project=self.project).order_by('-is_UR','identifier')
             
         return self
+    """
     
     class Meta:
         model = TestCase
         fields = [
             'name',
-            'requirement',
+            #'requirement',
+            'softwareRequirement',
             'description',
             'acceptableResult',
             'optimumResult',

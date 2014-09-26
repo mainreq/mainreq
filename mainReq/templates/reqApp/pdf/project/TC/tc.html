@@ -3,10 +3,10 @@
 <div class="element_container">
     <b>{{element}}</b><br/>
     <div>
-    {% if element.requirement.validity %}
-        <i>Requisito asociado: </i>{{ element.requirement }}<br/>
+    {% if element.softwareRequirement.validity %}
+        <i>Requisito asociado: </i>{{ element.softwareRequirement }}<br/>
     {% else %}
-        <i>Requisito asociado: {{ element.requirement }} (eliminado)</i><br/>
+        <i>Requisito asociado: {{ element.softwareRequirement }} (eliminado)</i><br/>
     {% endif %}
     <i>Descripción: </i>{{ element.description }}<br/>
     <i>Resultado aceptable: </i>{{ element.acceptableResult }}<br/>

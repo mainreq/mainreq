@@ -65,7 +65,8 @@ def elementAlarms(el):
             if srsCount > 0 and srsCount == srs.filter(state='satisfy').count():
                 resp.append("Su estado es No Cumple, pero todos sus Requisitos de Software asociados Cumplen")
         #--------------------------------------------------------------------------------------------
-            tcs = TestCase.objects.valids(el.project).filter(requirement=el)
+            #tcs = TestCase.objects.valids(el.project).filter(requirement=el)
+            tcs = TestCase.objects.valids(el.project).filter(softwareRequirement__userRequirements=el)
             tcsCount = tcs.count()
             if tcsCount > 0 and tcsCount == tcs.filter(state='satisfy').count():
                 resp.append("Su estado es No Cumple, pero todos sus Casos de Prueba asociados Cumplen")
@@ -76,7 +77,8 @@ def elementAlarms(el):
             if srsCount > 0 and srs.filter(state='satisfy').count() == 0:
                 resp.append("Su estado es Cumple, pero ninguno de sus Requisitos de Software asociados Cumplen")
         #--------------------------------------------------------------------------------------------
-            tcs = TestCase.objects.valids(el.project).filter(requirement=el)
+            #tcs = TestCase.objects.valids(el.project).filter(requirement=el)
+            tcs = TestCase.objects.valids(el.project).filter(softwareRequirement__userRequirements=el)
             tcsCount = tcs.count()
             if tcsCount > 0 and tcs.filter(state='satisfy').count() == 0:
                 resp.append("Su estado es Cumple, pero ninguno de sus Casos de Prueba asociados Cumplen")
@@ -138,13 +140,15 @@ def elementAlarms(el):
             resp.append("No tiene ningún Módulo asociado")
         #--------------------------------------------------------------------------------------------
         if el.state == 'fails':
-            tcs = TestCase.objects.valids(el.project).filter(requirement=el)
+            #tcs = TestCase.objects.valids(el.project).filter(requirement=el)
+            tcs = TestCase.objects.valids(el.project).filter(softwareRequirement=el)
             tcsCount = tcs.count()
             if tcsCount > 0 and tcsCount == tcs.filter(state='satisfy').count():
                 resp.append("Su estado es No Cumple, pero todos sus Casos de Prueba asociados Cumplen")
         #--------------------------------------------------------------------------------------------
         elif el.state == 'satisfy':
-            tcs = TestCase.objects.valids(el.project).filter(requirement=el)
+            #tcs = TestCase.objects.valids(el.project).filter(requirement=el)
+            tcs = TestCase.objects.valids(el.project).filter(softwareRequirement=el)
             tcsCount = tcs.count()
             if tcsCount > 0 and tcs.filter(state='satisfy').count() == 0:
                 resp.append("Su estado es Cumple, pero ninguno de sus Casos de Prueba asociados Cumplen")
@@ -177,11 +181,11 @@ def elementAlarms(el):
                 resp.append("Un Requisito de Software asociado " + s + u" ha sido modificado (su fecha de modificación es posterior a la de este Módulo, favor revisar y actualizar)")
         #--------------------------------------------------------------------------------------------
     elif el.__class__ == TestCase:
-        if el.requirement.validity == False:
-            resp.append("El Requisito asignado a este Caso de Prueba ha sido eliminado")
+        if el.softwareRequirement.validity == False:
+            resp.append("El Requisito de Software asignado a este Caso de Prueba ha sido eliminado")
         #--------------------------------------------------------------------------------------------
-        if el.requirement.validity and el.requirement.date > el.date:
-            resp.append("El Requisito asociado ha sido modificado (su fecha de modificación es posterior a la de este Caso de Prueba, favor revisar y actualizar)")
+        if el.softwareRequirement.validity and el.softwareRequirement.date > el.date:
+            resp.append("El Requisito de Software asociado ha sido modificado (su fecha de modificación es posterior a la de este Caso de Prueba, favor revisar y actualizar)")
         #--------------------------------------------------------------------------------------------
         """
         if el.userTypes.all().filter(validity=True).count() == 0:

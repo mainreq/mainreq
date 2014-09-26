@@ -74,7 +74,7 @@ def orderingList(model):
             {'order':'identifier', 'label':'identificador', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-2',},
             {'order':'name', 'label':'nombre', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-1',},
             {'order':'state', 'label':'estado', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-3',},
-            {'order':'requirement', 'label':'requisito', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-6',},
+            {'order':'softwareRequirement', 'label':'requisito', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-6',},
         ]
     elif model == Increment:
         return [
@@ -101,7 +101,8 @@ def deleteWarning(el):
         return (u"%s Requisitos de Usuario, %s Requisitos de Software y %s Casos de Prueba dejarán de estar asociados a este Tipo de Usuario." % (urn, srn, tcn))
     if el.__class__ == UserRequirement:
         srn = SoftwareRequirement.objects.valids(el.project).filter(userRequirements=el)
-        tcn = TestCase.objects.valids(el.project).filter(requirement=el)
+        #tcn = TestCase.objects.valids(el.project).filter(requirement=el)
+        tcn = TestCase.objects.valids(el.project).filter(softwareRequirement__userRequirements=el)
         
         src = 0
         srs = ""
@@ -118,7 +119,8 @@ def deleteWarning(el):
         return (u"%s Requisitos de Software y %s Casos de Prueba dejarán de estar asociados a este Requisito de Usuario:%s%s" % (src, tcc, srs, tcs))
     if el.__class__ == SoftwareRequirement:
         urn = el.userRequirements.filter(validity=True)
-        tcn = TestCase.objects.valids(el.project).filter(requirement=el)
+        #tcn = TestCase.objects.valids(el.project).filter(requirement=el)
+        tcn = TestCase.objects.valids(el.project).filter(softwareRequirement=el)
         mdn = Module.objects.valids(el.project).filter(softwareRequirements=el)
         
         urc = 0
@@ -141,7 +143,7 @@ def deleteWarning(el):
         
         return (u"%s Requisitos de Usuario, %s Casos de Prueba y %s Módulos dejarán de estar asociados a este Requisito de Software:%s%s%s" % (urc, tcc, mdc, urs, tcs, mds))
     if el.__class__ == TestCase:
-        return (u"El Requisito ( %s ) dejará de estar asociado a este Caso de Prueba." % el.requirement.__unicode__())
+        return (u"El Requisito de Software ( %s ) dejará de estar asociado a este Caso de Prueba." % el.softwareRequirement.__unicode__())
     if el.__class__ == Module:
         srn = el.softwareRequirements.filter(validity=True)
         srs = ""
@@ -210,7 +212,7 @@ def elementsFilters(model, project, actualFilters=None):
             actualFilters = {
                 'increment':'',
                 'state':'',
-                'requirement':'',
+                #'requirement':'',
             }
         
         incrementList = [('no_filter', 'Todos', False)]
@@ -222,16 +224,18 @@ def elementsFilters(model, project, actualFilters=None):
         for state, name in STATE_CHOICES:
             stateList.append((state, name, (actualFilters['state'] == state)))
             
+        """
         requirementList = [
             ('no_filter', 'Todos', False),
             ('ur', 'Requisitos de Usuario', (actualFilters['requirement'] == 'ur')),
             ('sr', 'Requisitos de Software', (actualFilters['requirement'] == 'sr')),
         ]
+        """
         
         return [
             {'title':'Selecciona Hito','key':'increment','list':incrementList},
             {'title':'Selecciona Estado','key':'state','list':stateList},
-            {'title':'Selecciona Requisitos','key':'requirement','list':requirementList},
+            #{'title':'Selecciona Requisitos','key':'requirement','list':requirementList},
         ]
     if model == Module:
         if actualFilters is None:
@@ -280,19 +284,20 @@ def filterElements(model, project, elements, request):
         incrementInentifier = request.GET.get('increment','no_filter')
         actualFilters.update({'increment':incrementInentifier})
         if incrementInentifier != 'no_filter':
-            elements = elements.filter(requirement__userrequirement__increment__identifier=int(incrementInentifier)) | elements.filter(requirement__softwarerequirement__increment__identifier=int(incrementInentifier))
+            elements = elements.filter(softwareRequirement__increment__identifier=int(incrementInentifier))#elements.filter(requirement__userrequirement__increment__identifier=int(incrementInentifier)) | elements.filter(requirement__softwarerequirement__increment__identifier=int(incrementInentifier))
         
         state = request.GET.get('state','no_filter')
         actualFilters.update({'state':state})
         if state != 'no_filter':
             elements = elements.filter(state=state)
-            
+        """
         requirement = request.GET.get('requirement','no_filter')
         actualFilters.update({'requirement':requirement})
         if requirement == 'ur':
             elements = elements.filter(requirement__is_UR=True)
         elif requirement == 'sr':
             elements = elements.filter(requirement__is_UR=False)
+        """
     elif model == Module:
         actualFilters = {}
         
