@@ -6,16 +6,22 @@
     <div id="{{ element.identifierText }}">
         <div>
             <div class="element_title row">
-                <div class="col-sm-11">
+              {% if registry %}
+                <div class="col-sm-12">{# not show alarms #}
+              {% else %}
+                <div class="col-sm-11">{# extra space for alarms #}
+              {% endif %}
                     <div class="row" trigger="yes" onclick="showHideContent(this,'{% url 'reqApp:elemContent' %}','{% block elemType %}{% endblock %}',{{ element.id }},{% if registry %}1{% else %}0{% endif %},{% if canEdit %}1{% else %}0{% endif %})" style="cursor:pointer;">
                         {% block head %}{% endblock %}
                         {% if registry %}
-                            {% include "reqApp/tools/registry/registryState.html" with actual=actual deleted=deleted new=new %}
+                            <div class="col-sm-12">
+                                {% include "reqApp/tools/registry/registryState.html" with actual=actual deleted=deleted new=new %}
+                            </div>
                         {% endif %}
                     </div>
                 </div>
-                <div class="col-sm-1" style="text-align:right;">
-                    {% if not registry %}
+                {% if not registry %}
+                    <div class="col-sm-1" style="text-align:right;">
                         {% with element|alarms as alerts %}
                             {% if alerts %}
                                 <div name="reqAppModal" class="modal fade" role="dialog" aria-hidden="true" style="text-align:left;">
@@ -39,8 +45,8 @@
                                 <span blink="yes" data-toggle="tooltip" data-placement="left" title="Ver Conflictos ..." class="mainReqAlarm glyphicon glyphicon-warning-sign"></span>
                             {% endif %}
                         {% endwith %}
-                    {% endif %}
-                </div>
+                    </div>
+                {% endif %}
             </div>
         </div>
 
