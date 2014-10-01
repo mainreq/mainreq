@@ -480,7 +480,7 @@ def tasks(request):
                 tasks = Task.objects.getTasks(project, workerUsers[userIndex], actualOrder)
         else:
             tasks = Task.objects.getTasks(project, order=actualOrder)
-    else: # show his tasks
+    else: # show only his tasks
         if request.method == 'POST':
             if request.POST.has_key("nextTaskState"):# change task state
                 taskId = int(request.POST['id'])
@@ -488,9 +488,13 @@ def tasks(request):
                 if task is None:
                     raise Http404
                 if request.POST['nextTaskState'] == 'done':
-                    if task.isToDo():
+                    if task.isToDo() or task.isNotDone():
                         task.setDone()
-                        msgs.append('La tarea "'+task.__unicode__()+'" ha sido realizada.')
+                        if task.isLate():
+                            lateTask = ' con atraso'
+                        else:
+                            lateTask = ''
+                        msgs.append('La tarea "'+task.__unicode__()+'" ha sido realizada'+lateTask)
                     else:
                         msgs.append('ERROR: la tarea "'+task.__unicode__()+'" no se puede realizar!')
         tasks = Task.objects.getTasks(project, user, actualOrder)

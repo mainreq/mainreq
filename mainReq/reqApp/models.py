@@ -486,6 +486,7 @@ class Task(models.Model):
     
     def setDone(self):
         self.state = 't2_done'
+        self.doneDate = timezone.now()
         self.save()
         
     def isApproved(self):
@@ -508,3 +509,9 @@ class Task(models.Model):
         
     def isToDo(self):
         return self.state == 't1_to_do'
+        
+    def isNotDone(self):
+        return self.state == 't3_not_done'
+        
+    def isLate(self):
+        return self.doneDate > self.deadlineDate

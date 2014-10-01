@@ -75,7 +75,7 @@ def showTaskButton(task, button):
     if button == 'reprobate':
         return state == 't2_done'
     if button == 'done':
-        return state == 't1_to_do'
+        return state == 't1_to_do' or state == 't3_not_done'
 
 @register.filter(name="taskState2CssClass")
 def taskState2CssClass(task):
