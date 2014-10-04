@@ -504,6 +504,12 @@ def tasks(request):
         state = request.GET['state']
         tasks = tasks.filter(state=state)
         getParams = getParams + "&state="+state
+        
+    late = None
+    if 'late' in request.GET:
+        late = 'yes'
+        tasks = Task.objects.filterByIsLate(tasks)
+        getParams = getParams + "&late=yes"
     
     context.update({
         'navbar':navbar,
@@ -516,6 +522,7 @@ def tasks(request):
         'template':'reqApp/tools/tasks/task.html',
         'states':TASK_CHOICES,
         'state':state,
+        'late':late,
         'getParams':getParams,
     })
     return render(request, 'reqApp/tools/tasks/tasks.html', context)

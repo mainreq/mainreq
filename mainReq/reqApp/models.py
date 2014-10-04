@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
 from django.db import models
 from django.db.models import Max
+from django.db.models import F
 from django.contrib.auth.models import User,Group
 from django.db.models.signals import post_save
 from reqApp.choices import *
@@ -451,6 +452,9 @@ class TaskManager(models.Manager):
     def getWorkerUsers(self, project):
         return User.objects.filter(is_active=True).filter(is_staff=False).filter(userprofile__projects=project).exclude(groups__permissions__codename=Task._meta.permissions[0][0])
         
+    def filterByIsLate(self, tasks):
+        return (tasks.filter(state__in=['t2_done','t4_approved','t5_reprobate','t6_discarded']).filter(doneDate__gt=F('deadlineDate')) | tasks.filter(state='t3_not_done'))
+        
 class Task(models.Model):
     name = models.CharField(max_length=100)
     project = models.ForeignKey(Project, null=False)
@@ -514,4 +518,10 @@ class Task(models.Model):
         return self.state == 't3_not_done'
         
     def isLate(self):
-        return self.doneDate > self.deadlineDate
+        if self.isToDo():
+            return False
+        elif self.isNotDone():
+            return True
+        elif self.doneDate > self.deadlineDate:
+            return True
+        return False

@@ -19,12 +19,32 @@
         {% endif %}
     </div>
     <div class="col-sm-3">
+        {% comment %}
         <select progressbar  class="selectpicker" data-width="auto" data-style="btn-default btn-xs" onchange="location=$(this).val();">
             <option title="Filtrar por Estado" value="?userIndex={{ userIndex }}">Sin Filtro</option>
             {% for s,n in states %}
                 <option data-icon="glyphicon-ok-sign" {% ifequal state s %}selected{% endifequal %} value="?state={{ s }}&userIndex={{ userIndex }}">{{ n }}</option>
             {% endfor %}
         </select>
+        {% endcomment %}
+        
+        <div class="btn-group">
+            <button title="Filtrar por Estado" type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-filter"></span> Filtros <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" style="max-height:400px;overflow-y:auto;">
+                    <li><a progressbar href="?userIndex={{ userIndex }}">Sin Filtro</a></li>
+                    <li class="divider"></li>
+                    <li class="dropdown-header">Estado</li>
+                    {% for s,n in states %}
+                        <li><a progressbar href="?state={{ s }}&userIndex={{ userIndex }}" {% ifequal state s %}selectedFilter>{{ n }} <span class='glyphicon glyphicon-ok'></span>{% else %}>{{ n }}{% endifequal %}</a></li>
+                    {% endfor %}
+                    <li class="divider"></li>
+                    <li class="dropdown-header">Fecha de Entrega</li>
+                    <li><a progressbar href="?userIndex={{ userIndex }}{% if state %}&state={{ state }}{% endif %}&late=yes" {% if late %}selectedFilter>atrasada <span class='glyphicon glyphicon-ok'></span>{% else %}>atrasada{% endif %}</a></li>
+            </ul>
+        </div>
+        
     </div>
     <div class="col-sm-3">
         {% if canEditTasks %}
