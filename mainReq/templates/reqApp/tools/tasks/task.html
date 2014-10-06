@@ -30,7 +30,9 @@
             <div><span style="color:Gray;">Estado: </span><span class="{{ task|taskState2CssClass }}">{{ task|taskState }}</span></div>
             <div><span style="color:Gray;">Email Responsable: </span>{{ task.user.email }}</div>
             <div><span style="color:Gray;">Fecha inicio: </span>{{ task.initDate|date:"Y-m-d H:i" }}</div>
+            <div><span style="color:Gray;">Fecha revisión: </span>{{ task.deadlineDate|date:"Y-m-d H:i" }}</div>
             <div><span style="color:Gray;">Plazo: </span>{{ task|daysHoursToDeadline }}</div>
+            <div><span style="color:Gray;">Fecha realizada: </span>{% if task.isDone or task.isApproved or task.isReprobated %}{{ task.doneDate|date:"Y-m-d H:i" }}{% else %}(no aún){% endif %}</div>
             <br/>
             <div><span style="color:Gray;">Descripción: </span>{{ task.description }}</div>
             <br/>
