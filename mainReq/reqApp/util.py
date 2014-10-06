@@ -80,6 +80,7 @@ def orderingList(model):
         return [
             {'order':'identifier', 'label':'identificador', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-2',},
             {'order':'name', 'label':'nombre', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-2',},
+            {'order':'initDate', 'label':'fecha', 'up':'&#x25B5;', 'down':'&#x25BF;', 'span':'col-sm-2',},
         ]
     elif model == Task:
         return [
