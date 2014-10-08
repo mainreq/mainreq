@@ -271,7 +271,6 @@ function imgAlignMessage(){
 function replaceMceBrowseimgButton(id,_staticUrl,_url,_csrf){
     var id_tooltip = id + '_voice';
     var tooltip = $(id_tooltip).html();
-    //console.log(id+" "+$(id).length);
     $(id).replaceWith('<div class="tinymceImg" style="background:url('+_staticUrl+'tiny_mce/plugins/yenimg/img/img2.gif) no-repeat center;"><input id="'+id+'" title="'+tooltip+'" type="file" accept="image/*" onclick="return imgAlignMessage()" onchange="insertMceImg(this, \''+_url+'\', \''+_csrf+'\')"></div>');
 }
 

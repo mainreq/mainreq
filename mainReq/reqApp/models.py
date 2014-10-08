@@ -464,6 +464,8 @@ class Task(models.Model):
     description = models.CharField(max_length=5000, blank=True)
     state = models.CharField(max_length=30, choices=TASK_CHOICES)
     
+    requirements = models.ManyToManyField(Requirement, null=True, blank=True)
+    
     objects = TaskManager()
     
     class Meta:
