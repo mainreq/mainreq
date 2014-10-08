@@ -8,7 +8,7 @@
     {% else %}
         <i>Requisito asociado: {{ element.softwareRequirement }} (eliminado)</i><br/>
     {% endif %}
-    <i>Descripción: </i>{{ element.description }}<br/>
+    <i>Descripción: </i>{{ element.description|addSrcHost:host|safe }}<br/>
     <i>Resultado aceptable: </i>{{ element.acceptableResult }}<br/>
     <i>Resultado óptimo: </i>{{ element.optimumResult }}<br/>
     <i>Estado: </i><b class="{{ element.state }}">{{ element|state }}</b><br/>

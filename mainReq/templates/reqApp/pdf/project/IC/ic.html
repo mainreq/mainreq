@@ -3,7 +3,7 @@
 <div class="element_container">
     <b>{{ element.identifierText }} {{ element }}</b><br/>
     <div>
-    <i>Descripción: </i>{{ element.description }}<br/>
+    <i>Descripción: </i>{{ element.description|addSrcHost:host|safe }}<br/>
     <i>Fecha Inicio: </i>{{ element.initDate|date:"d-m-Y H:i" }}<br/>
     <i>Fecha Fin: </i>{{ element.endDate|date:"Y-m-d H:i" }}
     </div>

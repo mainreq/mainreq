@@ -267,6 +267,14 @@ function imgAlignMessage(){
     return confirm("¡PRECAUCIÓN!\n\nPara CENTRAR o ALINEAR la imagen, primero debe alinear el cursor del editor.\nDe otra manera la imagen sólo se mostrará alineada a la izquierda en el Documento PDF.\n\n¿Desea insertar una imagen en la posición actual del cursor?");
 }
 
+// tiny mce replace browse image button
+function replaceMceBrowseimgButton(id,_staticUrl,_url,_csrf){
+    var id_tooltip = id + '_voice';
+    var tooltip = $(id_tooltip).html();
+    //console.log(id+" "+$(id).length);
+    $(id).replaceWith('<div class="tinymceImg" style="background:url('+_staticUrl+'tiny_mce/plugins/yenimg/img/img2.gif) no-repeat center;"><input id="'+id+'" title="'+tooltip+'" type="file" accept="image/*" onclick="return imgAlignMessage()" onchange="insertMceImg(this, \''+_url+'\', \''+_csrf+'\')"></div>');
+}
+
 // alarms modals
 function prepareModals(){
     $('[name=reqAppModal]').each(function(i){

@@ -33,18 +33,11 @@ tinyMCE.init({
         "elements":"{{ 'description_'|concat:identifierText }}",
     {% endif %}
 })
-
-var id = '#' +
-    {% if not identifierText %}
-    "description_new"
-    {% else %}
-    "{{ 'description_'|concat:identifierText }}"
-    {% endif %}
-    + '_browseimg';
-
-var id_tooltip = id + '_voice';
-var tooltip = $(id_tooltip).html();
-var _url = "{% url 'reqApp:mce_upload_image' %}";
-var _csrf = "{{ csrf_token }}";
-$(id).replaceWith('<div class="tinymceImg" style="background:url({{ STATIC_URL }}tiny_mce/plugins/yenimg/img/img2.gif) no-repeat center;"><input id="'+id+'" title="'+tooltip+'" type="file" accept="image/*" onclick="return imgAlignMessage()" onchange="insertMceImg(this, \''+_url+'\', \''+_csrf+'\')"></div>');
+{% if not identifierText %}
+    $(window).bind("load", function() {
+        replaceMceBrowseimgButton('#'+{% if not identifierText %}"description_new"{% else %}"{{ 'description_'|concat:identifierText }}"{% endif %}+'_browseimg',"{{ STATIC_URL }}","{% url 'reqApp:mce_upload_image' %}","{{ csrf_token }}");
+    });
+{% else %}
+    replaceMceBrowseimgButton('#'+{% if not identifierText %}"description_new"{% else %}"{{ 'description_'|concat:identifierText }}"{% endif %}+'_browseimg',"{{ STATIC_URL }}","{% url 'reqApp:mce_upload_image' %}","{{ csrf_token }}");
+{% endif %}
 </script>

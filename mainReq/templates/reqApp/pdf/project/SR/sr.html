@@ -3,7 +3,7 @@
 <div class="element_container">
     <b>{{element}}</b><br/>
     <div>
-    <i>Descripción: </i>{{ element.description }}<br/>
+    <i>Descripción: </i>{{ element.description|addSrcHost:host|safe }}<br/>
     <i>Estado: </i><b class="{{ element.state }}">{{ element|state }}</b><br/>
     <i>Tipo: </i>{{ element|SRType }}<br/>
     {% if element.increment.validity %}
