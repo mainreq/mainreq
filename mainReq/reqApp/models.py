@@ -7,6 +7,7 @@ from django.db.models.signals import post_save
 from reqApp.choices import *
 from django.utils import timezone
 from django.utils.dateformat import DateFormat
+from tinymce import models as tinymce_models
 
 # admin permission prefix
 PERM_PRE = u"EDITOR_"
@@ -99,7 +100,7 @@ class RegistryManager(models.Manager):
 class Registry(models.Model):
     name = models.CharField(max_length=100)
     identifier = models.PositiveIntegerField(default=0, blank=True, null=False)
-    description = models.CharField(max_length=5000, blank=True)
+    description = tinymce_models.HTMLField(blank=True)#models.CharField(max_length=5000, blank=True)
     reason = models.CharField(max_length=140, blank=True)
     project = models.ForeignKey(Project, blank=True, null=False)
     date = models.DateTimeField()
@@ -392,8 +393,6 @@ class Module(Registry):
         self.softwareRequirements = m2mValidsDict['softwareRequirements']
         
 ############ Documents #############
-from tinymce import models as tinymce_models
-
 class DocsManager(models.Manager):
     def versions(self, project, sectionType, limit=-1):
         if limit < 0:
