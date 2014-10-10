@@ -1,9 +1,13 @@
 {% extends "admin/base.html" %}
 
-{% block title %}MainReq administration{% endblock %}
+{% block title %}mainReq administration{% endblock %}
 
 {% block branding %}
-<h1 id="site-name">MainReq</h1>
+<h1 id="site-name"><a href="{% url 'reqApp:PR' %}"><i>main</i>Req</a></h1>
 {% endblock %}
 
-{% block nav-global %}{% endblock %}
+{% block nav-global %}
+    <div style="text-align:right;">
+        <a title="select a project" href="{% url 'reqApp:PR' %}"><b>My Projects ...</b></a>
+    </div>
+{% endblock %}
