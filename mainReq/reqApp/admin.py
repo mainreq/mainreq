@@ -31,7 +31,7 @@ class UserAdmin(AuthUserAdmin):
     )
     
     list_display = ('username','email','first_name','last_name','is_staff','semester')
-    list_filter = ('is_staff', 'userprofile__projects__semester','groups')
+    list_filter = ('is_staff','groups','userprofile__projects__semester','userprofile__projects')
     
     actions = ['reassignUserPass','deactivateNonStaffUser']
     
@@ -122,13 +122,18 @@ class MyProjectForm(forms.ModelForm):
 
 class ProjectAdmin(admin.ModelAdmin):
     form = MyProjectForm
-    list_display = ('name', 'semester', 'closingDate', 'status')
+    list_display = ('name', 'semester', 'closingDate', 'status','show_users')
     list_filter = ('semester',)
     search_fields = ['name', 'semester']
     
     def has_delete_permission(self, request, obj=None):
         # disable delete button in project form
         return False
+        
+    def show_users(self, pr):
+        return '<a href="/admin/auth/user/?userprofile__projects__id__exact=%s">Users...</a>' % (pr.id)
+    show_users.allow_tags = True
+    show_users.short_description = "Users"
     
 admin.site.register(Project, ProjectAdmin)
 
