@@ -398,6 +398,8 @@ def docHis(request):
 ############################### Tools ##########################
 
 ##############################  TASKS
+"""
+# original tasks flow
 def tasks(request):
     navbar = {'1':'tools', '2':'tasks'}
     msgs = []
@@ -526,7 +528,141 @@ def tasks(request):
         'getParams':getParams,
     })
     return render(request, 'reqApp/tools/tasks/tasks.html', context)
-
+"""
+def tasks(request):
+    navbar = {'1':'tools', '2':'tasks'}
+    msgs = []
+    
+    user = getUserOr404(request)
+    project = getProject(request)
+    
+    actualOrder = 'state'
+    if 'order' in request.GET:
+        actualOrder = request.GET['order']
+    
+    getParams = ""
+    
+    context = {}
+    if isEditor(request, Task):
+        userIndex = -1
+        if 'userIndex' in request.GET:
+            userIndex = int(request.GET.get('userIndex',-1))
+        workerUsers = Task.objects.getWorkerUsers(project)
+        workerUsersCount = workerUsers.count()
+        context.update({
+            'canEditTasks':True,
+            'workerUsers':enumerate(workerUsers),
+            'form_template':'reqApp/tools/tasks/task_form.html',
+            'form':TaskForm().assignUsers(workerUsers),
+            'userIndex':userIndex,
+        })
+        getParams = "&userIndex=" + str(userIndex)
+        if request.method == 'POST':
+            if request.POST.has_key("nextTaskState"):# change task state
+                taskId = int(request.POST['id'])
+                task = Task.objects.getTask(project, taskId)
+                if task is None:
+                    raise Http404
+                if request.POST['nextTaskState'] == 'approved':
+                    if task.isDone():
+                        task.setApproved()
+                        msgs.append('La tarea "'+task.__unicode__()+'" ha sido aprobada.')
+                    else:
+                        msgs.append('ERROR: la tarea "'+task.__unicode__()+'" debe estar realizada para ser aprobada')
+                elif request.POST['nextTaskState'] == 'reprobate':
+                    if task.isDone():
+                        task.setReprobated()
+                        msgs.append('La tarea "'+task.__unicode__()+'" ha sido reprobada.')
+                    else:
+                        msgs.append('ERROR: la tarea "'+task.__unicode__()+'" debe estar realizada para ser reprobada')
+                elif request.POST['nextTaskState'] == 'discarded':
+                    if not (task.isReprobated() or task.isApproved()):
+                        task.setDiscarded()
+                        msgs.append('La tarea "'+task.__unicode__()+'" ha sido descartada.')
+                    else:
+                        msgs.append('ERROR: la tarea "'+task.__unicode__()+'" no se puede descartar, ya ha sido evaluada')
+            else:# create task
+                form = TaskForm(request.POST)
+                if form.is_valid():
+                    if request.POST.has_key("validate"):
+                        return ajax_form_valid(form, True)
+                    task = form.createTask(project)
+                    workerUser = task.user
+                    msgs.append(u'Tarea creada: "'+task.__unicode__()+u'" Responsable: '+workerUser.__unicode__())
+                    # send email notifications
+                    if request.POST.has_key("sendNotifications"):
+                        notif = u"Hola '"+workerUser.__unicode__()+u"' tienes una nueva tarea. \nTarea: "+task.__unicode__()+u"\nFecha de Revisión: "+str(task.deadlineDate)[:-6]+u"\nDescripción: "+task.description+u"\n\n* IMPORTANTE: debes reportar su estado en la sección de Tareas de MainReq ("+getHost(request)+")."
+                        if sendEmail2User(workerUser, "MainReq: Nueva Tarea", notif):
+                            msgs.append(u"Nueva tarea notificada a Usuario: " + workerUser.__unicode__() + u" Email: " + workerUser.email)
+                            if sendEmail2User(user, "MainReq: Nueva Tarea", u"(Copia de notificación enviada)\n\n"+notif):
+                                msgs.append(u"Copia de notificación a Usuario: " + user.__unicode__() + u" Email: " + user.email)
+                            else:
+                                msgs.append(u"ERROR: No se pudo enviar copia de notificación a Usuario: " + user.__unicode__() + u" Email: " + user.email)
+                        else:
+                            msgs.append(u"ERROR: No se pudo enviar notificación a Usuario: " + workerUser.__unicode__() + u" Email:" + workerUser.email)
+                else:
+                    if request.POST.has_key("validate"):
+                        return ajax_form_valid(form, False)
+                    msgs.append('datos inválidos!')
+        if workerUsersCount > 0:
+            if userIndex < 0:
+                tasks = Task.objects.getTasks(project, order=actualOrder)
+            else:
+                tasks = Task.objects.getTasks(project, workerUsers[userIndex], actualOrder)
+        else:
+            tasks = Task.objects.getTasks(project, order=actualOrder)
+    else: # show only his tasks
+        if request.method == 'POST':
+            if request.POST.has_key("nextTaskState"):# change task state
+                taskId = int(request.POST['id'])
+                task = Task.objects.getTask(project, taskId)
+                if task is None:
+                    raise Http404
+                if request.POST['nextTaskState'] == 'done':
+                    if task.isToDo() or task.isDoing():# or task.isNotDone():
+                        task.setDone()
+                        if task.isLate():
+                            lateTask = ' con atraso'
+                        else:
+                            lateTask = ''
+                        msgs.append('La tarea "'+task.__unicode__()+'" ha sido realizada'+lateTask)
+                    else:
+                        msgs.append('ERROR: la tarea "'+task.__unicode__()+'" no se puede realizar!')
+                elif request.POST['nextTaskState'] == 'doing':
+                    if task.isToDo():
+                        task.setDoing()
+                        msgs.append('Haciendo tarea "'+task.__unicode__()+'".')
+                    else:
+                        msgs.append('ERROR: la tarea "'+task.__unicode__()+'" no se encuentra por hacer')
+        tasks = Task.objects.getTasks(project, user, actualOrder)
+    
+    state = None
+    if 'state' in request.GET:
+        state = request.GET['state']
+        tasks = tasks.filter(state=state)
+        getParams = getParams + "&state="+state
+        
+    late = None
+    if 'late' in request.GET:
+        late = 'yes'
+        tasks = Task.objects.filterByIsLate(tasks)
+        getParams = getParams + "&late=yes"
+    
+    context.update({
+        'navbar':navbar,
+        'helpLink':'task',
+        'ordering_bar': 'reqApp/orderingBar.html',
+        'ordering_attributes': orderingList(Task),
+        'actual_order': actualOrder,
+        'msgs':msgs,
+        'tasks':tasks,
+        'template':'reqApp/tools/tasks/task.html',
+        'states':TASK_CHOICES,
+        'state':state,
+        'late':late,
+        'getParams':getParams,
+    })
+    return render(request, 'reqApp/tools/tasks/tasks.html', context)
 ##############################  STATISTICS
 def statisticsUR_SR_TC_MD(project, ic=None):
     # user requirement statistics

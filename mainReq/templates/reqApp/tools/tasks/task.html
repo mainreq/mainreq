@@ -52,8 +52,19 @@
 	                    </div>
 	                {% endif %}
 	            </div>
-	        {% elif task|showTaskButton:'done' %}
-	            <button class="btn btn-primary btn-xs" onclick="taskButton('Esta acción es irreversible ¿Esta tarea fue realizada y está lista para ser revisada?\n\nTarea Realizada: {{ task }}', {{ task.id }}, 'done', '{{csrf_token}}')"><span class="glyphicon glyphicon-ok"></span> Realizada</button>
+	        {% else %}
+	            <div class="row">
+	                {% if task|showTaskButton:'doing' %}
+	                    <div class="col-sm-1">
+    	                    <button class="btn btn-primary btn-xs" onclick="taskButton('', {{ task.id }}, 'doing', '{{csrf_token}}')"><span class="glyphicon glyphicon-ok"></span> Haciendo</button>
+    	                </div>
+	                {% endif %}
+	                {% if task|showTaskButton:'done' %}
+	                    <div class="col-sm-1">
+    	                    <button class="btn btn-primary btn-xs" onclick="taskButton('Esta acción es irreversible ¿Esta tarea fue realizada y está lista para ser revisada?\n\nTarea Realizada: {{ task }}', {{ task.id }}, 'done', '{{csrf_token}}')"><span class="glyphicon glyphicon-ok"></span> Realizada</button>
+    	                </div>
+	                {% endif %}
+	            </div>
 	        {% endif %}
         </div>
     </div>

@@ -71,18 +71,21 @@ def taskState(task):
 def showTaskButton(task, button):
     state = task.state
     if button == 'discarded':
-        return state == 't1_to_do' or state == 't2_done' or state == 't3_not_done'
+        return state == 't1_to_do' or state == 't2_done' or state == 't0_doing' #or state == 't3_not_done'
     if button == 'reprobate':
         return state == 't2_done'
     if button == 'done':
-        return state == 't1_to_do' or state == 't3_not_done'
+        return state == 't1_to_do' or state == 't0_doing' #or state == 't3_not_done'
+    if button == 'doing':
+        return state == 't1_to_do'
 
 @register.filter(name="taskState2CssClass")
 def taskState2CssClass(task):
     css = {
+        "t0_doing":"doing",
         "t1_to_do":"to_do",
         "t2_done":"done",
-        "t3_not_done":"not_done",
+        #"t3_not_done":"not_done",
         "t4_approved":"approved",
         "t5_reprobate":"reprobate",
         "t6_discarded":"discarded",

@@ -62,9 +62,10 @@ SECTION_CHOICES = [
 ]
 
 TASK_CHOICES = [
+    ("t0_doing", "haciendo"),
     ("t1_to_do", "por hacer"),
     ("t2_done", "realizada"),
-    ("t3_not_done", "no realizada"),
+    #("t3_not_done", "no realizada"),
     ("t4_approved", "aprobada"),
     ("t5_reprobate", "reprobada"),
     ("t6_discarded", "descartada"),

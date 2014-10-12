@@ -435,7 +435,7 @@ class TaskManager(models.Manager):
     def getTask(self, project, id):
         try:
             resp = self.model.objects.filter(project=project).filter(id=id)[:1].get()
-            resp = resp.checkDeadline()
+            #resp = resp.checkDeadline()
         except self.model.DoesNotExist:
             resp = None
         return resp
@@ -444,15 +444,15 @@ class TaskManager(models.Manager):
         q = self.model.objects.filter(project=project)
         if user is not None:
             q = q.filter(user=user)
-        for task in q.filter(state='t1_to_do'):
-            task.checkDeadline()
+        #for task in q.filter(state='t1_to_do'):
+        #    task.checkDeadline()
         return q.order_by(order,'deadlineDate')
         
     def getWorkerUsers(self, project):
         return User.objects.filter(is_active=True).filter(is_staff=False).filter(userprofile__projects=project).exclude(groups__permissions__codename=Task._meta.permissions[0][0])
         
     def filterByIsLate(self, tasks):
-        return (tasks.filter(state__in=['t2_done','t4_approved','t5_reprobate','t6_discarded']).filter(doneDate__gt=F('deadlineDate')) | tasks.filter(state='t3_not_done'))
+        return tasks.filter(state__in=['t0_doing','t1_to_do','t2_done','t4_approved','t5_reprobate','t6_discarded']).filter(doneDate__gt=F('deadlineDate')) # | tasks.filter(state='t3_not_done')
         
 class Task(models.Model):
     name = models.CharField(max_length=100)
@@ -479,12 +479,14 @@ class Task(models.Model):
         self.initDate = timezone.now()
         self.state = 't1_to_do'
         self.save()
-        
+    
+    """
     def checkDeadline(self):
         if self.state == 't1_to_do' and  (self.deadlineDate < timezone.now()):
             self.state = 't3_not_done'
             self.save()
         return self
+    """
     
     def isDone(self):
         return self.state == 't2_done'
@@ -492,6 +494,13 @@ class Task(models.Model):
     def setDone(self):
         self.state = 't2_done'
         self.doneDate = timezone.now()
+        self.save()
+        
+    def isDoing(self):
+        return self.state == 't0_doing'
+    
+    def setDoing(self):
+        self.state = 't0_doing'
         self.save()
         
     def isApproved(self):
@@ -515,9 +524,10 @@ class Task(models.Model):
     def isToDo(self):
         return self.state == 't1_to_do'
         
-    def isNotDone(self):
-        return self.state == 't3_not_done'
-        
+    #def isNotDone(self):
+    #    return self.state == 't3_not_done'
+    
+    """    
     def isLate(self):
         if self.isToDo():
             return False
@@ -526,3 +536,6 @@ class Task(models.Model):
         elif self.doneDate > self.deadlineDate:
             return True
         return False
+    """
+    def isLate(self):
+        return self.doneDate > self.deadlineDate
