@@ -78,6 +78,8 @@ def showTaskButton(task, button):
         return state == 't1_to_do' or state == 't0_doing' #or state == 't3_not_done'
     if button == 'doing':
         return state == 't1_to_do'
+    if button == 'to_do':
+        return state == 't0_doing'
 
 @register.filter(name="taskState2CssClass")
 def taskState2CssClass(task):

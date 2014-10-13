@@ -58,6 +58,10 @@
 	                    <div class="col-sm-2">
     	                    <button class="btn btn-primary btn-xs" onclick="taskButton('', {{ task.id }}, 'doing', '{{csrf_token}}')"><span class="glyphicon glyphicon-pushpin"></span> Haciendo</button>
     	                </div>
+	                {% elif task|showTaskButton:'to_do' %}
+	                    <div class="col-sm-2">
+    	                    <button class="btn btn-primary btn-xs" onclick="taskButton('', {{ task.id }}, 'to_do', '{{csrf_token}}')"><span class="glyphicon glyphicon-pushpin"></span> No Haciendo</button>
+    	                </div>
 	                {% endif %}
 	                {% if task|showTaskButton:'done' %}
 	                    <div class="col-sm-2">

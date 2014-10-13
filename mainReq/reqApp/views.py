@@ -634,6 +634,12 @@ def tasks(request):
                         msgs.append('Haciendo tarea "'+task.__unicode__()+'".')
                     else:
                         msgs.append('ERROR: la tarea "'+task.__unicode__()+'" no se encuentra por hacer')
+                elif request.POST['nextTaskState'] == 'to_do':
+                    if task.isDoing():
+                        task.setToDo()
+                        msgs.append('Tarea por hacer "'+task.__unicode__()+'".')
+                    else:
+                        msgs.append('ERROR: no haciendo tarea "'+task.__unicode__()+'".')
         tasks = Task.objects.getTasks(project, user, actualOrder)
     
     state = None

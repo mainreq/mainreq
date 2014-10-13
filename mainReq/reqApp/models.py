@@ -523,6 +523,10 @@ class Task(models.Model):
         
     def isToDo(self):
         return self.state == 't1_to_do'
+    
+    def setToDo(self):
+        self.state = 't1_to_do'
+        self.save()
         
     #def isNotDone(self):
     #    return self.state == 't3_not_done'
