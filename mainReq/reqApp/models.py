@@ -538,4 +538,6 @@ class Task(models.Model):
         return False
     """
     def isLate(self):
+        if self.isToDo() or self.isDoing():
+            return timezone.now() > self.deadlineDate
         return self.doneDate > self.deadlineDate

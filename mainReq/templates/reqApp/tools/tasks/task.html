@@ -39,10 +39,10 @@
             {% if canEditTasks %}
                 <div class="row">
                     {% if task|showTaskButton:'reprobate' %}
-                        <div class="col-sm-1">
+                        <div class="col-sm-2">
                             <button class="btn btn-primary btn-xs" onclick="taskButton('Esta acción es irreversible ¿Esta tarea fue realizada de manera satisfactoria?\n\nAprobar: {{ task }}', {{ task.id }}, 'approved', '{{csrf_token}}')"><span class="glyphicon glyphicon-thumbs-up"></span> Aprobar</button>
                         </div>
-                        <div class="col-sm-2">
+                        <div class="col-sm-3">
 	                        <button class="btn btn-primary btn-xs" onclick="taskButton('Esta acción es irreversible ¿Esta tarea no fue realizada de manera satisfactoria?\n\nReprobar: {{ task }}', {{ task.id }}, 'reprobate', '{{csrf_token}}')"><span class="glyphicon glyphicon-thumbs-down"></span> Reprobar</button>
 	                    </div>
 	                {% endif %}
@@ -55,12 +55,12 @@
 	        {% else %}
 	            <div class="row">
 	                {% if task|showTaskButton:'doing' %}
-	                    <div class="col-sm-1">
-    	                    <button class="btn btn-primary btn-xs" onclick="taskButton('', {{ task.id }}, 'doing', '{{csrf_token}}')"><span class="glyphicon glyphicon-ok"></span> Haciendo</button>
+	                    <div class="col-sm-2">
+    	                    <button class="btn btn-primary btn-xs" onclick="taskButton('', {{ task.id }}, 'doing', '{{csrf_token}}')"><span class="glyphicon glyphicon-pushpin"></span> Haciendo</button>
     	                </div>
 	                {% endif %}
 	                {% if task|showTaskButton:'done' %}
-	                    <div class="col-sm-1">
+	                    <div class="col-sm-2">
     	                    <button class="btn btn-primary btn-xs" onclick="taskButton('Esta acción es irreversible ¿Esta tarea fue realizada y está lista para ser revisada?\n\nTarea Realizada: {{ task }}', {{ task.id }}, 'done', '{{csrf_token}}')"><span class="glyphicon glyphicon-ok"></span> Realizada</button>
     	                </div>
 	                {% endif %}
