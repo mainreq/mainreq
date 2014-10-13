@@ -3,6 +3,7 @@ from reqApp.models import *
 from django.http import Http404
 from django.http import HttpResponseRedirect
 from django.core.mail import EmailMessage
+import threading
 
 def getUserOr404(request):
     if request.user.is_authenticated():
@@ -27,14 +28,37 @@ def myFilter(s,val):
     dic = {}
     dic[s] = val
     return dic
-    
+
+class EmailThread(threading.Thread):
+    def __init__(self, subject, message, recipient_list):
+        self.subject = subject
+        self.recipient_list = recipient_list
+        self.message = message
+        threading.Thread.__init__(self)
+
+    def run (self):
+        msg = EmailMessage(self.subject, self.message, to=self.recipient_list)
+        #msg.content_subtype = "html"
+        try:
+            msg.send()
+            return True
+        except Exception, e:
+            return False
+
 def sendEmail2User(user, subject, message):
+    """
+    # wait for success
     email = EmailMessage(subject, message, to=[user.email])
     try:
         email.send()
         return True
     except Exception, e:
         return False
+    """
+    if user.email == '':
+        return False
+    EmailThread(subject, message, [user.email]).start()
+    return True
     
 def orderingList(model):
     if model == UserType:

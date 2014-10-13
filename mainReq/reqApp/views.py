@@ -593,13 +593,13 @@ def tasks(request):
                     if request.POST.has_key("sendNotifications"):
                         notif = u"Hola '"+workerUser.__unicode__()+u"' tienes una nueva tarea. \nTarea: "+task.__unicode__()+u"\nFecha de Revisión: "+str(task.deadlineDate)[:-6]+u"\nDescripción: "+task.description+u"\n\n* IMPORTANTE: debes reportar su estado en la sección de Tareas de MainReq ("+getHost(request)+")."
                         if sendEmail2User(workerUser, "MainReq: Nueva Tarea", notif):
-                            msgs.append(u"Nueva tarea notificada a Usuario: " + workerUser.__unicode__() + u" Email: " + workerUser.email)
+                            msgs.append(u"Nueva tarea notificada a Email: " + workerUser.email)
                             if sendEmail2User(user, "MainReq: Nueva Tarea", u"(Copia de notificación enviada)\n\n"+notif):
-                                msgs.append(u"Copia de notificación a Usuario: " + user.__unicode__() + u" Email: " + user.email)
+                                msgs.append(u"Copia de notificación a Email: " + user.email)
                             else:
-                                msgs.append(u"ERROR: No se pudo enviar copia de notificación a Usuario: " + user.__unicode__() + u" Email: " + user.email)
+                                msgs.append(u"ERROR: No se pudo enviar copia de notificación a Email: " + user.email)
                         else:
-                            msgs.append(u"ERROR: No se pudo enviar notificación a Usuario: " + workerUser.__unicode__() + u" Email:" + workerUser.email)
+                            msgs.append(u"ERROR: No se pudo enviar notificación a Email:" + workerUser.email)
                 else:
                     if request.POST.has_key("validate"):
                         return ajax_form_valid(form, False)
