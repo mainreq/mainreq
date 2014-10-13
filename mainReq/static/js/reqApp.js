@@ -333,7 +333,7 @@ $(window).load(function(){
 // tasks buttons
 function taskButton(confirmText, id, nextTaskState, csrf){
     // confirm action
-    if(!confirm(confirmText))
+    if(confirmText!='' && !confirm(confirmText))
         return;
 
     var params = new Array();

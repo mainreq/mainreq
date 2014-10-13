@@ -25,6 +25,8 @@ li .navbar-li-selected{
 
 .alert{
     padding:2px;
+    margin-bottom:2px;
+    margin-top:2px;
 }
 .alert-dismissible{
     padding-right:34px;
@@ -105,9 +107,10 @@ span.element-pointer{
 .ambiguous{color:Purple;}
 .to_do{color:Black;}
 .done{color:Blue;}
+.doing{color:Orange;}
 .not_done{color:Red;}
 .approved{color:Green;}
-.reprobate{color:Orange;}
+.reprobate{color:Red;}
 .discarded{color:Purple;}
 
 /* registry element colors */
@@ -141,9 +144,10 @@ div .reqLabelDiv{
 .label-ambiguous{background-color:rgba(128,0,128,0.7);}/* Purple */
 .label-to_do{background-color:rgba(0,0,0,0.7);}/* Black */
 .label-done{background-color:rgba(0,0,255,0.7);}/* Blue */
+.label-doing{background-color:rgba(255,165,0,0.7);}/* Orange */
 .label-not_done{background-color:rgba(255,0,0,0.7);}/* Red */
 .label-approved{background-color:rgba(0,128,0,0.7);}/* Green */
-.label-reprobate{background-color:rgba(255,165,0,0.7);}/* Orange */
+.label-reprobate{background-color:rgba(255,0,0,0.7);}/* Red */
 .label-discarded{background-color:rgba(128,0,128,0.7);}/* Purple */
 .label-registry-actual{background-color:rgba(0,128,128,0.7);}/* Teal */
 .label-registry-new{background-color:rgba(128,128,0,0.7);}/* Olive */
