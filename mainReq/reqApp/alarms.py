@@ -89,13 +89,14 @@ def elementAlarms(el):
         """
         #--------------------------------------------------------------------------------------------
     elif el.__class__ == SoftwareRequirement:
+        urCount = el.userRequirements.filter(validity=True).count()
+        
         if el.increment.validity == False:
             resp.append("El Hito asignado a este Requisito de Software ha sido eliminado")
         #--------------------------------------------------------------------------------------------
-        elif el.userRequirements.filter(validity=True).filter(increment=el.increment).count() == 0:
+        elif urCount > 0 and el.userRequirements.filter(validity=True).filter(increment=el.increment).count() == 0:
             resp.append("Su Hito no corresponde con ningún Hito asociado a sus Requisitos de Usuario")
         #--------------------------------------------------------------------------------------------
-        urCount = el.userRequirements.filter(validity=True).count()
         if urCount == 0:
             resp.append("No tiene ningún Requisito de Usuario asociado")
         #--------------------------------------------------------------------------------------------
