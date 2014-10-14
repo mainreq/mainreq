@@ -1,6 +1,13 @@
 {% extends "reqApp/pdf/base.html" %}
 {% load reqApp_tags %}
 
+{% block pagePreIndex %}
+    {% for section in preIndexSections %}
+    	{{ section.title|safe }}
+    	{{ section.obj.content|addSrcHost:host|safe }}
+	{% endfor %}
+{% endblock %}
+
 {% block content %}
 	{% for section in sections %}
     	{{ section.title|safe }}

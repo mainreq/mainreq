@@ -311,13 +311,13 @@ def docView(request, navbar, availables, shownSection, pdfLink, helpLink=None):
 def docReq(request):
     navbar = {'1':'documents', '2':'requirements'}
     sections = [
+        'project_members',
         'introduction',
         'purpose',
         'scope',
         'context',
         'definitions',
         'references',
-        'project_members',
         'general_description',
         
         'users',
@@ -330,13 +330,13 @@ def docReq(request):
 def docDsn(request):
     navbar = {'1':'documents', '2':'design'}
     sections = [
+        'project_members',
         'introduction',
         'purpose',
         'scope',
         'context',
         'definitions',
         'references',
-        'project_members',
         'general_description',
         
         'design',
@@ -352,13 +352,13 @@ def docDsn(request):
 def docTC(request):
     navbar = {'1':'documents', '2':'tc'}
     sections = [
+        'project_members',
         'introduction',
         'purpose',
         'scope',
         'context',
         'definitions',
         'references',
-        'project_members',
         'general_description',
         
         'users',
@@ -371,13 +371,13 @@ def docTC(request):
 def docHis(request):
     navbar = {'1':'documents', '2':'historic'}
     sections = [
+        'project_members',
         'introduction',
         'purpose',
         'scope',
         'context',
         'definitions',
         'references',
-        'project_members',
         'general_description',
         
         'users',
@@ -1350,6 +1350,9 @@ def pdf(request):
         pdfType =  request.GET.get('pdfType', '')
         if pdfType == 'docReq':
             template = 'reqApp/pdf/documents/requirements.html'
+            preIndexSections = [
+                {'title':'<p style="font-size:1.4em;"><b>Equipo Desarrollador y Contraparte</b></p>','obj':DocumentSection.objects.valid(project,'project_members')},
+            ]
             sections = [
                 {'title':'<h1>1. Introducción</h1>',            'obj':DocumentSection.objects.valid(project,'introduction')},
                 {'title':'<h2>1.1. Propósito</h2>',             'obj':DocumentSection.objects.valid(project,'purpose')},
@@ -1357,7 +1360,6 @@ def pdf(request):
                 {'title':'<h2>1.3. Contexto</h2>',              'obj':DocumentSection.objects.valid(project,'context')},
                 {'title':'<h2>1.4. Definiciones</h2>',          'obj':DocumentSection.objects.valid(project,'definitions')},
                 {'title':'<h2>1.5. Referencias</h2>',           'obj':DocumentSection.objects.valid(project,'references')},
-                {'title':'<h2>1.6. Equipo Desarrollador y Contraparte</h2>','obj':DocumentSection.objects.valid(project,'project_members')},
                 {'title':'<h1>2. Descripción General</h1>',     'obj':DocumentSection.objects.valid(project,'general_description')},
                 {'title':'<h2>2.1. Usuarios</h2>',              'obj':DocumentSection.objects.valid(project,'users')},
                 {'title':'<h2>2.2. Producto</h2>',              'obj':DocumentSection.objects.valid(project,'product')},
@@ -1369,6 +1371,7 @@ def pdf(request):
             context.update({
                 'title':'Documento de Especificación de Requisitos de Usuario/Software',
                 'fileName':'Documento_de_Requisitos',
+                'preIndexSections':preIndexSections,
                 'sections':sections,
                 'URs':UserRequirement.objects.valids(project,'reqType'),
                 'SRs':SoftwareRequirement.objects.valids(project,'reqType'),
@@ -1379,6 +1382,9 @@ def pdf(request):
             })
         elif pdfType == 'docDsn':
             template = 'reqApp/pdf/documents/design.html'
+            preIndexSections = [
+                {'title':'<p style="font-size:1.4em;"><b>Equipo Desarrollador y Contraparte</b></p>','obj':DocumentSection.objects.valid(project,'project_members')},
+            ]
             sections = [
                 {'title':'<h1>1. Introducción</h1>',            'obj':DocumentSection.objects.valid(project,'introduction')},
                 {'title':'<h2>1.1. Propósito</h2>',             'obj':DocumentSection.objects.valid(project,'purpose')},
@@ -1386,7 +1392,6 @@ def pdf(request):
                 {'title':'<h2>1.3. Contexto</h2>',              'obj':DocumentSection.objects.valid(project,'context')},
                 {'title':'<h2>1.4. Definiciones</h2>',          'obj':DocumentSection.objects.valid(project,'definitions')},
                 {'title':'<h2>1.5. Referencias</h2>',           'obj':DocumentSection.objects.valid(project,'references')},
-                {'title':'<h2>1.6. Equipo Desarrollador y Contraparte</h2>','obj':DocumentSection.objects.valid(project,'project_members')},
                 {'title':'<h1>2. Descripción General</h1>',     'obj':DocumentSection.objects.valid(project,'general_description')},
                 
                 {'title':'<h1>3. Diseño</h1>',                  'obj':DocumentSection.objects.valid(project,'design')},
@@ -1402,6 +1407,7 @@ def pdf(request):
             context.update({
                 'title':'Documento de Diseño',
                 'fileName':'Documento_de_Diseno',
+                'preIndexSections':preIndexSections,
                 'sections':sections,
                 'MDs':Module.objects.valids(project),
                 'MTs':[{
@@ -1411,6 +1417,9 @@ def pdf(request):
             })
         elif pdfType == 'docTC':
             template = 'reqApp/pdf/documents/tc.html'
+            preIndexSections = [
+                {'title':'<p style="font-size:1.4em;"><b>Equipo Desarrollador y Contraparte</b></p>','obj':DocumentSection.objects.valid(project,'project_members')},
+            ]
             sections = [
                 {'title':'<h1>1. Introducción</h1>',            'obj':DocumentSection.objects.valid(project,'introduction')},
                 {'title':'<h2>1.1. Propósito</h2>',             'obj':DocumentSection.objects.valid(project,'purpose')},
@@ -1418,7 +1427,6 @@ def pdf(request):
                 {'title':'<h2>1.3. Contexto</h2>',              'obj':DocumentSection.objects.valid(project,'context')},
                 {'title':'<h2>1.4. Definiciones</h2>',          'obj':DocumentSection.objects.valid(project,'definitions')},
                 {'title':'<h2>1.5. Referencias</h2>',           'obj':DocumentSection.objects.valid(project,'references')},
-                {'title':'<h2>1.6. Equipo Desarrollador y Contraparte</h2>','obj':DocumentSection.objects.valid(project,'project_members')},
                 {'title':'<h1>2. Descripción General</h1>',     'obj':DocumentSection.objects.valid(project,'general_description')},
                 {'title':'<h2>2.1. Usuarios</h2>',              'obj':DocumentSection.objects.valid(project,'users')},
                 {'title':'<h2>2.2. Producto</h2>',              'obj':DocumentSection.objects.valid(project,'product')},
@@ -1430,6 +1438,7 @@ def pdf(request):
             context.update({
                 'title':'Documento de Casos de Prueba',
                 'fileName':'Documento_Casos_de_Prueba',
+                'preIndexSections':preIndexSections,
                 'sections':sections,
                 'URs':UserRequirement.objects.valids(project,'reqType'),
                 'SRs':SoftwareRequirement.objects.valids(project,'reqType'),
@@ -1447,6 +1456,9 @@ def pdf(request):
             })
         elif pdfType == 'docHis':
             template = 'reqApp/pdf/documents/historic.html'
+            preIndexSections = [
+                {'title':'<p style="font-size:1.4em;"><b>Equipo Desarrollador y Contraparte</b></p>','obj':DocumentSection.objects.valid(project,'project_members')},
+            ]
             sections = [
                 {'title':'<h1>1. Introducción</h1>',            'obj':DocumentSection.objects.valid(project,'introduction')},
                 {'title':'<h2>1.1. Propósito</h2>',             'obj':DocumentSection.objects.valid(project,'purpose')},
@@ -1454,7 +1466,6 @@ def pdf(request):
                 {'title':'<h2>1.3. Contexto</h2>',              'obj':DocumentSection.objects.valid(project,'context')},
                 {'title':'<h2>1.4. Definiciones</h2>',          'obj':DocumentSection.objects.valid(project,'definitions')},
                 {'title':'<h2>1.5. Referencias</h2>',           'obj':DocumentSection.objects.valid(project,'references')},
-                {'title':'<h2>1.6. Equipo Desarrollador y Contraparte</h2>','obj':DocumentSection.objects.valid(project,'project_members')},
                 {'title':'<h1>2. Descripción General</h1>',     'obj':DocumentSection.objects.valid(project,'general_description')},
                 {'title':'<h2>2.1. Usuarios</h2>',              'obj':DocumentSection.objects.valid(project,'users')},
                 {'title':'<h2>2.2. Producto</h2>',              'obj':DocumentSection.objects.valid(project,'product')},
@@ -1479,6 +1490,7 @@ def pdf(request):
             context.update({
                 'title':'Documento Histórico',
                 'fileName':'Documento_Historico',
+                'preIndexSections':preIndexSections,
                 'sections':sections,
                 'URs':UserRequirement.objects.valids(project,'reqType'),
                 'SRs':SoftwareRequirement.objects.valids(project,'reqType'),

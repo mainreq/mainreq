@@ -23,6 +23,11 @@
             height: 1cm;
         }
     }
+    @page pagePreIndex {
+        size: {{pagesize}};
+        margin: 1.5cm;
+        bottom: 1cm;
+    }
     @page pageIndex {
         size: {{pagesize}};
         margin: 1.5cm;
@@ -82,6 +87,11 @@
     </div>
 </div>
 <div>
+
+<pdf:nexttemplate name="pagePreIndex"/>
+<pdf:nextpage/>
+{% block pagePreIndex %}{% endblock %}
+
 {% block pageIndex %}
     <pdf:nexttemplate name="pageIndex"/>
     <pdf:nextpage/>

@@ -250,7 +250,7 @@ class DocForm(forms.ModelForm):
                     'theme_advanced_statusbar_location':None,
                     'theme_advanced_blockformats':"p,h3,h4,h5,h6",# no incluye h1 ni h2 para poder usarlo en el documento final.
                     'theme_advanced_buttons1':
-                        "formatselect,|,bold,italic,underline,|,justifyleft,justifycenter,justifyright,justifyfull,|,outdent,indent,|,bullist,numlist,|,browseimg,imgurl,|,removeformat,|,undo,redo",
+                        "formatselect,|,bold,italic,underline,|,justifyleft,justifycenter,justifyright,justifyfull,|,outdent,indent,|,bullist,numlist,|,browseimg,imgurl,link,|,removeformat,|,undo,redo",
                     'theme_advanced_buttons2':"",
                     'theme_advanced_buttons3':"",
                     'relative_urls':False,

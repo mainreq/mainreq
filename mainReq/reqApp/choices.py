@@ -40,13 +40,13 @@ STATE_CHOICES = [
 ]
 
 SECTION_CHOICES = [
+    ("project_members", "Equipo Desarrollador y Contraparte"),
     ("introduction", "Introducción"),
     ("purpose", "Propósito"),
     ("scope", "Alcance"),
     ("context", "Contexto"),
     ("definitions", "Definiciones"),
     ("references", "Referencias"),
-    ("project_members", "Equipo Desarrollador y Contraparte"),
     ("general_description", "Descripción General"),
     ("users", "Usuarios"),
     ("product", "Producto"),
