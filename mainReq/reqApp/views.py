@@ -312,6 +312,7 @@ def docReq(request):
     navbar = {'1':'documents', '2':'requirements'}
     sections = [
         'project_members',
+        'prototype_access',
         'introduction',
         'purpose',
         'scope',
@@ -331,6 +332,7 @@ def docDsn(request):
     navbar = {'1':'documents', '2':'design'}
     sections = [
         'project_members',
+        'prototype_access',
         'introduction',
         'purpose',
         'scope',
@@ -353,6 +355,7 @@ def docTC(request):
     navbar = {'1':'documents', '2':'tc'}
     sections = [
         'project_members',
+        'prototype_access',
         'introduction',
         'purpose',
         'scope',
@@ -372,6 +375,7 @@ def docHis(request):
     navbar = {'1':'documents', '2':'historic'}
     sections = [
         'project_members',
+        'prototype_access',
         'introduction',
         'purpose',
         'scope',
@@ -1352,6 +1356,7 @@ def pdf(request):
             template = 'reqApp/pdf/documents/requirements.html'
             preIndexSections = [
                 {'title':'<p style="font-size:1.4em;"><b>Equipo Desarrollador y Contraparte</b></p>','obj':DocumentSection.objects.valid(project,'project_members')},
+                {'title':'<p style="font-size:1.4em;"><b>Acceso al Prototipo del Proyecto</b></p>','obj':DocumentSection.objects.valid(project,'prototype_access')},
             ]
             sections = [
                 {'title':'<h1>1. Introducción</h1>',            'obj':DocumentSection.objects.valid(project,'introduction')},
@@ -1384,6 +1389,7 @@ def pdf(request):
             template = 'reqApp/pdf/documents/design.html'
             preIndexSections = [
                 {'title':'<p style="font-size:1.4em;"><b>Equipo Desarrollador y Contraparte</b></p>','obj':DocumentSection.objects.valid(project,'project_members')},
+                {'title':'<p style="font-size:1.4em;"><b>Acceso al Prototipo del Proyecto</b></p>','obj':DocumentSection.objects.valid(project,'prototype_access')},
             ]
             sections = [
                 {'title':'<h1>1. Introducción</h1>',            'obj':DocumentSection.objects.valid(project,'introduction')},
@@ -1419,6 +1425,7 @@ def pdf(request):
             template = 'reqApp/pdf/documents/tc.html'
             preIndexSections = [
                 {'title':'<p style="font-size:1.4em;"><b>Equipo Desarrollador y Contraparte</b></p>','obj':DocumentSection.objects.valid(project,'project_members')},
+                {'title':'<p style="font-size:1.4em;"><b>Acceso al Prototipo del Proyecto</b></p>','obj':DocumentSection.objects.valid(project,'prototype_access')},
             ]
             sections = [
                 {'title':'<h1>1. Introducción</h1>',            'obj':DocumentSection.objects.valid(project,'introduction')},
@@ -1458,6 +1465,7 @@ def pdf(request):
             template = 'reqApp/pdf/documents/historic.html'
             preIndexSections = [
                 {'title':'<p style="font-size:1.4em;"><b>Equipo Desarrollador y Contraparte</b></p>','obj':DocumentSection.objects.valid(project,'project_members')},
+                {'title':'<p style="font-size:1.4em;"><b>Acceso al Prototipo del Proyecto</b></p>','obj':DocumentSection.objects.valid(project,'prototype_access')},
             ]
             sections = [
                 {'title':'<h1>1. Introducción</h1>',            'obj':DocumentSection.objects.valid(project,'introduction')},

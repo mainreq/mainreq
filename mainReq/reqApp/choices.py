@@ -41,6 +41,7 @@ STATE_CHOICES = [
 
 SECTION_CHOICES = [
     ("project_members", "Equipo Desarrollador y Contraparte"),
+    ("prototype_access", "Acceso al Prototipo del Proyecto"),
     ("introduction", "Introducción"),
     ("purpose", "Propósito"),
     ("scope", "Alcance"),

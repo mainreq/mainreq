@@ -5,6 +5,7 @@
     {% for section in preIndexSections %}
     	{{ section.title|safe }}
     	{{ section.obj.content|addSrcHost:host|safe }}
+    	<br/>
 	{% endfor %}
 {% endblock %}
 
