@@ -93,7 +93,28 @@ def taskState2CssClass(task):
         "t6_discarded":"discarded",
     }
     return css[task.state]
-        
+
+@register.filter(name="isTaskEditor")
+def isTaskEditor(request):
+    return isEditor(request, Task)
+    
+@register.filter(name="tasksCountDone")
+def tasksCountDone(request):
+    project = getProject(request)
+    return Task.objects.getTasks(project).filter(state='t2_done').count()
+    
+@register.filter(name="tasksCountToDo")
+def tasksCountToDo(request):
+    user = getUserOr404(request)
+    project = getProject(request)
+    return Task.objects.getTasks(project,user).filter(state='t1_to_do').count()
+    
+@register.filter(name="tasksCountDoing")
+def tasksCountDoing(request):
+    user = getUserOr404(request)
+    project = getProject(request)
+    return Task.objects.getTasks(project,user).filter(state='t0_doing').count()
+
 @register.filter(name="secondsToDeadline")
 def secondsToDeadline(task):
     if task.state == 't1_to_do':

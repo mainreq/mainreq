@@ -38,7 +38,24 @@
         <li {% ifequal navbar.1 "tools" %} class="active" {% endifequal %} class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Herramientas <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li {% ifequal navbar.2 "tasks" %}class="navbar-li-selected"{% endifequal %}><a progressbar href="{% url 'reqApp:tasks' %}"><span class="glyphicon glyphicon-ok-sign"></span> Tareas</a></li>
+            <li {% ifequal navbar.2 "tasks" %}class="navbar-li-selected"{% endifequal %}><a progressbar href="{% url 'reqApp:tasks' %}"><span class="glyphicon glyphicon-ok-sign"></span> Tareas
+                {% if request|isTaskEditor %}
+                    {% with doneTasks=request|tasksCountDone %}
+                        {% if doneTasks > 0 %}
+                            <span class="badge label-done" data-toggle="tooltip" data-placement="right" title="realizadas">{{ doneTasks }}</span>
+                        {% endif %}
+                    {% endwith %}
+                {% else %}
+                    {% with tasksToDo=request|tasksCountToDo tasksDoing=request|tasksCountDoing %}
+                        {% if tasksToDo > 0 %}
+                            <span class="badge label-to_do" data-toggle="tooltip" data-placement="right" title="por hacer">{{ tasksToDo }}</span>
+                        {% endif %}
+                        {% if tasksDoing > 0 %}
+                            <span class="badge label-doing" data-toggle="tooltip" data-placement="right" title="haciendo">{{ tasksDoing }}</span>
+                        {% endif %}
+                    {% endwith %}
+                {% endif %}
+            </a></li>
             <li {% ifequal navbar.2 "statistics" %}class="navbar-li-selected"{% endifequal %}><a progressbar href="{% url 'reqApp:statistics' %}"><span class="glyphicon glyphicon-stats"></span> Estadísticas</a></li>
             <li {% ifequal navbar.2 "matrices" %}class="navbar-li-selected"{% endifequal %}><a progressbar href="{% url 'reqApp:matrices' %}"><span class="glyphicon glyphicon-th"></span> Matrices de Trazado</a></li>
             <li {% ifequal navbar.2 "consistency" %}class="navbar-li-selected"{% endifequal %}><a progressbar href="{% url 'reqApp:consistency' %}"><span class="glyphicon glyphicon-eye-open"></span> Consistencia de Relaciones</a></li>
