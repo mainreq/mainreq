@@ -42,7 +42,7 @@
                 {% if request|isTaskEditor %}
                     {% with doneTasks=request|tasksCountDone %}
                         {% if doneTasks > 0 %}
-                            <span class="badge label-done" data-toggle="tooltip" data-placement="right" title="realizadas">{{ doneTasks }}</span>
+                            <span class="badge label-done" data-toggle="tooltip" data-placement="right" title="realizadas (por evaluar)">{{ doneTasks }}</span>
                         {% endif %}
                     {% endwith %}
                 {% else %}

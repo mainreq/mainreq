@@ -66,7 +66,14 @@ def selectProject(request):
         if 'index' in request.POST:
             index = int(request.POST['index'])
             request.session['project'] = index
-    return HttpResponseRedirect(reverse('reqApp:IC'))
+
+    firstView = 'reqApp:IC'
+    
+    tasksToDo = Task.objects.getTasks(getProject(request),user).filter(state='t1_to_do').count()
+    tasksDoing = Task.objects.getTasks(getProject(request),user).filter(state='t0_doing').count()
+    if not isEditor(request,Task) and (tasksToDo + tasksDoing) > 0:
+        firstView = 'reqApp:tasks'
+    return HttpResponseRedirect(reverse(firstView))
 
 ################ Project Elements ################
 
