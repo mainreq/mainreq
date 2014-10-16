@@ -81,8 +81,8 @@ $(window).bind("load", function() {
     {% endif %}
             <div class="col-sm-3 col-sm-offset-1" id="version">
                 {% if actual %}
-                        <span style="white-space:nowrap;"><span class="glyphicon glyphicon-time"></span> {{ actual.date|date:"Y-m-d H:i" }}</span>
-                        <span style="white-space:nowrap;"><span class="glyphicon glyphicon-user"></span> {{ actual.user }}</span>
+                        <span style="white-space:nowrap;cursor:default;"><span class="glyphicon glyphicon-time"></span> {{ actual.date|date:"Y-m-d H:i" }}</span>
+                        <span style="white-space:nowrap;cursor:default;"><span class="glyphicon glyphicon-user"></span> {{ actual.user }}</span>
                 {% endif %}
             </div>
             {% if canEdit %}
