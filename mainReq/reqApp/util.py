@@ -185,9 +185,18 @@ def getPermissionCodename(model):
 def isEditor(request, model):
     user = getUserOr404(request)
     project = getProject(request)
-    if not project.is_active() and not user.is_staff:
-        return False
     return user.has_perm('reqApp.'+getPermissionCodename(model))
+    
+def cantEdit(request):
+    user = getUserOr404(request)
+    project = getProject(request)
+    return (not project.is_active() and not user.is_staff)
+
+def canEdit(request, model):
+    if cantEdit(request):
+        return False
+    else:
+        return isEditor(request, model)
     
 def elementsFilters(model, project, actualFilters=None):
     if model == UserRequirement or model == SoftwareRequirement:

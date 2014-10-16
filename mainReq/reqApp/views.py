@@ -227,7 +227,7 @@ def elementView(request, modelFormClass, elementTemplate, formTemplate, modelCla
         'navbar':navbar,
         'pdfLink':pdfLink,
         'helpLink':helpLink,
-        'canEdit':isEditor(request, modelClass),
+        'canEdit':canEdit(request, modelClass),
         'elementsFilters':filters,
         'filtersQuery':filtersQuery,
         'colorLabels':colorLabels,
@@ -269,15 +269,13 @@ def docView(request, navbar, availables, shownSection, pdfLink, helpLink=None):
             active = True
         sections.append({'sType':pa[0], 'sName':pa[1], 'active':active})
     
-    canEdit = isEditor(request, DocumentSection)
-    
     context = {
         'navbar':navbar,
         'sections':sections,
         'section':section,
         'pdfLink':pdfLink,
         'helpLink':helpLink,
-        'canEdit':canEdit,
+        'canEdit':canEdit(request, DocumentSection),
     }
     
     id_version = -1 # no edition version selected
@@ -561,7 +559,8 @@ def tasks(request):
         workerUsers = Task.objects.getWorkerUsers(project)
         workerUsersCount = workerUsers.count()
         context.update({
-            'canEditTasks':True,
+            'canEditTasks':canEdit(request, Task),
+            'isTasksEditor':True,
             'workerUsers':enumerate(workerUsers),
             'form_template':'reqApp/tools/tasks/task_form.html',
             'form':TaskForm().assignUsers(workerUsers),
@@ -652,6 +651,7 @@ def tasks(request):
                     else:
                         msgs.append('ERROR: no haciendo tarea "'+task.__unicode__()+'".')
         tasks = Task.objects.getTasks(project, user, actualOrder)
+        context.update({'canDoTask':(not cantEdit(request))})
     
     state = None
     if 'state' in request.GET:

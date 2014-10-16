@@ -452,7 +452,7 @@ class TaskManager(models.Manager):
         return User.objects.filter(is_active=True).filter(is_staff=False).filter(userprofile__projects=project).exclude(groups__permissions__codename=Task._meta.permissions[0][0])
         
     def filterByIsLate(self, tasks):
-        return tasks.filter(state__in=['t0_doing','t1_to_do','t2_done','t4_approved','t5_reprobate','t6_discarded']).filter(doneDate__gt=F('deadlineDate')) # | tasks.filter(state='t3_not_done')
+        return tasks.filter(state__in=['t2_done','t4_approved','t5_reprobate','t6_discarded']).filter(doneDate__gt=F('deadlineDate')) | tasks.filter(state__in=['t0_doing','t1_to_do']).filter(deadlineDate__lt=timezone.now()) # | tasks.filter(state='t3_not_done')
         
 class Task(models.Model):
     name = models.CharField(max_length=100)

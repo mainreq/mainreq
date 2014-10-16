@@ -36,39 +36,43 @@
             <br/>
             <div><span style="color:Gray;">Descripción: </span>{{ task.description }}</div>
             <br/>
-            {% if canEditTasks %}
-                <div class="row">
-                    {% if task|showTaskButton:'reprobate' %}
-                        <div class="col-sm-2">
-                            <button class="btn btn-primary btn-xs" onclick="taskButton('Esta acción es irreversible ¿Esta tarea fue realizada de manera satisfactoria?\n\nAprobar: {{ task }}', {{ task.id }}, 'approved', '{{csrf_token}}')"><span class="glyphicon glyphicon-thumbs-up"></span> Aprobar</button>
-                        </div>
-                        <div class="col-sm-3">
-	                        <button class="btn btn-primary btn-xs" onclick="taskButton('Esta acción es irreversible ¿Esta tarea no fue realizada de manera satisfactoria?\n\nReprobar: {{ task }}', {{ task.id }}, 'reprobate', '{{csrf_token}}')"><span class="glyphicon glyphicon-thumbs-down"></span> Reprobar</button>
-	                    </div>
-	                {% endif %}
-	                {% if task|showTaskButton:'discarded' %}
-	                    <div class="col-sm-2">
-	                        <button class="btn btn-primary btn-xs" onclick="taskButton('Esta acción es irreversible ¿Esta tarea no se encuentra correctamente redactada o su especificación es ambigua?\n\nDescartar: {{ task }}', {{ task.id }}, 'discarded', '{{csrf_token}}')"><span class="glyphicon glyphicon-trash"></span> Descartar</button>
-	                    </div>
-	                {% endif %}
-	            </div>
+            {% if isTasksEditor %}
+                {% if canEditTasks %}
+                    <div class="row">
+                        {% if task|showTaskButton:'reprobate' %}
+                            <div class="col-sm-2">
+                                <button class="btn btn-primary btn-xs" onclick="taskButton('Esta acción es irreversible ¿Esta tarea fue realizada de manera satisfactoria?\n\nAprobar: {{ task }}', {{ task.id }}, 'approved', '{{csrf_token}}')"><span class="glyphicon glyphicon-thumbs-up"></span> Aprobar</button>
+                            </div>
+                            <div class="col-sm-3">
+	                            <button class="btn btn-primary btn-xs" onclick="taskButton('Esta acción es irreversible ¿Esta tarea no fue realizada de manera satisfactoria?\n\nReprobar: {{ task }}', {{ task.id }}, 'reprobate', '{{csrf_token}}')"><span class="glyphicon glyphicon-thumbs-down"></span> Reprobar</button>
+	                        </div>
+	                    {% endif %}
+	                    {% if task|showTaskButton:'discarded' %}
+	                        <div class="col-sm-2">
+	                            <button class="btn btn-primary btn-xs" onclick="taskButton('Esta acción es irreversible ¿Esta tarea no se encuentra correctamente redactada o su especificación es ambigua?\n\nDescartar: {{ task }}', {{ task.id }}, 'discarded', '{{csrf_token}}')"><span class="glyphicon glyphicon-trash"></span> Descartar</button>
+	                        </div>
+	                    {% endif %}
+	                </div>
+	            {% endif %}
 	        {% else %}
-	            <div class="row">
-	                {% if task|showTaskButton:'doing' %}
-	                    <div class="col-sm-2">
-    	                    <button class="btn btn-primary btn-xs" onclick="taskButton('', {{ task.id }}, 'doing', '{{csrf_token}}')"><span class="glyphicon glyphicon-pushpin"></span> Haciendo</button>
-    	                </div>
-	                {% elif task|showTaskButton:'to_do' %}
-	                    <div class="col-sm-2">
-    	                    <button class="btn btn-primary btn-xs" onclick="taskButton('', {{ task.id }}, 'to_do', '{{csrf_token}}')"><span class="glyphicon glyphicon-pushpin"></span> No Haciendo</button>
-    	                </div>
-	                {% endif %}
-	                {% if task|showTaskButton:'done' %}
-	                    <div class="col-sm-2">
-    	                    <button class="btn btn-primary btn-xs" onclick="taskButton('Esta acción es irreversible ¿Esta tarea fue realizada y está lista para ser revisada?\n\nTarea Realizada: {{ task }}', {{ task.id }}, 'done', '{{csrf_token}}')"><span class="glyphicon glyphicon-ok"></span> Realizada</button>
-    	                </div>
-	                {% endif %}
-	            </div>
+	            {% if canDoTask %}
+	                <div class="row">
+	                    {% if task|showTaskButton:'doing' %}
+	                        <div class="col-sm-2">
+        	                    <button class="btn btn-primary btn-xs" onclick="taskButton('', {{ task.id }}, 'doing', '{{csrf_token}}')"><span class="glyphicon glyphicon-pushpin"></span> Haciendo</button>
+        	                </div>
+	                    {% elif task|showTaskButton:'to_do' %}
+	                        <div class="col-sm-2">
+        	                    <button class="btn btn-primary btn-xs" onclick="taskButton('', {{ task.id }}, 'to_do', '{{csrf_token}}')"><span class="glyphicon glyphicon-pushpin"></span> No Haciendo</button>
+        	                </div>
+	                    {% endif %}
+	                    {% if task|showTaskButton:'done' %}
+	                        <div class="col-sm-2">
+        	                    <button class="btn btn-primary btn-xs" onclick="taskButton('Esta acción es irreversible ¿Esta tarea fue realizada y está lista para ser revisada?\n\nTarea Realizada: {{ task }}', {{ task.id }}, 'done', '{{csrf_token}}')"><span class="glyphicon glyphicon-ok"></span> Realizada</button>
+        	                </div>
+	                    {% endif %}
+	                </div>
+	            {% endif %}
 	        {% endif %}
         </div>
     </div>
