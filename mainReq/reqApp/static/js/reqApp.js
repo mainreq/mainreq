@@ -235,6 +235,8 @@ function insertMceImg(input,url,csrf,host){
     fd.append('file', file);
     fd.append('csrfmiddlewaretoken', csrf);
     
+    NProgress.start();
+    
     $.ajax({
         url: url,
         data: fd,
@@ -245,8 +247,10 @@ function insertMceImg(input,url,csrf,host){
         success: function(data){
             if(data != ""){
                 addMCEImg(data, host);//host --> "http://localhost:8000"
+                NProgress.done();
             }else{
                 bootbox.alert('ERROR: archivo de imagen inválido!');
+                NProgress.done();
             }
        }
     });
