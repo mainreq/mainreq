@@ -21,7 +21,13 @@
             <a title="Agregar Nuevo" href='#new' class="btn btn-primary btn-xs" onclick='editNewElement()'><span class="glyphicon glyphicon-plus"></span> Nuevo</a>
         {% endif %}
     </div>
-    <div style="white-space:nowrap;" class="col-sm-1 col-sm-offset-2">
+    <div class="col-sm-2">
+        {% if showStateTimeline %}
+            <a elements_list style="cursor:pointer;" onclick="showStateTimeline()">ver evolución</a>
+            <a timeline style="cursor:pointer;display:none;" onclick="showElements()">ver elementos</a>
+        {% endif %}
+    </div>
+    <div style="white-space:nowrap;" class="col-sm-1">
         <a title="Generar Documento PDF" data-toggle="tooltip" data-placement="auto" href="{% url 'reqApp:pdf' %}?pdfType={{ pdfLink }}" target="_blank"><span class="glyphicon glyphicon-download"></span> PDF</a>
     </div>
     <div style="white-space:nowrap;text-align:right;" class="col-sm-1">
@@ -52,10 +58,16 @@
 {% ifequal elements|listCount 0 %}
     <p class="centered">--------------- Lista Vacía ---------------</p>
 {% else %}
-    {% for e in elements %}
-        {% include template with element=e canEdit=canEdit %}
-    {% endfor %}
+    <div elements_list>
+        {% for e in elements %}
+            {% include template with element=e canEdit=canEdit %}
+        {% endfor %}
+    </div>
 {% endifequal %}
+
+{% if showStateTimeline %}
+    <div timeline style="display:none;" >timeline</div>
+{% endif %}
 
 {% if canEdit %}
     <div class="new_element">

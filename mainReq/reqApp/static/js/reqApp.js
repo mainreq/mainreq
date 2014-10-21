@@ -27,6 +27,18 @@ function hideContents(){
     $('[name=element_content]').hide('slow');
 }
 
+// hide elements list
+function showStateTimeline(){
+    $('[elements_list]').hide();
+    $('[timeline]').show();
+}
+
+// show elements list
+function showElements(){
+    $('[timeline]').hide();
+    $('[elements_list]').show();
+}
+
 // reload after canceling element edition
 function cancelElementEdition(identifierText){
     //location.reload(true); // WARNING: not use! (problems with 'resend form')
