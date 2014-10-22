@@ -5,9 +5,6 @@
 {% block content %}
     <div>
         <span style="color:Gray;">Estado: </span><span class="{{ element.state }}">{{ element|state }}</span>
-        {% if not registry %}
-            {% include "reqApp/project/state_history.html" with element=element %}
-        {% endif %}
     </div>
     <br/>
     <div>

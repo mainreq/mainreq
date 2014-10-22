@@ -1,0 +1,126 @@
+{% load reqApp_tags %}
+
+{% with stateTimeline=elements|stateTimeline %}
+    {% if stateTimeline %}
+        <a elements_list style="cursor:pointer;" data-toggle="modal" data-target="#stateTimelineModal"><span class="glyphicon glyphicon-tasks"></span> Evolución</a>
+        <div id="stateTimelineModal" class="modal fade" role="dialog" aria-hidden="true" style="text-align:left;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                        <h4 class="modal-title"><span class="glyphicon glyphicon-tasks"></span> Evolución de estados de cumplimiento</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-10 col-sm-offset-2">
+                                <div statevolutionparent style='width:100%;height:1.4em;position:relative;overflow:hidden;border-left:1px solid Gray;border-right:1px solid Gray;'>
+                                    {% for inc in stateTimeline.increments %}
+                                        <span   statevolution
+                                                data-html='true'
+                                                title="{{ inc.increment }}<br/>{{ inc.increment.initDate|date:'Y-m-d' }}<br/>{{ inc.increment.endDate|date:'Y-m-d' }}"
+                                                data-toggle='tooltip'
+                                                data-placement='top'
+                                                style="
+                                                    cursor:default;
+                                                    border:1px solid Gray;
+                                                    color:Gray;
+                                                    white-space:nowrap;
+                                                    overflow:hidden;
+                                                    left:{{ inc.left }}%;
+                                                    width:{{ inc.width }}%;
+                                                    text-overflow:ellipsis;
+                                                    position:absolute
+                                                "
+                                        >
+                                            {{ inc.increment }}
+                                        </span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        {% for e,states in stateTimeline.elements %}
+                            <div class="row">
+                                <div class="col-sm-2" style="cursor:default;text-align:right;">
+                                    <span class="{{ e.state }}" data-toggle="tooltip" data-placement="auto" title="{{ e }}">{{ e.identifierText }}</span>
+                                </div>
+                                <div class="col-sm-10">
+                                    <div    statevolutionparent
+                                            style="
+                                                width:100%;
+                                                height:1em;
+                                                position:relative;
+                                                overflow:hidden;
+                                                border-left:1px solid Gray;
+                                                border-right:1px solid Gray;
+                                            "
+                                    >
+                                        <span style='position:absolute;width:100%;'>
+                                            {% for sta in states %}
+                                                <span   statevolution
+                                                        data-html='true'
+                                                        title="{{ sta.state|string2State }}<br/>{{ sta.leftDate|date:'Y-m-d' }}<br/>{{ sta.rightDate|date:'Y-m-d' }}"
+                                                        data-toggle='tooltip'
+                                                        class="label-{{ sta.state }}"
+                                                        data-placement='bottom'
+                                                        style="
+                                                            cursor:default;
+                                                            color:White;
+                                                            white-space:nowrap;
+                                                            overflow:hidden;
+                                                            left:{{ sta.left }}%;
+                                                            width:{{ sta.width }}%;
+                                                            text-overflow:ellipsis;
+                                                            position:absolute
+                                                        "
+                                                >
+                                                    {{ sta.state|string2State }}
+                                                </span>
+                                            {% endfor %}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endwith %}
+
+{% comment %}
+{% with stateTimeline=element|stateTimeline %}
+    {% if stateTimeline %}
+        <a  href="#narf"
+            tabindex="0"
+            data-toggle="popover"
+            data-trigger="focus"
+            data-html="true"
+            title="Línea de Tiempo de Estados de {{ element.identifierText }}"
+            data-content="
+                <div statevolutionparent style='width:500px;height:2.4em;position:relative;overflow:hidden;border-left:1px solid Gray;border-right:1px solid Gray;'>
+                    <span style='position:absolute;width:100%;padding-top:1.2em;'>
+                        {% for sta in stateTimeline.states %}
+                            <span statevolution data-html='true' title='{{ sta.state|string2State }}<br/>{{ sta.leftDate|date:'Y-m-d' }}<br/>{{ sta.rightDate|date:'Y-m-d' }}' data-toggle='tooltip' class='label-{{ sta.state }}' data-placement='bottom' style='cursor:default;color:White;white-space:nowrap;overflow:hidden;left:{{ sta.left }}%;width:{{ sta.width }}%;text-overflow:ellipsis;position:absolute'>{{ sta.state|string2State }}</span>
+                        {% endfor %}
+                    </span>
+                    {% for inc in stateTimeline.increments %}
+                        <span statevolution data-html='true' title='{{ inc.increment }}<br/>{{ inc.increment.initDate|date:'Y-m-d' }}<br/>{{ inc.increment.endDate|date:'Y-m-d' }}' data-toggle='tooltip' data-placement='top' style='cursor:default;border:1px solid Gray;color:Gray;white-space:nowrap;overflow:hidden;left:{{ inc.left }}%;width:{{ inc.width }}%;text-overflow:ellipsis;position:absolute'>{{ inc.increment }}</span>
+                    {% endfor %}
+                </div>
+                <script>
+                    var self = $('[data-toggle=tooltip][statevolution]');
+                    self.tooltip({container:self.closest('[statevolutionparent]').parent()});
+                </script>
+            ">
+            (línea de tiempo...)
+        </a>
+        <script>
+            $('[data-toggle=popover]').popover({
+                container:'body',
+                template:'<div class="popover" role="tooltip" style="max-width:none;"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+            });
+        </script>
+    {% endif %}
+{% endwith %}
+{% endcomment %}

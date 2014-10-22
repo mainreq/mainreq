@@ -23,8 +23,9 @@
     </div>
     <div class="col-sm-2">
         {% if showStateTimeline %}
-            <a elements_list style="cursor:pointer;" onclick="showStateTimeline()">ver evolución</a>
-            <a timeline style="cursor:pointer;display:none;" onclick="showElements()">ver elementos</a>
+            {% ifequal elements|listCount 0 %}{% else %}
+                {% include "reqApp/project/stateTimeline.html" %}
+            {% endifequal %}
         {% endif %}
     </div>
     <div style="white-space:nowrap;" class="col-sm-1">
@@ -58,16 +59,10 @@
 {% ifequal elements|listCount 0 %}
     <p class="centered">--------------- Lista Vacía ---------------</p>
 {% else %}
-    <div elements_list>
-        {% for e in elements %}
-            {% include template with element=e canEdit=canEdit %}
-        {% endfor %}
-    </div>
+    {% for e in elements %}
+        {% include template with element=e canEdit=canEdit %}
+    {% endfor %}
 {% endifequal %}
-
-{% if showStateTimeline %}
-    <div timeline style="display:none;" >timeline</div>
-{% endif %}
 
 {% if canEdit %}
     <div class="new_element">

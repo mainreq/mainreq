@@ -240,9 +240,11 @@ def incrementRSCount(el):
     return SoftwareRequirement.objects.valids(el.project).filter(increment=el).count()
     
 @register.filter(name="stateTimeline")
-def stateTimeline(el):
+def stateTimeline(elements):
+    if elements.count() == 0:
+        return None
     increments = []
-    incs = Increment.objects.valids(el.project, 'initDate')
+    incs = Increment.objects.valids(elements[0].project, 'initDate')
     incsCount = incs.count()
     if incsCount == 0:
         return None
@@ -258,32 +260,35 @@ def stateTimeline(el):
             'width':right-left,
         })
     
-    states = []
-    elements = el.__class__.objects.registered(el.project, el.identifier).order_by('date')
-    left = 0
-    leftDate = initDate
-    state = ''
-    for element in elements:
-        if element.date <= endDate and element.state != state:
-            if state != '':
-                right = (element.date - initDate).total_seconds() * 100.0 / totalSeconds
-                if right > left:
-                    width = right-left
-                    if width < 1:
-                        width = 1
-                    states.append({'state':state, 'leftDate':leftDate, 'rightDate':element.date,'left':left,'width':width,})
-                    left = right
-            if element.date > leftDate:
-                leftDate = element.date
-                left = (leftDate - initDate).total_seconds() * 100.0 / totalSeconds
-            state = element.state
-    if state != '':
-        now = timezone.now()
-        if now > endDate:
-            now = endDate
-        right = (now - initDate).total_seconds() * 100.0 / totalSeconds
-        width = right-left
-        if width < 1:
-            width = 1
-        states.append({'state':state, 'leftDate':leftDate, 'rightDate':now,'left':left,'width':width,})
-    return {'increments':increments,'states':states}
+    timeline = []
+    for el in elements:
+        states = []
+        registered = el.__class__.objects.registered(el.project, el.identifier).order_by('date')
+        left = 0
+        leftDate = initDate
+        state = ''
+        for registry in registered:
+            if registry.date <= endDate and registry.state != state:
+                if state != '':
+                    right = (registry.date - initDate).total_seconds() * 100.0 / totalSeconds
+                    if right > left:
+                        width = right-left
+                        if width < 1:
+                            width = 1
+                        states.append({'state':state, 'leftDate':leftDate, 'rightDate':registry.date,'left':left,'width':width,})
+                        left = right
+                if registry.date > leftDate:
+                    leftDate = registry.date
+                    left = (leftDate - initDate).total_seconds() * 100.0 / totalSeconds
+                state = registry.state
+        if state != '':
+            now = timezone.now()
+            if now > endDate:
+                now = endDate
+            right = (now - initDate).total_seconds() * 100.0 / totalSeconds
+            width = right-left
+            if width < 1:
+                width = 1
+            states.append({'state':state, 'leftDate':leftDate, 'rightDate':now,'left':left,'width':width,})
+        timeline.append((el,states))
+    return {'increments':increments,'elements':timeline}
