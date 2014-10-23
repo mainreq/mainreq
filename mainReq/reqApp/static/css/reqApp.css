@@ -364,3 +364,8 @@ ul.flat{
     border:none;
     background-color:rgba(0,0,0,0);
 }
+
+/* state timeline */
+.timeline:hover span[name="timelineIdentifierText"]{
+    background-color:Gold;
+}
