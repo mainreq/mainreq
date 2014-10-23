@@ -17,7 +17,7 @@
                                     <div style="width:100%;height:1.4em;position:relative;overflow:hidden;">
                                         {% for inc in stateTimeline.increments %}
                                             <span   data-html='true'
-                                                    title="{{ inc.increment }}<br/>{{ inc.increment.initDate|date:'Y-m-d' }}<br/>{{ inc.increment.endDate|date:'Y-m-d' }}"
+                                                    title="{{ inc.increment }}<br/>{{ inc.increment.initDate|date:'Y-m-d H:i' }}<br/>{{ inc.increment.endDate|date:'Y-m-d H:i' }}"
                                                     data-toggle='tooltip'
                                                     data-placement='top'
                                                     style="
@@ -58,10 +58,10 @@
                                                 {% for sta in states %}
                                                     <span   statevolution
                                                             data-html='true'
-                                                            title="<b class='reqLabel label-{{ sta.state }}'>{{ sta.state|string2State }}</b><br/>{{ sta.leftDate|date:'Y-m-d' }}<br/>{{ sta.rightDate|date:'Y-m-d' }}"
+                                                            title="<b class='reqLabel label-{{ sta.state }}'>{{ sta.state|string2State }}</b><br/>{{ sta.leftDate|date:'Y-m-d H:i' }}<br/>{{ sta.rightDate|date:'Y-m-d H:i' }}"
                                                             data-toggle='tooltip'
                                                             class="label-{{ sta.state }}"
-                                                            data-placement='bottom'
+                                                            data-placement='top'
                                                             style="
                                                                 cursor:default;
                                                                 color:Transparent;
