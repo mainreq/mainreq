@@ -58,7 +58,7 @@
                                                 {% for sta in states %}
                                                     <span   statevolution
                                                             data-html='true'
-                                                            title="{{ sta.state|string2State }}<br/>{{ sta.leftDate|date:'Y-m-d' }}<br/>{{ sta.rightDate|date:'Y-m-d' }}"
+                                                            title="<b class='reqLabel label-{{ sta.state }}'>{{ sta.state|string2State }}</b><br/>{{ sta.leftDate|date:'Y-m-d' }}<br/>{{ sta.rightDate|date:'Y-m-d' }}"
                                                             data-toggle='tooltip'
                                                             class="label-{{ sta.state }}"
                                                             data-placement='bottom'
