@@ -5,6 +5,8 @@ from reqApp.choices import *
 from reqApp.util import *
 from reqApp.alarms import *
 
+from django.db.models import Sum
+
 register = template.Library()
 
 @register.filter(name="userProject")
@@ -238,6 +240,13 @@ def incrementRUCount(el):
 @register.filter(name="incrementRSCount")
 def incrementRSCount(el):
     return SoftwareRequirement.objects.valids(el.project).filter(increment=el).count()
+    
+@register.filter(name="incrementRSCost")
+def incrementRSCost(el):
+    cost = SoftwareRequirement.objects.valids(el.project).filter(increment=el).aggregate(Sum('cost'))['cost__sum']
+    if cost is None:
+        return 0
+    return cost
     
 @register.filter(name="stateTimeline")
 def stateTimeline(elements):
