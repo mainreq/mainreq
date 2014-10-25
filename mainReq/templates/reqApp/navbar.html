@@ -15,9 +15,6 @@
         <li {% ifequal navbar.1 "project" %} class="active" {% endifequal %} class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Proyecto <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            {% with project=request|userProject %}
-                <li class="dropdown-header">{{ project.name }}</li>
-            {% endwith %}
             <li {% ifequal navbar.2 "IC" %}class="navbar-li-selected"{% endifequal %}><a progressbar href="{% url 'reqApp:IC' %}"><span class="badge">HT</span> Hitos</a></li>
             <li {% ifequal navbar.2 "UT" %}class="navbar-li-selected"{% endifequal %}><a progressbar href="{% url 'reqApp:UT' %}"><span class="badge">TU</span> Tipos de Usuario</a></li>
             <li {% ifequal navbar.2 "UR" %}class="navbar-li-selected"{% endifequal %}><a progressbar href="{% url 'reqApp:UR' %}"><span class="badge">RU</span> Requisitos de Usuario</a></li>
@@ -86,7 +83,7 @@
                 {% endwith %}
                 <li role="presentation" class="divider"></li>
                 {% ifequal user.userprofile.projects.count 1 %}{% else %}
-                    <li><a href="{% url 'reqApp:PR' %}"><span class="glyphicon glyphicon-list"></span> Proyectos</a></li>
+                    <li><a href="{% url 'reqApp:PR' %}"><span class="glyphicon glyphicon-list-alt"></span> Lista de Proyectos</a></li>
                 {% endifequal %}
                 <li><a href="{% url 'reqApp:editUser' %}?next={% firstof request.path '/' %}"><span class="glyphicon glyphicon-cog"></span> Cuenta</a></li>
                 {% if user.is_staff %}{% if user.is_superuser %}

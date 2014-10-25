@@ -47,6 +47,14 @@
     <div class="row">
         <div class="col-sm-9">
             <ol class="breadcrumb" style="color:Gray;cursor:default">
+                {% ifequal user.userprofile.projects.count 1 %}{% else %}
+                    <li><a href="{% url 'reqApp:PR' %}" data-toggle="tooltip" data-placement="top" title="Lista de Proyectos"><span class="glyphicon glyphicon-list-alt"></span></a></li>
+                {% endifequal %}
+                
+                {% with project=request|userProject %}
+                    <li><b>{{ project.name }}</b></li>
+                {% endwith %}
+                
                 {% ifequal navbar.1 "project" %}<li>Proyecto</li>{% endifequal %}
                 {% ifequal navbar.1 "documents" %}<li>Documentos</li>{% endifequal %}
                 {% ifequal navbar.1 "tools" %}<li>Herramientas</li>{% endifequal %}

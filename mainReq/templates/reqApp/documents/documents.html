@@ -66,12 +66,19 @@ $(window).bind("load", function() {
             <button title="Editar Sección del Documento" data-toggle="tooltip" data-placement="top" id="btn_edit" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span> Editar</button>
         </div>
                 
-        <div id="edition" class="col-sm-4 col-sm-offset-2" style="display:none;">
+        <div id="edition" class="col-sm-6" style="display:none;">
             <div class="row">
                 <div class="col-sm-6">
+                    {% for pa in sections %}
+                        {% ifequal section pa.sType %}
+                            {{ pa.sName }}:
+                        {% endifequal %}
+                    {% endfor %}
+                </div>
+                <div class="col-sm-3">
                     <button progressbar id="btn_cancel" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-3">
                     <button progressbar id="btn_save" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-ok"></span> Guardar</button>
                 </div>
             </div>
@@ -79,23 +86,23 @@ $(window).bind("load", function() {
     {% else %}
         <div class="col-sm-1"></div>
     {% endif %}
-            <div class="col-sm-3 col-sm-offset-1" id="version">
-                {% if actual %}
-                        <span style="white-space:nowrap;cursor:default;"><span class="glyphicon glyphicon-time"></span> {{ actual.date|date:"Y-m-d H:i" }}</span>
-                        <span style="white-space:nowrap;cursor:default;"><span class="glyphicon glyphicon-user"></span> {{ actual.user }}</span>
-                {% endif %}
-            </div>
-            {% if canEdit %}
-                <div id="versionSelect" class="col-sm-5" style="display:none;">
-                    {% if versions %}
-                        <select progressbar class="selectpicker" data-width="auto" data-style="btn-default btn-xs" id="selectVersion" onchange="location = this.options[this.selectedIndex].value;">
-                            {% for version in versions %}
-                                <option data-content="<span class='glyphicon glyphicon-time'></span> {{ version.date|date:'Y-m-d H:i' }} <span class='glyphicon glyphicon-user'></span>  {{version.user}}{% ifequal version.id actual.id %} (actual){% endifequal %}" value="?section={{ section }}&id={{version.id}}" {% if id_version %}{% ifequal version.id id_version %}selected{% endifequal %}{% endif %}></option>
-                            {% endfor %}
-                        </select>
-                    {% endif %}
-                </div>
+    <div class="col-sm-3 col-sm-offset-1" id="version">
+        {% if actual %}
+            <span style="white-space:nowrap;cursor:default;"><span class="glyphicon glyphicon-time"></span> {{ actual.date|date:"Y-m-d H:i" }}</span>
+            <span style="white-space:nowrap;cursor:default;"><span class="glyphicon glyphicon-user"></span> {{ actual.user }}</span>
+        {% endif %}
+    </div>
+    {% if canEdit %}
+        <div id="versionSelect" class="col-sm-5" style="display:none;">
+            {% if versions %}
+                <select progressbar class="selectpicker" data-width="auto" data-style="btn-default btn-xs" id="selectVersion" onchange="location = this.options[this.selectedIndex].value;">
+                    {% for version in versions %}
+                        <option data-content="<span class='glyphicon glyphicon-time'></span> {{ version.date|date:'Y-m-d H:i' }} <span class='glyphicon glyphicon-user'></span>  {{version.user}}{% ifequal version.id actual.id %} (actual){% endifequal %}" value="?section={{ section }}&id={{version.id}}" {% if id_version %}{% ifequal version.id id_version %}selected{% endifequal %}{% endif %}></option>
+                    {% endfor %}
+                </select>
             {% endif %}
+        </div>
+    {% endif %}
     <div id="pdf" style="white-space:nowrap;" class="col-sm-1">
         <a title="Generar Documento PDF" data-toggle="tooltip" data-placement="auto" href="{% url 'reqApp:pdf' %}?pdfType={{ pdfLink }}" target="_blank"><span class="glyphicon glyphicon-download"></span> PDF</a>
     </div>
