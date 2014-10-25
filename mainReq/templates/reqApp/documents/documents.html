@@ -1,10 +1,12 @@
 {% extends "reqApp/base.html" %}
 
+{% comment %}
 {% block extrabreadcrumb %}
     {% for pa in sections %}
         {% ifequal section pa.sType %}<li>{{ pa.sName }}</li>{% endifequal %}
     {% endfor %}
 {% endblock %}
+{% endcomment %}
 
 {% block body %}
 
