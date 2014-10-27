@@ -117,6 +117,7 @@ def elementAlarms(el):
                 if urCount > 0 and urCount == el.userRequirements.filter(validity=True).filter(stability='negotiable').count():
                     resp.append("Su estabilidad es intransable, sin embargo todos sus Requisitos de Usuario son transables")
         #--------------------------------------------------------------------------------------------
+            """
             urs = el.userRequirements.filter(validity=True).filter(date__gte=el.date)
             c = 0
             s = "( "
@@ -126,6 +127,7 @@ def elementAlarms(el):
             s = s + ")"
             if c > 0:
                 resp.append("Un Requisito de Usuario asociado " + s + u" ha sido modificado (su fecha de modificación es posterior a la de este Requisito de Software, favor revisar y actualizar)")
+            """
         #--------------------------------------------------------------------------------------------
             notConsideredUT = el.userTypes.filter(validity=True).exclude(userrequirement=el.userRequirements.filter(validity=True))
             c = 0
@@ -171,6 +173,7 @@ def elementAlarms(el):
             if el.priority < maxSrPriority:
                 resp.append("Ningún Requisito de Software asociado tiene por lo menos la misma urgencia que este módulo")
         #--------------------------------------------------------------------------------------------
+            """
             srs = el.softwareRequirements.filter(validity=True).filter(date__gte=el.date)
             c = 0
             s = "( "
@@ -180,13 +183,16 @@ def elementAlarms(el):
             s = s + ")"
             if c > 0:
                 resp.append("Un Requisito de Software asociado " + s + u" ha sido modificado (su fecha de modificación es posterior a la de este Módulo, favor revisar y actualizar)")
+            """
         #--------------------------------------------------------------------------------------------
     elif el.__class__ == TestCase:
         if el.softwareRequirement.validity == False:
             resp.append("El Requisito de Software asignado a este Caso de Prueba ha sido eliminado")
         #--------------------------------------------------------------------------------------------
+        """
         if el.softwareRequirement.validity and el.softwareRequirement.date > el.date:
             resp.append("El Requisito de Software asociado ha sido modificado (su fecha de modificación es posterior a la de este Caso de Prueba, favor revisar y actualizar)")
+        """
         #--------------------------------------------------------------------------------------------
         """
         if el.userTypes.all().filter(validity=True).count() == 0:
