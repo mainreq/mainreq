@@ -45,5 +45,12 @@ tr.statistics{
         <h3><i style="color:Gray;">{{ st.title }}: </i>Módulos</h3>
         {% include "reqApp/tools/statistics/MD.html" with MD=st.MD %}
     {% endif %}
+    
+    {% if st.TK %}
+        <br/>
+        <h3><i style="color:Gray;">{{ st.title }}: </i>Tareas</h3>
+        {% include "reqApp/tools/statistics/TK.html" with TK=st.TK %}
+    {% endif %}
+    
     <pdf:nextpage/>
 {% endfor %}

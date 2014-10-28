@@ -682,7 +682,7 @@ def tasks(request):
     })
     return render(request, 'reqApp/tools/tasks/tasks.html', context)
 ##############################  STATISTICS
-def statisticsUR_SR_TC_MD(project, ic=None):
+def statisticsUR_SR_TC_MD_TK(project, ic=None):
     # user requirement statistics
     q = UserRequirement.objects.valids(project).filter(increment__validity=True)
     if ic is not None:
@@ -878,11 +878,36 @@ def statisticsUR_SR_TC_MD(project, ic=None):
     md.update({'extras':extras})
     md.update({'total':total})
     
+    # tasks statistics
+    q = Task.objects.getTasks(project)
+    tk = {}
+    state = []
+    
+    table = [
+        ('Estado', 'state', TASK_CHOICES, state),
+    ]
+    
+    for attribute, s, choices, arr in table:
+        dic = {'attribute':attribute,'attributes':len(choices)}
+        for key, name in choices:
+            dic.update({'name':name})
+            qq = q.filter(state=key)
+            total = qq.count()
+            dic.update({'total':total})
+            arr.append(dic)
+            dic = {}
+    
+    total = q.count()
+    
+    tk.update({'attributes':[state]})
+    tk.update({'total':total})
+    
     return {
         'UR':ur,
         'SR':sr,
         'TC':tc,
         'MD':md,
+        'TK':tk,
     }
     
 def statistics(request):
@@ -907,7 +932,7 @@ def statistics(request):
         else:# every increment
             ic = None
             
-        stDic = statisticsUR_SR_TC_MD(project, ic)
+        stDic = statisticsUR_SR_TC_MD_TK(project, ic)
     else:
         raise Http404
     context = {
@@ -919,6 +944,7 @@ def statistics(request):
         'SR':stDic['SR'],
         'MD':stDic['MD'],
         'TC':stDic['TC'],
+        'TK':stDic['TK'],
         'helpLink':'ST',
     }
     return render(request, 'reqApp/tools/statistics/statistics.html', context)
@@ -1577,23 +1603,25 @@ def pdf(request):
             increments = Increment.objects.valids(project)
             sTs = []
             
-            st = statisticsUR_SR_TC_MD(project)
+            st = statisticsUR_SR_TC_MD_TK(project)
             sTs.append({
                 'title':'Estadísticas de Todo el Proyecto',
                 'UR':st['UR'],
                 'SR':st['SR'],
                 'TC':st['TC'],
                 'MD':st['MD'],
+                'TK':st['TK'],
             })
             
             for ic in increments:
-                st = statisticsUR_SR_TC_MD(project, ic)
+                st = statisticsUR_SR_TC_MD_TK(project, ic)
                 sTs.append({
                     'title':u'Estadísticas '+ic.name,
                     'UR':st['UR'],
                     'SR':st['SR'],
                     'TC':st['TC'],
                     #'MD':st['MD'], # modules don't have a particular increment asociated
+                    #'TK':st['TK'], # tasks don't have a particular increment asociated
                 })
             
             context.update({

@@ -33,8 +33,12 @@
 {% include "reqApp/tools/statistics/MD.html" with MD=MD %}
 
 <br/>
+<h3>Tareas</h3>
+{% include "reqApp/tools/statistics/TK.html" with TK=TK %}
+
+<br/>
 <ul>
-<li>Los Módulos no se encuentran asociados a un Hito específico, en esta tabla se cuentan todos los MD asociados al proyecto.</li>
+<li>Los Módulos y Tareas no se encuentran asociados a un Hito específico, en esta tabla se cuentan todos los Módulos y Tareas asociadas al proyecto.</li>
 <li>No se contabilizan RU ni RS sin Hito asociado.</li>
 <li>Se contabilizan sólo los CP asociados a los requisitos contabilizados aquí.</li>
 <li>Elementos sin RU, RS o TU asociados son contabilizados en el total.</li>

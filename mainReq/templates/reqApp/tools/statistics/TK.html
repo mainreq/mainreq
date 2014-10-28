@@ -1,0 +1,29 @@
+<table class="statistics">
+    <tr>
+        <th colspan=2>Tareas</th>
+        <th class="statistics">total</th>
+    </tr>
+    {% for attribute in TK.attributes %}
+        {% for tr in attribute %}
+            {% if tr.attribute %}
+            <tr class="statistics">
+                <th rowspan={{ tr.attributes }}>{{ tr.attribute }}</th>
+            {% else %}
+            <tr>
+            {% endif %}
+                <td>{{ tr.name }}</td>
+                <td>{{ tr.total }}{% include "reqApp/tools/statistics/percentage.html" with total=TK.total part=tr.total %}</td>
+            </tr>
+        {% endfor %}
+    {% endfor %}
+    <tr class="statistics">
+        <td colspan=2></td>
+        <td><b>{{ TK.total }}</b>{% include "reqApp/tools/statistics/percentage.html" with total=TK.total part=TK.total %}</td>
+    </tr>
+    {% for e in TK.extras %}
+        <tr>
+            <th>{{ e.name }}</th>
+            <td>{{ e.exCount }}</td>
+        </tr>
+    {% endfor %}
+</table>
