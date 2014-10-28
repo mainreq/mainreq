@@ -1,6 +1,8 @@
 <table class="statistics">
     <tr>
         <th colspan=2>Tareas</th>
+        <th class="statistics">a tiempo</th>
+        <th class="statistics">atrasadas</th>
         <th class="statistics">total</th>
     </tr>
     {% for attribute in TK.attributes %}
@@ -12,12 +14,16 @@
             <tr>
             {% endif %}
                 <td>{{ tr.name }}</td>
+                <td>{{ tr.no_late }}</td>
+                <td>{{ tr.late }}</td>
                 <td>{{ tr.total }}{% include "reqApp/tools/statistics/percentage.html" with total=TK.total part=tr.total %}</td>
             </tr>
         {% endfor %}
     {% endfor %}
     <tr class="statistics">
         <td colspan=2></td>
+        <td>{{ TK.state.no_late }}{% include "reqApp/tools/statistics/percentage.html" with total=TK.total part=TK.state.no_late %}</td>
+        <td>{{ TK.state.late }}{% include "reqApp/tools/statistics/percentage.html" with total=TK.total part=TK.state.late %}</td>
         <td><b>{{ TK.total }}</b>{% include "reqApp/tools/statistics/percentage.html" with total=TK.total part=TK.total %}</td>
     </tr>
     {% for e in TK.extras %}

@@ -727,12 +727,15 @@ def statisticsUR_SR_TC_MD_TK(project, ic=None):
         'name':'Sin TU asoc.',
         'exCount':total - q.filter(userTypes__validity=True).distinct().count()
     })
-    cost = q.aggregate(Sum('cost'))['cost__sum']
-    if cost == None:
-        cost = 0
+    totalCost = q.aggregate(Sum('cost'))['cost__sum']
+    if totalCost == None:
+        totalCost = 0
+    satisfyCost = q.filter(state='satisfy').aggregate(Sum('cost'))['cost__sum']
+    if satisfyCost == None:
+        satisfyCost = 0
     extras.append({
-        'name':'Costo total',
-        'exCount':cost
+        'name':'Costo (cumple/total)',
+        'exCount':'%s/%s'%(satisfyCost,totalCost),
     })
     
     ur.update({'attributes':[priority,stability,tyype]})
@@ -784,12 +787,15 @@ def statisticsUR_SR_TC_MD_TK(project, ic=None):
         'name':'Sin TU asoc.',
         'exCount':total - q.filter(userTypes__validity=True).distinct().count()
     })
-    cost = q.aggregate(Sum('cost'))['cost__sum']
-    if cost == None:
-        cost = 0
+    totalCost = q.aggregate(Sum('cost'))['cost__sum']
+    if totalCost == None:
+        totalCost = 0
+    satisfyCost = q.filter(state='satisfy').aggregate(Sum('cost'))['cost__sum']
+    if satisfyCost == None:
+        satisfyCost = 0
     extras.append({
-        'name':'Costo total',
-        'exCount':cost
+        'name':'Costo (cumple/total)',
+        'exCount':'%s/%s'%(satisfyCost,totalCost),
     })
     
     sr.update({'attributes':[priority,stability,tyype]})
@@ -887,12 +893,18 @@ def statisticsUR_SR_TC_MD_TK(project, ic=None):
         ('Estado', 'state', TASK_CHOICES, state),
     ]
     
+    lates = 0
+    
     for attribute, s, choices, arr in table:
         dic = {'attribute':attribute,'attributes':len(choices)}
         for key, name in choices:
             dic.update({'name':name})
             qq = q.filter(state=key)
             total = qq.count()
+            late = Task.objects.filterByIsLate(qq).count()
+            lates = lates + late
+            dic.update({'late':late})
+            dic.update({'no_late':total-late})
             dic.update({'total':total})
             arr.append(dic)
             dic = {}
@@ -900,6 +912,7 @@ def statisticsUR_SR_TC_MD_TK(project, ic=None):
     total = q.count()
     
     tk.update({'attributes':[state]})
+    tk.update({'state':{'no_late':total-lates,'late':lates,}})
     tk.update({'total':total})
     
     return {
