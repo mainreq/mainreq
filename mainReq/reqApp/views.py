@@ -1735,6 +1735,12 @@ def pdf(request):
     return render_to_pdf(template,context)
     
 ############################### HELP ##########################
+import locale
+import sys
+
 def help(request):
-    context = {}# 'helpLink'
+    loc_info = {'loc_loc': locale.getlocale(), 'loc_def': locale.getdefaultlocale(), 'sys_fenc': sys.getfilesystemencoding(), 'sys_denc': sys.getdefaultencoding()}
+    context = {
+        'loc_info':loc_info,
+    }# 'helpLink'
     return render(request, 'reqApp/help.html', context)
