@@ -7,7 +7,8 @@
 {% endblock %}
 
 {% block nav-global %}
-    <div style="text-align:right;">
-        <a title="select a project" href="{% url 'reqApp:PR' %}"><b>My Projects ...</b></a>
+    <div>
+        <a style="float:right;margin-right:1em;" title="select a project" href="{% url 'reqApp:PR' %}"><b>My Projects ...</b></a>
+        <a style="margin-left:1em;" title="select a project" href="{% url 'reqApp:admin_help' %}" target="_blank"><b>Help?</b></a>
     </div>
 {% endblock %}

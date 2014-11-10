@@ -40,4 +40,5 @@ urlpatterns = patterns('',
     url(r'pdf/$', views.pdf, name='pdf'),
     
     url(r'^ayuda/$', views.help, name='help'),
+    url(r'^ayudadmin/$', views.adminHelp, name='admin_help'),
 )

@@ -1,0 +1,78 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reqApp.css' %}" />
+    <title>mainReq :: administración :: ayuda</title>
+</head>
+
+<body>
+    <h3>¿Cómo administrar MainReq?</h3>
+    <p>Desde el módulo de administración de MainReq se pueden crear y editar Proyectos, Roles (con permisos de edición) y Usuarios.</p>
+    <p>¿Cómo crear un Proyecto?</p>
+    <ul>
+        <li>Ingresar los atributos del nuevo proyecto</li>
+        <ul>
+            <li>nombre</li>
+            <li>descripción</li>
+            <li>fecha y semestre de inicio</li>
+            <li>fecha de cierre (tras la cual usuarios no administradores no pueden editar el proyecto)</li>
+        </ul>
+        <li>Crear Roles (de no existir) y especificar sus permisos de edición</li>
+        <ul>
+            <li>nombre</li>
+            <li>permisos de edición</li>
+            <ul>
+                <li>Editor Documentos</li>
+                <li>Editor Hitos</li>
+                <li>Editor Tipos de Usuario</li>
+                <li>Editor Requisitos de Usuario</li>
+                <li>Editor Requisitos de Software</li>
+                <li>Editor Módulos</li>
+                <li>Editor Casos de Prueba</li>
+                <li>Asignar y Revisar Tareas</li>
+            </ul>
+            <li>* Generalmente los Roles se crean sólo una vez, pero pueden ser modificados y se pueden crear nuevos Roles de ser necesario</li>
+            <li>* No están asociados a un proyecto en particular. El Rol del usuario determina sus permisos de edición sobre todos sus proyectos</li>
+        </ul>
+        <li>Crear Usuarios</li>
+        <ul>
+            <li>especificar atributos</li>
+            <ul>
+                <li>email (necesario para notificar credenciales)</li>
+                <li>contraseña provisional (será cambiada luego)</li>
+                <li>asociar Roles</li>
+                <li>asociar Proyecto</li>
+            </ul>
+            <li>¿El usuario es administrador?</li>
+            <ul>
+                <li>Para hacer que el usuario sea administrador todas las opciones bajo la categoría “Permissions” deben estar activadas (Active, Staff status, Superuser status)</li>
+                <ul><li><img style="zoom:100%;" src="{% static 'img/admin_permissions.png' %}"><img/></li></ul>
+            </ul>
+        </ul>
+        <li>Notificar a los nuevos usuarios sus credenciales de acceso</li>
+        <ul>
+            <li>acceder a la lista de proyectos y seguir el link "Users..." desde el proyecto creado</li>
+            <ul><li><img style="zoom:100%;" src="{% static 'img/admin_users.png' %}"><img/></li></ul>
+            <li>seleccionar nuevos usuarios (checkboxes)</li>
+            <ul><li><img style="zoom:100%;" src="{% static 'img/admin_selectedusers.png' %}"><img/></li></ul>
+            <li>enviar email con credenciales de acceso (los usuarios DEBEN tener un email válido), seleccionando "Send Email Notification" y presionando "Go"</li>
+            <ul>
+                <li><img style="zoom:100%;" src="{% static 'img/admin_email.png' %}"><img/></li>
+                <li>esta acción es útil en caso de olvido de contraseña, pues genera una nueva contraseña</li>
+            </ul>
+        </ul>
+        <li>Acceder al Proyecto</li>
+        <ul>
+            <li>verificar que nuestro usuario tenga el proyecto asociado</li>
+            <li>acceder mediante link "My Projects ..."</li>
+            <ul><img style="zoom:100%;" src="{% static 'img/admin_projects.png' %}"><img/></ul>
+        </ul>
+    </ul>
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+</body>
+</html>
