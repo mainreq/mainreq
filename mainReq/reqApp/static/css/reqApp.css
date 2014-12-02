@@ -96,6 +96,7 @@ div .documentPreview{
 span.element-pointer{
     color:rgba(0,0,0,0);
     white-space:nowrap;
+    position:absolute;
 }
 .element_title:hover span.element-pointer{
     color:rgba(0,0,0,0.6);
